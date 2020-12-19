@@ -31,7 +31,7 @@ module.exports = env => {
             contentBase: path.join(__dirname, 'dist'),
             port: 4000
         },
-        devtool: 'source-map',
+        devtool: isDevelopment ? 'source-map' : false,
         optimization: {
             minimize: !isDevelopment,
             minimizer: [
@@ -56,15 +56,9 @@ module.exports = env => {
                 {
                     test: /\.ts(x?)$/,
                     use: [
-                        'babel-loader',
                         'ts-loader'
                     ],
                     exclude: /node_modules/
-                },
-                {
-                    test: /\.js(x?)$/,
-                    exclude: /node_modules/,
-                    use: ['babel-loader']
                 },
                 {
                     test: /\.css$/,
@@ -79,7 +73,12 @@ module.exports = env => {
                         MiniCssExtractPlugin.loader,
                         'css-loader',
                         'resolve-url-loader',
-                        'sass-loader'
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true,
+                            },
+                        }
                     ],
                 },
                 {
