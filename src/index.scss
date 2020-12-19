@@ -1,0 +1,18 @@
+@import './styles/reset';
+@import './styles/fonts';
+@import './styles/variables.scss';
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 18px;
+  color: $white;
+  background: $grey-dark;
+  font-weight: 500;
+}
+
+.container-fluid {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
