@@ -25,6 +25,8 @@ module.exports = {
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": ["error"],
         "no-constructor-return": "off",
-        "default-param-last": "off"
+        "default-param-last": "off",
+        "eol-last": ["error", "always"],
+        "react/prop-types": [2, {ignore: ['children']}]
     }
 };

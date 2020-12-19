@@ -3,6 +3,7 @@ import bem from 'easy-bem';
 import './IndexPage.scss';
 
 const b = bem('IndexPage');
+
 export default class IndexPage extends React.PureComponent {
     render() {
         return (
@@ -11,6 +12,6 @@ export default class IndexPage extends React.PureComponent {
                     Index Page
                 </div>
             </div>
-        )
+        );
     }
 }

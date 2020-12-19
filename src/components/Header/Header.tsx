@@ -6,6 +6,7 @@ import {RouteType} from '../Router/types';
 import './Header.scss';
 
 const b = bem('Header');
+
 export default class Header extends React.PureComponent {
     render() {
         return (
@@ -19,7 +20,7 @@ export default class Header extends React.PureComponent {
                     </ul>
                 </nav>
             </header>
-        )
+        );
     }
 
     renderNavItem(route: RouteType) {
@@ -34,6 +35,6 @@ export default class Header extends React.PureComponent {
                     {route.title}
                 </Link>
             </li>
-        )
+        );
     }
 }

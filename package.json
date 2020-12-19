@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --env NODE_ENV=development",
     "build": "webpack --env NODE_ENV=production",
-    "eslint": "eslint ./src/**/*.ts",
-    "eslint:fix": "eslint ./src/**/*.ts --fix",
+    "eslint": "eslint --ext .ts --ext .tsx src/",
+    "eslint:fix": "eslint --ext .ts --ext .tsx src/ --fix",
     "stylelint": "stylelint ./src/**/*.scss",
     "stylelint:fix": "stylelint ./src/**/*.scss --fix"
   },

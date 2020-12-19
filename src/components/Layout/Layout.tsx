@@ -4,6 +4,7 @@ import bem from 'easy-bem';
 import './Layout.scss';
 
 const b = bem('Layout');
+
 export default class Layout extends React.PureComponent {
     render() {
         return (
@@ -13,6 +14,6 @@ export default class Layout extends React.PureComponent {
                     {this.props.children}
                 </main>
             </div>
-        )
+        );
     }
 }

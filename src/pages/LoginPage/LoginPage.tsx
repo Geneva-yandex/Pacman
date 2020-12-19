@@ -1,8 +1,9 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import './LoginPage.scss'
+import './LoginPage.scss';
 
 const b = bem('LoginPage');
+
 export default class LoginPage extends React.PureComponent {
     render() {
         return (
@@ -11,6 +12,6 @@ export default class LoginPage extends React.PureComponent {
                     Login Page
                 </div>
             </div>
-        )
+        );
     }
 }

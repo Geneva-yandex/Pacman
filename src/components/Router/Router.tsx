@@ -18,7 +18,7 @@ export default class Router extends React.PureComponent<IRouterProps> {
                     </Switch>
                 </Layout>
             </BrowserRouter>
-        )
+        );
     }
 
     renderRoute(route: RouteType) {
@@ -32,6 +32,6 @@ export default class Router extends React.PureComponent<IRouterProps> {
             >
                 <Component/>
             </Route>
-        )
+        );
     }
 }

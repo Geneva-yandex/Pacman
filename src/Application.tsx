@@ -10,6 +10,6 @@ export default class Application extends React.PureComponent {
                 layout={Layout}
                 routes={routes}
             />
-        )
+        );
     }
 }
