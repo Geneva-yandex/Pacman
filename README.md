@@ -1,5 +1,6 @@
 # PACMAN
+Firstly, you must switch node version with command ```nvm use```.
 
-To run the project use ```npm start``` command, dev-server with hot reload starts.
+To run the project use ```npm start```, dev-server with hot reload starts.
 
-To bulds use ```npm run build```.
+For production use ```npm run build```.
