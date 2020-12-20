@@ -29,7 +29,9 @@ module.exports = env => {
         devServer: {
             hot: true,
             contentBase: path.join(__dirname, 'dist'),
-            port: 4000
+            port: 4000,
+            publicPath: '/',
+            historyApiFallback: true,
         },
         devtool: isDevelopment ? 'source-map' : false,
         optimization: {
