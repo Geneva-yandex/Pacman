@@ -7,7 +7,6 @@ import {
 import {IRouterProps, RouteType} from './types';
 
 export default class Router extends React.PureComponent<IRouterProps> {
-
     render() {
         const Layout = this.props.layout;
         return (

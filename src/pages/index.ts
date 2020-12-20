@@ -30,6 +30,6 @@ export default [
         component: SignUpPage,
         title: 'Sign Up',
         isNavVisible: true
-    },
+    }
 
 ];

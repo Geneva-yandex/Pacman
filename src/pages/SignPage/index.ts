@@ -1,2 +1,2 @@
 import SignUpPage from './SignPage';
-export default SignUpPage
+export default SignUpPage;

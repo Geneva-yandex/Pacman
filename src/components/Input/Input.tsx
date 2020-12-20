@@ -1,6 +1,5 @@
 import * as React from 'react';
-import './Input.scss';
-import {ChangeEvent} from "react";
+import {ChangeEvent} from 'react';
 
 type OwnProps = {
     className?: string;
@@ -13,9 +12,6 @@ type OwnProps = {
 };
 
 type Props = OwnProps;
-
-
-
 
 export default class Input extends React.Component<Props> {
     public render() {
