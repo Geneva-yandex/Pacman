@@ -1,8 +1,10 @@
 import IndexPage from './IndexPage';
 import LoginPage from './LoginPage';
+import SignUpPage from './SignPage';
 
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
+const ROUTE_SIGNUP = 'sign up';
 
 export default [
     {
@@ -20,5 +22,14 @@ export default [
         component: LoginPage,
         title: 'Log-in',
         isNavVisible: true
-    }
+    },
+    {
+        id: ROUTE_SIGNUP,
+        exact: true,
+        path: '/sign-up',
+        component: SignUpPage,
+        title: 'Sign Up',
+        isNavVisible: true
+    },
+
 ];

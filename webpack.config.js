@@ -13,6 +13,7 @@ module.exports = env => {
     const isDevelopment = env.NODE_ENV === 'development';
 
     return {
+
         mode: isDevelopment ? 'development' : 'production',
         entry: {
             bundle: [
@@ -29,7 +30,9 @@ module.exports = env => {
         devServer: {
             hot: true,
             contentBase: path.join(__dirname, 'dist'),
-            port: 4000
+            port: 4000,
+            publicPath: '/',
+            historyApiFallback: true
         },
         devtool: isDevelopment ? 'source-map' : false,
         optimization: {
