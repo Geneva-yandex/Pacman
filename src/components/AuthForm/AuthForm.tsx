@@ -64,10 +64,10 @@ export default class AuthForm extends React.Component {
             <form className={b()} onSubmit={this.onSubmit}>
                 <Input onChange={(e: ChangeEvent) => {
                     this.onControlChange(e, 'login');
-                }} name="login" title="Enter the login" type="text" placeholder="login" />
+                }} name="login" title="Enter the login" type="text" placeholder="login"/>
                 <Input onChange={(e: ChangeEvent) => {
                     this.onControlChange(e, 'password');
-                }} name="password" title="Enter the password" type="password" placeholder="*******" />
+                }} name="password" title="Enter the password" type="password" placeholder="*******"/>
                 <label>
                     <input onChange={(e: ChangeEvent) => {
                         this.onControlChange(e, 'remember');

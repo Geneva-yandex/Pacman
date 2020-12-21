@@ -44,7 +44,8 @@ export default class LoginPage extends React.PureComponent {
                         });
                     }
                 })
-                .catch(() => {});
+                .catch(() => {
+                });
         }
     }
 
@@ -57,7 +58,7 @@ export default class LoginPage extends React.PureComponent {
             <div className={b()}>
                 <div className={'container-fluid'}>
                     <h1>Login Page</h1>
-                    <Form />
+                    <Form/>
                 </div>
             </div>
         );
