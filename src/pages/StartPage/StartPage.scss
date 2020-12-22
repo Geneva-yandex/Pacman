@@ -1,0 +1,45 @@
+.StartPage__navigation {
+  display: flex;
+  align-items: center;
+  width: 350px;
+  margin: 0 auto;
+  text-align: center;
+  justify-content: center;
+}
+
+.StartPage__navigation-list {
+  width: 100%;
+}
+
+.StartPage__navigation-item {
+  margin-bottom: 10px;
+  border: 1px solid #fed940;
+
+  &:hover {
+    a {
+      color: #fed940;
+    }
+  }
+}
+
+.StartPage__navigation-item a {
+  transition: 0.3s linear all;
+  height: 100%;
+  display: block;
+  padding: 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.instruction-modal {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #292926;
+  padding: 20px;
+}
+
+.modal-default-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
