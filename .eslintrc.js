@@ -28,6 +28,7 @@ module.exports = {
         "default-param-last": "off",
         "eol-last": ["error", "always"],
         "react/prop-types": [2, {ignore: ['children']}],
-        "default-case": "off"
+        "default-case": "off",
+        "no-mixed-operators": "off"
     }
 };
