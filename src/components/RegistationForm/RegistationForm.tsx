@@ -2,14 +2,14 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import Input from '../Input';
 import {FormEvent} from 'react';
-import signUpApi from '../../utils/api/AuthApi/SignUp';
+import authApi from '../../utils/api/AuthApi'
 import {ChangeEvent} from 'react';
-import {Redirect} from 'react-router';
+import {withRouter, RouteComponentProps} from 'react-router';
 
 const b = bem('AuthForm');
 
-export default class AuthForm extends React.Component {
-    user: any;
+class AuthForm extends React.Component<RouteComponentProps> {
+
     state = {
         first_name: '',
         second_name: '',
@@ -18,19 +18,16 @@ export default class AuthForm extends React.Component {
         password: '',
         phone: '',
         error: '',
-        toDashBoards: false,
-        errorMessage: ''
+        errorMessage: '',
     };
 
-    changeState = (prop: string, value: string) => {
+    onControlChange = (event: ChangeEvent) => {
+        const target = event.target;
+        const value = (target as HTMLInputElement).value;
+        const propertyName = (target as HTMLInputElement).name;
         this.setState({
-            [prop]: value
+            [propertyName]: value
         });
-    };
-
-    onControlChange = (event: ChangeEvent, propertyName: string) => {
-        const value = (event.target as HTMLInputElement).value;
-        this.changeState(propertyName, value);
     };
 
     onSubmit = (event: FormEvent) => {
@@ -45,12 +42,19 @@ export default class AuthForm extends React.Component {
             phone: this.state.phone
         };
 
-        signUpApi(signUpData)
+        authApi.sendAuthRequest(signUpData)
             .then(res => {
                 if (res.status === 200) {
-                    this.setState({
-                        toDashBoards: true
-                    });
+                    authApi.getUserInfo()
+                        .then(resp => {
+                            localStorage.setItem('user', JSON.stringify(resp.data));
+                            this.props.history.push('/')
+                        })
+                        .catch(err => {
+                            this.setState({
+                                errorMessage: err.response.data.reason
+                            })
+                        })
                 }
             })
             .catch(err => {
@@ -61,40 +65,37 @@ export default class AuthForm extends React.Component {
     };
 
     public render() {
-        if (this.state.toDashBoards) {
-            return (
-                <Redirect to="/"/>
-            );
-        }
 
         return (
             <form className={b()} onSubmit={this.onSubmit}>
                 <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e, 'first_name');
+                    this.onControlChange(e);
                 }} name="first_name" title="Enter your name" type="text" placeholder="first_name" />
                 <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e, 'second_name');
+                    this.onControlChange(e);
                 }} name="second_name" title="Enter the second_name" type="text" placeholder="second_name" />
                 <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e, 'login');
+                    this.onControlChange(e);
                 }} name="login" title="Enter the login" type="text" placeholder="login" />
                 <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e, 'email');
+                    this.onControlChange(e);
                 }} name="email" title="Enter the email" type="email" placeholder="email" />
                 <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e, 'password');
+                    this.onControlChange(e);
                 }} name="password" title="Enter the password" type="password" placeholder="*******" />
                 <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e, 'phone');
+                    this.onControlChange(e);
                 }} name="phone" title="Enter the phone" type="tel" placeholder="phone" />
 
                 <button type="submit">
                     Зарегестрироваться
                 </button>
-                <div className={'error'}>
+                <div className='error'>
                     {this.state.errorMessage}
                 </div>
             </form>
         );
     }
 }
+
+export default withRouter(AuthForm);

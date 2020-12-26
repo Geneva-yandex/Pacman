@@ -21,15 +21,16 @@ export default class Router extends React.PureComponent<IRouterProps> {
     }
 
     renderRoute(route: RouteType) {
-        const Component = route.component;
+        /*const Component = route.component;*/
 
         return (
             <Route
                 path={route.path}
                 exact={route.exact}
                 key={route.id}
+                component={route.component}
             >
-                <Component/>
+                {/*<Component/>*/}
             </Route>
         );
     }
