@@ -6,7 +6,7 @@ import StartPage from './StartPage';
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
 const ROUTE_SIGNUP = 'sign up';
-const ROUTE_START = 'start page'
+const ROUTE_START = 'start page';
 
 export default [
     {

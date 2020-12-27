@@ -1,14 +1,14 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 
-const b = bem('Modal')
+const b = bem('Modal');
 
 type OwnProps = {
     isClosed: boolean,
     className?: string,
     close: (event: React.MouseEvent<HTMLElement>) => void,
     stateModal: string,
-}
+};
 
 type Props = OwnProps;
 
@@ -17,6 +17,7 @@ export default class Modal extends React.Component<Props> {
         if (this.props.isClosed) {
             return '';
         }
+
         return (
             <div className={'modal'}>
                 <div className={this.props.className}>
@@ -27,6 +28,6 @@ export default class Modal extends React.Component<Props> {
                     </section>
                 </div>
             </div>
-        )
+        );
     }
 }
