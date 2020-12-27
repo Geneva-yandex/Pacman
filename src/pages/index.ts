@@ -19,7 +19,7 @@ export default [
     },
     {
         id: ROUTE_LOGIN,
-        exact: true,
+        exact: false,
         path: '/login',
         component: LoginPage,
         title: 'Log-in',
@@ -27,7 +27,7 @@ export default [
     },
     {
         id: ROUTE_SIGNUP,
-        exact: true,
+        exact: false,
         path: '/sign-up',
         component: SignUpPage,
         title: 'Sign Up',

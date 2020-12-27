@@ -1,17 +1,9 @@
-import getUserInfo from "./api/AuthApi/getUserInfo";
+import authApi from '../utils/api/AuthApi'
 
-type userData = {
-    first_name: string;
-    second_name: string;
-    login: string;
-    email: string;
-    avatar: string;
-    phone: string;
-};
-
+import { SignUpValueObject } from '../types/types'
 
 type PromiseResolver = {
-    user: userData | null,
+    user: SignUpValueObject | null,
     redirectUrl: string
 }
 
@@ -28,7 +20,7 @@ async function checkForAuthOrRedirect(redirectUrl: string): Promise<PromiseResol
                 redirectUrl: '',
             });
         } else {
-            getUserInfo()
+            authApi.getUserInfo()
                 .then(res => {
                     if (res.status === 200) {
                         const userInfo = res.data;
