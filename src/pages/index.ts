@@ -2,11 +2,13 @@ import IndexPage from './IndexPage';
 import LoginPage from './LoginPage';
 import SignUpPage from './SignPage';
 import StartPage from './StartPage';
+import ProfilePage from './ProfilePage';
 
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
 const ROUTE_SIGNUP = 'sign up';
 const ROUTE_START = 'start page';
+const PROFILE = 'profile page';
 
 export default [
     {
@@ -40,6 +42,13 @@ export default [
         component: StartPage,
         title: 'Start',
         isNavVisible: true
+    },
+    {
+        id: PROFILE,
+        exact: false,
+        path: '/profile',
+        component: ProfilePage,
+        title: 'Profile',
+        isNavVisible: true
     }
-
 ];
