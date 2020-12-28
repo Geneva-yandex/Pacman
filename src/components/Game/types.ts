@@ -1,11 +1,13 @@
-export type mapType = number[][];
+export type MapType = number[][];
 
-export type coordsType = {
+export type СoordsType = {
     row: number,
     cell: number
 };
 
-export type userDirectionType = 'left' | 'right' | 'top' | 'bottom';
+export type UserDirectionType = 'left' | 'right' | 'top' | 'bottom';
+
+export type UserDirectionTypeType = 'vertical' | 'horizontal';
 
 export interface IGameState {
     cookies: number,
@@ -17,12 +19,12 @@ export interface IGameState {
     speed: number
 }
 
-export type gameInitMethodsType = {
+export type GameInitMethodsType = {
     initCookies: (cookies: number) => void,
     initPills: (pills: number) => void,
 };
 
-export interface ICanvasProps extends Omit<IGameState, 'lives' | 'level' | 'score'>, gameInitMethodsType {
+export interface ICanvasProps extends Omit<IGameState, 'lives' | 'level' | 'score'>, GameInitMethodsType {
     eatPills: () => void
     eatCookies: () => void
 }
@@ -31,12 +33,12 @@ export interface IComponentProps {
     ctx: CanvasRenderingContext2D | null
 }
 
-export type drawMapParams = {
-    map: mapType,
-    initUser: (position: coordsType) => void,
-} & gameInitMethodsType;
+export type DrawMapParams = {
+    map: MapType,
+    initUser: (position: СoordsType) => void,
+} & GameInitMethodsType;
 
-export type availableCellsCountParamsType = {
+export type AvailableCellsCountParamsType = {
     cell:number,
     row:number,
     isVerticalDirection:boolean,

@@ -1,14 +1,16 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './Canvas.scss';
-import {coordsType, ICanvasProps, mapType, userDirectionType, availableCellsCountParamsType} from '../types';
+import {СoordsType, ICanvasProps, MapType, UserDirectionType, AvailableCellsCountParamsType} from '../types';
 import mapData from '../maps/basic';
 import Map from '../components/Map';
 import User from '../components/User';
-import {convertToPixel, getCell, getRow, makeCellCoords} from '../helpers';
+import {convertToPixel, getCell, getRow, makeCellCoords, isOutOfReachItem} from '../helpers';
 import UserDirectionEnum from '../../../enums/UserDirectionEnum';
 import GameItemsEnum from '../../../enums/GameItemsEnum';
 import {isSuitableValue} from '../helpers';
+import KeyCodeEnum from '../../../enums/KeyCodeEnum';
+import UserDirectionTypeEnum from '../../../enums/UserDirectionTypeEnum';
 
 const b = bem('Canvas');
 
@@ -21,12 +23,12 @@ const CANVAS_SIZE = {
 export default class Canvas extends React.PureComponent<ICanvasProps> {
     canvasRef: React.RefObject<HTMLCanvasElement>;
     ctx: CanvasRenderingContext2D | null;
-    mapData: mapType;
+    mapData: MapType;
     mapComponent: Map;
     userComponent: User;
     requestAnimationId: number | null;
-    userPosition: coordsType;
-    userDirection: userDirectionType;
+    userPosition: СoordsType;
+    userDirection: UserDirectionType;
 
     constructor(props: ICanvasProps) {
         super(props);
@@ -37,6 +39,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
 
         this.userPosition = makeCellCoords(0, 0);
         this.userDirection = UserDirectionEnum.RIGHT as 'right';
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     componentDidMount() {
@@ -44,8 +47,12 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
             this.ctx = this.canvasRef.current.getContext('2d');
             this.initComponents();
 
-            window.addEventListener('keydown', (e: KeyboardEvent) => this.onKeyDown(e.code));
+            window.addEventListener('keydown', this.onKeyDown);
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.onKeyDown);
     }
 
     render() {
@@ -80,8 +87,8 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         });
     }
 
-    onKeyDown(keyCode: string) {
-        const newDirection = UserDirectionEnum.getDirectionByKeyCode(keyCode);
+    onKeyDown(e: KeyboardEvent) {
+        const newDirection = KeyCodeEnum.getDirectionByKeyCode(e.code);
         if (!newDirection) {
             return;
         }
@@ -96,26 +103,22 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         if (currentDirectionType !== newDirectionType) {
             const row = getRow(this.userPosition);
             const cell = getCell(this.userPosition);
-            const isPositiveNewDirection = UserDirectionEnum.isPositiveDirection(newDirection);
+            const newDirectionSign = UserDirectionEnum.getSign(newDirection);
 
-            if (!isSuitableValue(currentDirectionType === 'vertical' ? row : cell)) {
+            if (!isSuitableValue(currentDirectionType === UserDirectionTypeEnum.VERTICAL ? row : cell)) {
                 return;
             }
 
             let newRow = Math.round(row);
             let newCell = Math.round(cell);
 
-            if (currentDirectionType === 'vertical') {
-                newCell = isPositiveNewDirection ?
-                    newCell + 1 :
-                    newCell - 1;
+            if (currentDirectionType === UserDirectionTypeEnum.VERTICAL) {
+                newCell += newDirectionSign;
             } else {
-                newRow = isPositiveNewDirection ?
-                    newRow + 1 :
-                    newRow - 1;
+                newRow += newDirectionSign;
             }
 
-            if (GameItemsEnum.isOutOfReachItem(this.mapData[newRow][newCell])) {
+            if (isOutOfReachItem(this.mapData[newRow][newCell])) {
                 return;
             }
         }
@@ -123,7 +126,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         this.turnDirection(newDirection);
     }
 
-    turnDirection(newDirection: userDirectionType) {
+    turnDirection(newDirection: UserDirectionType) {
         this.userDirection = newDirection;
         if (this.requestAnimationId) {
             cancelAnimationFrame(this.requestAnimationId);
@@ -132,17 +135,17 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         this.animateUser(newDirection, this.userPosition);
     }
 
-    animateUser(userDirection: userDirectionType, userPosition:coordsType) {
+    animateUser(userDirection: UserDirectionType, userPosition:СoordsType) {
         const cell = Math.round(getCell(userPosition));
         const row = Math.round(getRow(userPosition));
-        const isVerticalDirection = UserDirectionEnum.getDirectionType(userDirection) === 'vertical';
-        const isPositiveDirection = UserDirectionEnum.isPositiveDirection(userDirection);
+        const isVerticalDirection = UserDirectionEnum.getDirectionType(userDirection) === UserDirectionTypeEnum.VERTICAL;
+        const sign = UserDirectionEnum.getSign(userDirection);
 
         const availableCellsCount = this.getAvailableCellsCount({
             cell,
             row,
             isVerticalDirection,
-            isPositiveDirection
+            isPositiveDirection: sign === 1
         });
 
         if (availableCellsCount === 0) {
@@ -150,7 +153,6 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         }
 
         const duration = availableCellsCount * this.props.speed;
-        const sign = isPositiveDirection ? 1 : -1;
         let start = performance.now();
 
         const animate = (time:number) => {
@@ -182,7 +184,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         this.requestAnimationId = requestAnimationFrame(animate);
     }
 
-    getAvailableCellsCount(params: availableCellsCountParamsType):number {
+    getAvailableCellsCount(params: AvailableCellsCountParamsType):number {
         const step = params.isPositiveDirection ? 1 : -1;
 
         let cellsCount = 0;
@@ -195,7 +197,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
             params.row + step :
             params.row;
 
-        while (!GameItemsEnum.isOutOfReachItem(this.mapData[rowIndex][cellIndex])) {
+        while (!isOutOfReachItem(this.mapData[rowIndex][cellIndex])) {
             ++cellsCount;
             if (params.isVerticalDirection) {
                 rowIndex += step;
@@ -207,12 +209,12 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         return cellsCount;
     }
 
-    setUserPosition(userPosition: coordsType) {
+    setUserPosition(userPosition: СoordsType) {
         this.userPosition = userPosition;
     }
 
-    takeMapItems(direction: userDirectionType, row: number, cell: number) {
-        if (!isSuitableValue(UserDirectionEnum.getDirectionType(direction) === 'vertical' ? row : cell)) {
+    takeMapItems(direction: UserDirectionType, row: number, cell: number) {
+        if (!isSuitableValue(UserDirectionEnum.getDirectionType(direction) === UserDirectionTypeEnum.VERTICAL ? row : cell)) {
             return;
         }
 

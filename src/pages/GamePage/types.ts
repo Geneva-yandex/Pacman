@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-export type viewType = 'start' | 'game' | 'finish';
+export type ViewType = 'start' | 'game' | 'finish';
 
 export interface IStateGamePage {
-    view: viewType
+    view: ViewType
 }
 
 export interface IViewProps {

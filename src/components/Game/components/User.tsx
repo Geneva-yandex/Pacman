@@ -1,17 +1,17 @@
-import {IComponentProps, coordsType} from '../types';
+import {IComponentProps, СoordsType} from '../types';
 import {CELL_SIZE} from '../views/Canvas';
 import {convertToPixel, getCell, getRow} from '../helpers';
 
 export default class User {
     ctx: CanvasRenderingContext2D | null;
-    prevCoords: coordsType | null;
+    prevCoords: СoordsType | null;
 
     constructor(props: IComponentProps) {
         this.ctx = props.ctx;
         this.prevCoords = null;
     }
 
-    public draw(userPosition: coordsType) {
+    public draw(userPosition: СoordsType) {
         if (!this.ctx) {
             return;
         }
@@ -28,7 +28,7 @@ export default class User {
         this.ctx.fill();
     }
 
-    public move(userPosition: coordsType) {
+    public move(userPosition: СoordsType) {
         if (!this.ctx) {
             return;
         }

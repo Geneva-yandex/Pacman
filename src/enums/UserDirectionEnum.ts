@@ -1,4 +1,5 @@
-import {userDirectionType} from '../components/Game/types';
+import {UserDirectionType, UserDirectionTypeType} from '../components/Game/types';
+import UserDirectionTypeEnum from './UserDirectionTypeEnum';
 
 export default class UserDirectionEnum {
     static LEFT = 'left';
@@ -6,30 +7,25 @@ export default class UserDirectionEnum {
     static TOP = 'top';
     static BOTTOM = 'bottom';
 
-    static getDirectionByKeyCode(keyCode: string):userDirectionType | undefined {
-        const map:Record<string, string> = {
-            ArrowUp: this.TOP,
-            ArrowDown: this.BOTTOM,
-            ArrowRight: this.RIGHT,
-            ArrowLeft: this.LEFT
+    static getDirectionType(direction: UserDirectionType):UserDirectionTypeType | undefined {
+        const map = {
+            [this.LEFT]: UserDirectionTypeEnum.HORIZONTAL,
+            [this.RIGHT]: UserDirectionTypeEnum.HORIZONTAL,
+            [this.TOP]: UserDirectionTypeEnum.VERTICAL,
+            [this.BOTTOM]: UserDirectionTypeEnum.VERTICAL
         };
 
-        return map[keyCode] as userDirectionType | undefined;
+        return map[direction] as UserDirectionTypeType | undefined;
     }
 
-    static getDirectionType(direction: userDirectionType): 'vertical' | 'horizontal' | null {
-        if ([this.TOP, this.BOTTOM].includes(direction)) {
-            return 'vertical';
-        }
+    static getSign(direction: UserDirectionType):number {
+        const map = {
+            [this.LEFT]: -1,
+            [this.RIGHT]: 1,
+            [this.TOP]: -1,
+            [this.BOTTOM]: 1
+        };
 
-        if ([this.LEFT, this.RIGHT].includes(direction)) {
-            return 'horizontal';
-        }
-
-        return null;
-    }
-
-    static isPositiveDirection(direction: userDirectionType): boolean {
-        return [this.BOTTOM, this.RIGHT].includes(direction);
+        return map[direction];
     }
 }
