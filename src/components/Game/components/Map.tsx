@@ -1,5 +1,5 @@
 import GameItemsEnum from '../../../enums/GameItemsEnum';
-import {IComponentProps, СoordsType, DrawMapParams} from '../types';
+import {IComponentProps, CoordsType, DrawMapParams} from '../types';
 import {CELL_SIZE} from '../views/Canvas';
 import {convertToPixel, getCell, getRow, makeCellCoords} from '../helpers';
 
@@ -42,7 +42,7 @@ export default class Map {
         initPills(pills);
     }
 
-    private drawItem(itemCode: number, coords: СoordsType) {
+    private drawItem(itemCode: number, coords: CoordsType) {
         switch (itemCode) {
         case (GameItemsEnum.WALL):
             this.drawWalls(coords);
@@ -59,7 +59,7 @@ export default class Map {
         }
     }
 
-    public drawWalls(coords: СoordsType) {
+    public drawWalls(coords: CoordsType) {
         if (!this.ctx) {
             return;
         }
@@ -69,7 +69,7 @@ export default class Map {
         this.ctx.fillRect(rectCoords.x, rectCoords.y, rectCoords.width, rectCoords.height);
     }
 
-    public drawGhostHome(coords: СoordsType) {
+    public drawGhostHome(coords: CoordsType) {
         if (!this.ctx) {
             return;
         }
@@ -80,7 +80,7 @@ export default class Map {
         this.ctx.fillRect(rectCoords.x, rectCoords.y, rectCoords.width, rectCoords.height);
     }
 
-    public drawCookie(coords: СoordsType) {
+    public drawCookie(coords: CoordsType) {
         if (!this.ctx) {
             return;
         }
@@ -94,7 +94,7 @@ export default class Map {
         this.ctx.fill();
     }
 
-    public drawPill(coords: СoordsType) {
+    public drawPill(coords: CoordsType) {
         if (!this.ctx) {
             return;
         }
@@ -108,7 +108,7 @@ export default class Map {
         this.ctx.fill();
     }
 
-    private getRectCoords(coords: СoordsType) {
+    private getRectCoords(coords: CoordsType) {
         return {
             x: convertToPixel(getCell(coords)),
             y: convertToPixel(getRow(coords)),
@@ -117,7 +117,7 @@ export default class Map {
         };
     }
 
-    private getArcCoords(coords: СoordsType) {
+    private getArcCoords(coords: CoordsType) {
         return {
             x: convertToPixel(getCell(coords)) + CELL_SIZE / 2,
             y: convertToPixel(getRow(coords)) + CELL_SIZE / 2

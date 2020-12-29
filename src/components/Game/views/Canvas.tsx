@@ -1,7 +1,7 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './Canvas.scss';
-import {СoordsType, ICanvasProps, MapType, UserDirectionType, AvailableCellsCountParamsType} from '../types';
+import {CoordsType, ICanvasProps, MapType, UserDirectionType, AvailableCellsCountParamsType} from '../types';
 import mapData from '../maps/basic';
 import Map from '../components/Map';
 import User from '../components/User';
@@ -27,7 +27,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
     mapComponent: Map;
     userComponent: User;
     requestAnimationId: number | null;
-    userPosition: СoordsType;
+    userPosition: CoordsType;
     userDirection: UserDirectionType;
 
     constructor(props: ICanvasProps) {
@@ -135,7 +135,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         this.animateUser(newDirection, this.userPosition);
     }
 
-    animateUser(userDirection: UserDirectionType, userPosition:СoordsType) {
+    animateUser(userDirection: UserDirectionType, userPosition:CoordsType) {
         const cell = Math.round(getCell(userPosition));
         const row = Math.round(getRow(userPosition));
         const isVerticalDirection = UserDirectionEnum.getDirectionType(userDirection) === UserDirectionTypeEnum.VERTICAL;
@@ -209,7 +209,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         return cellsCount;
     }
 
-    setUserPosition(userPosition: СoordsType) {
+    setUserPosition(userPosition: CoordsType) {
         this.userPosition = userPosition;
     }
 

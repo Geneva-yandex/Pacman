@@ -1,19 +1,19 @@
 import {CELL_SIZE} from '../views/Canvas';
-import {СoordsType} from '../types';
+import {CoordsType} from '../types';
 import GameItemsEnum from '../../../enums/GameItemsEnum';
 
 export const convertToPixel = (cellsCount: number):number => {
     return cellsCount * CELL_SIZE;
 };
 
-export const makeCellCoords = (row: number, cell: number):СoordsType => ({
+export const makeCellCoords = (row: number, cell: number):CoordsType => ({
     row,
     cell
 });
 
-export const getRow = (coords: СoordsType) => coords.row;
+export const getRow = (coords: CoordsType) => coords.row;
 
-export const getCell = (coords: СoordsType) => coords.cell;
+export const getCell = (coords: CoordsType) => coords.cell;
 
 export const isSuitableValue = (value:number):boolean => {
     const ERROR = 0.2;

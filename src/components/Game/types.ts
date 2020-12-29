@@ -1,6 +1,6 @@
 export type MapType = number[][];
 
-export type СoordsType = {
+export type CoordsType = {
     row: number,
     cell: number
 };
@@ -35,7 +35,7 @@ export interface IComponentProps {
 
 export type DrawMapParams = {
     map: MapType,
-    initUser: (position: СoordsType) => void,
+    initUser: (position: CoordsType) => void,
 } & GameInitMethodsType;
 
 export type AvailableCellsCountParamsType = {
