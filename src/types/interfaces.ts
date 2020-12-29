@@ -2,18 +2,23 @@ export interface IBaseId<T = number> {
     id: T;
 }
 
-export interface IUser extends IBaseId {
+export interface IPsswordsDto {
+    oldPassword: string;
+    newPassword: string;
+}
+
+export interface IBaseUser {
     first_name: string;
     second_name: string;
     display_name: string;
     login: string;
     email: string;
+}
+
+export interface IUser extends IBaseId, IBaseUser {
     phone: string;
     avatar: string;
     role?: string;
 }
 
-export interface IPasswordRequest {
-    oldPassword: string;
-    newPassword: string;
-}
+export type IUserProfileDto = IBaseUser;

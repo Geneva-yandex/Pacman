@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {FC, FormEvent, useCallback} from 'react';
 import Input from '../../../components/Input';
-import {useFormField} from '../../../utils/hooks';
-import {IPasswordRequest} from '../../../types/interfaces';
+import {useFormField} from '../../../misc/hooks';
+import {IPsswordsDto} from '../../../types/interfaces';
 
 interface IPasswordFormProps {
-    onSave: (passwords: IPasswordRequest) => void;
+    onSave: (passwords: IPsswordsDto) => void;
 }
 
 const PasswordForm: FC<IPasswordFormProps> = ({onSave}: IPasswordFormProps) => {

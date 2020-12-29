@@ -3,14 +3,14 @@ import {FC} from 'react';
 import {Tab, Tabs} from '../../components/Tabs';
 import {AccountForm, AvatarForm, PasswordForm} from './components';
 import {ProfileTabs} from './types';
-import {IUser, IPasswordRequest} from '../../types/interfaces';
+import {IUser, IPsswordsDto} from '../../types/interfaces';
 
 const user: IUser = {
     id: 1,
-    first_name: '',
-    second_name: '',
-    display_name: '',
-    login: '',
+    first_name: '1',
+    second_name: '2',
+    display_name: '3',
+    login: '4',
     email: '',
     phone: '',
     avatar: ''
@@ -27,7 +27,7 @@ const ProfilePage: FC = () => {
                 }} />
             </Tab>
             <Tab name={ProfileTabs.Password} title="Пароль">
-                <PasswordForm onSave={(passwords: IPasswordRequest) => {
+                <PasswordForm onSave={(passwords: IPsswordsDto) => {
                     console.log(passwords);
                 }} />
             </Tab>

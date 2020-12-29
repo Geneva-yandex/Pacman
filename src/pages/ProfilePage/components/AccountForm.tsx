@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, FormEvent, useCallback} from 'react';
 import Input from '../../../components/Input';
 import {IUser} from '../../../types/interfaces';
-import {useForm} from '../../../utils/hooks';
+import {useForm} from '../../../misc/hooks';
 
 interface IAccountFormProps {
     user: IUser;
@@ -23,16 +23,16 @@ const AccountForm: FC<IAccountFormProps> = ({user, onSave}: IAccountFormProps) =
                 value={formFields.second_name} onChange={formFieldChangeHandler}/>
 
             <Input type="text" name="first_name" title="Имя"
-                value={formFields.second_name} onChange={formFieldChangeHandler}/>
+                value={formFields.first_name} onChange={formFieldChangeHandler}/>
 
             <Input type="text" name="login" title="Логин"
-                value={formFields.second_name} onChange={formFieldChangeHandler}/>
+                value={formFields.login} onChange={formFieldChangeHandler}/>
 
             <Input type="email" name="email" title="Почта"
-                value={formFields.second_name} onChange={formFieldChangeHandler}/>
+                value={formFields.email} onChange={formFieldChangeHandler}/>
 
             <Input type="tel" name="phone" title="Номер телефона"
-                value={formFields.second_name} onChange={formFieldChangeHandler}/>
+                value={formFields.phone} onChange={formFieldChangeHandler}/>
 
             <button>Сохранить</button>
         </form>

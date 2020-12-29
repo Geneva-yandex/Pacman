@@ -2,7 +2,7 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import Input from '../Input';
 import {FormEvent} from 'react';
-import authApi from '../../utils/api/AuthApi';
+import authApi from '../../api/AuthApi';
 import {ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
 

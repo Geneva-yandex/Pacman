@@ -1,8 +1,8 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './IndexPage.scss';
-import checkForAuthOrRedirect from '../../utils/checkForAuthOrRedirect';
-import AuthApi from '../../utils/api/AuthApi';
+import checkForAuthOrRedirect from '../../misc/utils/checkForAuthOrRedirect';
+import AuthApi from '../../api/AuthApi';
 import {RouteComponentProps, withRouter} from 'react-router';
 
 const b = bem('IndexPage');
