@@ -16,37 +16,37 @@ type navItem = {
 
 const b = bem('StartPage');
 
+const startPageNavigation = [
+    {
+        id: 0,
+        name: 'Старт',
+        route: '/',
+        modalControl: ''
+    },
+    {
+        id: 1,
+        name: 'Тренировка',
+        route: '/',
+        modalControl: ''
+    },
+    {
+        id: 2,
+        name: 'Настройки',
+        route: '/',
+        modalControl: ''
+    },
+    {
+        id: 3,
+        name: 'Инструкция',
+        route: '',
+        modalControl: 'instructionModal'
+    }
+]
+
 class StartPage extends React.PureComponent<RouteComponentProps> {
     private modalWrapperRef = React.createRef<HTMLDivElement>();
 
     state = {
-        user: {},
-        pages: [
-            {
-                id: 0,
-                name: 'Старт',
-                route: '/',
-                modalControl: ''
-            },
-            {
-                id: 1,
-                name: 'Тренировка',
-                route: '/',
-                modalControl: ''
-            },
-            {
-                id: 2,
-                name: 'Настройки',
-                route: '/',
-                modalControl: ''
-            },
-            {
-                id: 3,
-                name: 'Инструкция',
-                route: '',
-                modalControl: 'instructionModal'
-            }
-        ],
         modals: {
             instructionModal: true
         }
@@ -55,13 +55,8 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
 
     componentDidMount() {
         checkForAuthOrRedirect('/login')
-            .then(res => {
-                this.setState({
-                    user: res.user
-                });
-            })
-            .catch(() => {
-                this.props.history.push('/login');
+            .catch((err) => {
+                this.props.history.push(err.redirectUrl);
             });
     }
 
@@ -78,7 +73,7 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
             return;
         }
 
-        const allModals : {[index: string]: boolean} = this.state.modals;
+        const allModals: { [index: string]: boolean } = this.state.modals;
         for (let key in allModals) {
             allModals[key] = true;
         }
@@ -119,21 +114,17 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
     }
 
     renderNavItems(navItem: navItem) {
-        if (navItem.route) {
-            return (
-                <li key={navItem.id} className={b('navigation-item')}>
+        return (
+            <li key={navItem.id} className={b('navigation-item')}>
+                {navItem.route ?
                     <Link to={navItem.route}>
                         {navItem.name}
                     </Link>
-                </li>
-            );
-        }
-
-        return (
-            <li key={navItem.id} className={b('navigation-item')}>
-                <a onClick={e => this.openModal(navItem.modalControl, e)} href="#">
-                    {navItem.name}
-                </a>
+                    :
+                    <a onClick={e => this.openModal(navItem.modalControl, e)} href="#">
+                        {navItem.name}
+                    </a>
+                }
             </li>
         );
     }
@@ -141,26 +132,26 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
     render() {
         return (
             <div className={b()}>
-                <div className={'container-fluid'}>
+                <div className='container-fluid'>
                     <h1>Start page</h1>
                     <div className={b('navigation-wrapper')}>
                         <nav className={b('navigation')}>
                             <ul className={b('navigation-list')}>
                                 {
-                                    this.state.pages
+                                    startPageNavigation
                                         .map(page => this.renderNavItems(page))
                                 }
                             </ul>
                         </nav>
                     </div>
                 </div>
-                <div onClick={this.closeAllModals} className={'modals-wrapper'} ref={this.modalWrapperRef}>
+                <div onClick={this.closeAllModals} className='modals-wrapper' ref={this.modalWrapperRef}>
                     <Modal stateModal="instructionModal" close={e => this.closeModal(e)}
-                        className={'instruction-modal'} isClosed={this.state.modals.instructionModal}>
-                        <h3 className={'modal-default-title'}>
+                           className='instruction-modal' isClosed={this.state.modals.instructionModal}>
+                        <h3 className='modal-default-title'>
                             Заголовок инстукции
                         </h3>
-                        <div className={'modal-default-text-box'}>
+                        <div className='modal-default-text-box'>
                             <p>
                                 Инструкция Инструкция Инструкция Инструкция
                             </p>
@@ -171,4 +162,5 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
         );
     }
 }
+
 export default withRouter(StartPage);
