@@ -18,7 +18,7 @@ export interface IBaseUser {
 export interface IUser extends IBaseId, IBaseUser {
     phone: string;
     avatar: string;
-    role?: string;
+    role: string;
 }
 
 export type IUserProfileDto = IBaseUser;

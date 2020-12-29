@@ -11,8 +11,8 @@ class UserApi extends BaseApi {
         return this.get<IUser>(userId.toString());
     }
 
-    public changeProfile(profileDto: IUserProfileDto): Promise<any> {
-        return this.put<IUserProfileDto, any>('profile', profileDto);
+    public changeProfile(profileDto: IUserProfileDto): Promise<AxiosResponse<IUser>> {
+        return this.put<IUserProfileDto, IUser>('profile', profileDto);
     }
 
     public changeAvatar(avatar: File): Promise<any> {

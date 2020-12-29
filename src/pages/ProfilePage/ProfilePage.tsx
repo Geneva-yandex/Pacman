@@ -1,45 +1,90 @@
 import * as React from 'react';
-import {FC} from 'react';
 import {Tab, Tabs} from '../../components/Tabs';
 import {AccountForm, AvatarForm, PasswordForm} from './components';
 import {ProfileTabs} from './types';
 import {IUser, IPsswordsDto} from '../../types/interfaces';
+import checkForAuthOrRedirect from '../../misc/utils/checkForAuthOrRedirect';
+import {RouteComponentProps, withRouter} from 'react-router';
+import {AuthApi, UserApi} from '../../api';
 
-const user: IUser = {
-    id: 1,
-    first_name: '1',
-    second_name: '2',
-    display_name: '3',
-    login: '4',
-    email: '',
-    phone: '',
-    avatar: ''
-};
+interface IProfilePageState {
+    currentTab: ProfileTabs;
+    user: IUser;
+}
 
-const ProfilePage: FC = () => {
-    const [currentTab, setCurrentTab] = React.useState(ProfileTabs.Account);
+class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState> {
+    constructor(props: RouteComponentProps) {
+        super(props);
 
-    return <div className="container-fluid">
-        <Tabs selectedTab={currentTab} onSelect={(tab: ProfileTabs) => setCurrentTab(tab)}>
-            <Tab name={ProfileTabs.Account} title="Информация">
-                <AccountForm user={user} onSave={(user: IUser) => {
-                    console.log(user);
-                }} />
-            </Tab>
-            <Tab name={ProfileTabs.Password} title="Пароль">
-                <PasswordForm onSave={(passwords: IPsswordsDto) => {
-                    console.log(passwords);
-                }} />
-            </Tab>
-            <Tab name={ProfileTabs.Avatar} title="Аватар">
-                <AvatarForm
-                    onSave={(avatar: File) => {
-                        console.log(avatar);
-                    }}
-                    avatar={'https://t1.pixers.pics/img-d5043af1/kangaskuvat-wow-pop-art-kasvot-seksikas-yllattynyt-nainen-vaaleanpunainen-kihara-hiukset-ja-avata-suuhun-tilalla-aurinkolasit-kadessaan-merkinta-wow-heijastus-vektori-varikas-tausta-pop-art-retro-koominen-tyyli.png?H4sIAAAAAAAAA5VQS26EMAy9Dkhh7CSOw3CA2c4RUCChg8pAlNB2OqdvUNVNpS4qL_z8fX6GtzW7KcAY1j0kuM_eLwGmeSlR7lLI8zNUhllg3ZXsUiEWtL2HNKYtVo1RoiErGFvBUtfdhyuDd5deq9u-x9wBZH2K86NsK27MMN4zKJQMyGCsMUSKyA5MfVy2fd0ajQ-Np7i-CDys7lyMy2efQuHMoXdLvLl_LG-9PrPutyG5Z_Obov5RSIiCDmXTVq7fq6MGf5B8YyjtcLlCISMLUkHbgj6S_eUqmaxUbav7aWBv_WDOapjKF4NmIjSeZUBLzPgF2oXazX8BAAA='} />
-            </Tab>
-        </Tabs>
-    </div>;
-};
+        this.state = {
+            currentTab: ProfileTabs.Account,
+            user: {} as IUser
+        };
 
-export default ProfilePage;
+        this._changeProfile.bind(this);
+        this._changePasswords.bind(this);
+        this._changeAvatar.bind(this);
+    }
+
+    componentDidMount() {
+        checkForAuthOrRedirect('/')
+            .then(res => {
+                this.setState({
+                    user: res.user as IUser
+                });
+            })
+            .catch(err => {
+                this.props.history.push('/login');
+                console.log(err);
+            });
+    }
+
+    render() {
+        const {user, currentTab} = this.state;
+
+        return <div className="container-fluid">
+            {user && <React.Fragment>
+                <Tabs selectedTab={currentTab} onSelect={(tab: ProfileTabs) => this.setState({currentTab: tab})}>
+                    <Tab name={ProfileTabs.Account} title="Информация">
+                        <AccountForm user={user} onSave={this._changeProfile} />
+                    </Tab>
+                    <Tab name={ProfileTabs.Password} title="Пароль">
+                        <PasswordForm onSave={this._changePasswords} />
+                    </Tab>
+                    <Tab name={ProfileTabs.Avatar} title="Аватар">
+                        <AvatarForm avatar={user.avatar} onSave={this._changeAvatar} />
+                    </Tab>
+                </Tabs>
+            </React.Fragment>}
+        </div>;
+    }
+
+    private async _changeProfile(user: IUser) {
+        try {
+            const response = await UserApi.changeProfile(user);
+            this.setState({user: response.data});
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    private async _changePasswords(passwords: IPsswordsDto) {
+        try {
+            await UserApi.changePassword(passwords);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    private async _changeAvatar(avatar: File) {
+        try {
+            await UserApi.changeAvatar(avatar);
+            const response = await AuthApi.getUserInfo();
+            this.setState({user: response.data});
+        } catch (error) {
+            console.error(error);
+        }
+    }
+}
+
+export default withRouter(ProfilePage);
