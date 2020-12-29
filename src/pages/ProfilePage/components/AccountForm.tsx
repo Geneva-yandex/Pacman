@@ -9,12 +9,12 @@ interface IAccountFormProps {
     onSave: (user: IUser) => void;
 }
 
-const AccountForm: FC<IAccountFormProps> = ({user}: IAccountFormProps) => {
+const AccountForm: FC<IAccountFormProps> = ({user, onSave}: IAccountFormProps) => {
     const {formFields, formFieldChangeHandler} = useForm(user);
 
     const onSubmit = useCallback((event: FormEvent) => {
         event.preventDefault();
-        console.log(formFields);
+        onSave(formFields);
     }, []);
 
     return <React.Fragment>

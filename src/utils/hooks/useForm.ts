@@ -1,6 +1,6 @@
 import {ChangeEvent, useCallback, useState} from 'react';
 
-export default <T>(initialState: T) => {
+export default <T = unknown>(initialState: T) => {
     const [value, setValue] = useState(initialState);
 
     const formFieldChangeHandler = useCallback((event: ChangeEvent) => {

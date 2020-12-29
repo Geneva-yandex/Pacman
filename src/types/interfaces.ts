@@ -12,3 +12,8 @@ export interface IUser extends IBaseId {
     avatar: string;
     role?: string;
 }
+
+export interface IPasswordRequest {
+    oldPassword: string;
+    newPassword: string;
+}
