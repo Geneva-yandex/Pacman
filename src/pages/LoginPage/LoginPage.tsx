@@ -1,28 +1,27 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import Form from '../../components/AuthForm';
-import checkForAuthOrRedirect from "../../utils/checkForAuthOrRedirect";
-import {RouteComponentProps, withRouter} from "react-router";
-
+import checkForAuthOrRedirect from '../../utils/checkForAuthOrRedirect';
+import {RouteComponentProps, withRouter} from 'react-router';
 
 const b = bem('LoginPage');
 
 class LoginPage extends React.PureComponent<RouteComponentProps> {
     state = {
-        user: {},
+        user: {}
     };
 
     componentDidMount() {
         checkForAuthOrRedirect('/')
             .then(res => {
                 this.setState({
-                    user: res.user,
-                })
+                    user: res.user
+                });
                 this.props.history.push('/');
             })
             .catch(err => {
                 void err;
-            })
+            });
     }
 
     render() {
@@ -36,4 +35,4 @@ class LoginPage extends React.PureComponent<RouteComponentProps> {
         );
     }
 }
-export default withRouter(LoginPage)
+export default withRouter(LoginPage);

@@ -1,0 +1,63 @@
+@import '../../styles/variables';
+
+.TopicCard {
+  background: #2f2f2f;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-start;
+  color: #bdbdbd;
+  font-weight: 400;
+  padding: 20px 10px;
+  transition: opacity $short-effect;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &__avatar {
+    flex: 0 0 auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: $yellow;
+    border: 3px solid $yellow;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__content {
+    margin-left: 20px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__user-name {
+    height: 70px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__topic-title {
+    color: $white;
+    font-size: 20px;
+    margin-top: 20px;
+  }
+
+  &__comments {
+    margin-top: 30px;
+    margin-left: auto;
+    width: auto;
+    align-self: flex-end;
+    font-size: 14px;
+    font-style: italic;
+    color: $white;
+  }
+
+  &__topic-description {
+    margin: 10px 0 20px;
+    max-width: 70%;
+  }
+}

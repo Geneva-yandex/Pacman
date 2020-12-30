@@ -1,20 +1,19 @@
 import axios from 'axios';
 import baseUrl from '../baseUrl';
 
-import {SignUpValueObject, logInValueObject} from '../../types/types'
+import {SignUpValueObject, logInValueObject} from '../../types/types';
 
 const ApiOperationName = 'auth';
 
 axios.defaults.withCredentials = true;
 
 class AuthApi {
-
     public getUserInfo() {
         return axios
             .get(`${baseUrl}${ApiOperationName}/user`);
     }
 
-    public logOut(){
+    public logOut() {
         return axios
             .post(`${baseUrl}${ApiOperationName}/logout`);
     }
@@ -28,7 +27,6 @@ class AuthApi {
         return axios
             .post(`${baseUrl}${ApiOperationName}/signup`, SignUpValueObject);
     }
-
 }
 
 export default new AuthApi();

@@ -10,6 +10,10 @@ body {
   font-weight: 500;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .container-fluid {
   max-width: 1400px;
   width: 100%;
