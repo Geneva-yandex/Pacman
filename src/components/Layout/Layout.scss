@@ -1,5 +1,8 @@
+@import "src/styles/variables";
+
 .Layout {
   height: 100%;
+  padding-left: $sidebar-width;
 
   &__sidebar {
     position: fixed;
@@ -8,7 +11,32 @@
     bottom: 0;
   }
 
-  &__main {
-    padding-left: 50px;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 24px 32px;
   }
+
+  &__header {
+    flex-shrink: 0;
+    margin-bottom: 40px;
+  }
+
+  &__main {
+    flex: 1;
+
+    .container-fluid {
+      height: 100%;
+    }
+  }
+}
+
+.logo {
+  display: inline-block;
+  font-size: 30px;
+  color: $yellow;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
 }

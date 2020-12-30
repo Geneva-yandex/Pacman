@@ -1,4 +1,3 @@
-import IndexPage from './IndexPage';
 import LoginPage from './LoginPage';
 import SignUpPage from './SignPage';
 import StartPage from './StartPage';
@@ -7,7 +6,6 @@ import ProfilePage from './ProfilePage';
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
 const ROUTE_SIGNUP = 'sign up';
-const ROUTE_START = 'start page';
 const PROFILE = 'profile page';
 
 export default [
@@ -15,7 +13,7 @@ export default [
         id: ROUTE_ROOT,
         exact: true,
         path: '/',
-        component: IndexPage,
+        component: StartPage,
         title: 'PACMAN',
         isNavVisible: true
     },
@@ -33,14 +31,6 @@ export default [
         path: '/sign-up',
         component: SignUpPage,
         title: 'Sign Up',
-        isNavVisible: true
-    },
-    {
-        id: ROUTE_START,
-        exact: true,
-        path: '/start',
-        component: StartPage,
-        title: 'Start',
         isNavVisible: true
     },
     {

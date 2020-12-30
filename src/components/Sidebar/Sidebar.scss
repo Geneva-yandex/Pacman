@@ -5,7 +5,7 @@
   width: $sidebar-width;
   background-color: rgba(#2f2f2f, 50%);
   display: flex;
-  padding: 10px;
+  padding: 24px 10px;
   flex-direction: column;
   overflow: auto;
 
@@ -13,18 +13,34 @@
     flex: 1;
   }
 
-  a {
+  &__nav-list {
+    li {
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
+    }
+
+    a.active {
+      opacity: 1;
+      color: $yellow;
+    }
+  }
+
+  .icon-button,
+  .icon-link {
+    display: block;
     color: #ffffff;
+    width: 40px;
+    height: 40px;
   }
 }
 
-.icon-link {
-  display: block;
-  max-width: 40px;
+.icon-link,
+.icon-button {
+  opacity: 0.5;
+  transition: 0.25s ease;
 
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
+  &:hover {
+    opacity: 0.8;
   }
 }

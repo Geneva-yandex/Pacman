@@ -1,4 +1,5 @@
 import * as React from 'react';
+import bem from 'easy-bem';
 import {Tab, Tabs} from '../../components/ui/Tabs';
 import {AccountForm, AvatarForm, PasswordForm} from './components';
 import {ProfileTabs} from './types';
@@ -6,11 +7,14 @@ import {IUser, IPsswordsDto} from '../../types/interfaces';
 import checkForAuthOrRedirect from '../../misc/utils/checkForAuthOrRedirect';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {AuthApi, UserApi} from '../../api';
+import './ProfilePage.scss';
 
 interface IProfilePageState {
     currentTab: ProfileTabs;
     user: IUser;
 }
+
+const b = bem('ProfilePage');
 
 class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState> {
     constructor(props: RouteComponentProps) {
@@ -42,7 +46,11 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
     render() {
         const {user, currentTab} = this.state;
 
-        return <div className="container-fluid">
+        return <div className={b()}>
+            <header className={b('header')}>
+                <h1>Профиль</h1>
+            </header>
+
             <Tabs selectedTab={currentTab} onSelect={(tab: ProfileTabs) => this.setState({currentTab: tab})}>
                 <Tab name={ProfileTabs.Account} title="Информация">
                     <AccountForm user={user} onSave={this._changeProfile} />

@@ -36,12 +36,6 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
             },
             {
                 id: 2,
-                name: 'Настройки',
-                route: '/',
-                modalControl: ''
-            },
-            {
-                id: 3,
                 name: 'Инструкция',
                 route: '',
                 modalControl: 'instructionModal'
@@ -141,18 +135,15 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
     render() {
         return (
             <div className={b()}>
-                <div className={'container-fluid'}>
-                    <h1>Start page</h1>
-                    <div className={b('navigation-wrapper')}>
-                        <nav className={b('navigation')}>
-                            <ul className={b('navigation-list')}>
-                                {
-                                    this.state.pages
-                                        .map(page => this.renderNavItems(page))
-                                }
-                            </ul>
-                        </nav>
-                    </div>
+                <div className={b('navigation-wrapper')}>
+                    <nav className={b('navigation')}>
+                        <ul className={b('navigation-list')}>
+                            {
+                                this.state.pages
+                                    .map(page => this.renderNavItems(page))
+                            }
+                        </ul>
+                    </nav>
                 </div>
                 <div onClick={this.closeAllModals} className={'modals-wrapper'} ref={this.modalWrapperRef}>
                     <Modal stateModal="instructionModal" close={e => this.closeModal(e)}
