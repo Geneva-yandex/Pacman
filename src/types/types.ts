@@ -7,7 +7,7 @@ export type SignUpValueObject = {
     phone: string
 };
 
-export type logInValueObject = {
+export type LogInValueObject = {
     login: string;
     password: string;
     remember: boolean;

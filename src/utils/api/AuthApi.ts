@@ -1,7 +1,7 @@
 import axios from 'axios';
 import baseUrl from '../baseUrl';
 
-import {SignUpValueObject, logInValueObject} from '../../types/types';
+import {SignUpValueObject, LogInValueObject} from '../../types/types';
 
 const ApiOperationName = 'auth';
 
@@ -18,7 +18,7 @@ class AuthApi {
             .post(`${baseUrl}${ApiOperationName}/logout`);
     }
 
-    public sendLogInRequest(logInValueObject: logInValueObject) {
+    public sendLogInRequest(logInValueObject: LogInValueObject) {
         return axios
             .post(`${baseUrl}${ApiOperationName}/signin`, logInValueObject);
     }

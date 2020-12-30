@@ -7,16 +7,9 @@ import {RouteComponentProps, withRouter} from 'react-router';
 const b = bem('LoginPage');
 
 class LoginPage extends React.PureComponent<RouteComponentProps> {
-    state = {
-        user: {}
-    };
-
     componentDidMount() {
         checkForAuthOrRedirect('/')
-            .then(res => {
-                this.setState({
-                    user: res.user
-                });
+            .then(() => {
                 this.props.history.push('/');
             })
             .catch(err => {

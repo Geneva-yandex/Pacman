@@ -21,7 +21,6 @@ export default class Router extends React.PureComponent<IRouterProps> {
     }
 
     renderRoute(route: RouteType) {
-        /* Const Component = route.component; */
 
         return (
             <Route
@@ -30,7 +29,6 @@ export default class Router extends React.PureComponent<IRouterProps> {
                 key={route.id}
                 component={route.component}
             >
-                {/* <Component/> */}
             </Route>
         );
     }

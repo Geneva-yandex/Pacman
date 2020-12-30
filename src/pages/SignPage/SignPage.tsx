@@ -9,10 +9,8 @@ const b = bem('SignUpPage');
 class SignPage extends React.PureComponent<RouteComponentProps> {
     componentDidMount() {
         checkForAuthOrRedirect('/')
-            .then(res => {
-                this.setState({
-                    user: res.user
-                });
+            .then(() => {
+                this.props.history.push('/');
             })
             .catch(err => {
                 console.log(err);

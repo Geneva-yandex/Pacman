@@ -7,12 +7,18 @@ import './StartPage.scss';
 import {MouseEvent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
 
-type navItem = {
+type NavItem = {
     id: number,
     name: string,
     route: string,
     modalControl: string
 };
+
+type State = {
+    modals: {
+        [key: string]: boolean
+    }
+}
 
 const b = bem('StartPage');
 
@@ -41,9 +47,9 @@ const startPageNavigation = [
         route: '',
         modalControl: 'instructionModal'
     }
-]
+];
 
-class StartPage extends React.PureComponent<RouteComponentProps> {
+class StartPage extends React.PureComponent<RouteComponentProps, State> {
     private modalWrapperRef = React.createRef<HTMLDivElement>();
 
     state = {
@@ -55,20 +61,20 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
 
     componentDidMount() {
         checkForAuthOrRedirect('/login')
-            .catch((err) => {
+            .catch(err => {
                 this.props.history.push(err.redirectUrl);
             });
     }
 
     toggleClassListOfModalWrapper() {
-        let modalWrapper = this.modalWrapperRef.current;
+        const modalWrapper = this.modalWrapperRef.current;
         if (modalWrapper !== null) {
             modalWrapper.classList.toggle('active');
         }
     }
 
     closeAllModals = (event: React.SyntheticEvent) => {
-        let eventTarget = event.target;
+        const eventTarget = event.target;
         if (!(eventTarget as HTMLElement).classList.contains('modals-wrapper')) {
             return;
         }
@@ -98,9 +104,9 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
     }
 
     closeModal(e: React.MouseEvent) {
-        let target = e.target;
+        const target = e.target;
         if (target !== null) {
-            let modalName = (e.target as HTMLElement).getAttribute('data-modal');
+            const modalName = (e.target as HTMLElement).getAttribute('data-modal');
             if (modalName !== null) {
                 this.setState({
                     modals: {
@@ -113,14 +119,13 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
         }
     }
 
-    renderNavItems(navItem: navItem) {
+    renderNavItems(navItem: NavItem) {
         return (
-            <li key={navItem.id} className={b('navigation-item')}>
+            <li key={navItem.id} className={b('navigationItem')}>
                 {navItem.route ?
                     <Link to={navItem.route}>
                         {navItem.name}
-                    </Link>
-                    :
+                    </Link> :
                     <a onClick={e => this.openModal(navItem.modalControl, e)} href="#">
                         {navItem.name}
                     </a>
@@ -132,11 +137,11 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
     render() {
         return (
             <div className={b()}>
-                <div className='container-fluid'>
+                <div className="container-fluid">
                     <h1>Start page</h1>
                     <div className={b('navigation-wrapper')}>
                         <nav className={b('navigation')}>
-                            <ul className={b('navigation-list')}>
+                            <ul className={b('navigationList')}>
                                 {
                                     startPageNavigation
                                         .map(page => this.renderNavItems(page))
@@ -145,13 +150,13 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
                         </nav>
                     </div>
                 </div>
-                <div onClick={this.closeAllModals} className='modals-wrapper' ref={this.modalWrapperRef}>
-                    <Modal stateModal="instructionModal" close={e => this.closeModal(e)}
-                           className='instruction-modal' isClosed={this.state.modals.instructionModal}>
-                        <h3 className='modal-default-title'>
+                <div onClick={this.closeAllModals} className="modals-wrapper" ref={this.modalWrapperRef}>
+                    <Modal stateModal="instructionModal" close={this.closeModal}
+                        className="instruction-modal" isClosed={this.state.modals.instructionModal}>
+                        <h3 className="modal-default-title">
                             Заголовок инстукции
                         </h3>
-                        <div className='modal-default-text-box'>
+                        <div className="modal-default-text-box">
                             <p>
                                 Инструкция Инструкция Инструкция Инструкция
                             </p>

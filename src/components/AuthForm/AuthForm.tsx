@@ -8,7 +8,15 @@ import {withRouter, RouteComponentProps} from 'react-router';
 
 const b = bem('AuthForm');
 
-class AuthForm extends React.Component<RouteComponentProps> {
+type State = {
+    login: string
+    password: string
+    remember: string
+    errorMessage: string
+    [key: string]: string
+}
+
+class AuthForm extends React.Component<RouteComponentProps, State> {
     state = {
         login: '',
         password: '',
@@ -29,10 +37,10 @@ class AuthForm extends React.Component<RouteComponentProps> {
         event.preventDefault();
 
         const remember = this.state.remember === 'on';
-
+        const { login, password } = this.state;
         const logInData = {
-            login: this.state.login,
-            password: this.state.password,
+            login,
+            password,
             remember: remember
         };
 
@@ -61,16 +69,10 @@ class AuthForm extends React.Component<RouteComponentProps> {
     public render() {
         return (
             <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e);
-                }} name="login" title="Enter the login" type="text" placeholder="login"/>
-                <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e);
-                }} name="password" title="Enter the password" type="password" placeholder="*******"/>
+                <Input onChange={this.onControlChange} name="login" title="Введите логин" type="text" placeholder="Логин"/>
+                <Input onChange={this.onControlChange} name="password" title="Введите пароль" type="password" placeholder="*******"/>
                 <label>
-                    <input onChange={(e: ChangeEvent) => {
-                        this.onControlChange(e);
-                    }} type="checkbox" name="remember"/>
+                    <input onChange={this.onControlChange} type="checkbox" name="remember"/>
                     Запомнить меня
                 </label>
                 <button type="submit">

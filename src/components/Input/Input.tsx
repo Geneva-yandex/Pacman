@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ChangeEvent} from 'react';
 
-type OwnProps = {
+type Props = {
     className?: string;
     value?: string | number;
     type: string;
@@ -10,8 +10,6 @@ type OwnProps = {
     name: string;
     onChange?: (event: ChangeEvent) => void;
 };
-
-type Props = OwnProps;
 
 export default class Input extends React.Component<Props> {
     public render() {
