@@ -1,9 +1,10 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import './LoginPage.scss';
-import Form from '../../components/AuthForm'
+import './SignPage.scss';
+import Form from '../../components/RegistationForm'
 import getUserInfo from "../../utils/api/AuthApi/getUserInfo";
 import {Redirect} from "react-router";
+const b = bem('SignUpPage');
 
 type userData = {
     first_name: string;
@@ -14,13 +15,10 @@ type userData = {
     phone: string;
 }
 
-const b = bem('LoginPage');
-
-export default class LoginPage extends React.PureComponent {
+export default class SignPage extends React.PureComponent {
     user: userData | null;
     state = {
-        user: {},
-        toDashBoards: false,
+        toDashBoards: false
     }
     componentDidMount() {
         const rawUserString = localStorage.getItem('user')
@@ -46,16 +44,15 @@ export default class LoginPage extends React.PureComponent {
                 .catch(() => {})
         }
     }
-
     render() {
         if (this.state.toDashBoards) {
-            return <Redirect to='/'/>
+            return <Redirect to='/' />
         }
         return (
             <div className={b()}>
                 <div className={'container-fluid'}>
-                    <h1>Login Page</h1>
-                    <Form  />
+                    <h1>Sign Up Page</h1>
+                    <Form />
                 </div>
             </div>
         );
