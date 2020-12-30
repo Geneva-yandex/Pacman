@@ -33,7 +33,7 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
     }
 
     componentDidMount() {
-        // TODO: Вынести хранение юзера в стор, добавить Protected Page
+        // TODO: Вынести хранение юзера в стор, добавить ProtectedRoute
         checkForAuthOrRedirect('/')
             .then(res => {
                 this.setState({

@@ -2,6 +2,7 @@ import * as React from 'react';
 import {ChangeEvent, FC, useRef} from 'react';
 import Input from '../../../components/ui/Input';
 import Avatar from '../../../components/ui/Avatar';
+import {Button} from '../../../components/ui';
 
 interface IAvatarFormProps {
     avatar: string;
@@ -22,8 +23,7 @@ const AvatarForm: FC<IAvatarFormProps> = ({avatar, onSave}: IAvatarFormProps) =>
     return <React.Fragment>
         <Input ref={inputEl} className="visually-hidden" type="file" name="avatar" onChange={onChange} />
         <Avatar src={avatar} />
-
-        <button type="button" onClick={() => inputEl?.current?.inputRef?.click()}>Загрузить новый</button>
+        <Button type="button" onClick={() => inputEl?.current?.inputRef?.click()}>Загрузить новый</Button>
     </React.Fragment>;
 };
 

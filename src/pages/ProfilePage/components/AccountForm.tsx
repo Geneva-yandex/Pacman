@@ -3,6 +3,7 @@ import {FC, FormEvent, useCallback} from 'react';
 import Input from '../../../components/ui/Input';
 import {IUser} from '../../../types/interfaces';
 import {useForm} from '../../../misc/hooks';
+import {Button} from '../../../components/ui';
 
 interface IAccountFormProps {
     user: IUser;
@@ -34,7 +35,7 @@ const AccountForm: FC<IAccountFormProps> = ({user, onSave}: IAccountFormProps) =
             <Input type="tel" name="phone" title="Номер телефона"
                 value={formFields.phone} onChange={formFieldChangeHandler}/>
 
-            <button>Сохранить</button>
+            <Button>Сохранить</Button>
         </form>
     </React.Fragment>;
 };

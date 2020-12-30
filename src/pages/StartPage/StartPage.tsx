@@ -6,12 +6,14 @@ import Modal from '../../components/ui/Modal';
 import './StartPage.scss';
 import {MouseEvent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
+import {Button} from '../../components/ui';
 
 type navItem = {
     id: number,
     name: string,
     route: string,
-    modalControl: string
+    modalControl: string,
+    primary: boolean
 };
 
 const b = bem('StartPage');
@@ -26,19 +28,22 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
                 id: 0,
                 name: 'Старт',
                 route: '/',
-                modalControl: ''
+                modalControl: '',
+                primary: true
             },
             {
                 id: 1,
                 name: 'Тренировка',
                 route: '/',
-                modalControl: ''
+                modalControl: '',
+                primary: false
             },
             {
                 id: 2,
                 name: 'Инструкция',
                 route: '',
-                modalControl: 'instructionModal'
+                modalControl: 'instructionModal',
+                primary: false
             }
         ],
         modals: {
@@ -117,7 +122,7 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
             return (
                 <li key={navItem.id} className={b('navigation-item')}>
                     <Link to={navItem.route}>
-                        {navItem.name}
+                        <Button aperance={navItem.primary ? 'primary' : 'outlined'}>{navItem.name}</Button>
                     </Link>
                 </li>
             );
@@ -125,9 +130,7 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
 
         return (
             <li key={navItem.id} className={b('navigation-item')}>
-                <a onClick={e => this.openModal(navItem.modalControl, e)} href="#">
-                    {navItem.name}
-                </a>
+                <Button aperance="outlined" onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
             </li>
         );
     }

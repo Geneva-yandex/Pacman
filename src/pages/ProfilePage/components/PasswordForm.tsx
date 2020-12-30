@@ -3,6 +3,7 @@ import {FC, FormEvent, useCallback} from 'react';
 import Input from '../../../components/ui/Input';
 import {useFormField} from '../../../misc/hooks';
 import {IPsswordsDto} from '../../../types/interfaces';
+import {Button} from '../../../components/ui';
 
 interface IPasswordFormProps {
     onSave: (passwords: IPsswordsDto) => void;
@@ -24,8 +25,7 @@ const PasswordForm: FC<IPasswordFormProps> = ({onSave}: IPasswordFormProps) => {
         <form onSubmit={onSubmit}>
             <Input type="text" name="oldPassword" title="Старый пароль" {...oldPasswordField} />
             <Input type="text" name="newPassword" title="Новый пароль" {...newPasswordField} />
-
-            <button>Поменять пароль</button>
+            <Button>Поменять пароль</Button>
         </form>
     </React.Fragment>;
 };

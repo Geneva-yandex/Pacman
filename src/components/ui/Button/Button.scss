@@ -1,0 +1,36 @@
+@import "src/styles/variables";
+
+.Button {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  background: $white;
+  color: $grey-dark;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform $short-effect;
+  outline: none;
+  will-change: transform;
+  border: none;
+  padding: 12px 25px;
+  line-height: 1;
+
+  &--primary {
+    background: $yellow;
+    color: #171717;
+  }
+
+  &--outlined {
+    background: transparent;
+    border: 2px solid $yellow;
+    color: $yellow;
+  }
+
+  &:hover {
+    transform: scale(0.99) translateY(2px);
+  }
+
+  &:active {
+    transform: scale(0.97) translateY(3px);
+  }
+}
