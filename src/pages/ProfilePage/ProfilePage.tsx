@@ -1,5 +1,7 @@
 import * as React from 'react';
 import bem from 'easy-bem';
+
+// TODO: настроить короткие импорты от корня
 import {Tab, Tabs} from '../../components/ui/Tabs';
 import {AccountForm, AvatarForm, PasswordForm} from './components';
 import {ProfileTabs} from './types';
@@ -31,6 +33,7 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
     }
 
     componentDidMount() {
+        // TODO: Вынести хранение юзера в стор, добавить Protected Page
         checkForAuthOrRedirect('/')
             .then(res => {
                 this.setState({
@@ -66,6 +69,7 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
     }
 
     private async _changeProfile(user: IUser) {
+        // TODO: убрать сайдэффект обновления в стор
         try {
             const response = await UserApi.changeProfile(user);
             this.setState({user: response.data});

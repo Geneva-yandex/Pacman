@@ -6,6 +6,7 @@ import Sidebar from '../Sidebar';
 
 const b = bem('Layout');
 
+// TODO: после организации стора, отображать сайдбар только авторизированным пользователям
 export default class Layout extends React.PureComponent {
     render() {
         return (
