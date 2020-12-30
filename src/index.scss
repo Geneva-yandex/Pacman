@@ -12,6 +12,12 @@ html {
   box-sizing: inherit;
 }
 
+#root,
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: 'Ubuntu', sans-serif;
   font-size: 18px;

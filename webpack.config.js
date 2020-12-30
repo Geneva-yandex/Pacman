@@ -119,7 +119,7 @@ module.exports = env => {
             new CopyPlugin({
                 patterns: [
                     { from: './public/fonts', to: './fonts' },
-                    { from: './public/images', to: './images' }
+                    { from: './public/images', to: './images' },
                 ],
             }),
             new MiniCssExtractPlugin({

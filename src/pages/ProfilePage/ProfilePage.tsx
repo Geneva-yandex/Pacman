@@ -43,19 +43,17 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
         const {user, currentTab} = this.state;
 
         return <div className="container-fluid">
-            {user && <React.Fragment>
-                <Tabs selectedTab={currentTab} onSelect={(tab: ProfileTabs) => this.setState({currentTab: tab})}>
-                    <Tab name={ProfileTabs.Account} title="Информация">
-                        <AccountForm user={user} onSave={this._changeProfile} />
-                    </Tab>
-                    <Tab name={ProfileTabs.Password} title="Пароль">
-                        <PasswordForm onSave={this._changePasswords} />
-                    </Tab>
-                    <Tab name={ProfileTabs.Avatar} title="Аватар">
-                        <AvatarForm avatar={user.avatar} onSave={this._changeAvatar} />
-                    </Tab>
-                </Tabs>
-            </React.Fragment>}
+            <Tabs selectedTab={currentTab} onSelect={(tab: ProfileTabs) => this.setState({currentTab: tab})}>
+                <Tab name={ProfileTabs.Account} title="Информация">
+                    <AccountForm user={user} onSave={this._changeProfile} />
+                </Tab>
+                <Tab name={ProfileTabs.Password} title="Пароль">
+                    <PasswordForm onSave={this._changePasswords} />
+                </Tab>
+                <Tab name={ProfileTabs.Avatar} title="Аватар">
+                    <AvatarForm avatar={user.avatar} onSave={this._changeAvatar} />
+                </Tab>
+            </Tabs>
         </div>;
     }
 

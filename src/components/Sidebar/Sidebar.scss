@@ -1,0 +1,18 @@
+@import "src/styles/variables";
+
+.Sidebar {
+  height: 100%;
+  //width: $sidebar-width;
+  background-color: rgba(#2f2f2f, 50%);
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+
+  &__navigation {
+    flex: 1;
+  }
+
+  a {
+    color: #ffffff;
+  }
+}
