@@ -1,6 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import Input from '../Input';
+import Input from '../ui/Input';
 import {FormEvent} from 'react';
 import authApi from '../../api/AuthApi';
 import {ChangeEvent} from 'react';

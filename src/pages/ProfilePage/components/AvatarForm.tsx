@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ChangeEvent, FC, useRef} from 'react';
-import Input from '../../../components/Input';
-import Avatar from '../../../components/Avatar';
+import Input from '../../../components/ui/Input';
+import Avatar from '../../../components/ui/Avatar';
 
 interface IAvatarFormProps {
     avatar: string;

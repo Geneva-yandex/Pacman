@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Tab, Tabs} from '../../components/Tabs';
+import {Tab, Tabs} from '../../components/ui/Tabs';
 import {AccountForm, AvatarForm, PasswordForm} from './components';
 import {ProfileTabs} from './types';
 import {IUser, IPsswordsDto} from '../../types/interfaces';

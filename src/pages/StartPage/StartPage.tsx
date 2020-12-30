@@ -2,7 +2,7 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import {Link} from 'react-router-dom';
 import checkForAuthOrRedirect from '../../misc/utils/checkForAuthOrRedirect';
-import Modal from '../../components/Modal';
+import Modal from '../../components/ui/Modal';
 import './StartPage.scss';
 import {MouseEvent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';

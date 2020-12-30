@@ -16,34 +16,44 @@ class Sidebar extends React.PureComponent<RouteComponentProps & ISidebarProps> {
     render() {
         return (
             <aside className={classnames(this.props.className, b())}>
-                <button>open</button>
-
                 <nav className={b('navigation')}>
                     <ul className={b('nav-list')}>
-                        <li><Link to="start">Game</Link></li>
-                        <li><Link to="leaderboard">Leaderboard</Link></li>
-                        <li><Link to="profile">Profile</Link></li>
+                        <li>
+                            <Link className="icon-link" to="start">
+                                <img src="/images/icons/game-controller-outline.svg" />
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="icon-link" to="leaderboard">
+                                <img src="/images/icons/ribbon-outline.svg" />
+                            </Link>
+                        </li>
+                        <li>
+                            <Link className="icon-link" to="profile">
+                                <img src="/images/icons/person-outline.svg" />
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
 
-                <button onClick={this.signout}>signout</button>
+                <button onClick={this._signout}><img src="/images/icons/exit-outline.svg" /></button>
             </aside>
         );
     }
 
-    signout = () => {
-        AuthApi.logOut()
-            .then(res => {
-                if (res.status === 200) {
-                    localStorage.removeItem('user');
-                    this.props.history.push('/login');
-                }
-            })
-            .catch(err => {
-                this.setState({
-                    errorMessage: err.response.data.reason
-                });
+    private _signout = async () => {
+        try {
+            const response = await AuthApi.logOut();
+
+            if (response.status === 200) {
+                localStorage.removeItem('user');
+                this.props.history.push('/login');
+            }
+        } catch (error) {
+            this.setState({
+                errorMessage: error.response.data.reason
             });
+        }
     };
 }
 

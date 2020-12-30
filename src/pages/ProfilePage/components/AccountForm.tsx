@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, FormEvent, useCallback} from 'react';
-import Input from '../../../components/Input';
+import Input from '../../../components/ui/Input';
 import {IUser} from '../../../types/interfaces';
 import {useForm} from '../../../misc/hooks';
 
