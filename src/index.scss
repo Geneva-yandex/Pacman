@@ -103,3 +103,14 @@ button {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
+
+.profile-form {
+  .Input {
+    margin-bottom: 24px;
+
+    &__control {
+      width: 100%;
+      max-width: 460px;
+    }
+  }
+}

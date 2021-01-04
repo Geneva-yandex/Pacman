@@ -1,5 +1,8 @@
 import * as React from 'react';
 import {ChangeEvent, createRef} from 'react';
+import bem from 'easy-bem';
+import './Input.scss';
+import classnames from 'classnames';
 
 type OwnProps = {
     className?: string;
@@ -14,6 +17,8 @@ type OwnProps = {
 
 type Props = OwnProps;
 
+const b = bem('Input');
+
 export default class Input extends React.Component<Props> {
     private _inputRef = createRef<HTMLInputElement>();
 
@@ -22,11 +27,13 @@ export default class Input extends React.Component<Props> {
     }
 
     public render() {
+        const className = classnames(b(), this.props.className);
+
         return (
-            <div className={this.props.className}>
+            <div className={className}>
                 <label>
-                    {this.props.title && <span>{this.props.title}</span>}
-                    <input {...this.props} ref={this._inputRef} />
+                    {this.props.title && <span className={b('label')}>{this.props.title}</span>}
+                    <input className={b('control')} {...this.props} ref={this._inputRef} />
                 </label>
             </div>
         );

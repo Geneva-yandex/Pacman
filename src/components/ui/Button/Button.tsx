@@ -9,7 +9,8 @@ const b = bem('Button');
 const Button: FC<IButtonProps> = (props?: IButtonProps) => {
     const className = classnames(b(), props?.className, {
         [`${b()}--primary`]: props?.aperance === 'primary',
-        [`${b()}--outlined`]: props?.aperance === 'outlined'
+        [`${b()}--outlined`]: props?.aperance === 'outlined',
+        [`${b()}--small`]: props?.size === 'small'
     });
 
     return <button className={className} {...props}>{props?.children}</button>;

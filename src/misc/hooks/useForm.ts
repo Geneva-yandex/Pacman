@@ -1,7 +1,7 @@
 import {ChangeEvent, useCallback, useState} from 'react';
 
 export default <T = unknown>(initialState: T) => {
-    const [value, setValue] = useState(initialState);
+    const [values, setValue] = useState(initialState);
 
     const formFieldChangeHandler = useCallback((event: ChangeEvent) => {
         const target = event.target as HTMLInputElement;
@@ -9,10 +9,10 @@ export default <T = unknown>(initialState: T) => {
         const inputValue = isCheckedInput ? target.checked : target.value;
 
         setValue({
-            ...value,
+            ...values,
             [target.name]: inputValue
         });
     }, []);
 
-    return {formFields: value, formFieldChangeHandler};
+    return {values, formFieldChangeHandler};
 };

@@ -14,7 +14,6 @@ interface ISidebarProps {
 
 class Sidebar extends React.PureComponent<RouteComponentProps & ISidebarProps> {
     render() {
-        console.log(this.props);
         return (
             <aside className={classnames(this.props.className, b())}>
                 <nav className={b('navigation')}>
@@ -68,7 +67,7 @@ class Sidebar extends React.PureComponent<RouteComponentProps & ISidebarProps> {
                     </ul>
                 </nav>
 
-                <div>
+                <div className={b('actions')}>
                     <button className="icon-button">
                         <svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512">
                             <title>Settings</title>

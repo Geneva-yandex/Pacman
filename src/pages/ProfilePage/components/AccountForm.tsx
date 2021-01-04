@@ -10,32 +10,36 @@ interface IAccountFormProps {
     onSave: (user: IUser) => void;
 }
 
+// TODO: Добавить feedback результата обновления профиля
+// TODO: Добавить валидатор в useForm
 const AccountForm: FC<IAccountFormProps> = ({user, onSave}: IAccountFormProps) => {
-    const {formFields, formFieldChangeHandler} = useForm(user);
+    console.log(user);
+    const {values, formFieldChangeHandler} = useForm(user);
+    console.log(values);
 
     const onSubmit = useCallback((event: FormEvent) => {
         event.preventDefault();
-        onSave(formFields);
+        onSave(values);
     }, []);
 
     return <React.Fragment>
-        <form onSubmit={onSubmit}>
+        <form className="profile-form" onSubmit={onSubmit}>
             <Input type="text" name="second_name" title="Фамилия"
-                value={formFields.second_name} onChange={formFieldChangeHandler}/>
+                value={values.second_name} onChange={formFieldChangeHandler}/>
 
             <Input type="text" name="first_name" title="Имя"
-                value={formFields.first_name} onChange={formFieldChangeHandler}/>
+                value={values.first_name} onChange={formFieldChangeHandler}/>
 
             <Input type="text" name="login" title="Логин"
-                value={formFields.login} onChange={formFieldChangeHandler}/>
+                value={values.login} onChange={formFieldChangeHandler}/>
 
             <Input type="email" name="email" title="Почта"
-                value={formFields.email} onChange={formFieldChangeHandler}/>
+                value={values.email} onChange={formFieldChangeHandler}/>
 
             <Input type="tel" name="phone" title="Номер телефона"
-                value={formFields.phone} onChange={formFieldChangeHandler}/>
+                value={values.phone} onChange={formFieldChangeHandler}/>
 
-            <Button>Сохранить</Button>
+            <Button size="small" aperance="outlined">Сохранить</Button>
         </form>
     </React.Fragment>;
 };

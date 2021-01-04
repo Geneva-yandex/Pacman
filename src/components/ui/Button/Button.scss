@@ -26,6 +26,11 @@
     color: $yellow;
   }
 
+  &--small {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
   &:hover {
     transform: scale(0.99) translateY(2px);
   }
