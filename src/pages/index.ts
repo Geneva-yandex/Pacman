@@ -2,11 +2,13 @@ import LoginPage from './LoginPage';
 import SignUpPage from './SignPage';
 import StartPage from './StartPage';
 import ProfilePage from './ProfilePage';
+import LeaderboardPage from './LeaderboardPage';
 
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
 const ROUTE_SIGNUP = 'sign up';
 const PROFILE = 'profile page';
+const LEADERBOARD = 'leaderboard page';
 
 export default [
     {
@@ -39,6 +41,14 @@ export default [
         path: '/profile',
         component: ProfilePage,
         title: 'Profile',
+        isNavVisible: true
+    },
+    {
+        id: LEADERBOARD,
+        exact: false,
+        path: '/leaderboard',
+        component: LeaderboardPage,
+        title: 'Leaderboard',
         isNavVisible: true
     }
 ];

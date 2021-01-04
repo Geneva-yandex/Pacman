@@ -10,7 +10,9 @@ interface IAccountFormProps {
     onSave: (user: IUser) => void;
 }
 
+// eslint-disable-next-line no-warning-comments
 // TODO: Добавить feedback результата обновления профиля
+// eslint-disable-next-line no-warning-comments
 // TODO: Добавить валидатор в useForm
 const AccountForm: FC<IAccountFormProps> = ({user, onSave}: IAccountFormProps) => {
     console.log(user);
