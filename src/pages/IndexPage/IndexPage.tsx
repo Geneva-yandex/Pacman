@@ -17,7 +17,7 @@ class IndexPage extends React.PureComponent<RouteComponentProps, State> {
     };
 
     componentDidMount() {
-        checkForAuthOrRedirect('/login', this.props)
+        checkForAuthOrRedirect('/login')
             .catch(err => {
                 this.props.history.push(err.redirectUrl);
             });
