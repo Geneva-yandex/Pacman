@@ -14,7 +14,7 @@ type State = {
     remember: string
     errorMessage: string
     [key: string]: string
-}
+};
 
 class AuthForm extends React.Component<RouteComponentProps, State> {
     state = {
@@ -37,7 +37,7 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
         event.preventDefault();
 
         const remember = this.state.remember === 'on';
-        const { login, password } = this.state;
+        const {login, password} = this.state;
         const logInData = {
             login,
             password,

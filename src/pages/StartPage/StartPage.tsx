@@ -18,7 +18,7 @@ type State = {
     modals: {
         [key: string]: boolean
     }
-}
+};
 
 const b = bem('StartPage');
 
@@ -60,10 +60,7 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
     };
 
     componentDidMount() {
-        checkForAuthOrRedirect('/login')
-            .catch(err => {
-                this.props.history.push(err.redirectUrl);
-            });
+        checkForAuthOrRedirect('/login', this.props)
     }
 
     toggleClassListOfModalWrapper() {

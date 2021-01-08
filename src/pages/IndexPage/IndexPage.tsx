@@ -9,7 +9,7 @@ const b = bem('IndexPage');
 
 type State = {
     errorMessage: string
-}
+};
 
 class IndexPage extends React.PureComponent<RouteComponentProps, State> {
     state = {
@@ -17,7 +17,7 @@ class IndexPage extends React.PureComponent<RouteComponentProps, State> {
     };
 
     componentDidMount() {
-        checkForAuthOrRedirect('/login')
+        checkForAuthOrRedirect('/login', this.props)
             .catch(err => {
                 this.props.history.push(err.redirectUrl);
             });

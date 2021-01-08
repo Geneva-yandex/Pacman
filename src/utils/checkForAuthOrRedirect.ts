@@ -2,12 +2,14 @@ import authApi from '../utils/api/AuthApi';
 
 import {SignUpValueObject} from '../types/types';
 
+import {RouteComponentProps} from "react-router";
+
 type PromiseResolver = {
     user: SignUpValueObject | null,
     redirectUrl: string
 };
 
-async function checkForAuthOrRedirect(redirectUrl: string): Promise<PromiseResolver> {
+async function checkForAuthOrRedirect(redirectUrl: string, props: RouteComponentProps): Promise<PromiseResolver> {
     return new Promise<PromiseResolver>((resolve, reject) => {
         const rawUserString = localStorage.getItem('user');
         let user = null;
@@ -37,6 +39,7 @@ async function checkForAuthOrRedirect(redirectUrl: string): Promise<PromiseResol
                         user: {},
                         redirectUrl
                     });
+                    props.history.push(redirectUrl);
                 });
         }
     });

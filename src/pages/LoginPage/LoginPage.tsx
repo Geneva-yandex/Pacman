@@ -8,7 +8,7 @@ const b = bem('LoginPage');
 
 class LoginPage extends React.PureComponent<RouteComponentProps> {
     componentDidMount() {
-        checkForAuthOrRedirect('/')
+        checkForAuthOrRedirect('/', this.props)
             .then(() => {
                 this.props.history.push('/');
             })

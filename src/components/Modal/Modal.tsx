@@ -12,7 +12,6 @@ type Props = {
 
 export default class Modal extends React.Component<Props> {
     render() {
-
         const {className, isClosed, close, stateModal} = this.props;
 
         if (isClosed) {

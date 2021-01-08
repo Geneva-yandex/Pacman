@@ -21,7 +21,6 @@ export default class Router extends React.PureComponent<IRouterProps> {
     }
 
     renderRoute(route: RouteType) {
-
         return (
             <Route
                 path={route.path}

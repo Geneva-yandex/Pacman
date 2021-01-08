@@ -16,7 +16,7 @@ type State = {
     error: string,
     errorMessage: string,
     [key: string]: string
-}
+};
 
 const b = bem('AuthForm');
 
