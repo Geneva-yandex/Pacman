@@ -24,6 +24,7 @@ export default class ForumPage extends React.PureComponent {
                             <TopicCard
                                 topic={topic}
                                 key={topic.id}
+                                isLink
                             />
                         ))}
                     </div>

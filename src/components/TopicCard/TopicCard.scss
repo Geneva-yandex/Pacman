@@ -1,19 +1,26 @@
 @import '../../styles/variables';
 
 .TopicCard {
-  background: #2f2f2f;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  display: flex;
-  align-items: flex-start;
-  color: #bdbdbd;
-  font-weight: 400;
-  padding: 20px 10px;
-  transition: opacity $short-effect;
+  &--link {
+    display: block;
+    text-decoration: none;
+    transition: opacity $short-effect;
 
-  &:hover {
-    opacity: 0.8;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__inner {
+    background: #2f2f2f;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: flex-start;
+    color: #bdbdbd;
+    font-weight: 400;
+    padding: 20px 10px;
   }
 
   &__avatar {

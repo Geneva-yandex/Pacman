@@ -3,23 +3,41 @@ import bem from 'easy-bem';
 import {Link} from 'react-router-dom';
 import './TopicCard.scss';
 import {ITopicCardProps} from './types';
+import {ITopic} from '../../types/ForumTypes';
 
 const b = bem('TopicCard');
 
 export default class TopicCard extends React.PureComponent<ITopicCardProps> {
     static defaultProps = {
-        hasDescription: false
+        hasDescription: false,
+        isLink: false
     };
 
     render() {
         const {topic} = this.props;
-        const topicUrl = `/forum/${topic.id}`;
+        const inner = this.renderInner(topic);
 
+        return this.props.isLink ?
+            (
+                <Link
+                    to={`/forum/${topic.id}`}
+                    className={b({
+                        link: true
+                    })}
+                >
+                    {inner}
+                </Link>
+            ) :
+            (
+                <div className={b()}>
+                    {inner}
+                </div>
+            );
+    }
+
+    renderInner(topic: ITopic) {
         return (
-            <Link
-                to={topicUrl}
-                className={b()}
-            >
+            <div className={b('inner')}>
                 <div
                     className={b('avatar')}
                     style={{
@@ -45,7 +63,7 @@ export default class TopicCard extends React.PureComponent<ITopicCardProps> {
                         }
                     </div>
                 </div>
-            </Link>
+            </div>
         );
     }
 }

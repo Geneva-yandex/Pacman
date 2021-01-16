@@ -1,22 +1,44 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './TopicPage.scss';
-import {RouteComponentProps, withRouter} from 'react-router';
+import {withRouter} from 'react-router';
 import forumData from '../../data/forum-data';
 import {IComment, ITopic} from '../../types/ForumTypes';
 import TopicCard from '../../components/TopicCard';
 import CommentForm from './views/CommentForm';
 import Comment from './views/Comment';
+import {ITopicPageProps, ITopicPageState} from './types';
 
 const b = bem('TopicPage');
 
-class TopicPage extends React.PureComponent<RouteComponentProps<{topicId: string}>> {
-    render() {
+class TopicPage extends React.PureComponent<ITopicPageProps, ITopicPageState> {
+    constructor(props: ITopicPageProps) {
+        super(props);
+        this.state = {
+            isLoading: true,
+            topic: null
+        };
+    }
+
+    componentDidMount() {
         const topicId = this.props.match?.params?.topicId;
         const topic = forumData.find((topic:ITopic) => topic.id === Number(topicId));
-        if (!topic) {
+        this.setState({
+            topic: topic || null,
+            isLoading: false
+        });
+    }
+
+    render() {
+        if (this.state.isLoading) {
+            return 'Loading...';
+        }
+
+        if (!this.state.topic) {
             return 'The topic is not found';
         }
+
+        const {topic} = this.state;
 
         return (
             <div className={b()}>
