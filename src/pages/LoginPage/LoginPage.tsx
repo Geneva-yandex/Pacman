@@ -1,22 +1,11 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import Form from '../../components/AuthForm';
-import checkForAuthOrRedirect from '../../utils/checkForAuthOrRedirect';
 import {RouteComponentProps, withRouter} from 'react-router';
 
 const b = bem('LoginPage');
 
 class LoginPage extends React.PureComponent<RouteComponentProps> {
-    componentDidMount() {
-        checkForAuthOrRedirect('/')
-            .then(() => {
-                this.props.history.push('/');
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
-
     render() {
         return (
             <div className={b()}>

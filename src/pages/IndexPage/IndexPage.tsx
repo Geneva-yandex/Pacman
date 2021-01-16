@@ -1,7 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './IndexPage.scss';
-import checkForAuthOrRedirect from '../../utils/checkForAuthOrRedirect';
 import AuthApi from '../../utils/api/AuthApi';
 import {RouteComponentProps, withRouter} from 'react-router';
 
@@ -15,13 +14,6 @@ class IndexPage extends React.PureComponent<RouteComponentProps, State> {
     state = {
         errorMessage: ''
     };
-
-    componentDidMount() {
-        checkForAuthOrRedirect('/login')
-            .catch(err => {
-                this.props.history.push(err.redirectUrl);
-            });
-    }
 
     logOutFromSystem = () => {
         AuthApi.logOut()

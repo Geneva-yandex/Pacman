@@ -15,7 +15,8 @@ export default [
         path: '/',
         component: IndexPage,
         title: 'PACMAN',
-        isNavVisible: true
+        isNavVisible: true,
+        isProtected: true
     },
     {
         id: ROUTE_LOGIN,
@@ -23,7 +24,8 @@ export default [
         path: '/login',
         component: LoginPage,
         title: 'Log-in',
-        isNavVisible: true
+        isNavVisible: true,
+        isProtected: false
     },
     {
         id: ROUTE_SIGNUP,
@@ -31,7 +33,8 @@ export default [
         path: '/sign-up',
         component: SignUpPage,
         title: 'Sign Up',
-        isNavVisible: true
+        isNavVisible: true,
+        isProtected: false
     },
     {
         id: ROUTE_START,
@@ -39,7 +42,8 @@ export default [
         path: '/start',
         component: StartPage,
         title: 'Start',
-        isNavVisible: false
+        isNavVisible: false,
+        isProtected: true
     }
 
 ];

@@ -6,7 +6,8 @@ export type RouteType = {
     path: string,
     component: React.ComponentType,
     title: string,
-    isNavVisible: boolean
+    isNavVisible: boolean,
+    isProtected: boolean,
 };
 
 export interface IRouterProps {
