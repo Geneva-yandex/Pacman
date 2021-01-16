@@ -1,8 +1,10 @@
 import IndexPage from './IndexPage';
 import LoginPage from './LoginPage';
+import GamePage from './GamePage';
 
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
+const ROUTE_GAME = 'game';
 
 export default [
     {
@@ -20,5 +22,13 @@ export default [
         component: LoginPage,
         title: 'Log-in',
         isNavVisible: true
+    },
+    {
+        id: ROUTE_GAME,
+        exact: true,
+        path: '/game',
+        component: GamePage,
+        title: 'game',
+        isNavVisible: false
     }
 ];
