@@ -6,7 +6,7 @@ import Start from './views/Start';
 import Finish from './views/Finish';
 import Game from '../../components/Game';
 import {ViewType} from './types';
-import GamePageViewEnum from '../../enums/GamePageViewEnum';
+import {GamePageViewEnum} from '../../enums/GamePageViewEnum';
 
 const b = bem('GamePage');
 
@@ -14,7 +14,7 @@ export default class GamePage extends React.PureComponent<{}, IStateGamePage> {
     constructor(props: any) {
         super(props);
         this.state = {
-            view: GamePageViewEnum.START as 'start'
+            view: GamePageViewEnum.Start
         };
     }
 
@@ -30,12 +30,12 @@ export default class GamePage extends React.PureComponent<{}, IStateGamePage> {
 
     renderView() {
         switch (this.state.view) {
-        case GamePageViewEnum.START:
-            return <Start changeView={() => this.changeView(GamePageViewEnum.GAME as 'game')}/>;
-        case GamePageViewEnum.FINISH:
-            return <Finish changeView={() => this.changeView(GamePageViewEnum.GAME as 'game')}/>;
-        case GamePageViewEnum.GAME:
-            return <Game changeView={() => this.changeView(GamePageViewEnum.FINISH as 'finish')}/>;
+        case GamePageViewEnum.Start:
+            return <Start changeView={() => this.changeView(GamePageViewEnum.Game)}/>;
+        case GamePageViewEnum.Finish:
+            return <Finish changeView={() => this.changeView(GamePageViewEnum.Game)}/>;
+        case GamePageViewEnum.Game:
+            return <Game changeView={() => this.changeView(GamePageViewEnum.Finish)}/>;
         }
     }
 

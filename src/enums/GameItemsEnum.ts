@@ -1,8 +1,8 @@
-export default class GameItemsEnum {
-    static EMPTY = 0;
-    static WALL = 1;
-    static COOKIE = 2;
-    static PILL = 3;
-    static FRUIT = 4;
-    static GHOST_HOME = 5;
+export enum GameItemsEnum {
+    Empty = 0,
+    Wall = 1,
+    Cookie = 2,
+    Pill = 3,
+    Fruit = 4,
+    Ghost_home = 5
 }

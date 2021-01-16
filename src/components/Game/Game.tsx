@@ -5,7 +5,7 @@ import {IGameState} from './types';
 import {IViewProps} from '../../pages/GamePage/types';
 import Canvas from './views/Canvas';
 import bonuses from './bonuses';
-import GameItemsEnum from '../../enums/GameItemsEnum';
+import {GameItemsEnum} from '../../enums/GameItemsEnum';
 
 const b = bem('Game');
 
@@ -32,12 +32,12 @@ export default class Game extends React.PureComponent<IViewProps, IGameState> {
     componentDidUpdate(_prevProps: Readonly<IViewProps>, prevState: Readonly<IGameState>) {
         if (prevState.cookies !== 0 && prevState.cookies !== this.state.cookies) {
             const eatenCookies = prevState.cookies - this.state.cookies;
-            this.increaseScore(eatenCookies, bonuses[GameItemsEnum.COOKIE]);
+            this.increaseScore(eatenCookies, bonuses[GameItemsEnum.Cookie]);
         }
 
         if (prevState.pills !== 0 && prevState.pills !== this.state.pills) {
             const eatenPills = prevState.pills - this.state.pills;
-            this.increaseScore(eatenPills, bonuses[GameItemsEnum.PILL]);
+            this.increaseScore(eatenPills, bonuses[GameItemsEnum.Pill]);
         }
     }
 

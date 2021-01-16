@@ -1,4 +1,4 @@
-export default class UserDirectionTypeEnum {
-    static VERTICAL = 'vertical';
-    static HORIZONTAL = 'horizontal';
+export enum UserDirectionTypeEnum {
+    Vertical = 'vertical',
+    Horizontal = 'horizontal'
 }

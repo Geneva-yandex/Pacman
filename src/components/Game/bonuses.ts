@@ -1,7 +1,7 @@
-import GameItemsEnum from '../../enums/GameItemsEnum';
+import {GameItemsEnum} from '../../enums/GameItemsEnum';
 
 export default {
-    [GameItemsEnum.COOKIE]: 10,
-    [GameItemsEnum.PILL]: 50,
-    [GameItemsEnum.FRUIT]: 100
+    [GameItemsEnum.Cookie]: 10,
+    [GameItemsEnum.Pill]: 50,
+    [GameItemsEnum.Fruit]: 100
 };

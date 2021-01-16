@@ -1,5 +1,5 @@
-export default class GamePageViewEnum {
-    static START = 'start';
-    static FINISH = 'finish';
-    static GAME = 'game';
+export enum GamePageViewEnum {
+    Start = 'start',
+    Finish = 'finish',
+    Game = 'game'
 }

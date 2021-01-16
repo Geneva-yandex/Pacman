@@ -1,4 +1,4 @@
-import GameItemsEnum from '../../../enums/GameItemsEnum';
+import {GameItemsEnum} from '../../../enums/GameItemsEnum';
 import {IComponentProps, CoordsType, DrawMapParams} from '../types';
 import {CELL_SIZE} from '../views/Canvas';
 import {convertToPixel, getCell, getRow, makeCellCoords} from '../helpers';
@@ -24,15 +24,15 @@ export default class Map {
             row.forEach((itemCode, cellIndex) => {
                 this.drawItem(itemCode, makeCellCoords(rowIndex, cellIndex));
 
-                if (itemCode === GameItemsEnum.COOKIE) {
+                if (itemCode === GameItemsEnum.Cookie) {
                     cookies = countCookies();
                 }
 
-                if (itemCode === GameItemsEnum.PILL) {
+                if (itemCode === GameItemsEnum.Pill) {
                     pills = countPills();
                 }
 
-                if (itemCode === GameItemsEnum.EMPTY) {
+                if (itemCode === GameItemsEnum.Empty) {
                     initUser(makeCellCoords(rowIndex, cellIndex));
                 }
             });
@@ -44,16 +44,16 @@ export default class Map {
 
     private drawItem(itemCode: number, coords: CoordsType) {
         switch (itemCode) {
-        case (GameItemsEnum.WALL):
+        case (GameItemsEnum.Wall):
             this.drawWalls(coords);
             break;
-        case (GameItemsEnum.GHOST_HOME):
+        case (GameItemsEnum.Ghost_home):
             this.drawGhostHome(coords);
             break;
-        case (GameItemsEnum.COOKIE):
+        case (GameItemsEnum.Cookie):
             this.drawCookie(coords);
             break;
-        case (GameItemsEnum.PILL):
+        case (GameItemsEnum.Pill):
             this.drawPill(coords);
             break;
         }
