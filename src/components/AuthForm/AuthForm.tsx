@@ -13,8 +13,9 @@ class AuthForm extends React.Component<RouteComponentProps> {
         login: '',
         password: '',
         remember: '',
-        errorMessage: '',
+        errorMessage: ''
     };
+
     onControlChange = (event: ChangeEvent) => {
         const target = event.target;
         const value = (target as HTMLInputElement).value;
@@ -41,14 +42,13 @@ class AuthForm extends React.Component<RouteComponentProps> {
                     authApi.getUserInfo()
                         .then(resp => {
                             localStorage.setItem('user', JSON.stringify(resp.data));
-                            this.props.history.push('/')
+                            this.props.history.push('/');
                         })
                         .catch(err => {
                             this.setState({
                                 errorMessage: err.response.data.reason
-                            })
-                        })
-
+                            });
+                        });
                 }
             })
             .catch(err => {
@@ -76,11 +76,11 @@ class AuthForm extends React.Component<RouteComponentProps> {
                 <button type="submit">
                     Отправить форму
                 </button>
-                <div className='error'>
+                <div className="error">
                     {this.state.errorMessage}
                 </div>
             </form>
         );
     }
 }
-export default withRouter(AuthForm)
+export default withRouter(AuthForm);

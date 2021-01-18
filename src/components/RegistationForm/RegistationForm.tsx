@@ -2,14 +2,13 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import Input from '../Input';
 import {FormEvent} from 'react';
-import authApi from '../../utils/api/AuthApi'
+import authApi from '../../utils/api/AuthApi';
 import {ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
 
 const b = bem('AuthForm');
 
 class AuthForm extends React.Component<RouteComponentProps> {
-
     state = {
         first_name: '',
         second_name: '',
@@ -18,7 +17,7 @@ class AuthForm extends React.Component<RouteComponentProps> {
         password: '',
         phone: '',
         error: '',
-        errorMessage: '',
+        errorMessage: ''
     };
 
     onControlChange = (event: ChangeEvent) => {
@@ -48,13 +47,13 @@ class AuthForm extends React.Component<RouteComponentProps> {
                     authApi.getUserInfo()
                         .then(resp => {
                             localStorage.setItem('user', JSON.stringify(resp.data));
-                            this.props.history.push('/')
+                            this.props.history.push('/');
                         })
                         .catch(err => {
                             this.setState({
                                 errorMessage: err.response.data.reason
-                            })
-                        })
+                            });
+                        });
                 }
             })
             .catch(err => {
@@ -65,7 +64,6 @@ class AuthForm extends React.Component<RouteComponentProps> {
     };
 
     public render() {
-
         return (
             <form className={b()} onSubmit={this.onSubmit}>
                 <Input onChange={(e: ChangeEvent) => {
@@ -90,7 +88,7 @@ class AuthForm extends React.Component<RouteComponentProps> {
                 <button type="submit">
                     Зарегестрироваться
                 </button>
-                <div className='error'>
+                <div className="error">
                     {this.state.errorMessage}
                 </div>
             </form>

@@ -7,7 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
+const {InjectManifest} = require('workbox-webpack-plugin');
 
 module.exports = env => {
     const isDevelopment = env.NODE_ENV === 'development';
@@ -119,18 +120,29 @@ module.exports = env => {
             new CopyPlugin({
                 patterns: [
                     { from: './public/fonts', to: './fonts' },
-                    { from: './public/images', to: './images' }
+                    { from: './public/images', to: './images' },
+                    { from: './public/offline.html', to: './' },
                 ],
             }),
             new MiniCssExtractPlugin({
                 filename: isDevelopment ? 'index.css' : 'index.[contenthash].css'
             }),
             new HtmlWebpackPlugin({
-                filename: 'index.html',
-                template: './src/index.html',
-                inject: 'body',
-                chunks: ['bundle', 'vendor']
+                    filename: 'index.html',
+                    template: './src/index.html',
+                    inject: 'body',
+                    chunks: ['bundle', 'vendor']
             }),
+            new webpack.DefinePlugin({
+                NODE_ENV: JSON.stringify(env.NODE_ENV)
+            }),
+            !isDevelopment && new InjectManifest({
+                swSrc: './src/sw.ts',
+                swDest: 'sw.js',
+                exclude: [
+                    /\.gitempty$/
+                ]
+            })
         ].filter(Boolean),
     }
 };

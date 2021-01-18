@@ -27,6 +27,10 @@ module.exports = {
         "no-constructor-return": "off",
         "default-param-last": "off",
         "eol-last": ["error", "always"],
-        "react/prop-types": [2, {ignore: ['children']}]
+        "react/prop-types": [2, {ignore: ['children']}],
+        "no-alert": "off",
+        "no-undef": "off",
+        "no-void": "off",
+        "prefer-promise-reject-errors": "off"
     }
 };
