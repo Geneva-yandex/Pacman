@@ -27,7 +27,7 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
             {
                 id: 0,
                 name: 'Старт',
-                route: '/',
+                route: '/game',
                 modalControl: '',
                 primary: true
             },
@@ -53,7 +53,7 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
     };
 
     componentDidMount() {
-        checkForAuthOrRedirect('/login')
+        checkForAuthOrRedirect()
             .then(res => {
                 this.setState({
                     user: res.user

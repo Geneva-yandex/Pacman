@@ -1,14 +1,20 @@
 import LoginPage from './LoginPage';
-import SignUpPage from './SignPage';
-import StartPage from './StartPage';
+import GamePage from './GamePage';
+import ForumPage from './ForumPage';
+import TopicPage from './TopicPage';
 import ProfilePage from './ProfilePage';
 import LeaderboardPage from './LeaderboardPage';
+import StartPage from './StartPage';
+import SignUpPage from './SignPage';
 
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
-const ROUTE_SIGNUP = 'sign up';
-const PROFILE = 'profile page';
-const LEADERBOARD = 'leaderboard page';
+const ROUTE_SIGNUP = 'signup';
+const ROUTE_PROFILE = 'profile';
+const ROUTE_FORUM = 'forum';
+const ROUTE_TOPIC = 'topic';
+const ROUTE_GAME = 'game';
+const ROUTE_LEADERBOARD = 'leaderboard';
 
 export default [
     {
@@ -21,7 +27,7 @@ export default [
     },
     {
         id: ROUTE_LOGIN,
-        exact: false,
+        exact: true,
         path: '/login',
         component: LoginPage,
         title: 'Log-in',
@@ -36,7 +42,29 @@ export default [
         isNavVisible: true
     },
     {
-        id: PROFILE,
+        id: ROUTE_GAME,
+        exact: true,
+        path: '/game',
+        component: GamePage,
+        title: 'game',
+        isNavVisible: false
+    },
+    {
+        id: ROUTE_FORUM,
+        exact: true,
+        path: '/forum',
+        component: ForumPage,
+        title: 'Forum',
+        isNavVisible: true
+    },
+    {
+        id: ROUTE_TOPIC,
+        path: '/forum/:topicId',
+        component: TopicPage,
+        isNavVisible: false
+    },
+    {
+        id: ROUTE_PROFILE,
         exact: false,
         path: '/profile',
         component: ProfilePage,
@@ -44,7 +72,7 @@ export default [
         isNavVisible: true
     },
     {
-        id: LEADERBOARD,
+        id: ROUTE_LEADERBOARD,
         exact: false,
         path: '/leaderboard',
         component: LeaderboardPage,

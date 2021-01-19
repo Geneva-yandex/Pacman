@@ -6,7 +6,7 @@ type PromiseResolver = {
     redirectUrl: string
 };
 
-async function checkForAuthOrRedirect(redirectUrl: string): Promise<PromiseResolver> {
+async function checkForAuthOrRedirect(): Promise<PromiseResolver> {
     return new Promise<PromiseResolver>((resolve, reject) => {
         const rawUserString = localStorage.getItem('user');
         let user = null;
@@ -31,12 +31,7 @@ async function checkForAuthOrRedirect(redirectUrl: string): Promise<PromiseResol
                         });
                     }
                 })
-                .catch(() => {
-                    reject({
-                        user: {},
-                        redirectUrl
-                    });
-                });
+                .catch(error => reject(error));
         }
     });
 }

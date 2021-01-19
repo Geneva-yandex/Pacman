@@ -13,7 +13,6 @@ module.exports = env => {
     const isDevelopment = env.NODE_ENV === 'development';
 
     return {
-
         mode: isDevelopment ? 'development' : 'production',
         entry: {
             bundle: [
@@ -32,7 +31,7 @@ module.exports = env => {
             contentBase: path.join(__dirname, 'dist'),
             port: 4000,
             publicPath: '/',
-            historyApiFallback: true
+            historyApiFallback: true,
         },
         devtool: isDevelopment ? 'source-map' : false,
         optimization: {
@@ -119,7 +118,7 @@ module.exports = env => {
             new CopyPlugin({
                 patterns: [
                     { from: './public/fonts', to: './fonts' },
-                    { from: './public/images', to: './images' },
+                    { from: './public/images', to: './images' }
                 ],
             }),
             new MiniCssExtractPlugin({

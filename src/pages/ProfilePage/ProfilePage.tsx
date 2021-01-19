@@ -35,15 +35,15 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
     componentDidMount() {
         // eslint-disable-next-line no-warning-comments
         // TODO: Вынести хранение юзера в стор, добавить ProtectedRoute
-        checkForAuthOrRedirect('/')
+        checkForAuthOrRedirect()
             .then(res => {
                 this.setState({
                     user: res.user as IUser
                 });
             })
-            .catch(err => {
+            .catch(error => {
                 this.props.history.push('/login');
-                console.log(err);
+                console.error(error);
             });
     }
 
