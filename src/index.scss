@@ -10,9 +10,17 @@ body {
   background: $grey-dark;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .container-fluid {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
   padding: 0 10px;
+}
+
+.error {
+  color: red;
 }
