@@ -14,10 +14,10 @@ export default class TopicCard extends React.PureComponent<ITopicCardProps> {
     };
 
     render() {
-        const {topic} = this.props;
+        const {topic, isLink} = this.props;
         const inner = this.renderInner(topic);
 
-        return this.props.isLink ?
+        return isLink ?
             (
                 <Link
                     to={`/forum/${topic.id}`}
@@ -36,6 +36,8 @@ export default class TopicCard extends React.PureComponent<ITopicCardProps> {
     }
 
     renderInner(topic: ITopic) {
+        const {hasDescription} = this.props;
+
         return (
             <div className={b('inner')}>
                 <div
@@ -51,7 +53,7 @@ export default class TopicCard extends React.PureComponent<ITopicCardProps> {
                     <div className={b('topic-title')}>
                         {topic.title}
                     </div>
-                    {this.props.hasDescription && (
+                    {hasDescription && (
                         <p className={b('topic-description')}>
                             {topic.description}
                         </p>

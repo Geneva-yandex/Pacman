@@ -30,15 +30,15 @@ class TopicPage extends React.PureComponent<ITopicPageProps, ITopicPageState> {
     }
 
     render() {
-        if (this.state.isLoading) {
+        const {topic, isLoading} = this.state;
+
+        if (isLoading) {
             return 'Loading...';
         }
 
-        if (!this.state.topic) {
+        if (!topic) {
             return 'The topic is not found';
         }
-
-        const {topic} = this.state;
 
         return (
             <div className={b()}>
