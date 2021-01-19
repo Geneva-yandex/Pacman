@@ -1,6 +1,7 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 
+// eslint-disable-next-line no-warning-comments
 // TODO: настроить короткие импорты от корня
 import {Tab, Tabs} from '../../components/ui/Tabs';
 import {AccountForm, AvatarForm, PasswordForm} from './components';
@@ -33,16 +34,17 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
     }
 
     componentDidMount() {
+        // eslint-disable-next-line no-warning-comments
         // TODO: Вынести хранение юзера в стор, добавить ProtectedRoute
-        checkForAuthOrRedirect('/')
+        checkForAuthOrRedirect()
             .then(res => {
                 this.setState({
                     user: res.user as IUser
                 });
             })
-            .catch(err => {
+            .catch(error => {
                 this.props.history.push('/login');
-                console.log(err);
+                console.error(error);
             });
     }
 
@@ -69,6 +71,7 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
     }
 
     private async _changeProfile(user: IUser) {
+        // eslint-disable-next-line no-warning-comments
         // TODO: убрать сайдэффект обновления в стор
         try {
             const response = await UserApi.changeProfile(user);

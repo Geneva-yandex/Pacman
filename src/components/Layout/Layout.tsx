@@ -6,6 +6,7 @@ import Sidebar from '../Sidebar';
 
 const b = bem('Layout');
 
+// eslint-disable-next-line no-warning-comments
 // TODO: после организации стора, отображать сайдбар только авторизированным пользователям
 export default class Layout extends React.PureComponent {
     render() {

@@ -53,7 +53,7 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
     };
 
     componentDidMount() {
-        checkForAuthOrRedirect('/login')
+        checkForAuthOrRedirect()
             .then(res => {
                 this.setState({
                     user: res.user
