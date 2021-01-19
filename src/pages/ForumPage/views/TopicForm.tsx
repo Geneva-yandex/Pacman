@@ -1,7 +1,7 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './TopicForm.scss';
-import Input from '../../../components/Input';
+import {Input} from '../../../components/ui';
 
 const b = bem('TopicForm');
 const FORM_ID = 'TopicForm';
