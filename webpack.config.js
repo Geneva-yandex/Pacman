@@ -28,6 +28,7 @@ module.exports = env => {
             publicPath: '/'
         },
         devServer: {
+            host: '0.0.0.0',
             hot: true,
             contentBase: path.join(__dirname, 'dist'),
             port: 4000,
