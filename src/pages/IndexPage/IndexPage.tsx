@@ -3,10 +3,10 @@ import bem from 'easy-bem';
 import './IndexPage.scss';
 import AuthApi from '../../utils/api/AuthApi';
 import {RouteComponentProps, withRouter} from 'react-router';
-import {connect} from "react-redux";
-import {ThunkDispatch} from "redux-thunk";
-import {AnyAction} from "redux";
-import {DispatchLoggingOut} from "../../store/user/actionTypes";
+import {connect} from 'react-redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import {DispatchLoggingOut} from '../../store/user/actionTypes';
 
 type StateProps = {
     state: unknown;
@@ -66,6 +66,5 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): Di
 const mapStateToProps = (state: unknown): StateProps => ({
     state
 });
-
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(IndexPage));
