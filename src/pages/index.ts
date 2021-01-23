@@ -42,7 +42,7 @@ export default [
         path: '/start',
         component: StartPage,
         title: 'Start',
-        isNavVisible: false,
+        isNavVisible: true,
         isProtected: true
     }
 

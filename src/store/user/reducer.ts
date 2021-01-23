@@ -1,15 +1,41 @@
 import {IAction} from '../types';
+import {SignUpValueObject as user} from '../../types/types';
 
 export interface IUserState {
-    user: unknown | null;
+    item: user | null;
 }
 
 const defaultState: IUserState = {
-    user: null
+    item: null
 };
 
-export default (state = defaultState, action: IAction) => {
-    switch (action.type) {
-    default: return state;
+const actions = {
+    PENDING: 'PENDING',
+    FAILED: 'FAILED',
+    setUser: 'setUser'
+};
+
+export default (state: IUserState = defaultState, {type, payload}: IAction) => {
+    switch (type) {
+    case actions.PENDING:
+        return {
+            ...state,
+            status: 'pending'
+        };
+    case actions.setUser:
+        return {
+            ...state,
+            ...payload as object,
+            status: 'success'
+        };
+    case actions.FAILED:
+        return {
+            ...state,
+            status: 'failed'
+        };
+
+    default:
+        return state;
     }
 };
+

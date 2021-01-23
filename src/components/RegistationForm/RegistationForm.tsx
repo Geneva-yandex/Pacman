@@ -5,6 +5,15 @@ import {FormEvent} from 'react';
 import authApi from '../../utils/api/AuthApi';
 import {ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
+import {connect} from 'react-redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import {SignUpValueObject as userItem} from '../../types/types';
+import {DispatchAdding} from '../../store/user/actionTypes';
+
+type StateProps = {
+    state: unknown;
+};
 
 type State = {
     first_name: string,
@@ -18,9 +27,13 @@ type State = {
     [key: string]: string
 };
 
+interface ComponentProps extends RouteComponentProps {
+    setUser: DispatchAdding['setUser']
+
+}
 const b = bem('AuthForm');
 
-class AuthForm extends React.Component<RouteComponentProps, State> {
+class AuthForm extends React.Component<ComponentProps, State> {
     state = {
         first_name: '',
         second_name: '',
@@ -43,7 +56,8 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
 
     onSubmit = (event: FormEvent) => {
         event.preventDefault();
-
+        // @ts-ignore
+        const {setUser} = this.props;
         const signUpData = {
             first_name: this.state.first_name,
             second_name: this.state.second_name,
@@ -58,7 +72,9 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
                 if (res.status === 200) {
                     authApi.getUserInfo()
                         .then(resp => {
-                            localStorage.setItem('user', JSON.stringify(resp.data));
+                            const userData = resp.data;
+                            localStorage.setItem('user', JSON.stringify(userData));
+                            setUser(userData);
                             this.props.history.push('/');
                         })
                         .catch(err => {
@@ -95,4 +111,14 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
     }
 }
 
-export default withRouter(AuthForm);
+const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
+    setUser: (user: userItem) => {
+        dispatch({type: 'setUser', payload: {item: user}});
+    }
+});
+
+const mapStateToProps = (state: unknown): StateProps => ({
+    state
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));

@@ -5,6 +5,9 @@ import Modal from '../../components/Modal';
 import './StartPage.scss';
 import {MouseEvent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
+import {connect} from 'react-redux';
+import fullNameSelector from '../../selectors/user';
+import {state as stateType} from '../../store/types';
 
 type NavItem = {
     id: number,
@@ -13,11 +16,17 @@ type NavItem = {
     modalControl: string
 };
 
+type StateProps = {
+    fullName: string;
+};
+
 type State = {
     modals: {
         [key: string]: boolean
     }
 };
+
+interface Props extends RouteComponentProps, StateProps{}
 
 const b = bem('StartPage');
 
@@ -48,7 +57,7 @@ const startPageNavigation = [
     }
 ];
 
-class StartPage extends React.PureComponent<RouteComponentProps, State> {
+class StartPage extends React.PureComponent<Props, State> {
     private modalWrapperRef = React.createRef<HTMLDivElement>();
 
     state = {
@@ -127,10 +136,12 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
     }
 
     render() {
+        const {fullName} = this.props;
         return (
             <div className={b()}>
                 <div className="container-fluid">
                     <h1>Start page</h1>
+                    <span> Здравствуй, {fullName} </span>
                     <div className={b('navigation-wrapper')}>
                         <nav className={b('navigation')}>
                             <ul className={b('navigationList')}>
@@ -160,4 +171,7 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
     }
 }
 
-export default withRouter(StartPage);
+const mapStateToProps = (state: stateType): StateProps => ({
+    fullName: fullNameSelector(state)
+});
+export default withRouter(connect(mapStateToProps, null)(StartPage));

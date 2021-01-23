@@ -7,7 +7,7 @@ import {
 import {IRouterProps, RouteType} from './types';
 import PrivateRoute from '../../utils/PrivateRoute';
 
-export default class Router extends React.PureComponent<IRouterProps> {
+class Router extends React.PureComponent<IRouterProps> {
     render() {
         const Layout = this.props.layout;
         return (
@@ -45,3 +45,5 @@ export default class Router extends React.PureComponent<IRouterProps> {
         );
     }
 }
+
+export default Router;
