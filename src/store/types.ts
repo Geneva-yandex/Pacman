@@ -8,5 +8,6 @@ export interface IAction<T = unknown> {
 export interface state {
     user: {
         item: null | user;
+        status: string
     }
 }

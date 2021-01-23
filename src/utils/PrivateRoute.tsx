@@ -1,30 +1,30 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
-import checkForAuth from '../utils/checkForAuthOrRedirect';
 
-// @ts-ignore
-export default function PrivateRoute({children, ...rest}) {
-    let isAuth = false;
+type PrivateRouteArgs = {
+    authed: boolean,
+    path: string,
+    exact: boolean,
+    key: string,
+    component: any,
+};
 
-    checkForAuth()
-        .then(() => {
-            isAuth = true;
-        });
+export default function PrivateRoute({authed, path, exact, key, component}: PrivateRouteArgs) {
+    if (authed) {
+        return (
+            <Route
+                path={path}
+                exact={exact}
+                key={key}
+                component={component}
+            />
+        );
+    }
 
     return (
-        <Route
-            {...rest}
-            render={() =>
-                isAuth ? (
-                    children
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: '/login'
-                        }}
-                    />
-                )
-            }
-        />
+        <Redirect
+            to={'/login'}
+        >
+        </Redirect>
     );
 }

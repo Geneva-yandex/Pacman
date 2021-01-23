@@ -65,7 +65,6 @@ class AuthForm extends React.Component<ComponentProps, State> {
                             const userData = resp.data;
                             localStorage.setItem('user', JSON.stringify(userData));
                             setUser(userData);
-                            console.log(this.props);
                             this.props.history.push('/');
                         })
                         .catch(err => {
