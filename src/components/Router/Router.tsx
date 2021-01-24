@@ -7,6 +7,7 @@ import {
 import {IRouterProps, RouteType} from './types';
 import PrivateRoute from '../../utils/PrivateRoute';
 
+
 class Router extends React.PureComponent<IRouterProps> {
     render() {
         const Layout = this.props.layout;
@@ -14,7 +15,7 @@ class Router extends React.PureComponent<IRouterProps> {
             <BrowserRouter>
                 <Layout>
                     <Switch>
-                        {this.props.routes.map(route => this.renderRoute(route))}
+                            {this.props.routes.map(route => this.renderRoute(route))}
                     </Switch>
                 </Layout>
             </BrowserRouter>

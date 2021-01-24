@@ -10,6 +10,7 @@ import {SignUpValueObject as userItem} from '../../types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchAdding} from '../../store/user/actionTypes';
+import {setUser} from "../../store/user/actions";
 
 const b = bem('AuthForm');
 
@@ -63,9 +64,7 @@ class AuthForm extends React.Component<ComponentProps, State> {
                     authApi.getUserInfo()
                         .then(resp => {
                             const userData = resp.data;
-                            localStorage.setItem('user', JSON.stringify(userData));
                             setUser(userData);
-                            console.log(this.props);
                             this.props.history.push('/');
                         })
                         .catch(err => {
@@ -104,7 +103,7 @@ class AuthForm extends React.Component<ComponentProps, State> {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
     setUser: (user: userItem) => {
-        dispatch({type: 'setUser', payload: {item: user}});
+        dispatch(setUser(user));
     }
 });
 
