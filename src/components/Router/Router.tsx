@@ -23,6 +23,7 @@ class Router extends React.Component<Props> {
         item: SignUpValueObject | null,
         status: string
     };
+
     public render() {
         const Layout = this.props.layout;
 
