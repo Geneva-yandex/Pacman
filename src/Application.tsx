@@ -5,11 +5,10 @@ import Layout from './components/Layout';
 import routes from './pages';
 import ErrorBoundary from './components/ErrorBoundary';
 import store from './store';
-import checkForAuth from "./utils/checkForAuthOrRedirect";
-
+import checkForAuth from './utils/checkForAuthOrRedirect';
 
 export default class Application extends React.PureComponent {
-    componentWillMount(): void {
+    componentDidMount(): void {
         checkForAuth();
     }
 

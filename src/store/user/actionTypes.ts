@@ -5,5 +5,5 @@ export type DispatchAdding = {
 };
 export type pendingUserType = {
     onGettingUser: () => void;
-}
+};
 

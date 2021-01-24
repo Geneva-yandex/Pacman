@@ -10,7 +10,7 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {SignUpValueObject as userItem} from '../../types/types';
 import {DispatchAdding} from '../../store/user/actionTypes';
-import {setUser} from "../../store/user/actions";
+import {setUser} from '../../store/user/actions';
 
 type StateProps = {
     state: unknown;

@@ -4,9 +4,8 @@ import {SignUpValueObject as userItem} from '../../types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchAdding, pendingUserType} from '../../store/user/actionTypes';
-import {setUser, pendingUser} from "../../store/user/actions";
-import AuthApi from "../../utils/api/AuthApi";
-
+import {setUser, pendingUser} from '../../store/user/actions';
+import AuthApi from '../../utils/api/AuthApi';
 
 type StateProps = {
     state: unknown;
@@ -14,21 +13,16 @@ type StateProps = {
 
 type ComponentState = {
     user: {}
-}
+};
 
 interface DispatchToProps {
     setUser: DispatchAdding['setUser'],
     onGettingUser: pendingUserType['onGettingUser']
 }
 
-function withUser(WrappedComponent: typeof React.Component){
+function withUser(WrappedComponent: typeof React.Component) {
     class withUser extends React.Component<DispatchToProps, ComponentState> {
-        constructor(props: DispatchToProps) {
-            super(props);
-        }
-
         componentDidMount(): void {
-
             const {onGettingUser, setUser} = this.props;
 
             onGettingUser();
@@ -38,17 +32,16 @@ function withUser(WrappedComponent: typeof React.Component){
                     setUser(res.data);
                 })
                 .catch(() => {
-                    return;
-                })
+
+                });
         }
 
         render() {
             return (
                 <WrappedComponent data={this.state.user} {...this.props}/>
-            )
+            );
         }
     }
-
 
     const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchToProps => ({
         setUser: (user: userItem) => {
@@ -63,9 +56,7 @@ function withUser(WrappedComponent: typeof React.Component){
         state
     });
 
-
     return connect(mapStateToProps, mapDispatchToProps)(withUser);
-
 }
 
-export default withUser
+export default withUser;

@@ -10,7 +10,7 @@ import {SignUpValueObject as userItem} from '../../types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchAdding} from '../../store/user/actionTypes';
-import {setUser} from "../../store/user/actions";
+import {setUser} from '../../store/user/actions';
 
 const b = bem('AuthForm');
 
