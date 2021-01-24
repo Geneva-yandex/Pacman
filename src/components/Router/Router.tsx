@@ -5,7 +5,7 @@ import {
     Route
 } from 'react-router-dom';
 import {IRouterProps, RouteType} from './types';
-import PrivateRoute from '../../utils/PrivateRoute';
+import PrivateRoute from '../PrivateRoute';
 import {connect} from 'react-redux';
 import {state as StateTyping} from '../../store/types';
 import {SignUpValueObject} from '../../types/types';
@@ -19,34 +19,10 @@ interface Props extends IRouterProps {
 }
 
 class Router extends React.Component<Props> {
-    isAuthed: boolean;
     user: {
         item: SignUpValueObject | null,
         status: string
     };
-
-    isAuthorized() {
-        let {user} = this.props.state;
-
-        if (user.item) {
-            this.isAuthed = true;
-        } else {
-            this.isAuthed = false;
-        }
-    }
-
-    componentDidMount(): void {
-        this.isAuthorized();
-    }
-
-    componentDidUpdate(prevProps: Readonly<Props>): void {
-        if (prevProps.state.user.status !== this.props.state.user.status) {
-            this.isAuthorized();
-
-            this.forceUpdate();
-        }
-    }
-
     public render() {
         const Layout = this.props.layout;
 
@@ -69,7 +45,6 @@ class Router extends React.Component<Props> {
                     exact={route.exact}
                     key={route.id}
                     component={route.component}
-                    authed={this.isAuthed}
                 />
             );
         }

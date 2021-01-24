@@ -1,15 +1,20 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+import {state} from '../../store/types'
 
 type PrivateRouteArgs = {
-    authed: boolean,
     path: string,
     exact: boolean,
     key: string,
     component: any,
 };
 
-export default function PrivateRoute({authed, path, exact, key, component}: PrivateRouteArgs) {
+export default function PrivateRoute({path, exact, key, component}: PrivateRouteArgs) {
+    const userData = useSelector((state : state) => state.user);
+    let authed = false
+    userData.item !== null ? authed = true : authed = false
+
     if (authed) {
         return (
             <Route
