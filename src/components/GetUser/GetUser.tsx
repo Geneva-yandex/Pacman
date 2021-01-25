@@ -6,9 +6,10 @@ import {AnyAction} from 'redux';
 import {DispatchAdding, pendingUserType} from '../../store/user/actionTypes';
 import {setUser, pendingUser} from '../../store/user/actions';
 import AuthApi from '../../utils/api/AuthApi';
+import {state} from "../../store/types";
 
 type StateProps = {
-    state: unknown;
+    user: unknown;
 };
 
 type ComponentState = {
@@ -24,21 +25,17 @@ function withUser(WrappedComponent: typeof React.Component) {
     class withUser extends React.Component<DispatchToProps, ComponentState> {
         componentDidMount(): void {
             const {onGettingUser, setUser} = this.props;
-
             onGettingUser();
             AuthApi
                 .getUserInfo()
                 .then(res => {
                     setUser(res.data);
                 })
-                .catch(() => {
-
-                });
         }
 
         render() {
             return (
-                <WrappedComponent data={this.state.user} {...this.props}/>
+                <WrappedComponent {...this.props}/>
             );
         }
     }
@@ -52,8 +49,8 @@ function withUser(WrappedComponent: typeof React.Component) {
         }
     });
 
-    const mapStateToProps = (state: unknown): StateProps => ({
-        state
+    const mapStateToProps = (state: state): StateProps => ({
+        user: state.user,
     });
 
     return connect(mapStateToProps, mapDispatchToProps)(withUser);
