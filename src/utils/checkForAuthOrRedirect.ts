@@ -2,35 +2,34 @@ import authApi from '../utils/api/AuthApi';
 
 import {SignUpValueObject} from '../types/types';
 
+import {setUser, pendingUser } from '../store/user/actions'
+
 import store from '../store';
 
 type PromiseResolver = {
     user: SignUpValueObject | null
 };
 
-const {dispatch} = store;
+const {dispatch, getState} = store;
 
 async function checkForAuth(): Promise<PromiseResolver> {
     return new Promise<PromiseResolver>((resolve, reject) => {
-        const rawUserString = localStorage.getItem('user');
-        let user = null;
-        if (rawUserString !== null) {
-            user = JSON.parse(rawUserString);
-        }
+        const userState = getState();
+
+        let user = userState.user.item;
 
         if (user) {
-            dispatch({type: 'setUser', payload: {item: user}});
+            dispatch(setUser(user));
             resolve({
                 user
             });
         } else {
-            dispatch({type: 'PENDING'});
+            dispatch(pendingUser());
             authApi.getUserInfo()
                 .then(res => {
                     if (res.status === 200) {
                         const userInfo = res.data;
-                        localStorage.setItem('user', JSON.stringify(userInfo));
-                        dispatch({type: 'setUser', payload: {item: userInfo}});
+                        dispatch(setUser(userInfo));
                         resolve({
                             user: userInfo
                         });
