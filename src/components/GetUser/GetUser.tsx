@@ -6,7 +6,7 @@ import {AnyAction} from 'redux';
 import {DispatchAdding, pendingUserType} from '../../store/user/actionTypes';
 import {setUser, pendingUser} from '../../store/user/actions';
 import AuthApi from '../../utils/api/AuthApi';
-import {state} from "../../store/types";
+import {state} from '../../store/types';
 
 type StateProps = {
     user: unknown;
@@ -30,7 +30,7 @@ function withUser(WrappedComponent: typeof React.Component) {
                 .getUserInfo()
                 .then(res => {
                     setUser(res.data);
-                })
+                });
         }
 
         render() {
@@ -50,7 +50,7 @@ function withUser(WrappedComponent: typeof React.Component) {
     });
 
     const mapStateToProps = (state: state): StateProps => ({
-        user: state.user,
+        user: state.user
     });
 
     return connect(mapStateToProps, mapDispatchToProps)(withUser);
