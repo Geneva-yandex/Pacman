@@ -1,22 +1,21 @@
-import * as React from 'react';
+import React from 'react';
 import bem from 'easy-bem';
+import {RouteComponentProps, withRouter} from 'react-router';
+import {Tab, Tabs} from 'components/ui';
+import {IUser, IPsswordsDto} from 'types/interfaces';
+import {checkForAuthOrRedirect} from 'misc/utils';
+import {AuthApi, UserApi} from 'api';
 
-// eslint-disable-next-line no-warning-comments
-// TODO: настроить короткие импорты от корня
-import {Tab, Tabs} from '../../components/ui/Tabs';
 import {AccountForm, AvatarForm, PasswordForm} from './components';
 import {ProfileTabs} from './types';
-import {IUser, IPsswordsDto} from '../../types/interfaces';
-import checkForAuthOrRedirect from '../../misc/utils/checkForAuthOrRedirect';
-import {RouteComponentProps, withRouter} from 'react-router';
-import {AuthApi, UserApi} from '../../api';
+import './ProfilePage.scss';
 
 interface IProfilePageState {
     currentTab: ProfileTabs;
     user: IUser;
 }
 
-const b = bem('InnerPage');
+const b = bem('ProfilePage');
 
 class ProfilePage extends React.PureComponent<RouteComponentProps, IProfilePageState> {
     constructor(props: RouteComponentProps) {

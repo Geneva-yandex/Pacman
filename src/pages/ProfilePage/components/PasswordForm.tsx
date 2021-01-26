@@ -1,8 +1,7 @@
-import * as React from 'react';
-import Input from '../../../components/ui/Input';
-import {useForm} from '../../../misc/hooks';
-import {IPsswordsDto} from '../../../types/interfaces';
-import {Button} from '../../../components/ui';
+import React from 'react';
+import {useForm} from 'misc/hooks';
+import {IPsswordsDto} from 'types/interfaces';
+import {Input, Button} from 'components/ui';
 
 interface IPasswordFormProps {
     onSave: (passwords: IPsswordsDto) => void;

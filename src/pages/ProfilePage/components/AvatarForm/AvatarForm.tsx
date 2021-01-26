@@ -1,10 +1,7 @@
-import * as React from 'react';
-import {ChangeEvent, useRef} from 'react';
+import React, {ChangeEvent, useRef} from 'react';
 import bem from 'easy-bem';
-import Input from '../../../../components/ui/Input';
-import Avatar from '../../../../components/ui/Avatar';
-import {Button} from '../../../../components/ui';
-import {API_ENDPOINT} from '../../../../misc/constants';
+import {Input, Button, Avatar} from 'components/ui';
+import {API_ENDPOINT} from 'misc/constants';
 import './AvatarForm.scss';
 
 interface IAvatarFormProps {
