@@ -5,6 +5,7 @@ import {FormEvent} from 'react';
 import authApi from '../../api/AuthApi';
 import {ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
+import {Button} from '../ui';
 
 const b = bem('AuthForm');
 
@@ -85,9 +86,9 @@ class AuthForm extends React.Component<RouteComponentProps> {
                     this.onControlChange(e);
                 }} name="phone" title="Enter the phone" type="tel" placeholder="phone" />
 
-                <button type="submit">
-                    Зарегестрироваться
-                </button>
+                <div>
+                    <Button>Зарегестрироваться</Button>
+                </div>
                 <div className="error">
                     {this.state.errorMessage}
                 </div>

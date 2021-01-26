@@ -19,7 +19,7 @@ type Props = OwnProps;
 
 const b = bem('Input');
 
-export default class Input extends React.Component<Props> {
+export default class Input extends React.PureComponent<Props> {
     private _inputRef = createRef<HTMLInputElement>();
 
     public get inputRef(): HTMLInputElement | null {

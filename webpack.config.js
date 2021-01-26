@@ -29,7 +29,7 @@ module.exports = env => {
         devServer: {
             hot: true,
             contentBase: path.join(__dirname, 'dist'),
-            port: 4000,
+            port: 4100,
             publicPath: '/',
             historyApiFallback: true,
         },
