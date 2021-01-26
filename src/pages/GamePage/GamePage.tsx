@@ -11,7 +11,7 @@ import Finish from './views/Finish';
 
 const b = bem('GamePage');
 
-const PagePage = () => {
+const GamePage = () => {
     const gameRef = useRef(null);
     const [view, setView] = useState<ViewType>(GamePageViewEnum.Start);
     const [isFullscreen, setIsFullscreen] = useFullscreen(gameRef);
@@ -37,4 +37,4 @@ const PagePage = () => {
     );
 };
 
-export default PagePage;
+export default GamePage;
