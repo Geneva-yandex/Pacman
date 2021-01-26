@@ -32,7 +32,7 @@ module.exports = env => {
         devServer: {
             hot: true,
             contentBase: PATHS.dist,
-            port: 4100,
+            port: 4000,
             publicPath: '/',
             historyApiFallback: true
         },
