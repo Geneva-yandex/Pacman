@@ -84,7 +84,7 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
         try {
             const response = await UserApi.changeProfile(user);
             this.setState({user: response.data});
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(response.data));
         } catch (error) {
             console.error(error);
         }
@@ -103,6 +103,7 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
             await UserApi.changeAvatar(avatar);
             const response = await AuthApi.getUserInfo();
             this.setState({user: response.data});
+            localStorage.setItem('user', JSON.stringify(response.data));
         } catch (error) {
             console.error(error);
         }
