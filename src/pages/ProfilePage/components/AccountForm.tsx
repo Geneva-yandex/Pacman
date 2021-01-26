@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {FC, FormEvent, useCallback} from 'react';
 import Input from '../../../components/ui/Input';
 import {IUser} from '../../../types/interfaces';
 import {useForm} from '../../../misc/hooks';
@@ -14,34 +13,33 @@ interface IAccountFormProps {
 // TODO: Добавить feedback результата обновления профиля
 // eslint-disable-next-line no-warning-comments
 // TODO: Добавить валидатор в useForm
-const AccountForm: FC<IAccountFormProps> = ({user, onSave}: IAccountFormProps) => {
-    console.log(user);
-    const {values, formFieldChangeHandler} = useForm(user);
-    console.log(values);
-
-    const onSubmit = useCallback((event: FormEvent) => {
-        event.preventDefault();
-        onSave(values);
-    }, []);
+const AccountForm = ({user, onSave}: IAccountFormProps) => {
+    const {values, handleChange, handleSubmit} = useForm<IUser>({
+        initialValues: user,
+        onSubmit: (values: IUser) => onSave(values)
+    });
 
     return <React.Fragment>
-        <form className="profile-form" onSubmit={onSubmit}>
-            <Input type="text" name="second_name" title="Фамилия"
-                value={values.second_name} onChange={formFieldChangeHandler}/>
+        <form className="profile-form" onSubmit={handleSubmit}>
+            <Input type="text" name="second_name" title="Last Name"
+                value={values.second_name} onChange={handleChange}/>
 
-            <Input type="text" name="first_name" title="Имя"
-                value={values.first_name} onChange={formFieldChangeHandler}/>
+            <Input type="text" name="first_name" title="First Name"
+                value={values.first_name} onChange={handleChange}/>
 
-            <Input type="text" name="login" title="Логин"
-                value={values.login} onChange={formFieldChangeHandler}/>
+            <Input type="text" name="login" title="Login"
+                value={values.login} onChange={handleChange}/>
 
-            <Input type="email" name="email" title="Почта"
-                value={values.email} onChange={formFieldChangeHandler}/>
+            <Input type="text" name="display_name" title="Display Name"
+                value={values.display_name} onChange={handleChange}/>
 
-            <Input type="tel" name="phone" title="Номер телефона"
-                value={values.phone} onChange={formFieldChangeHandler}/>
+            <Input type="email" name="email" title="Email"
+                value={values.email} onChange={handleChange}/>
 
-            <Button size="small" aperance="outlined">Сохранить</Button>
+            <Input type="tel" name="phone" title="Phone Number"
+                value={values.phone} onChange={handleChange}/>
+
+            <Button size="small" aperance="outlined">Save</Button>
         </form>
     </React.Fragment>;
 };

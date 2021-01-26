@@ -13,12 +13,6 @@
     flex: 1;
   }
 
-  &__actions {
-    .icon-button:not(:last-child) {
-      margin-bottom: 16px;
-    }
-  }
-
   &__nav-list {
     li {
       &:not(:last-child) {

@@ -3,6 +3,7 @@ import Input from './Input';
 import Modal from './Modal';
 import {Tabs, Tab} from './Tabs';
 import Button from './Button';
+import Tooltip from './Tooltip';
 
 export {
     Avatar,
@@ -10,5 +11,6 @@ export {
     Modal,
     Tabs,
     Tab,
-    Button
+    Button,
+    Tooltip
 };

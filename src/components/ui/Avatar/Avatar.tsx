@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {FC} from 'react';
+import React from 'react';
 import bem from 'easy-bem';
 import './Avatar.scss';
 
@@ -10,7 +9,7 @@ interface IAvatarProps {
 
 const b = bem('Avatar');
 
-const Avatar: FC<IAvatarProps> = ({src, size = 48}: IAvatarProps) => {
+const Avatar = ({src, size = 48}: IAvatarProps) => {
     const style = {
         backgroundImage: `url(${src})`,
         width: `${size}px`,
