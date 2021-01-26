@@ -23,9 +23,9 @@ const PasswordForm: FC<IPasswordFormProps> = ({onSave}: IPasswordFormProps) => {
 
     return <React.Fragment>
         <form className="profile-form" onSubmit={onSubmit}>
-            <Input type="text" name="oldPassword" title="Старый пароль" {...oldPasswordField} />
-            <Input type="text" name="newPassword" title="Новый пароль" {...newPasswordField} />
-            <Button size="small" aperance="outlined">Поменять пароль</Button>
+            <Input type="text" name="oldPassword" title="Old Password" {...oldPasswordField} />
+            <Input type="text" name="newPassword" title="New Password" {...newPasswordField} />
+            <Button size="small" aperance="outlined">Change password</Button>
         </form>
     </React.Fragment>;
 };

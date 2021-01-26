@@ -28,9 +28,10 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
             user: {} as IUser
         };
 
-        this._changeProfile.bind(this);
-        this._changePasswords.bind(this);
-        this._changeAvatar.bind(this);
+        this._onSelectTab = this._onSelectTab.bind(this);
+        this._changeProfile = this._changeProfile.bind(this);
+        this._changePasswords = this._changePasswords.bind(this);
+        this._changeAvatar = this._changeAvatar.bind(this);
     }
 
     componentDidMount() {
@@ -53,21 +54,25 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
 
         return <div className={b()}>
             <header className={b('header')}>
-                <h1>Профиль</h1>
+                <h1>Profile</h1>
             </header>
 
-            <Tabs selectedTab={currentTab} onSelect={(tab: ProfileTabs) => this.setState({currentTab: tab})}>
-                <Tab name={ProfileTabs.Account} title="Информация">
+            <Tabs selectedTab={currentTab} onSelect={this._onSelectTab}>
+                <Tab name={ProfileTabs.Account} title="Personal Info">
                     <AccountForm user={user} onSave={this._changeProfile} />
                 </Tab>
-                <Tab name={ProfileTabs.Password} title="Пароль">
+                <Tab name={ProfileTabs.Password} title="Password">
                     <PasswordForm onSave={this._changePasswords} />
                 </Tab>
-                <Tab name={ProfileTabs.Avatar} title="Аватар">
+                <Tab name={ProfileTabs.Avatar} title="Avatar">
                     <AvatarForm avatar={user.avatar} onSave={this._changeAvatar} />
                 </Tab>
             </Tabs>
         </div>;
+    }
+
+    private _onSelectTab(tab: ProfileTabs) {
+        this.setState({currentTab: tab});
     }
 
     private async _changeProfile(user: IUser) {
