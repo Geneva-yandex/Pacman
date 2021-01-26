@@ -1,13 +1,16 @@
 const path = require('path');
-
 const webpack = require('webpack');
-
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
+
+const PATHS = {
+    dist: path.resolve(__dirname, 'dist'),
+    src: path.resolve(__dirname, 'src')
+};
 
 module.exports = env => {
     const isDevelopment = env.NODE_ENV === 'development';
@@ -22,29 +25,29 @@ module.exports = env => {
             ].filter(Boolean)
         },
         output: {
-            filename: isDevelopment ? '[name].js' : '[name].[contenthash].js',
-            path: path.resolve(__dirname, 'dist'),
+            filename: isDevelopment ? '[name].js' : '[name].[contentHash].js',
+            path: PATHS.dist,
             publicPath: '/'
         },
         devServer: {
             hot: true,
-            contentBase: path.join(__dirname, 'dist'),
+            contentBase: PATHS.dist,
             port: 4100,
             publicPath: '/',
-            historyApiFallback: true,
+            historyApiFallback: true
         },
         devtool: isDevelopment ? 'source-map' : false,
         optimization: {
             minimize: !isDevelopment,
             minimizer: [
                 new TerserPlugin(),
-                new CssMinimizerPlugin(),
+                new CssMinimizerPlugin()
             ],
             runtimeChunk: 'single',
             splitChunks: {
                 minSize: 0,
                 cacheGroups: {
-                    'vendor': {
+                    vendor: {
                         name: 'vendor',
                         test: /[\\/]node_modules[\\/]/,
                         chunks: 'initial',
@@ -78,10 +81,10 @@ module.exports = env => {
                         {
                             loader: 'sass-loader',
                             options: {
-                                sourceMap: true,
-                            },
+                                sourceMap: true
+                            }
                         }
-                    ],
+                    ]
                 },
                 {
                     test: /\.(png|jpe?g|svg)$/i,
@@ -91,9 +94,9 @@ module.exports = env => {
                             options: {
                                 name: '[name].[ext]',
                                 outputPath: 'images/'
-                            },
-                        },
-                    ],
+                            }
+                        }
+                    ]
                 },
                 {
                     test: /\.ttf$/,
@@ -103,33 +106,40 @@ module.exports = env => {
                             options: {
                                 name: '[name].[ext]',
                                 outputPath: 'fonts/'
-                            },
-                        },
-                    ],
-                },
-            ],
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
+            alias: {
+                api: `${PATHS.src}/api`,
+                components: `${PATHS.src}/components`,
+                pages: `${PATHS.src}/pages`,
+                types: `${PATHS.src}/types`,
+                misc: `${PATHS.src}/misc`
+            }
         },
         plugins: [
             new CleanWebpackPlugin(),
             isDevelopment && new webpack.HotModuleReplacementPlugin(),
             new CopyPlugin({
                 patterns: [
-                    { from: './public/fonts', to: './fonts' },
-                    { from: './public/images', to: './images' }
-                ],
+                    {from: './public/fonts', to: './fonts'},
+                    {from: './public/images', to: './images'}
+                ]
             }),
             new MiniCssExtractPlugin({
-                filename: isDevelopment ? 'index.css' : 'index.[contenthash].css'
+                filename: isDevelopment ? 'index.css' : 'index.[contentHash].css'
             }),
             new HtmlWebpackPlugin({
                 filename: 'index.html',
                 template: './src/index.html',
                 inject: 'body',
                 chunks: ['bundle', 'vendor']
-            }),
-        ].filter(Boolean),
-    }
+            })
+        ].filter(Boolean)
+    };
 };

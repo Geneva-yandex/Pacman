@@ -1,5 +1,5 @@
-import authApi from '../../api/AuthApi';
-import {IUser} from '../../types/interfaces';
+import authApi from 'api/AuthApi';
+import {IUser} from 'types/interfaces';
 
 type PromiseResolver = {
     user: IUser | null,
