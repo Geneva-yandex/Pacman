@@ -22,7 +22,7 @@ const PasswordForm = ({onSave}: IPasswordFormProps) => {
                 value={values.oldPassword} onChange={handleChange} />
             <Input type="password" name="newPassword" title="New Password"
                 value={values.newPassword} onChange={handleChange} />
-            <Button size="small" aperance="outlined">Change password</Button>
+            <Button size="small" appearance="outlined">Change password</Button>
         </form>
     </React.Fragment>;
 };

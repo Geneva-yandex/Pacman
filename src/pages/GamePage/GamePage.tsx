@@ -1,45 +1,40 @@
-import * as React from 'react';
+import React, {useRef, useState} from 'react';
 import bem from 'easy-bem';
-import {IStateGamePage} from './types';
 import './GamePage.scss';
-import Start from './views/Start';
-import Finish from './views/Finish';
-import Game from '../../components/Game';
+import Game from 'components/Game';
+import FullscreenButton from 'components/FullscreenButton';
+import {useFullscreen} from 'misc/hooks';
 import {ViewType} from './types';
 import {GamePageViewEnum} from '../../enums/GamePageViewEnum';
+import Start from './views/Start';
+import Finish from './views/Finish';
 
 const b = bem('GamePage');
 
-export default class GamePage extends React.PureComponent<{}, IStateGamePage> {
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            view: GamePageViewEnum.Start
-        };
-    }
+const PagePage = () => {
+    const gameRef = useRef(null);
+    const [view, setView] = useState<ViewType>(GamePageViewEnum.Start);
+    const [isFullscreen, setIsFullscreen] = useFullscreen(gameRef);
 
-    render() {
-        return (
-            <div className={b()}>
-                <div className={'container-fluid'}>
-                    {this.renderView()}
-                </div>
-            </div>
-        );
-    }
-
-    renderView() {
-        switch (this.state.view) {
+    const getView = () => {
+        switch (view) {
         case GamePageViewEnum.Start:
-            return <Start changeView={() => this.changeView(GamePageViewEnum.Game)}/>;
+            return <Start changeView={() => setView(GamePageViewEnum.Game)}/>;
         case GamePageViewEnum.Finish:
-            return <Finish changeView={() => this.changeView(GamePageViewEnum.Game)}/>;
+            return <Finish changeView={() => setView(GamePageViewEnum.Game)}/>;
         case GamePageViewEnum.Game:
-            return <Game changeView={() => this.changeView(GamePageViewEnum.Finish)}/>;
+            return <Game changeView={() => setView(GamePageViewEnum.Finish)}/>;
         }
-    }
+    };
 
-    changeView(view: ViewType) {
-        this.setState({view});
-    }
-}
+    return (
+        <div ref={gameRef} className={b()}>
+            <div className={'container-fluid'}>
+                <FullscreenButton onClick={setIsFullscreen} isFullscreen={isFullscreen} />
+                {getView()}
+            </div>
+        </div>
+    );
+};
+
+export default PagePage;

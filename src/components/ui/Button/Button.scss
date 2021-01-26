@@ -31,6 +31,10 @@
     font-size: 14px;
   }
 
+  &--large {
+    padding: 15px 30px;
+  }
+
   &:hover {
     transform: scale(0.99) translateY(2px);
   }

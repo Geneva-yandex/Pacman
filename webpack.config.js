@@ -9,7 +9,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const PATHS = {
     dist: path.resolve(__dirname, 'dist'),
-    src: path.resolve(__dirname, 'src')
+    src: path.resolve(__dirname, 'src'),
+    public: path.resolve(__dirname, 'public')
 };
 
 module.exports = env => {
@@ -32,7 +33,7 @@ module.exports = env => {
         devServer: {
             hot: true,
             contentBase: PATHS.dist,
-            port: 4100,
+            port: 4000,
             publicPath: '/',
             historyApiFallback: true
         },
@@ -115,6 +116,7 @@ module.exports = env => {
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             alias: {
+                public: PATHS.public,
                 api: `${PATHS.src}/api`,
                 components: `${PATHS.src}/components`,
                 pages: `${PATHS.src}/pages`,

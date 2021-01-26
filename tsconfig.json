@@ -16,6 +16,7 @@
     "esModuleInterop": true
   },
     "paths": {
+        "public/*": [ "../public/*" ],
         "api/*": [ "api/*" ],
         "components/*": [ "components/*" ],
         "pages/*": [ "pages/*" ],

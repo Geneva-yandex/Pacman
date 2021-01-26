@@ -122,7 +122,7 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
             return (
                 <li key={navItem.id} className={b('navigation-item')}>
                     <Link to={navItem.route}>
-                        <Button aperance={navItem.primary ? 'primary' : 'outlined'}>{navItem.name}</Button>
+                        <Button appearance={navItem.primary ? 'primary' : 'outlined'}>{navItem.name}</Button>
                     </Link>
                 </li>
             );
@@ -130,7 +130,7 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
 
         return (
             <li key={navItem.id} className={b('navigation-item')}>
-                <Button aperance="outlined" onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
+                <Button appearance="outlined" onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
             </li>
         );
     }

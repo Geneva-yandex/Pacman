@@ -1,9 +1,9 @@
 import {ButtonHTMLAttributes, PropsWithChildren} from 'react';
 
-type ButtonAperance = 'primary' | 'default' | 'outlined';
-type ButtonSize = 'small' | 'middle';
+type ButtonAppearance = 'primary' | 'default' | 'outlined';
+type ButtonSize = 'small' | 'middle' | 'large';
 
 export interface IButtonProps extends PropsWithChildren<ButtonHTMLAttributes<any>> {
-    aperance?: ButtonAperance;
+    appearance?: ButtonAppearance;
     size?: ButtonSize;
 }
