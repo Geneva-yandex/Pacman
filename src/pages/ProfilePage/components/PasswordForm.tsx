@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {FC, FormEvent, useCallback} from 'react';
 import Input from '../../../components/ui/Input';
-import {useFormField} from '../../../misc/hooks';
+import {useForm} from '../../../misc/hooks';
 import {IPsswordsDto} from '../../../types/interfaces';
 import {Button} from '../../../components/ui';
 
@@ -9,22 +8,21 @@ interface IPasswordFormProps {
     onSave: (passwords: IPsswordsDto) => void;
 }
 
-const PasswordForm: FC<IPasswordFormProps> = ({onSave}: IPasswordFormProps) => {
-    const oldPasswordField = useFormField('');
-    const newPasswordField = useFormField('');
-
-    const onSubmit = useCallback((event: FormEvent) => {
-        event.preventDefault();
-        onSave({
-            oldPassword: oldPasswordField.value as string,
-            newPassword: newPasswordField.value as string
-        });
-    }, []);
+const PasswordForm: React.FC<IPasswordFormProps> = ({onSave}: IPasswordFormProps) => {
+    const {values, handleChange, handleSubmit} = useForm<IPsswordsDto>({
+        initialValues: {
+            oldPassword: '',
+            newPassword: ''
+        },
+        onSubmit: values => onSave(values)
+    });
 
     return <React.Fragment>
-        <form className="profile-form" onSubmit={onSubmit}>
-            <Input type="text" name="oldPassword" title="Old Password" {...oldPasswordField} />
-            <Input type="text" name="newPassword" title="New Password" {...newPasswordField} />
+        <form className="profile-form" onSubmit={handleSubmit}>
+            <Input type="password" name="oldPassword" title="Old Password"
+                value={values.oldPassword} onChange={handleChange} />
+            <Input type="password" name="newPassword" title="New Password"
+                value={values.newPassword} onChange={handleChange} />
             <Button size="small" aperance="outlined">Change password</Button>
         </form>
     </React.Fragment>;
