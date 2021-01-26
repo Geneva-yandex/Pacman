@@ -23,9 +23,12 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
     constructor(props: RouteComponentProps) {
         super(props);
 
+        const _user = localStorage.getItem('user');
+        const user = (_user ? JSON.parse(_user) : {}) as IUser;
+
         this.state = {
             currentTab: ProfileTabs.Account,
-            user: {} as IUser
+            user
         };
 
         this._onSelectTab = this._onSelectTab.bind(this);
@@ -81,6 +84,7 @@ class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState
         try {
             const response = await UserApi.changeProfile(user);
             this.setState({user: response.data});
+            localStorage.setItem('user', JSON.stringify(user));
         } catch (error) {
             console.error(error);
         }

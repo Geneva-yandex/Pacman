@@ -27,8 +27,11 @@ const AccountForm: React.FC<IAccountFormProps> = ({user, onSave}: IAccountFormPr
             <Input type="text" name="first_name" title="First Name"
                 value={values.first_name} onChange={handleChange}/>
 
-            <Input type="text" name="login" title="Username"
+            <Input type="text" name="login" title="Login"
                 value={values.login} onChange={handleChange}/>
+
+            <Input type="text" name="display_name" title="Display Name"
+                value={values.display_name} onChange={handleChange}/>
 
             <Input type="email" name="email" title="Email"
                 value={values.email} onChange={handleChange}/>
