@@ -1,8 +1,7 @@
-import * as React from 'react';
-import {FC} from 'react';
+import React from 'react';
 import bem from 'easy-bem';
-import {IUser} from '../../../../types/interfaces';
-import {Avatar} from '../../../../components/ui';
+import {IUser} from 'types/interfaces';
+import {Avatar} from 'components/ui';
 import './User.scss';
 
 const b = bem('User');
@@ -11,7 +10,7 @@ interface IUserProps {
     user: IUser;
 }
 
-const User: FC<IUserProps> = ({user}: IUserProps) => {
+const User = ({user}: IUserProps) => {
     const {avatar, login, first_name, second_name} = user;
 
     return <div className={b()}>

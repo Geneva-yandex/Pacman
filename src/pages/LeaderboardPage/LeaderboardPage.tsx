@@ -1,6 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import {IUser} from '../../types/interfaces';
+import {IUser} from 'types/interfaces';
 import LeaderboardItem from './components/LeaderboardItem';
 
 const b = bem('InnerPage');
@@ -17,7 +17,7 @@ const user: IUser = {
     display_name: ''
 };
 
-class LeaderboardPage extends React.Component {
+class LeaderboardPage extends React.PureComponent {
     render() {
         return <div className={b()}>
             <header className={b('header')}>

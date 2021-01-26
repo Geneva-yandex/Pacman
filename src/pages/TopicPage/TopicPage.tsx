@@ -2,7 +2,7 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import './TopicPage.scss';
 import {withRouter} from 'react-router';
-import forumData from '../../data/forum-data';
+import forumData from '../../misc/data/forum-data';
 import {IComment, ITopic} from '../../types/ForumTypes';
 import TopicCard from '../../components/TopicCard';
 import CommentForm from './views/CommentForm';

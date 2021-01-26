@@ -1,7 +1,6 @@
-import * as React from 'react';
-import {FC} from 'react';
+import React from 'react';
 import bem from 'easy-bem';
-import {IUser} from '../../../../types/interfaces';
+import {IUser} from 'types/interfaces';
 import User from '../User';
 import './LeaderboardItem.scss';
 
@@ -15,7 +14,7 @@ interface ILeaderboardItem {
 
 // eslint-disable-next-line no-warning-comments
 // TODO: сделать расчёт ширины полосы индикатора относительно максимального значения
-const LeaderboardItem: FC<ILeaderboardItem> = ({position, rank, user}: ILeaderboardItem) => {
+const LeaderboardItem = ({position, rank, user}: ILeaderboardItem) => {
     return <div className={b()}>
         <div className={b('position')}>{position}</div>
         <div className={b('user')}>
