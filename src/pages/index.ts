@@ -3,16 +3,18 @@ import GamePage from './GamePage';
 import ForumPage from './ForumPage';
 import TopicPage from './TopicPage';
 import ProfilePage from './ProfilePage';
+import LeaderboardPage from './LeaderboardPage';
 import StartPage from './StartPage';
 import SignUpPage from './SignPage';
 
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
 const ROUTE_SIGNUP = 'signup';
-const PROFILE = 'profile';
+const ROUTE_PROFILE = 'profile';
 const ROUTE_FORUM = 'forum';
 const ROUTE_TOPIC = 'topic';
 const ROUTE_GAME = 'game';
+const ROUTE_LEADERBOARD = 'leaderboard';
 
 export default [
     {
@@ -62,11 +64,19 @@ export default [
         isNavVisible: false
     },
     {
-        id: PROFILE,
+        id: ROUTE_PROFILE,
         exact: false,
         path: '/profile',
         component: ProfilePage,
         title: 'Profile',
+        isNavVisible: true
+    },
+    {
+        id: ROUTE_LEADERBOARD,
+        exact: false,
+        path: '/leaderboard',
+        component: LeaderboardPage,
+        title: 'Leaderboard',
         isNavVisible: true
     }
 ];

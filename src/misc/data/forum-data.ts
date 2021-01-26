@@ -1,5 +1,5 @@
-import user_1 from '../../public/images/Hillary_Clinton.jpg';
-import user_3 from '../../public/images/Ryan_Gosling.png';
+import user_1 from '../../../public/images/Hillary_Clinton.jpg';
+import user_3 from '../../../public/images/Ryan_Gosling.png';
 
 export default [
     {
