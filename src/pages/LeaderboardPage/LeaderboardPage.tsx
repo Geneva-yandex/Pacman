@@ -21,7 +21,7 @@ class LeaderboardPage extends React.PureComponent {
     render() {
         return <div className={b()}>
             <header className={b('header')}>
-                <h1>Лидерборд</h1>
+                <h1>Leaderboard</h1>
             </header>
 
             <div className={b('main')}>
