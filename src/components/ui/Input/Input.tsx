@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {ChangeEvent, createRef} from 'react';
 import bem from 'easy-bem';
 import './Input.scss';

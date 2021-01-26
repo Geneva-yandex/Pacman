@@ -8,7 +8,7 @@ interface IPasswordFormProps {
     onSave: (passwords: IPsswordsDto) => void;
 }
 
-const PasswordForm: React.FC<IPasswordFormProps> = ({onSave}: IPasswordFormProps) => {
+const PasswordForm = ({onSave}: IPasswordFormProps) => {
     const {values, handleChange, handleSubmit} = useForm<IPsswordsDto>({
         initialValues: {
             oldPassword: '',

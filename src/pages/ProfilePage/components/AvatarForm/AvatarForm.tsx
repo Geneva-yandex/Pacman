@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ChangeEvent, FC, useRef} from 'react';
+import {ChangeEvent, useRef} from 'react';
 import bem from 'easy-bem';
 import Input from '../../../../components/ui/Input';
 import Avatar from '../../../../components/ui/Avatar';
@@ -14,9 +14,9 @@ interface IAvatarFormProps {
 
 const b = bem('AvatarForm');
 
-const AvatarForm: FC<IAvatarFormProps> = ({avatar, onSave}: IAvatarFormProps) => {
+const AvatarForm = ({avatar, onSave}: IAvatarFormProps) => {
     const inputEl = useRef<Input>(null);
-    console.log(avatar);
+    const avatarSrc = `${API_ENDPOINT}/${avatar}`;
 
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         const target = event.target;
@@ -30,7 +30,7 @@ const AvatarForm: FC<IAvatarFormProps> = ({avatar, onSave}: IAvatarFormProps) =>
         <div className={b()}>
             <div className={b('photo')}>
                 <Input ref={inputEl} className="visually-hidden" type="file" name="avatar" onChange={onChange} />
-                <Avatar size={120} src={`${API_ENDPOINT}/${avatar}`} />
+                <Avatar size={120} src={avatarSrc} />
             </div>
 
             <Button size="small" aperance="outlined" type="button" onClick={() => inputEl?.current?.inputRef?.click()}>Change avatar</Button>

@@ -19,7 +19,7 @@ interface IProfilePageState {
 
 const b = bem('ProfilePage');
 
-class ProfilePage extends React.Component<RouteComponentProps, IProfilePageState> {
+class ProfilePage extends React.PureComponent<RouteComponentProps, IProfilePageState> {
     constructor(props: RouteComponentProps) {
         super(props);
 

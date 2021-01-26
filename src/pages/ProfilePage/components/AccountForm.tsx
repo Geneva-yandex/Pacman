@@ -13,7 +13,7 @@ interface IAccountFormProps {
 // TODO: Добавить feedback результата обновления профиля
 // eslint-disable-next-line no-warning-comments
 // TODO: Добавить валидатор в useForm
-const AccountForm: React.FC<IAccountFormProps> = ({user, onSave}: IAccountFormProps) => {
+const AccountForm = ({user, onSave}: IAccountFormProps) => {
     const {values, handleChange, handleSubmit} = useForm<IUser>({
         initialValues: user,
         onSubmit: (values: IUser) => onSave(values)
