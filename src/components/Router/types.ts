@@ -2,10 +2,10 @@ import * as React from 'react';
 
 export type RouteType = {
     id: string,
-    exact: boolean,
+    exact?: boolean,
     path: string,
     component: React.ComponentType,
-    title: string,
+    title?: string,
     isNavVisible: boolean
 };
 

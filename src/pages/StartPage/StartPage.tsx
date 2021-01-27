@@ -1,7 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import {Link} from 'react-router-dom';
-import checkForAuthOrRedirect from '../../utils/checkForAuthOrRedirect';
 import Modal from '../../components/Modal';
 import './StartPage.scss';
 import {MouseEvent} from 'react';
@@ -58,13 +57,6 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
         }
 
     };
-
-    componentDidMount() {
-        checkForAuthOrRedirect('/login')
-            .catch(err => {
-                this.props.history.push(err.redirectUrl);
-            });
-    }
 
     toggleClassListOfModalWrapper() {
         const modalWrapper = this.modalWrapperRef.current;

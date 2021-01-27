@@ -8,16 +8,23 @@ import {RouteComponentProps, withRouter} from 'react-router';
 const b = bem('IndexPage');
 
 type State = {
-    errorMessage: string
+    errorMessage: string,
+    user: unknown
 };
 
 class IndexPage extends React.PureComponent<RouteComponentProps, State> {
     state = {
+        user: {},
         errorMessage: ''
     };
 
     componentDidMount() {
-        checkForAuthOrRedirect('/login')
+        checkForAuthOrRedirect()
+            .then(res => {
+                this.setState({
+                    user: res.user
+                });
+            })
             .catch(err => {
                 this.props.history.push(err.redirectUrl);
             });
