@@ -25,7 +25,7 @@ const startPageNavigation = [
     {
         id: 0,
         name: 'Старт',
-        route: '/',
+        route: '/game',
         modalControl: '',
         primary: true
     },
@@ -54,6 +54,11 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
         }
 
     };
+
+    constructor(props: RouteComponentProps) {
+        super(props);
+        this.closeModal = this.closeModal.bind(this);
+    }
 
     toggleClassListOfModalWrapper() {
         const modalWrapper = this.modalWrapperRef.current;
@@ -126,7 +131,7 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
             <div className={b()}>
                 <div className={b('navigation-wrapper')}>
                     <nav className={b('navigation')}>
-                        <ul className={b('navigation-list')}>
+                        <ul className={b('navigationList')}>
                             {
                                 startPageNavigation
                                     .map(page => this.renderNavItems(page))

@@ -1,5 +1,5 @@
 import {BaseApi} from './BaseApi';
-import {SignUpValueObject, logInValueObject} from '../types/types';
+import {SignUpValueObject, LogInValueObject} from '../types/types';
 import {IUser} from '../types/interfaces';
 import {AxiosResponse} from 'axios';
 
@@ -16,8 +16,8 @@ class AuthApi extends BaseApi {
         return this.post('logout');
     }
 
-    public sendLogInRequest(logInValueObject: logInValueObject) {
-        return this.post<logInValueObject, IUser>('signin', logInValueObject);
+    public sendLogInRequest(logInValueObject: LogInValueObject) {
+        return this.post<LogInValueObject, IUser>('signin', logInValueObject);
     }
 
     public sendAuthRequest(SignUpValueObject: SignUpValueObject) {
