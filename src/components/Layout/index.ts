@@ -1,7 +1,7 @@
 import Layout from './Layout';
 
-import getUser from '../GetUser';
+import withUser from '../GetUser';
 
-const LayoutComponent = getUser(Layout);
+const LayoutComponent = withUser(Layout);
 
 export default LayoutComponent;

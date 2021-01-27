@@ -1,5 +1,5 @@
 import {IAction} from '../types';
-import {SignUpValueObject as user} from '../../types/types';
+import {UserDTO as user} from '../../types/types';
 
 export interface IUserState {
     item: user | null;

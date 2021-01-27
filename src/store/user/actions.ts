@@ -1,4 +1,4 @@
-import {SignUpValueObject as userItem} from '../../types/types';
+import {UserDTO as userItem} from '../../types/types';
 
 export const setUser = (user : userItem) => (
     {

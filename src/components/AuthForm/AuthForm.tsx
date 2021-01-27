@@ -6,7 +6,7 @@ import authApi from '../../utils/api/AuthApi';
 import {ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
 import {connect} from 'react-redux';
-import {SignUpValueObject as userItem} from '../../types/types';
+import {UserDTO as userItem} from '../../types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchAdding} from '../../store/user/actionTypes';

@@ -6,8 +6,8 @@ import './StartPage.scss';
 import {MouseEvent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {connect} from 'react-redux';
-import fullNameSelector from '../../selectors/user';
-import {state as stateType} from '../../store/types';
+import fullNameSelector from '../../store/user/selectors';
+import {IStoreState as stateType} from '../../store/types';
 
 type NavItem = {
     id: number,

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {SignUpValueObject as userItem} from '../../types/types';
+import {UserDTO as userItem} from '../../types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchAdding, pendingUserType} from '../../store/user/actionTypes';
 import {setUser, pendingUser} from '../../store/user/actions';
 import AuthApi from '../../utils/api/AuthApi';
-import {state} from '../../store/types';
+import {IStoreState as state} from '../../store/types';
 
 type StateProps = {
     user: unknown;

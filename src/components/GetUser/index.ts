@@ -1,2 +1,2 @@
-import GetUser from './GetUser';
-export default GetUser;
+import withUser from './GetUser';
+export default withUser;

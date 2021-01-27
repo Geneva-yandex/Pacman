@@ -1,13 +1,13 @@
 import authApi from '../utils/api/AuthApi';
 
-import {SignUpValueObject} from '../types/types';
+import {UserDTO as userType} from '../types/types';
 
-import {setUser, pendingUser } from '../store/user/actions'
+import {setUser, pendingUser} from '../store/user/actions';
 
 import store from '../store';
 
 type PromiseResolver = {
-    user: SignUpValueObject | null
+    user: userType | null
 };
 
 const {dispatch, getState} = store;
