@@ -10,12 +10,7 @@ type PrivateRouteArgs = {
 };
 export default function PrivateRoute({path, exact, key, component}: PrivateRouteArgs) {
     const userData = useSelector((state : state) => state.user);
-    let authed = false;
-
-    if (userData.item) {
-        authed = true;
-    }
-
+    const authed = userData.item !== null;
     if (authed) {
         return (
             <Route
