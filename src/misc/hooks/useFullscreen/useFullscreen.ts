@@ -5,22 +5,20 @@ export default (elRef: RefObject<HTMLInputElement>): [boolean, () => void] => {
     const initialState = fullscreenElement() !== null;
     const [isFullscreen, setIsFullscreen] = useState<boolean>(initialState);
 
-    const setFullscreen = () => {
+    const setFullscreen = async () => {
         if (elRef.current === null) {
             return;
         }
 
-        if (!isFullscreen) {
-            elRef.current
-                .requestFullscreen()
-                .then(() => {
-                    setIsFullscreen(fullscreenElement() !== null);
-                })
-                .catch(() => {
-                    setIsFullscreen(false);
-                });
-        } else {
+        if (isFullscreen) {
             exitFullscreen();
+        } else {
+            try {
+                await elRef.current.requestFullscreen();
+                setIsFullscreen(fullscreenElement() !== null);
+            } catch (e) {
+                setIsFullscreen(false);
+            }
         }
     };
 
