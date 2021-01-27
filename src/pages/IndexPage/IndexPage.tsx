@@ -29,6 +29,7 @@ class IndexPage extends React.PureComponent<RouteComponentProps, State> {
                 this.props.history.push(err.redirectUrl);
             });
     }
+
     logOutFromSystem = () => {
         AuthApi.logOut()
             .then(res => {

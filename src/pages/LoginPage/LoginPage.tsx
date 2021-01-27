@@ -18,9 +18,6 @@ class LoginPage extends React.PureComponent<RouteComponentProps> {
                     user: res.user
                 });
                 this.props.history.push('/');
-            })
-            .catch(err => {
-                void err;
             });
     }
 

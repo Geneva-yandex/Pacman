@@ -13,9 +13,6 @@ class SignPage extends React.PureComponent<RouteComponentProps> {
                 this.setState({
                     user: res.user
                 });
-            })
-            .catch(err => {
-                void err;
             });
     }
 

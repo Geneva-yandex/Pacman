@@ -18,7 +18,6 @@ type State = {
     [key: string]: string
 };
 
-
 const b = bem('AuthForm');
 
 class AuthForm extends React.Component<RouteComponentProps, State> {
