@@ -1,14 +1,11 @@
-import * as React from 'react';
-import bem from 'easy-bem';
-import {Link} from 'react-router-dom';
-import checkForAuthOrRedirect from '../../misc/utils/checkForAuthOrRedirect';
-import Modal from '../../components/ui/Modal';
-import './StartPage.scss';
-import {MouseEvent} from 'react';
+import React, {MouseEvent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
-import {Button} from '../../components/ui';
+import {Link} from 'react-router-dom';
+import bem from 'easy-bem';
+import {Modal, Button} from 'components/ui';
+import './StartPage.scss';
 
-type navItem = {
+type NavItem = {
     id: number,
     name: string,
     route: string,
@@ -16,68 +13,62 @@ type navItem = {
     primary: boolean
 };
 
+type State = {
+    modals: {
+        [key: string]: boolean
+    }
+};
+
 const b = bem('StartPage');
 
-class StartPage extends React.PureComponent<RouteComponentProps> {
+const startPageNavigation = [
+    {
+        id: 0,
+        name: 'Старт',
+        route: '/',
+        modalControl: '',
+        primary: true
+    },
+    {
+        id: 1,
+        name: 'Тренировка',
+        route: '/',
+        modalControl: '',
+        primary: false
+    },
+    {
+        id: 2,
+        name: 'Инструкция',
+        route: '',
+        modalControl: 'instructionModal',
+        primary: false
+    }
+];
+
+class StartPage extends React.PureComponent<RouteComponentProps, State> {
     private modalWrapperRef = React.createRef<HTMLDivElement>();
 
     state = {
-        user: {},
-        pages: [
-            {
-                id: 0,
-                name: 'Старт',
-                route: '/game',
-                modalControl: '',
-                primary: true
-            },
-            {
-                id: 1,
-                name: 'Тренировка',
-                route: '/',
-                modalControl: '',
-                primary: false
-            },
-            {
-                id: 2,
-                name: 'Инструкция',
-                route: '',
-                modalControl: 'instructionModal',
-                primary: false
-            }
-        ],
         modals: {
             instructionModal: true
         }
 
     };
 
-    componentDidMount() {
-        checkForAuthOrRedirect()
-            .then(res => {
-                this.setState({
-                    user: res.user
-                });
-            })
-            .catch(() => {
-                this.props.history.push('/login');
-            });
-    }
-
     toggleClassListOfModalWrapper() {
-        let modalWrapper = this.modalWrapperRef.current;
+        const modalWrapper = this.modalWrapperRef.current;
         if (modalWrapper !== null) {
             modalWrapper.classList.toggle('active');
         }
     }
 
     closeAllModals = (event: React.SyntheticEvent) => {
-        let eventTarget = event.target;
+        const eventTarget = event.target;
         if (!(eventTarget as HTMLElement).classList.contains('modals-wrapper')) {
             return;
         }
 
-        const allModals : {[index: string]: boolean} = this.state.modals;
+        const allModals: { [index: string]: boolean } = this.state.modals;
         for (let key in allModals) {
             allModals[key] = true;
         }
@@ -102,9 +93,9 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
     }
 
     closeModal(e: React.MouseEvent) {
-        let target = e.target;
+        const target = e.target;
         if (target !== null) {
-            let modalName = (e.target as HTMLElement).getAttribute('data-modal');
+            const modalName = (e.target as HTMLElement).getAttribute('data-modal');
             if (modalName !== null) {
                 this.setState({
                     modals: {
@@ -117,20 +108,15 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
         }
     }
 
-    renderNavItems(navItem: navItem) {
-        if (navItem.route) {
-            return (
-                <li key={navItem.id} className={b('navigation-item')}>
+    renderNavItems(navItem: NavItem) {
+        return (
+            <li key={navItem.id} className={b('navigationItem')}>
+                {navItem.route ?
                     <Link to={navItem.route}>
                         <Button aperance={navItem.primary ? 'primary' : 'outlined'}>{navItem.name}</Button>
-                    </Link>
-                </li>
-            );
-        }
-
-        return (
-            <li key={navItem.id} className={b('navigation-item')}>
-                <Button aperance="outlined" onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
+                    </Link> :
+                    <Button aperance="outlined" onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
+                }
             </li>
         );
     }
@@ -142,19 +128,19 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
                     <nav className={b('navigation')}>
                         <ul className={b('navigation-list')}>
                             {
-                                this.state.pages
+                                startPageNavigation
                                     .map(page => this.renderNavItems(page))
                             }
                         </ul>
                     </nav>
                 </div>
-                <div onClick={this.closeAllModals} className={'modals-wrapper'} ref={this.modalWrapperRef}>
-                    <Modal stateModal="instructionModal" close={e => this.closeModal(e)}
-                        className={'instruction-modal'} isClosed={this.state.modals.instructionModal}>
-                        <h3 className={'modal-default-title'}>
+                <div onClick={this.closeAllModals} className="modals-wrapper" ref={this.modalWrapperRef}>
+                    <Modal stateModal="instructionModal" close={this.closeModal}
+                        className="instruction-modal" isClosed={this.state.modals.instructionModal}>
+                        <h3 className="modal-default-title">
                             Заголовок инстукции
                         </h3>
-                        <div className={'modal-default-text-box'}>
+                        <div className="modal-default-text-box">
                             <p>
                                 Инструкция Инструкция Инструкция Инструкция
                             </p>
@@ -165,4 +151,5 @@ class StartPage extends React.PureComponent<RouteComponentProps> {
         );
     }
 }
+
 export default withRouter(StartPage);

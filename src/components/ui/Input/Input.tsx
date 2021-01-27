@@ -1,10 +1,9 @@
-import React from 'react';
-import {ChangeEvent, createRef} from 'react';
+import React, {ChangeEvent, createRef} from 'react';
+import classnames from 'classnames';
 import bem from 'easy-bem';
 import './Input.scss';
-import classnames from 'classnames';
 
-type OwnProps = {
+type Props = {
     className?: string;
     value?: string | number;
     type: string;
@@ -14,8 +13,6 @@ type OwnProps = {
     ref?: any;
     onChange?: (event: ChangeEvent) => void;
 };
-
-type Props = OwnProps;
 
 const b = bem('Input');
 

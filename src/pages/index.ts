@@ -10,10 +10,10 @@ import SignUpPage from './SignPage';
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
 const ROUTE_SIGNUP = 'signup';
-const ROUTE_PROFILE = 'profile';
 const ROUTE_FORUM = 'forum';
 const ROUTE_TOPIC = 'topic';
 const ROUTE_GAME = 'game';
+const ROUTE_PROFILE = 'profile';
 const ROUTE_LEADERBOARD = 'leaderboard';
 
 export default [

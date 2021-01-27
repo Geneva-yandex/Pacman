@@ -1,15 +1,24 @@
-import * as React from 'react';
-import bem from 'easy-bem';
-import Input from '../ui/Input';
-import {FormEvent} from 'react';
-import authApi from '../../api/AuthApi';
-import {ChangeEvent} from 'react';
+import React, {ChangeEvent, FormEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
-import {Button} from '../ui';
+import bem from 'easy-bem';
+import {Input, Button} from '../ui';
+import authApi from 'api/AuthApi';
+
+type State = {
+    first_name: string,
+    second_name: string,
+    login: string,
+    email: string,
+    password: string,
+    phone: string,
+    error: string,
+    errorMessage: string,
+    [key: string]: string
+};
 
 const b = bem('AuthForm');
 
-class AuthForm extends React.Component<RouteComponentProps> {
+class AuthForm extends React.Component<RouteComponentProps, State> {
     state = {
         first_name: '',
         second_name: '',
@@ -67,27 +76,14 @@ class AuthForm extends React.Component<RouteComponentProps> {
     public render() {
         return (
             <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e);
-                }} name="first_name" title="Enter your name" type="text" placeholder="first_name" />
-                <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e);
-                }} name="second_name" title="Enter the second_name" type="text" placeholder="second_name" />
-                <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e);
-                }} name="login" title="Enter the login" type="text" placeholder="login" />
-                <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e);
-                }} name="email" title="Enter the email" type="email" placeholder="email" />
-                <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e);
-                }} name="password" title="Enter the password" type="password" placeholder="*******" />
-                <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e);
-                }} name="phone" title="Enter the phone" type="tel" placeholder="phone" />
-
+                <Input onChange={this.onControlChange} name="first_name" title="Введите имя" type="text" placeholder="Имя" />
+                <Input onChange={this.onControlChange} name="second_name" title="Введите фамилию" type="text" placeholder="Фамилия" />
+                <Input onChange={this.onControlChange} name="login" title="Введите логин" type="text" placeholder="Логин" />
+                <Input onChange={this.onControlChange} name="email" title="Введите email" type="email" placeholder="email" />
+                <Input onChange={this.onControlChange} name="password" title="Введите пароль" type="password" placeholder="*******" />
+                <Input onChange={this.onControlChange} name="phone" title="Введите номер телефона" type="tel" placeholder="Номер телефона" />
                 <div>
-                    <Button>Зарегестрироваться</Button>
+                    <Button type="submit">Зарегестрироваться</Button>
                 </div>
                 <div className="error">
                     {this.state.errorMessage}

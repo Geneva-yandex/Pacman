@@ -1,8 +1,8 @@
-import * as React from 'react';
-import bem from 'easy-bem';
-import Form from '../../components/RegistationForm';
-import checkForAuthOrRedirect from '../../misc/utils/checkForAuthOrRedirect';
+import React from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
+import bem from 'easy-bem';
+import Form from 'components/RegistationForm';
+import {checkForAuthOrRedirect} from 'misc/utils';
 
 const b = bem('SignUpPage');
 
@@ -13,8 +13,7 @@ class SignPage extends React.PureComponent<RouteComponentProps> {
                 this.setState({
                     user: res.user
                 });
-            })
-            .catch(error => console.error(error));
+            });
     }
 
     render() {

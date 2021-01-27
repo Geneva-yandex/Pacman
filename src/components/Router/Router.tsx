@@ -5,6 +5,7 @@ import {
     Route
 } from 'react-router-dom';
 import {IRouterProps, RouteType} from './types';
+import PrivateRoute from '../../misc/utils/PrivateRoute';
 
 export default class Router extends React.PureComponent<IRouterProps> {
     render() {
@@ -21,7 +22,17 @@ export default class Router extends React.PureComponent<IRouterProps> {
     }
 
     renderRoute(route: RouteType) {
-        /* Const Component = route.component; */
+        if (route.isProtected) {
+            return (
+                <PrivateRoute
+                    path={route.path}
+                    exact={route.exact}
+                    key={route.id}
+                    component={route.component}
+                >
+                </PrivateRoute>
+            );
+        }
 
         return (
             <Route
