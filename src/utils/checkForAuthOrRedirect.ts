@@ -13,7 +13,6 @@ async function checkForAuthOrRedirect(): Promise<PromiseResolver> {
         let user = null;
         if (rawUserString !== null) {
             user = JSON.parse(rawUserString);
-
         }
 
         if (user) {
@@ -36,14 +35,11 @@ async function checkForAuthOrRedirect(): Promise<PromiseResolver> {
                 })
                 .catch(() => {
                     reject({
-
-                        user: {},
-                        redirectUrl
+                        user: {}
                     });
                 });
         }
     });
 }
-
 
 export default checkForAuthOrRedirect;

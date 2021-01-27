@@ -1,13 +1,11 @@
 import axios from 'axios';
 import baseUrl from '../baseUrl';
 
-
 import {SignUpValueObject, LogInValueObject} from '../../types/types';
 
 const ApiOperationName = 'auth';
 
 axios.defaults.withCredentials = true;
-
 
 class AuthApi {
     public getUserInfo() {

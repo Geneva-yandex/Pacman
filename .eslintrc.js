@@ -1,4 +1,3 @@
-
 module.exports = {
     "env": {
         "browser": true,
@@ -30,6 +29,8 @@ module.exports = {
         "eol-last": ["error", "always"],
         "react/prop-types": [2, {ignore: ['children']}],
         "default-case": "off",
-        "no-mixed-operators": "off"
+        "no-mixed-operators": "off",
+
+        "prefer-promise-reject-errors": "off"
     }
-};
+}
