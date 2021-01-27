@@ -1,12 +1,14 @@
 import IndexPage from './IndexPage';
 import LoginPage from './LoginPage';
-import SignUpPage from './SignPage';
-import StartPage from './StartPage';
+import GamePage from './GamePage';
+import ForumPage from './ForumPage';
+import TopicPage from './TopicPage';
 
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
-const ROUTE_SIGNUP = 'sign up';
-const ROUTE_START = 'start page';
+const ROUTE_FORUM = 'forum';
+const ROUTE_TOPIC = 'topic';
+const ROUTE_GAME = 'game';
 
 export default [
     {
@@ -15,35 +17,36 @@ export default [
         path: '/',
         component: IndexPage,
         title: 'PACMAN',
-        isNavVisible: true,
-        isProtected: true
+        isNavVisible: true
     },
     {
         id: ROUTE_LOGIN,
-        exact: false,
+        exact: true,
         path: '/login',
         component: LoginPage,
         title: 'Log-in',
-        isNavVisible: true,
-        isProtected: false
+        isNavVisible: true
     },
     {
-        id: ROUTE_SIGNUP,
-        exact: false,
-        path: '/sign-up',
-        component: SignUpPage,
-        title: 'Sign Up',
-        isNavVisible: true,
-        isProtected: false
-    },
-    {
-        id: ROUTE_START,
+        id: ROUTE_GAME,
         exact: true,
-        path: '/start',
-        component: StartPage,
-        title: 'Start',
-        isNavVisible: false,
-        isProtected: true
+        path: '/game',
+        component: GamePage,
+        title: 'game',
+        isNavVisible: false
+    },
+    {
+        id: ROUTE_FORUM,
+        exact: true,
+        path: '/forum',
+        component: ForumPage,
+        title: 'Forum',
+        isNavVisible: true
+    },
+    {
+        id: ROUTE_TOPIC,
+        path: '/forum/:topicId',
+        component: TopicPage,
+        isNavVisible: false
     }
-
 ];

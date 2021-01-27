@@ -1,20 +1,34 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './IndexPage.scss';
+import checkForAuthOrRedirect from '../../utils/checkForAuthOrRedirect';
 import AuthApi from '../../utils/api/AuthApi';
 import {RouteComponentProps, withRouter} from 'react-router';
 
 const b = bem('IndexPage');
 
 type State = {
-    errorMessage: string
+    errorMessage: string,
+    user: unknown
 };
 
 class IndexPage extends React.PureComponent<RouteComponentProps, State> {
     state = {
+        user: {},
         errorMessage: ''
     };
 
+    componentDidMount() {
+        checkForAuthOrRedirect()
+            .then(res => {
+                this.setState({
+                    user: res.user
+                });
+            })
+            .catch(err => {
+                this.props.history.push(err.redirectUrl);
+            });
+    }
     logOutFromSystem = () => {
         AuthApi.logOut()
             .then(res => {

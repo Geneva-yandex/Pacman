@@ -41,6 +41,7 @@ export default class Router extends React.PureComponent<IRouterProps> {
                 key={route.id}
                 component={route.component}
             >
+                {/* <Component/> */}
             </Route>
         );
     }

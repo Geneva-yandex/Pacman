@@ -3,7 +3,8 @@ import authApi from '../utils/api/AuthApi';
 import {SignUpValueObject} from '../types/types';
 
 type PromiseResolver = {
-    user: SignUpValueObject | null
+    user: SignUpValueObject | null,
+    redirectUrl: string
 };
 
 async function checkForAuthOrRedirect(): Promise<PromiseResolver> {
@@ -12,11 +13,13 @@ async function checkForAuthOrRedirect(): Promise<PromiseResolver> {
         let user = null;
         if (rawUserString !== null) {
             user = JSON.parse(rawUserString);
+
         }
 
         if (user) {
             resolve({
-                user
+                user: user,
+                redirectUrl: ''
             });
         } else {
             authApi.getUserInfo()
@@ -25,17 +28,22 @@ async function checkForAuthOrRedirect(): Promise<PromiseResolver> {
                         const userInfo = res.data;
                         localStorage.setItem('user', JSON.stringify(userInfo));
                         resolve({
-                            user: userInfo
+
+                            user: userInfo,
+                            redirectUrl: ''
                         });
                     }
                 })
                 .catch(() => {
                     reject({
-                        user: {}
+
+                        user: {},
+                        redirectUrl
                     });
                 });
         }
     });
 }
+
 
 export default checkForAuthOrRedirect;
