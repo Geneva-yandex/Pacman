@@ -7,13 +7,19 @@ import {RouteComponentProps, withRouter} from 'react-router';
 
 const b = bem('IndexPage');
 
-class IndexPage extends React.PureComponent<RouteComponentProps> {
+type State = {
+    errorMessage: string,
+    user: unknown
+};
+
+class IndexPage extends React.PureComponent<RouteComponentProps, State> {
     state = {
-        user: {}
+        user: {},
+        errorMessage: ''
     };
 
     componentDidMount() {
-        checkForAuthOrRedirect('/login')
+        checkForAuthOrRedirect()
             .then(res => {
                 this.setState({
                     user: res.user
@@ -23,7 +29,6 @@ class IndexPage extends React.PureComponent<RouteComponentProps> {
                 this.props.history.push(err.redirectUrl);
             });
     }
-
     logOutFromSystem = () => {
         AuthApi.logOut()
             .then(res => {
@@ -33,7 +38,9 @@ class IndexPage extends React.PureComponent<RouteComponentProps> {
                 }
             })
             .catch(err => {
-                alert(err.response.data.reason);
+                this.setState({
+                    errorMessage: err.response.data.reason
+                });
             });
     };
 
@@ -43,6 +50,7 @@ class IndexPage extends React.PureComponent<RouteComponentProps> {
                 <div className="container-fluid">
                     <h1>Index Page</h1>
                     <button onClick={this.logOutFromSystem}>Выйти из системы</button>
+                    <p className="error">{this.state.errorMessage}</p>
                 </div>
             </div>
         );

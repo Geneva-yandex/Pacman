@@ -2,6 +2,16 @@
 @import './styles/fonts';
 @import './styles/variables.scss';
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
 body {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
@@ -23,4 +33,35 @@ body {
 
 .error {
   color: red;
+}
+
+.modals-wrapper {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s linear all;
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.modal {
+  position: relative;
+
+  .close-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+  }
 }

@@ -12,7 +12,7 @@ class LoginPage extends React.PureComponent<RouteComponentProps> {
     };
 
     componentDidMount() {
-        checkForAuthOrRedirect('/')
+        checkForAuthOrRedirect()
             .then(res => {
                 this.setState({
                     user: res.user

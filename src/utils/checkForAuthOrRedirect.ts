@@ -7,12 +7,13 @@ type PromiseResolver = {
     redirectUrl: string
 };
 
-async function checkForAuthOrRedirect(redirectUrl: string): Promise<PromiseResolver> {
+async function checkForAuthOrRedirect(): Promise<PromiseResolver> {
     return new Promise<PromiseResolver>((resolve, reject) => {
         const rawUserString = localStorage.getItem('user');
         let user = null;
         if (rawUserString !== null) {
             user = JSON.parse(rawUserString);
+
         }
 
         if (user) {
@@ -27,6 +28,7 @@ async function checkForAuthOrRedirect(redirectUrl: string): Promise<PromiseResol
                         const userInfo = res.data;
                         localStorage.setItem('user', JSON.stringify(userInfo));
                         resolve({
+
                             user: userInfo,
                             redirectUrl: ''
                         });
@@ -34,6 +36,7 @@ async function checkForAuthOrRedirect(redirectUrl: string): Promise<PromiseResol
                 })
                 .catch(() => {
                     reject({
+
                         user: {},
                         redirectUrl
                     });
@@ -41,5 +44,6 @@ async function checkForAuthOrRedirect(redirectUrl: string): Promise<PromiseResol
         }
     });
 }
+
 
 export default checkForAuthOrRedirect;

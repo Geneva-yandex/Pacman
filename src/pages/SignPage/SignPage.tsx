@@ -8,7 +8,7 @@ const b = bem('SignUpPage');
 
 class SignPage extends React.PureComponent<RouteComponentProps> {
     componentDidMount() {
-        checkForAuthOrRedirect('/')
+        checkForAuthOrRedirect()
             .then(res => {
                 this.setState({
                     user: res.user
@@ -30,5 +30,4 @@ class SignPage extends React.PureComponent<RouteComponentProps> {
         );
     }
 }
-
 export default withRouter(SignPage);
