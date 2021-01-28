@@ -16,13 +16,13 @@ export default class Layout extends React.PureComponent {
 
                 <div className={b('content')}>
                     <header className={b('header')}>
-                        <div className="container-fluid">
-                            <Link to="/" className="logo">Pacman</Link>
+                        <div className='container-fluid'>
+                            <Link to='/' className='logo'>Pacman</Link>
                         </div>
                     </header>
 
                     <main className={b('main')}>
-                        <div className="container-fluid">
+                        <div className='container-fluid'>
                             {this.props.children}
                         </div>
                     </main>

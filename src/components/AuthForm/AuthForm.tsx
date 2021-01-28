@@ -67,16 +67,16 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
     public render() {
         return (
             <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name="login" title="Введите логин" type="text" placeholder="Логин"/>
-                <Input onChange={this.onControlChange} name="password" title="Введите пароль" type="password" placeholder="*******"/>
+                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
+                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
                 <label>
-                    <input onChange={this.onControlChange} type="checkbox" name="remember"/>
+                    <input onChange={this.onControlChange} type='checkbox' name='remember'/>
                     Remember me
                 </label>
                 <div>
                     <Button>Sign In</Button>
                 </div>
-                <div className="error">
+                <div className='error'>
                     {this.state.errorMessage}
                 </div>
             </form>

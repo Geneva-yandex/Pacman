@@ -9,7 +9,7 @@ const Tooltip = (props: React.PropsWithChildren<{ id: string, tooltip: string } 
     const {id, tooltip, children} = props;
     return <div className={b()} data-tip data-for={id}>
         {children}
-        <ReactTooltip {...props} effect="solid" id={id}>{tooltip}</ReactTooltip>
+        <ReactTooltip {...props} effect='solid' id={id}>{tooltip}</ReactTooltip>
     </div>;
 };
 

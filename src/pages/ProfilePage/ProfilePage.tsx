@@ -59,13 +59,13 @@ class ProfilePage extends React.PureComponent<RouteComponentProps, IProfilePageS
             </header>
 
             <Tabs selectedTab={currentTab} onSelect={this._onSelectTab}>
-                <Tab name={ProfileTabs.Account} title="Personal Info">
+                <Tab name={ProfileTabs.Account} title='Personal Info'>
                     <AccountForm user={user} onSave={this._changeProfile} />
                 </Tab>
-                <Tab name={ProfileTabs.Password} title="Password">
+                <Tab name={ProfileTabs.Password} title='Password'>
                     <PasswordForm onSave={this._changePasswords} />
                 </Tab>
-                <Tab name={ProfileTabs.Avatar} title="Avatar">
+                <Tab name={ProfileTabs.Avatar} title='Avatar'>
                     <AvatarForm avatar={user.avatar} onSave={this._changeAvatar} />
                 </Tab>
             </Tabs>

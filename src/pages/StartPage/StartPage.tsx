@@ -120,7 +120,7 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
                     <Link to={navItem.route}>
                         <Button aperance={navItem.primary ? 'primary' : 'outlined'}>{navItem.name}</Button>
                     </Link> :
-                    <Button aperance="outlined" onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
+                    <Button aperance='outlined' onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
                 }
             </li>
         );
@@ -139,13 +139,13 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
                         </ul>
                     </nav>
                 </div>
-                <div onClick={this.closeAllModals} className="modals-wrapper" ref={this.modalWrapperRef}>
-                    <Modal stateModal="instructionModal" close={this.closeModal}
-                        className="instruction-modal" isClosed={this.state.modals.instructionModal}>
-                        <h3 className="modal-default-title">
+                <div onClick={this.closeAllModals} className='modals-wrapper' ref={this.modalWrapperRef}>
+                    <Modal stateModal='instructionModal' close={this.closeModal}
+                        className='instruction-modal' isClosed={this.state.modals.instructionModal}>
+                        <h3 className='modal-default-title'>
                             Заголовок инстукции
                         </h3>
-                        <div className="modal-default-text-box">
+                        <div className='modal-default-text-box'>
                             <p>
                                 Инструкция Инструкция Инструкция Инструкция
                             </p>

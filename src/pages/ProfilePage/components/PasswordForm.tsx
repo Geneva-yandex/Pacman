@@ -17,12 +17,12 @@ const PasswordForm = ({onSave}: IPasswordFormProps) => {
     });
 
     return <React.Fragment>
-        <form className="profile-form" onSubmit={handleSubmit}>
-            <Input type="password" name="oldPassword" title="Old Password"
+        <form className='profile-form' onSubmit={handleSubmit}>
+            <Input type='password' name='oldPassword' title='Old Password'
                 value={values.oldPassword} onChange={handleChange} />
-            <Input type="password" name="newPassword" title="New Password"
+            <Input type='password' name='newPassword' title='New Password'
                 value={values.newPassword} onChange={handleChange} />
-            <Button size="small" aperance="outlined">Change password</Button>
+            <Button size='small' aperance='outlined'>Change password</Button>
         </form>
     </React.Fragment>;
 };

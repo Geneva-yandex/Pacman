@@ -29,22 +29,22 @@ class Sidebar extends React.PureComponent<RouteComponentProps & ISidebarProps> {
                 <nav className={b('navigation')}>
                     <ul className={b('nav-list')}>
                         <li>
-                            <Tooltip id="gameTooltip" tooltip="Gaming">
-                                <NavLink activeClassName="active" exact={true} className="icon-link" to="/">
+                            <Tooltip id='gameTooltip' tooltip='Gaming'>
+                                <NavLink activeClassName='active' exact={true} className='icon-link' to='/'>
                                     <SVG src={GameIcon} />
                                 </NavLink>
                             </Tooltip>
                         </li>
                         <li>
-                            <Tooltip id="ratingTooltip" tooltip="Leader Board">
-                                <NavLink activeClassName="active" className="icon-link" to="leaderboard">
+                            <Tooltip id='ratingTooltip' tooltip='Leader Board'>
+                                <NavLink activeClassName='active' className='icon-link' to='leaderboard'>
                                     <SVG src={RatingIcon} />
                                 </NavLink>
                             </Tooltip>
                         </li>
                         <li>
-                            <Tooltip id="forumTooltip" tooltip="Forum">
-                                <NavLink activeClassName="active" className="icon-link" to="forum">
+                            <Tooltip id='forumTooltip' tooltip='Forum'>
+                                <NavLink activeClassName='active' className='icon-link' to='forum'>
                                     <SVG src={ChatIcon} />
                                 </NavLink>
                             </Tooltip>
@@ -55,15 +55,15 @@ class Sidebar extends React.PureComponent<RouteComponentProps & ISidebarProps> {
                 <div className={b('actions')}>
                     <ul className={b('nav-list')}>
                         <li>
-                            <Tooltip id="userTooltip" tooltip="Profile">
-                                <NavLink activeClassName="active" className="icon-link" to="profile">
+                            <Tooltip id='userTooltip' tooltip='Profile'>
+                                <NavLink activeClassName='active' className='icon-link' to='profile'>
                                     <SVG src={UserIcon} />
                                 </NavLink>
                             </Tooltip>
                         </li>
                         <li>
-                            <Tooltip id="signOutTooltip" tooltip="Sign Out">
-                                <button className="icon-button" onClick={this._signOut}>
+                            <Tooltip id='signOutTooltip' tooltip='Sign Out'>
+                                <button className='icon-button' onClick={this._signOut}>
                                     <SVG src={SignOutIcon} />
                                 </button>
                             </Tooltip>

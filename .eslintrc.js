@@ -30,7 +30,7 @@ module.exports = {
         "react/prop-types": [2, {ignore: ['children']}],
         "default-case": "off",
         "no-mixed-operators": "off",
-
-        "prefer-promise-reject-errors": "off"
+        "prefer-promise-reject-errors": "off",
+        "jsx-quotes": ["error", "prefer-single"]
     }
 }

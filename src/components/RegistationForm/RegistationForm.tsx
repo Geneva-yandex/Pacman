@@ -76,16 +76,16 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
     public render() {
         return (
             <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name="first_name" title="Введите имя" type="text" placeholder="Имя" />
-                <Input onChange={this.onControlChange} name="second_name" title="Введите фамилию" type="text" placeholder="Фамилия" />
-                <Input onChange={this.onControlChange} name="login" title="Введите логин" type="text" placeholder="Логин" />
-                <Input onChange={this.onControlChange} name="email" title="Введите email" type="email" placeholder="email" />
-                <Input onChange={this.onControlChange} name="password" title="Введите пароль" type="password" placeholder="*******" />
-                <Input onChange={this.onControlChange} name="phone" title="Введите номер телефона" type="tel" placeholder="Номер телефона" />
+                <Input onChange={this.onControlChange} name='first_name' title='Введите имя' type='text' placeholder='Имя' />
+                <Input onChange={this.onControlChange} name='second_name' title='Введите фамилию' type='text' placeholder='Фамилия' />
+                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин' />
+                <Input onChange={this.onControlChange} name='email' title='Введите email' type='email' placeholder='email' />
+                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******' />
+                <Input onChange={this.onControlChange} name='phone' title='Введите номер телефона' type='tel' placeholder='Номер телефона' />
                 <div>
-                    <Button type="submit">Зарегестрироваться</Button>
+                    <Button type='submit'>Зарегестрироваться</Button>
                 </div>
-                <div className="error">
+                <div className='error'>
                     {this.state.errorMessage}
                 </div>
             </form>

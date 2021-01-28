@@ -22,7 +22,7 @@ export default class Modal extends React.Component<Props> {
             <div className={'modal'}>
                 <div className={className}>
                     <section className={b('wrapper')}>
-                        <div onClick={close} className="close-button" data-modal={stateModal}>X
+                        <div onClick={close} className='close-button' data-modal={stateModal}>X
                         </div>
                         {this.props.children}
                     </section>
