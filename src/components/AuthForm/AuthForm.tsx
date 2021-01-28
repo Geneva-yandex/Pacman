@@ -1,10 +1,8 @@
-import * as React from 'react';
-import bem from 'easy-bem';
-import Input from '../Input';
-import {FormEvent} from 'react';
-import authApi from '../../utils/api/AuthApi';
-import {ChangeEvent} from 'react';
+import React, {FormEvent, ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
+import bem from 'easy-bem';
+import authApi from 'api/AuthApi';
+import {Input, Button} from '../ui';
 
 const b = bem('AuthForm');
 
@@ -73,11 +71,11 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
                 <Input onChange={this.onControlChange} name="password" title="Введите пароль" type="password" placeholder="*******"/>
                 <label>
                     <input onChange={this.onControlChange} type="checkbox" name="remember"/>
-                    Запомнить меня
+                    Remember me
                 </label>
-                <button type="submit">
-                    Отправить форму
-                </button>
+                <div>
+                    <Button>Sign In</Button>
+                </div>
                 <div className="error">
                     {this.state.errorMessage}
                 </div>

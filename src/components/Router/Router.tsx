@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import {
     BrowserRouter,
     Switch,
     Route
 } from 'react-router-dom';
 import {IRouterProps, RouteType} from './types';
-import PrivateRoute from '../../utils/PrivateRoute';
+import PrivateRoute from 'misc/utils/PrivateRoute';
 
 export default class Router extends React.PureComponent<IRouterProps> {
     render() {
@@ -41,7 +41,6 @@ export default class Router extends React.PureComponent<IRouterProps> {
                 key={route.id}
                 component={route.component}
             >
-                {/* <Component/> */}
             </Route>
         );
     }

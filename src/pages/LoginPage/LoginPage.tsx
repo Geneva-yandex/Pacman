@@ -1,8 +1,8 @@
-import * as React from 'react';
-import bem from 'easy-bem';
-import Form from '../../components/AuthForm';
-import checkForAuthOrRedirect from '../../utils/checkForAuthOrRedirect';
+import React from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
+import bem from 'easy-bem';
+import Form from 'components/AuthForm';
+import {checkForAuthOrRedirect} from 'misc/utils';
 
 const b = bem('LoginPage');
 

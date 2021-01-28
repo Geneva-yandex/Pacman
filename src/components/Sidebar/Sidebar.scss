@@ -1,0 +1,46 @@
+@import "src/styles/variables";
+
+.Sidebar {
+  height: 100%;
+  width: $sidebar-width;
+  background-color: rgba(#2f2f2f, 50%);
+  display: flex;
+  padding: 24px 10px;
+  flex-direction: column;
+  overflow: auto;
+
+  &__navigation {
+    flex: 1;
+  }
+
+  &__nav-list {
+    li {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+
+    a.active {
+      opacity: 1;
+      color: $yellow;
+    }
+  }
+
+  .icon-button,
+  .icon-link {
+    display: block;
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.icon-link,
+.icon-button {
+  opacity: 0.5;
+  transition: 0.25s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

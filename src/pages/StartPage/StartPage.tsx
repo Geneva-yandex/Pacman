@@ -1,16 +1,16 @@
-import * as React from 'react';
-import bem from 'easy-bem';
-import {Link} from 'react-router-dom';
-import Modal from '../../components/Modal';
-import './StartPage.scss';
-import {MouseEvent} from 'react';
+import React, {MouseEvent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
+import {Link} from 'react-router-dom';
+import bem from 'easy-bem';
+import {Modal, Button} from 'components/ui';
+import './StartPage.scss';
 
 type NavItem = {
     id: number,
     name: string,
     route: string,
-    modalControl: string
+    modalControl: string,
+    primary: boolean
 };
 
 type State = {
@@ -25,26 +25,23 @@ const startPageNavigation = [
     {
         id: 0,
         name: 'Старт',
-        route: '/',
-        modalControl: ''
+        route: '/game',
+        modalControl: '',
+        primary: true
     },
     {
         id: 1,
         name: 'Тренировка',
         route: '/',
-        modalControl: ''
+        modalControl: '',
+        primary: false
     },
     {
         id: 2,
-        name: 'Настройки',
-        route: '/',
-        modalControl: ''
-    },
-    {
-        id: 3,
         name: 'Инструкция',
         route: '',
-        modalControl: 'instructionModal'
+        modalControl: 'instructionModal',
+        primary: false
     }
 ];
 
@@ -57,6 +54,11 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
         }
 
     };
+
+    constructor(props: RouteComponentProps) {
+        super(props);
+        this.closeModal = this.closeModal.bind(this);
+    }
 
     toggleClassListOfModalWrapper() {
         const modalWrapper = this.modalWrapperRef.current;
@@ -116,11 +118,9 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
             <li key={navItem.id} className={b('navigationItem')}>
                 {navItem.route ?
                     <Link to={navItem.route}>
-                        {navItem.name}
+                        <Button aperance={navItem.primary ? 'primary' : 'outlined'}>{navItem.name}</Button>
                     </Link> :
-                    <a onClick={e => this.openModal(navItem.modalControl, e)} href="#">
-                        {navItem.name}
-                    </a>
+                    <Button aperance="outlined" onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
                 }
             </li>
         );
@@ -129,18 +129,15 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
     render() {
         return (
             <div className={b()}>
-                <div className="container-fluid">
-                    <h1>Start page</h1>
-                    <div className={b('navigation-wrapper')}>
-                        <nav className={b('navigation')}>
-                            <ul className={b('navigationList')}>
-                                {
-                                    startPageNavigation
-                                        .map(page => this.renderNavItems(page))
-                                }
-                            </ul>
-                        </nav>
-                    </div>
+                <div className={b('navigation-wrapper')}>
+                    <nav className={b('navigation')}>
+                        <ul className={b('navigationList')}>
+                            {
+                                startPageNavigation
+                                    .map(page => this.renderNavItems(page))
+                            }
+                        </ul>
+                    </nav>
                 </div>
                 <div onClick={this.closeAllModals} className="modals-wrapper" ref={this.modalWrapperRef}>
                     <Modal stateModal="instructionModal" close={this.closeModal}
