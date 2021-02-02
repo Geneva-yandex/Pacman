@@ -1,6 +1,6 @@
 import {IAction} from '../types';
 import {UserDTO as user} from '../../types/types';
-
+import {actions} from './types'
 export interface IUserState {
     item: user | null;
 }
@@ -9,11 +9,7 @@ const defaultState: IUserState = {
     item: null
 };
 
-const actions = {
-    PENDING: 'PENDING',
-    FAILED: 'FAILED',
-    setUser: 'setUser'
-};
+
 
 export default (state: IUserState = defaultState, {type, payload}: IAction) => {
     switch (type) {

@@ -7,7 +7,7 @@ import {MouseEvent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import fullNameSelector from '../../store/user/selectors';
-import {IStoreState as stateType} from '../../store/types';
+import {IStoreState} from '../../store/types';
 
 type NavItem = {
     id: number,
@@ -26,7 +26,7 @@ type State = {
     }
 };
 
-interface Props extends RouteComponentProps, StateProps{}
+type Props = RouteComponentProps & StateProps;
 
 const b = bem('StartPage');
 
@@ -171,7 +171,7 @@ class StartPage extends React.PureComponent<Props, State> {
     }
 }
 
-const mapStateToProps = (state: stateType): StateProps => ({
+const mapStateToProps = (state: IStoreState): StateProps => ({
     fullName: fullNameSelector(state)
 });
 export default withRouter(connect(mapStateToProps, null)(StartPage));

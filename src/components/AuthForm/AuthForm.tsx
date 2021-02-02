@@ -11,6 +11,8 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchAdding} from '../../store/user/actionTypes';
 import {setUser} from '../../store/user/actions';
+import {IStoreState} from "../../store/types";
+
 
 const b = bem('AuthForm');
 
@@ -23,13 +25,12 @@ type State = {
 
 };
 type StateProps = {
-    state: unknown;
+    user: IStoreState['user'];
 };
 
 interface ComponentProps extends RouteComponentProps {
     setUser: DispatchAdding['setUser']
 }
-
 class AuthForm extends React.Component<ComponentProps, State> {
     state = {
         login: '',
@@ -107,9 +108,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): Di
     }
 });
 
-const mapStateToProps = (state: unknown): StateProps => ({
-    state
+const mapStateToProps = (state: IStoreState): StateProps => ({
+    user: state['user']
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));
-
