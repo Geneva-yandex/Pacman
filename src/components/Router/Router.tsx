@@ -6,19 +6,9 @@ import {
 } from 'react-router-dom';
 import {IRouterProps, RouteType} from './types';
 import PrivateRoute from '../PrivateRoute';
-import {connect} from 'react-redux';
-import {state as StateTyping} from '../../store/types';
 import {SignUpValueObject} from '../../types/types';
 
-type StateProps = {
-    state: unknown
-};
-
-interface Props extends IRouterProps {
-    state: StateTyping
-}
-
-class Router extends React.Component<Props> {
+class Router extends React.Component<IRouterProps> {
     user: {
         item: SignUpValueObject | null,
         status: string
@@ -62,8 +52,4 @@ class Router extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: unknown): StateProps => ({
-    state
-});
-
-export default connect(mapStateToProps)(Router);
+export default (Router);

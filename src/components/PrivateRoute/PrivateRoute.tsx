@@ -6,12 +6,12 @@ type PrivateRouteArgs = {
     path: string,
     exact: boolean,
     key: string,
-    component: any,
+    component: React.ComponentType,
 };
 export default function PrivateRoute({path, exact, key, component}: PrivateRouteArgs) {
     const userData = useSelector((state : state) => state.user);
-    const authed = userData.item !== null;
-    if (authed) {
+    const isAuth = userData.item !== null;
+    if (isAuth) {
         return (
             <Route
                 path={path}

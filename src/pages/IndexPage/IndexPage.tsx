@@ -7,9 +7,11 @@ import {connect} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchLoggingOut} from '../../store/user/actionTypes';
+import {logOut} from '../../store/user/actions';
+import {state as IStoreState} from '../../store/types';
 
 type StateProps = {
-    state: unknown;
+    user: IStoreState['user'];
 };
 
 const b = bem('IndexPage');
@@ -59,12 +61,12 @@ class IndexPage extends React.PureComponent<ComponentProps, State> {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchLoggingOut => ({
     logOut: () => {
-        dispatch({type: 'logOut'});
+        dispatch(logOut());
     }
 });
 
-const mapStateToProps = (state: unknown): StateProps => ({
-    state
+const mapStateToProps = (state: IStoreState): StateProps => ({
+    user: state.user
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(IndexPage));

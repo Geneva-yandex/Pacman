@@ -1,11 +1,14 @@
 import authApi from '../utils/api/AuthApi';
 import store from '../store';
+import {UserDTO} from '../types/types';
+
+type User = UserDTO | null;
 
 const {dispatch} = store;
 
 function checkForAuth(): void {
     const rawUserString = localStorage.getItem('user');
-    let user = null;
+    let user: User = null;
     if (rawUserString !== null) {
         user = JSON.parse(rawUserString);
     }

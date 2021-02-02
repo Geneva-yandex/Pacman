@@ -8,11 +8,13 @@ import {withRouter, RouteComponentProps} from 'react-router';
 import {connect} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
-import {SignUpValueObject as userItem} from '../../types/types';
+import {UserDTO as userItem} from '../../types/types';
 import {DispatchAdding} from '../../store/user/actionTypes';
+import {state as IStoreState} from '../../store/types';
+import {setUser} from '../../store/user/actions';
 
 type StateProps = {
-    state: unknown;
+    user: IStoreState['user'];
 };
 
 type State = {
@@ -113,12 +115,12 @@ class AuthForm extends React.Component<ComponentProps, State> {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
     setUser: (user: userItem) => {
-        dispatch({type: 'setUser', payload: {item: user}});
+        dispatch(setUser(user));
     }
 });
 
-const mapStateToProps = (state: unknown): StateProps => ({
-    state
+const mapStateToProps = (state: IStoreState): StateProps => ({
+    user: state.user
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));
