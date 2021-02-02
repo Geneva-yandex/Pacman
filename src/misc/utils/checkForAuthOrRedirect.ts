@@ -1,7 +1,7 @@
 import authApi from '../../api/AuthApi';
 import store from '../../store';
 import {UserDTO} from '../../types/types';
-import {setUser, pendingUser, failedUser} from "../../store/user/actions";
+import {setUser, pendingUser, failedUser} from '../../store/user/actions';
 
 type User = UserDTO | null;
 

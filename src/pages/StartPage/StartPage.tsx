@@ -127,7 +127,7 @@ class StartPage extends React.PureComponent<Props, State> {
                     <Link to={navItem.route}>
                         {navItem.name}
                     </Link> :
-                    <a onClick={e => this.openModal(navItem.modalControl, e)} href="#">
+                    <a onClick={e => this.openModal(navItem.modalControl, e)} href='#'>
                         {navItem.name}
                     </a>
                 }
@@ -139,7 +139,7 @@ class StartPage extends React.PureComponent<Props, State> {
         const {fullName} = this.props;
         return (
             <div className={b()}>
-                <div className="container-fluid">
+                <div className='container-fluid'>
                     <h1>Start page</h1>
                     <span> Здравствуй, {fullName} </span>
                     <div className={b('navigation-wrapper')}>
@@ -153,13 +153,13 @@ class StartPage extends React.PureComponent<Props, State> {
                         </nav>
                     </div>
                 </div>
-                <div onClick={this.closeAllModals} className="modals-wrapper" ref={this.modalWrapperRef}>
-                    <Modal stateModal="instructionModal" close={this.closeModal}
-                        className="instruction-modal" isClosed={this.state.modals.instructionModal}>
-                        <h3 className="modal-default-title">
+                <div onClick={this.closeAllModals} className='modals-wrapper' ref={this.modalWrapperRef}>
+                    <Modal stateModal='instructionModal' close={this.closeModal}
+                        className='instruction-modal' isClosed={this.state.modals.instructionModal}>
+                        <h3 className='modal-default-title'>
                             Заголовок инстукции
                         </h3>
-                        <div className="modal-default-text-box">
+                        <div className='modal-default-text-box'>
                             <p>
                                 Инструкция Инструкция Инструкция Инструкция
                             </p>

@@ -19,4 +19,4 @@ export const failedUser = () => (
     {
         type: 'FAILED'
     }
-)
+);
