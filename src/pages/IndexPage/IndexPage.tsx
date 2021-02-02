@@ -8,7 +8,7 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchLoggingOut} from '../../store/user/actionTypes';
 import {logOut} from '../../store/user/actions';
-import {state as IStoreState} from '../../store/types';
+import {IStoreState} from '../../store/types';
 
 type StateProps = {
     user: IStoreState['user'];

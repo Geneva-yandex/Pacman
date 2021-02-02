@@ -5,7 +5,7 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {UserDTO as userItem} from '../../types/types';
 import {DispatchAdding} from '../../store/user/actionTypes';
-import {state as IStoreState} from '../../store/types';
+import {IStoreState} from '../../store/types';
 import {setUser} from '../../store/user/actions';
 
 import bem from 'easy-bem';
@@ -129,4 +129,3 @@ const mapStateToProps = (state: IStoreState): StateProps => ({
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));
-

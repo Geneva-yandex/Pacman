@@ -1,6 +1,6 @@
 import {IAction} from '../types';
-import {SignUpValueObject as user} from '../../types/types';
-
+import {UserDTO as user} from '../../types/types';
+import {actions} from './types';
 export interface IUserState {
     item: user | null;
 }
@@ -8,14 +8,6 @@ export interface IUserState {
 const defaultState: IUserState = {
     item: null
 };
-
-const actions = {
-    PENDING: 'PENDING',
-    FAILED: 'FAILED',
-    setUser: 'setUser',
-    logOut: 'logOut'
-};
-
 export default (state: IUserState = defaultState, {type, payload}: IAction) => {
     switch (type) {
     case actions.PENDING:

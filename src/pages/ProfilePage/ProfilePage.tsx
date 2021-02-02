@@ -2,8 +2,7 @@ import React from 'react';
 import bem from 'easy-bem';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {Tab, Tabs} from 'components/ui';
-import {IUser, IPsswordsDto} from 'types/interfaces';
-import {checkForAuthOrRedirect} from 'misc/utils';
+import {IUser, IPsswordsDto} from '../../types/interfaces';
 import {AuthApi, UserApi} from 'api';
 
 import {AccountForm, AvatarForm, PasswordForm} from './components';
@@ -33,21 +32,6 @@ class ProfilePage extends React.PureComponent<RouteComponentProps, IProfilePageS
         this._changeProfile = this._changeProfile.bind(this);
         this._changePasswords = this._changePasswords.bind(this);
         this._changeAvatar = this._changeAvatar.bind(this);
-    }
-
-    componentDidMount() {
-        // eslint-disable-next-line no-warning-comments
-        // TODO: Вынести хранение юзера в стор, добавить ProtectedRoute
-        checkForAuthOrRedirect()
-            .then(res => {
-                this.setState({
-                    user: res.user as IUser
-                });
-            })
-            .catch(error => {
-                this.props.history.push('/login');
-                console.error(error);
-            });
     }
 
     render() {

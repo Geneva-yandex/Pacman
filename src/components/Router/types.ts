@@ -1,4 +1,5 @@
 import {ComponentType} from 'react';
+/*import {ConnectedComponent} from "react-redux";*/
 
 export type RouteType = {
     id: string,
@@ -12,6 +13,5 @@ export type RouteType = {
 
 export interface IRouterProps {
     routes: RouteType[],
-    layout: ComponentType
+    layout: any,
 }
-
