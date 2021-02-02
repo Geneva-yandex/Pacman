@@ -1,9 +1,4 @@
-import * as React from 'react';
-import bem from 'easy-bem';
-import Input from '../Input';
-import {FormEvent} from 'react';
-import authApi from '../../utils/api/AuthApi';
-import {ChangeEvent} from 'react';
+import React, {ChangeEvent, FormEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
 import {connect} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
@@ -12,6 +7,11 @@ import {UserDTO as userItem} from '../../types/types';
 import {DispatchAdding} from '../../store/user/actionTypes';
 import {state as IStoreState} from '../../store/types';
 import {setUser} from '../../store/user/actions';
+
+
+import bem from 'easy-bem';
+import {Input, Button} from '../ui';
+import authApi from 'api/AuthApi';
 
 type StateProps = {
     user: IStoreState['user'];
@@ -33,6 +33,7 @@ interface ComponentProps extends RouteComponentProps {
     setUser: DispatchAdding['setUser']
 
 }
+
 const b = bem('AuthForm');
 
 class AuthForm extends React.Component<ComponentProps, State> {
@@ -58,7 +59,6 @@ class AuthForm extends React.Component<ComponentProps, State> {
 
     onSubmit = (event: FormEvent) => {
         event.preventDefault();
-        // @ts-ignore
         const {setUser} = this.props;
         const signUpData = {
             first_name: this.state.first_name,
@@ -96,16 +96,22 @@ class AuthForm extends React.Component<ComponentProps, State> {
     public render() {
         return (
             <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name="first_name" title="Введите имя" type="text" placeholder="Имя" />
-                <Input onChange={this.onControlChange} name="second_name" title="Введите фамилию" type="text" placeholder="Фамилия" />
-                <Input onChange={this.onControlChange} name="login" title="Введите логин" type="text" placeholder="Логин" />
-                <Input onChange={this.onControlChange} name="email" title="Введите email" type="email" placeholder="email" />
-                <Input onChange={this.onControlChange} name="password" title="Введите пароль" type="password" placeholder="*******" />
-                <Input onChange={this.onControlChange} name="phone" title="Введите номер телефона" type="tel" placeholder="Номер телефона" />
-                <button type="submit">
-                    Зарегестрироваться
-                </button>
-                <div className="error">
+                <Input onChange={this.onControlChange} name='first_name' title='Введите имя' type='text'
+                       placeholder='Имя'/>
+                <Input onChange={this.onControlChange} name='second_name' title='Введите фамилию' type='text'
+                       placeholder='Фамилия'/>
+                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text'
+                       placeholder='Логин'/>
+                <Input onChange={this.onControlChange} name='email' title='Введите email' type='email'
+                       placeholder='email'/>
+                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password'
+                       placeholder='*******'/>
+                <Input onChange={this.onControlChange} name='phone' title='Введите номер телефона' type='tel'
+                       placeholder='Номер телефона'/>
+                <div>
+                    <Button type='submit'>Зарегестрироваться</Button>
+                </div>
+                <div className='error'>
                     {this.state.errorMessage}
                 </div>
             </form>

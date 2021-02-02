@@ -1,9 +1,4 @@
-import * as React from 'react';
-import bem from 'easy-bem';
-import Input from '../Input';
-import {FormEvent} from 'react';
-import authApi from '../../utils/api/AuthApi';
-import {ChangeEvent} from 'react';
+import React, {FormEvent, ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
 import {connect} from 'react-redux';
 import {UserDTO as userItem} from '../../types/types';
@@ -11,6 +6,9 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchAdding} from '../../store/user/actionTypes';
 import {setUser} from '../../store/user/actions';
+import bem from 'easy-bem';
+import authApi from 'api/AuthApi';
+import {Input, Button} from '../ui';
 
 const b = bem('AuthForm');
 
@@ -85,16 +83,16 @@ class AuthForm extends React.Component<ComponentProps, State> {
     public render() {
         return (
             <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name="login" title="Введите логин" type="text" placeholder="Логин"/>
-                <Input onChange={this.onControlChange} name="password" title="Введите пароль" type="password" placeholder="*******"/>
+                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
+                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
                 <label>
-                    <input onChange={this.onControlChange} type="checkbox" name="remember"/>
-                    Запомнить меня
+                    <input onChange={this.onControlChange} type='checkbox' name='remember'/>
+                    Remember me
                 </label>
-                <button type="submit">
-                    Отправить форму
-                </button>
-                <div className="error">
+                <div>
+                    <Button>Sign In</Button>
+                </div>
+                <div className='error'>
                     {this.state.errorMessage}
                 </div>
             </form>

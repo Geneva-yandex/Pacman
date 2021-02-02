@@ -5,7 +5,7 @@ import Layout from './components/Layout';
 import routes from './pages';
 import ErrorBoundary from './components/ErrorBoundary';
 import store from './store';
-import checkForAuth from './utils/checkForAuthOrRedirect';
+import checkForAuth from './misc/utils/checkForAuthOrRedirect';
 
 export default class Application extends React.PureComponent {
     componentDidMount(): void {

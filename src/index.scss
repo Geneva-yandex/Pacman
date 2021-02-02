@@ -12,6 +12,12 @@ html {
   box-sizing: inherit;
 }
 
+#root,
+html,
+body {
+  height: 100%;
+}
+
 body {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 500;
@@ -24,11 +30,33 @@ body {
   box-sizing: border-box;
 }
 
-.container-fluid {
+.container {
   max-width: 1400px;
+  margin: auto;
+}
+
+.container-fluid {
   width: 100%;
-  margin: 0 auto;
+}
+
+.container,
+.container-fluid {
+  width: 100%;
   padding: 0 10px;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+button {
+  font-family: 'Ubuntu', sans-serif;
+  background: none;
+  border: none;
+  display: inline-block;
+  cursor: pointer;
+  padding: 0;
+  outline: 0;
 }
 
 .error {
@@ -63,5 +91,36 @@ body {
     right: 5px;
     top: 5px;
     cursor: pointer;
+  }
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  outline: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.profile-form {
+  .Input {
+    margin-bottom: 24px;
+
+    &__control {
+      width: 100%;
+      max-width: 460px;
+    }
+  }
+}
+
+.InnerPage {
+  &__header {
+    margin-bottom: 24px;
   }
 }

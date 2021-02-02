@@ -1,0 +1,32 @@
+@import "src/styles/variables";
+
+.Input {
+  &__label {
+    display: block;
+    font-size: 14px;
+    color: #bdbdbd;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  &__control {
+    background: rgba(#ffffff, 5%);
+    border: 1px solid rgba(#ffffff, 20%);
+    height: 46px;
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 5px 10px;
+    font-weight: 400;
+    outline: 0;
+    transition: 0.25s border-color ease;
+
+    &:focus {
+      border-color: rgba(#ffffff, 40%);
+    }
+
+    &::placeholder {
+      color: #b8bcca;
+    }
+  }
+}

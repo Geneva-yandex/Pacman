@@ -1,6 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import forumData from '../../data/forum-data';
+import forumData from '../../misc/data/forum-data';
 import {ITopic} from '../../types/ForumTypes';
 import './ForumPage.scss';
 import TopicCard from '../../components/TopicCard';

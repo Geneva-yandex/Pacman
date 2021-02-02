@@ -1,17 +1,17 @@
-import * as React from 'react';
+import {ComponentType} from 'react';
 
 export type RouteType = {
     id: string,
     exact?: boolean,
     path: string,
-    component: React.ComponentType,
+    component: ComponentType,
     title?: string,
-    isNavVisible: boolean,
-    isProtected: boolean,
+    isNavVisible: boolean;
+    isProtected?: boolean;
 };
 
 export interface IRouterProps {
     routes: RouteType[],
-    layout: React.ComponentType
+    layout: ComponentType
 }
 
