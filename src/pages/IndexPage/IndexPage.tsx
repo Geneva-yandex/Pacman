@@ -49,10 +49,10 @@ class IndexPage extends React.PureComponent<ComponentProps, State> {
     render() {
         return (
             <div className={b()}>
-                <div className="container-fluid">
+                <div className='container-fluid'>
                     <h1>Index Page</h1>
                     <button onClick={this.logOutFromSystem}>Выйти из системы</button>
-                    <p className="error">{this.state.errorMessage}</p>
+                    <p className='error'>{this.state.errorMessage}</p>
                 </div>
             </div>
         );
