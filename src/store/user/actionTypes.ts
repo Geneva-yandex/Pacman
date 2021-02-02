@@ -7,3 +7,6 @@ export type pendingUserType = {
     onGettingUser: () => void;
 };
 
+export type DispatchLoggingOut = {
+    logOut: () => void;
+};

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import Input from '../Input';
+import Input from '../ui/Input';
 import {FormEvent} from 'react';
-import authApi from '../../utils/api/AuthApi';
+import authApi from 'api/AuthApi';
 import {ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
 import {connect} from 'react-redux';
@@ -110,5 +110,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): Di
 const mapStateToProps = (state: IStoreState): StateProps => ({
     user: state.user
 });
-
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));

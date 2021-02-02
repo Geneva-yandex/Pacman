@@ -1,15 +1,22 @@
-import * as React from 'react';
+import React from 'react';
 import {
     BrowserRouter,
     Switch,
     Route
 } from 'react-router-dom';
 import {IRouterProps, RouteType} from './types';
-import PrivateRoute from '../../utils/PrivateRoute';
+import PrivateRoute from '../PrivateRoute';
+import {SignUpValueObject} from '../../types/types';
 
-class Router extends React.PureComponent<IRouterProps> {
-    render() {
+class Router extends React.Component<IRouterProps> {
+    user: {
+        item: SignUpValueObject | null,
+        status: string
+    };
+
+    public render() {
         const Layout = this.props.layout;
+
         return (
             <BrowserRouter>
                 <Layout>
@@ -23,14 +30,14 @@ class Router extends React.PureComponent<IRouterProps> {
 
     renderRoute(route: RouteType) {
         if (route.isProtected) {
+            let isExact = route.exact === true;
             return (
                 <PrivateRoute
                     path={route.path}
-                    exact={route.exact}
+                    exact={isExact}
                     key={route.id}
                     component={route.component}
-                >
-                </PrivateRoute>
+                />
             );
         }
 
@@ -46,4 +53,4 @@ class Router extends React.PureComponent<IRouterProps> {
     }
 }
 
-export default Router;
+export default (Router);

@@ -5,7 +5,7 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchAdding, pendingUserType} from '../../store/user/actionTypes';
 import {setUser, pendingUser} from '../../store/user/actions';
-import AuthApi from '../../utils/api/AuthApi';
+import AuthApi from 'api/AuthApi';
 import {IStoreState as state} from '../../store/types';
 
 type StateProps = {

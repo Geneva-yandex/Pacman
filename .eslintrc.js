@@ -28,6 +28,9 @@ module.exports = {
         "default-param-last": "off",
         "eol-last": ["error", "always"],
         "react/prop-types": [2, {ignore: ['children']}],
-        "prefer-promise-reject-errors": "off"
+        "default-case": "off",
+        "no-mixed-operators": "off",
+        "prefer-promise-reject-errors": "off",
+        "jsx-quotes": ["error", "prefer-single"]
     }
-};
+}

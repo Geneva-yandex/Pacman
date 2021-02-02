@@ -8,7 +8,6 @@ export interface IUserState {
 const defaultState: IUserState = {
     item: null
 };
-
 export default (state: IUserState = defaultState, {type, payload}: IAction) => {
     switch (type) {
     case actions.PENDING:
@@ -17,6 +16,7 @@ export default (state: IUserState = defaultState, {type, payload}: IAction) => {
             status: 'pending'
         };
     case actions.setUser:
+
         return {
             ...state,
             ...payload as object,
@@ -27,7 +27,12 @@ export default (state: IUserState = defaultState, {type, payload}: IAction) => {
             ...state,
             status: 'failed'
         };
-
+    case actions.logOut:
+        return {
+            ...state,
+            item: null,
+            status: 'quitted'
+        };
     default:
         return state;
     }

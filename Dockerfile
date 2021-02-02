@@ -2,7 +2,7 @@
 FROM node:alpine
 
 # set the working direction
-WORKDIR /app
+WORKDIR /dist
 
 # install app dependencies
 COPY package.json ./
@@ -15,8 +15,5 @@ RUN npm install
 COPY . ./
 
 # start app
-CMD ["npm", "run", "start"]
 
-ENV PORT=4000
-
-EXPOSE 4000
+CMD ["npm", "run", "deploy"]

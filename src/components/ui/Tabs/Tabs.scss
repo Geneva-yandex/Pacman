@@ -1,0 +1,33 @@
+@import "src/styles/variables";
+
+.Tabs {
+  &__nav {
+    display: inline-flex;
+    margin-bottom: 32px;
+    border-bottom: 1px solid rgba(#eaeef4, 30%);
+  }
+
+  &__header-item {
+    color: rgba(#ffffff, 0.5);
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    transition: 0.25s ease;
+
+    &--active {
+      color: $yellow;
+      border-color: $yellow;
+    }
+  }
+
+  &__tab-button {
+    color: currentColor;
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: normal;
+    transition: 0.25s ease;
+
+    &:hover {
+      color: $yellow;
+    }
+  }
+}
