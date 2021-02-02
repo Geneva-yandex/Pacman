@@ -14,3 +14,4 @@ export interface IRouterProps {
     routes: RouteType[],
     layout: ComponentType
 }
+
