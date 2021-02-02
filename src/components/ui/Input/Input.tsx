@@ -26,11 +26,14 @@ export default class Input extends React.PureComponent<Props> {
     public render() {
         const className = classnames(b(), this.props.className);
 
+        const inputProps = {...this.props};
+        delete inputProps.className;
+
         return (
             <div className={className}>
                 <label>
                     {this.props.title && <span className={b('label')}>{this.props.title}</span>}
-                    <input className={b('control')} {...this.props} ref={this._inputRef} />
+                    <input className={b('control')} {...inputProps} ref={this._inputRef} />
                 </label>
             </div>
         );

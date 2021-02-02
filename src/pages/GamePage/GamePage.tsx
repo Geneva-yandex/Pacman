@@ -1,7 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import {IStateGamePage} from './types';
-import './GamePage.scss';
 import Start from './views/Start';
 import Finish from './views/Finish';
 import Game from '../../components/Game';
@@ -11,7 +10,7 @@ import {GamePageViewEnum} from '../../enums/GamePageViewEnum';
 const b = bem('GamePage');
 
 export default class GamePage extends React.PureComponent<{}, IStateGamePage> {
-    constructor(props: any) {
+    constructor(props: {}) {
         super(props);
         this.state = {
             view: GamePageViewEnum.Start

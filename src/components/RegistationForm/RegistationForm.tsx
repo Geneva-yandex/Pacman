@@ -54,17 +54,16 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
         authApi.sendAuthRequest(signUpData)
             .then(res => {
                 if (res.status === 200) {
-                    authApi.getUserInfo()
-                        .then(resp => {
-                            localStorage.setItem('user', JSON.stringify(resp.data));
-                            this.props.history.push('/');
-                        })
-                        .catch(err => {
-                            this.setState({
-                                errorMessage: err.response.data.reason
-                            });
-                        });
+                    return authApi.getUserInfo();
                 }
+            })
+            .then(resp => {
+                if (!resp) {
+                    return;
+                }
+
+                localStorage.setItem('user', JSON.stringify(resp.data));
+                this.props.history.push('/');
             })
             .catch(err => {
                 this.setState({
@@ -82,9 +81,7 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
                 <Input onChange={this.onControlChange} name='email' title='Введите email' type='email' placeholder='email' />
                 <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******' />
                 <Input onChange={this.onControlChange} name='phone' title='Введите номер телефона' type='tel' placeholder='Номер телефона' />
-                <div>
-                    <Button type='submit'>Зарегестрироваться</Button>
-                </div>
+                <Button type='submit' block>Зарегестрироваться</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>

@@ -22,7 +22,7 @@ class TopicPage extends React.PureComponent<ITopicPageProps, ITopicPageState> {
 
     componentDidMount() {
         const topicId = this.props.match?.params?.topicId;
-        const topic = forumData.find((topic:ITopic) => topic.id === Number(topicId));
+        const topic = forumData.find((topic: ITopic) => topic.id === Number(topicId));
         this.setState({
             topic: topic || null,
             isLoading: false
