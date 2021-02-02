@@ -124,3 +124,4 @@ const mapStateToProps = (state: IStoreState): StateProps => ({
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));
+

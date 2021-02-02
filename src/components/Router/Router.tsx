@@ -30,10 +30,11 @@ class Router extends React.Component<IRouterProps> {
 
     renderRoute(route: RouteType) {
         if (route.isProtected) {
+            let isExact = route.exact == true;
             return (
                 <PrivateRoute
                     path={route.path}
-                    exact={route.exact}
+                    exact={isExact}
                     key={route.id}
                     component={route.component}
                 />

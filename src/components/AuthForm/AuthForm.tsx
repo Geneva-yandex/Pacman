@@ -113,4 +113,3 @@ const mapStateToProps = (state: unknown): StateProps => ({
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));
-
