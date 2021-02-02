@@ -11,8 +11,7 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchAdding} from '../../store/user/actionTypes';
 import {setUser} from '../../store/user/actions';
-import {IStoreState} from "../../store/types";
-
+import {IStoreState} from '../../store/types';
 
 const b = bem('AuthForm');
 
@@ -109,7 +108,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): Di
 });
 
 const mapStateToProps = (state: IStoreState): StateProps => ({
-    user: state['user']
+    user: state.user
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));
