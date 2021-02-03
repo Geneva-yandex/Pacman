@@ -9,7 +9,7 @@ type PrivateRouteArgs = {
     component: React.ComponentType,
 };
 export default function PrivateRoute({path, exact, key, component}: PrivateRouteArgs) {
-    const userData = useSelector((state : IStoreState) => state.user);
+    const userData = useSelector((state: IStoreState) => state.user);
     const isAuth = userData.item !== null;
     if (isAuth) {
         return (

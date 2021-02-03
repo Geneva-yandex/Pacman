@@ -71,19 +71,17 @@ class AuthForm extends React.Component<ComponentProps, State> {
         authApi.sendAuthRequest(signUpData)
             .then(res => {
                 if (res.status === 200) {
-                    authApi.getUserInfo()
-                        .then(resp => {
-                            const userData = resp.data;
-                            localStorage.setItem('user', JSON.stringify(userData));
-                            setUser(userData);
-                            this.props.history.push('/');
-                        })
-                        .catch(err => {
-                            this.setState({
-                                errorMessage: err.response.data.reason
-                            });
-                        });
+                    return authApi.getUserInfo();
                 }
+            })
+            .then(resp => {
+                if (!resp) {
+                    return;
+                }
+
+                const userData = resp.data;
+                setUser(userData);
+                this.props.history.push('/');
             })
             .catch(err => {
                 this.setState({
@@ -107,9 +105,7 @@ class AuthForm extends React.Component<ComponentProps, State> {
                     placeholder='*******'/>
                 <Input onChange={this.onControlChange} name='phone' title='Введите номер телефона' type='tel'
                     placeholder='Номер телефона'/>
-                <div>
-                    <Button type='submit'>Зарегестрироваться</Button>
-                </div>
+                <Button type='submit' block>Зарегестрироваться</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>
