@@ -1,0 +1,37 @@
+@import 'src/styles/variables';
+
+.LeaderboardItem {
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  &__position {
+    font-weight: 400;
+    font-size: 14px;
+    color: #bdbdbd;
+    margin-right: 32px;
+  }
+
+  &__user {
+    margin-right: 70px;
+    flex-shrink: 0;
+  }
+
+  &__indicator {
+    width: 480px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  &__indicator-line {
+    display: block;
+    height: 8px;
+    border-radius: 2px;
+    background-color: $yellow;
+    margin-top: 6px;
+  }
+}

@@ -1,0 +1,42 @@
+.StartPage__navigation {
+  display: flex;
+  align-items: center;
+  width: 350px;
+  margin: 0 auto;
+  text-align: center;
+  justify-content: center;
+}
+
+.StartPage__navigationList {
+  width: 100%;
+}
+
+.StartPage__navigationItem {
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+
+  .Button {
+    max-width: 220px;
+    width: 100%;
+    height: 50px;
+
+    &--primary {
+      max-width: 260px;
+      height: 60px;
+    }
+  }
+}
+
+.instruction-modal {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #292926;
+  padding: 20px;
+}
+
+.modal-default-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+}

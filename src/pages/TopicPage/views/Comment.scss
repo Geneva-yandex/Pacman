@@ -1,0 +1,42 @@
+@import '../../../styles/variables';
+
+.Comment {
+  background: #2f2f2f;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-start;
+  color: #bdbdbd;
+  font-weight: 400;
+  padding: 20px 10px;
+
+  &__avatar {
+    flex: 0 0 auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: $yellow;
+    border: 3px solid $yellow;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__content {
+    margin-left: 20px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__user-name {
+    height: 70px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__message {
+    margin: 10px 0 20px;
+    max-width: 70%;
+  }
+}
