@@ -30,7 +30,7 @@ const AvatarForm = ({avatar, onSave}: IAvatarFormProps) => {
                 <Avatar size={120} src={avatarSrc} />
             </div>
 
-            <Button size='small' aperance='outlined' type='button' onClick={() => inputEl?.current?.inputRef?.click()}>Change avatar</Button>
+            <Button size='small' apperance='outlined' type='button' onClick={() => inputEl?.current?.inputRef?.click()}>Change avatar</Button>
         </div>
     </React.Fragment>;
 };

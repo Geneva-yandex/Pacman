@@ -8,13 +8,14 @@ const b = bem('Button');
 
 const Button = (props?: IButtonProps) => {
     const className = classnames(b(), props?.className, {
-        [`${b()}--primary`]: props?.aperance === 'primary',
-        [`${b()}--outlined`]: props?.aperance === 'outlined',
+        [`${b()}--primary`]: props?.appearance === 'primary',
+        [`${b()}--outlined`]: props?.appearance === 'outlined',
         [`${b()}--small`]: props?.size === 'small',
+        [`${b()}--large`]: props?.size === 'large',
         [`${b()}--block`]: props?.block
     });
 
-    return <button className={className} {...props}>{props?.children}</button>;
+    return <button {...props} className={className}>{props?.children}</button>;
 };
 
 export default Button;
