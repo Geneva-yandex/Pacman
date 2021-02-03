@@ -83,7 +83,7 @@ export default [
         component: ProfilePage,
         title: 'Profile',
         isNavVisible: true,
-        isProtected: false
+        isProtected: true
     },
     {
         id: ROUTE_LEADERBOARD,
@@ -92,6 +92,6 @@ export default [
         component: LeaderboardPage,
         title: 'Leaderboard',
         isNavVisible: true,
-        isProtected: false
+        isProtected: true
     }
 ];
