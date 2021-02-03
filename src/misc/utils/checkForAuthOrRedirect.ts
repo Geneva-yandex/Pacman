@@ -1,39 +1,30 @@
-import authApi from 'api/AuthApi';
-import {IUser} from 'types/interfaces';
+import authApi from '../../api/AuthApi';
+import store from '../../store';
+import {UserDTO} from '../../types/types';
+import {setUser, pendingUser, failedUser} from '../../store/user/actions';
 
-type PromiseResolver = {
-    user: IUser | null,
-    redirectUrl: string
-};
+type User = UserDTO | null;
 
-async function checkForAuthOrRedirect(): Promise<PromiseResolver> {
-    return new Promise<PromiseResolver>((resolve, reject) => {
-        const rawUserString = localStorage.getItem('user');
-        let user = null;
-        if (rawUserString !== null) {
-            user = JSON.parse(rawUserString);
-        }
+const {dispatch} = store;
 
-        if (user) {
-            resolve({
-                user: user,
-                redirectUrl: ''
+function checkForAuth(): void {
+    let user: User = null;
+
+    if (user) {
+        dispatch(setUser(user));
+    } else {
+        dispatch(pendingUser());
+        authApi.getUserInfo()
+            .then(res => {
+                if (res.status === 200) {
+                    const userInfo = res.data;
+                    dispatch(setUser(userInfo));
+                }
+            })
+            .catch(() => {
+                dispatch(failedUser());
             });
-        } else {
-            authApi.getUserInfo()
-                .then(res => {
-                    if (res.status === 200) {
-                        const userInfo = res.data;
-                        localStorage.setItem('user', JSON.stringify(userInfo));
-                        resolve({
-                            user: userInfo,
-                            redirectUrl: ''
-                        });
-                    }
-                })
-                .catch(error => reject(error));
-        }
-    });
+    }
 }
 
-export default checkForAuthOrRedirect;
+export default checkForAuth;

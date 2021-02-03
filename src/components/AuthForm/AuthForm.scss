@@ -1,0 +1,18 @@
+.AuthForm {
+  &__remember-btn {
+    margin-bottom: 30px;
+
+    .Input__label {
+      margin: 0;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+    }
+
+    input {
+      order: -1;
+    }
+  }
+}

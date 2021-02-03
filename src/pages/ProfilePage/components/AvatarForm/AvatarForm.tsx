@@ -26,11 +26,11 @@ const AvatarForm = ({avatar, onSave}: IAvatarFormProps) => {
     return <React.Fragment>
         <div className={b()}>
             <div className={b('photo')}>
-                <Input ref={inputEl} className="visually-hidden" type="file" name="avatar" onChange={onChange} />
+                <Input ref={inputEl} className='visually-hidden' type='file' name='avatar' onChange={onChange} />
                 <Avatar size={120} src={avatarSrc} />
             </div>
 
-            <Button size="small" appearance="outlined" type="button" onClick={() => inputEl?.current?.inputRef?.click()}>Change avatar</Button>
+            <Button size='small' apperance='outlined' type='button' onClick={() => inputEl?.current?.inputRef?.click()}>Change avatar</Button>
         </div>
     </React.Fragment>;
 };

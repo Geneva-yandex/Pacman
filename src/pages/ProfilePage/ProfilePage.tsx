@@ -2,8 +2,7 @@ import React from 'react';
 import bem from 'easy-bem';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {Tab, Tabs} from 'components/ui';
-import {IUser, IPsswordsDto} from 'types/interfaces';
-import {checkForAuthOrRedirect} from 'misc/utils';
+import {IUser, IPsswordsDto} from '../../types/interfaces';
 import {AuthApi, UserApi} from 'api';
 
 import {AccountForm, AvatarForm, PasswordForm} from './components';
@@ -35,21 +34,6 @@ class ProfilePage extends React.PureComponent<RouteComponentProps, IProfilePageS
         this._changeAvatar = this._changeAvatar.bind(this);
     }
 
-    componentDidMount() {
-        // eslint-disable-next-line no-warning-comments
-        // TODO: Вынести хранение юзера в стор, добавить ProtectedRoute
-        checkForAuthOrRedirect()
-            .then(res => {
-                this.setState({
-                    user: res.user as IUser
-                });
-            })
-            .catch(error => {
-                this.props.history.push('/login');
-                console.error(error);
-            });
-    }
-
     render() {
         const {user, currentTab} = this.state;
 
@@ -59,13 +43,13 @@ class ProfilePage extends React.PureComponent<RouteComponentProps, IProfilePageS
             </header>
 
             <Tabs selectedTab={currentTab} onSelect={this._onSelectTab}>
-                <Tab name={ProfileTabs.Account} title="Personal Info">
+                <Tab name={ProfileTabs.Account} title='Personal Info'>
                     <AccountForm user={user} onSave={this._changeProfile} />
                 </Tab>
-                <Tab name={ProfileTabs.Password} title="Password">
+                <Tab name={ProfileTabs.Password} title='Password'>
                     <PasswordForm onSave={this._changePasswords} />
                 </Tab>
-                <Tab name={ProfileTabs.Avatar} title="Avatar">
+                <Tab name={ProfileTabs.Avatar} title='Avatar'>
                     <AvatarForm avatar={user.avatar} onSave={this._changeAvatar} />
                 </Tab>
             </Tabs>

@@ -30,7 +30,7 @@ export interface ICanvasProps extends Omit<IGameState, 'lives' | 'level' | 'scor
 }
 
 export interface IComponentProps {
-    ctx: CanvasRenderingContext2D | null
+    ctx: CanvasRenderingContext2D
 }
 
 export type DrawMapParams = {
@@ -39,8 +39,8 @@ export type DrawMapParams = {
 } & GameInitMethodsType;
 
 export type AvailableCellsCountParamsType = {
-    cell:number,
-    row:number,
-    isVerticalDirection:boolean,
-    isPositiveDirection:boolean
+    cell: number,
+    row: number,
+    isVerticalDirection: boolean,
+    isPositiveDirection: boolean
 };

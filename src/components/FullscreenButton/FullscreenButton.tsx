@@ -11,8 +11,8 @@ const FullscreenButton = ({isFullscreen, onClick}: IFullscreenButtonProps) => {
     const icon = isFullscreen ? FullscreenOutIcon : FullscreenInIcon;
     const tooltip = isFullscreen ? 'Fullscreen Out' : 'Fullscreen In';
 
-    return <button className="FullscreenButton" type="button" onClick={onClick}>
-        <Tooltip id="fsTooltip" tooltip={tooltip} place="bottom">
+    return <button className='FullscreenButton' type='button' onClick={onClick}>
+        <Tooltip id='fsTooltip' tooltip={tooltip} place='bottom'>
             <SVG src={icon} />
         </Tooltip>
     </button>;

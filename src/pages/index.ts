@@ -2,10 +2,10 @@ import LoginPage from './LoginPage';
 import GamePage from './GamePage';
 import ForumPage from './ForumPage';
 import TopicPage from './TopicPage';
+import SignUpPage from './SignPage';
+import StartPage from './StartPage';
 import ProfilePage from './ProfilePage';
 import LeaderboardPage from './LeaderboardPage';
-import StartPage from './StartPage';
-import SignUpPage from './SignPage';
 
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
@@ -23,7 +23,8 @@ export default [
         path: '/',
         component: StartPage,
         title: 'PACMAN',
-        isNavVisible: true
+        isNavVisible: true,
+        isProtected: true
     },
     {
         id: ROUTE_LOGIN,
@@ -47,7 +48,8 @@ export default [
         path: '/game',
         component: GamePage,
         title: 'game',
-        isNavVisible: false
+        isNavVisible: false,
+        isProtected: true
     },
     {
         id: ROUTE_FORUM,
@@ -55,13 +57,24 @@ export default [
         path: '/forum',
         component: ForumPage,
         title: 'Forum',
-        isNavVisible: true
+        isNavVisible: true,
+        isProtected: true
     },
     {
         id: ROUTE_TOPIC,
         path: '/forum/:topicId',
         component: TopicPage,
-        isNavVisible: false
+        isNavVisible: false,
+        isProtected: true
+    },
+    {
+        id: ROUTE_SIGNUP,
+        exact: false,
+        path: '/sign-up',
+        component: SignUpPage,
+        title: 'Sign Up',
+        isNavVisible: true,
+        isProtected: false
     },
     {
         id: ROUTE_PROFILE,
@@ -69,7 +82,8 @@ export default [
         path: '/profile',
         component: ProfilePage,
         title: 'Profile',
-        isNavVisible: true
+        isNavVisible: true,
+        isProtected: true
     },
     {
         id: ROUTE_LEADERBOARD,
@@ -77,6 +91,7 @@ export default [
         path: '/leaderboard',
         component: LeaderboardPage,
         title: 'Leaderboard',
-        isNavVisible: true
+        isNavVisible: true,
+        isProtected: true
     }
 ];

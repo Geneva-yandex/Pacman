@@ -29,6 +29,12 @@ module.exports = {
         "eol-last": ["error", "always"],
         "react/prop-types": [2, {ignore: ['children']}],
         "default-case": "off",
-        "no-mixed-operators": "off"
+        "no-mixed-operators": "off",
+        "prefer-promise-reject-errors": "off",
+        "jsx-quotes": ["error", "prefer-single"],
+        "@typescript-eslint/type-annotation-spacing": ["error"],
+        "no-alert": "off",
+        "no-undef": "off",
+        "no-void": "off",
     }
-};
+}

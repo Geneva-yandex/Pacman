@@ -35,6 +35,10 @@
     padding: 15px 30px;
   }
 
+  &--block {
+    display: block;
+  }
+
   &:hover {
     transform: scale(0.99) translateY(2px);
   }

@@ -10,7 +10,7 @@ export default class Start extends React.PureComponent<IViewProps> {
     render() {
         return (
             <div className={b()}>
-                <Button className={b('play')} onClick={this.props.changeView}>Play</Button>
+                <Button onClick={this.props.changeView}>Play</Button>
             </div>
         );
     }

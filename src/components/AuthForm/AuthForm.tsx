@@ -1,15 +1,37 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import Input from '../ui/Input';
 import {FormEvent} from 'react';
-import authApi from '../../api/AuthApi';
+import authApi from 'api/AuthApi';
 import {ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
-import {Button} from '../ui';
+import {connect} from 'react-redux';
+import {UserDTO as userItem} from '../../types/types';
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import {DispatchAdding} from '../../store/user/actionTypes';
+import {setUser} from '../../store/user/actions';
+import {IStoreState} from '../../store/types';
+import {Input, Button} from '../ui';
+import './AuthForm.scss';
 
 const b = bem('AuthForm');
 
-class AuthForm extends React.Component<RouteComponentProps> {
+type State = {
+    login: string
+    password: string
+    remember: string
+    errorMessage: string
+    [key: string]: string,
+
+};
+type StateProps = {
+    user: IStoreState['user'];
+};
+
+interface ComponentProps extends RouteComponentProps {
+    setUser: DispatchAdding['setUser']
+}
+class AuthForm extends React.Component<ComponentProps, State> {
     state = {
         login: '',
         password: '',
@@ -28,29 +50,29 @@ class AuthForm extends React.Component<RouteComponentProps> {
 
     onSubmit = (event: FormEvent) => {
         event.preventDefault();
-
+        const {setUser} = this.props;
         const remember = this.state.remember === 'on';
-
+        const {login, password} = this.state;
         const logInData = {
-            login: this.state.login,
-            password: this.state.password,
+            login,
+            password,
             remember: remember
         };
 
         authApi.sendLogInRequest(logInData)
             .then(res => {
                 if (res.status === 200) {
-                    authApi.getUserInfo()
-                        .then(resp => {
-                            localStorage.setItem('user', JSON.stringify(resp.data));
-                            this.props.history.push('/');
-                        })
-                        .catch(err => {
-                            this.setState({
-                                errorMessage: err.response.data.reason
-                            });
-                        });
+                    return authApi.getUserInfo();
                 }
+            })
+            .then(resp => {
+                if (!resp) {
+                    return;
+                }
+
+                const userData = resp.data;
+                setUser(userData);
+                this.props.history.push('/');
             })
             .catch(err => {
                 this.setState({
@@ -62,26 +84,25 @@ class AuthForm extends React.Component<RouteComponentProps> {
     public render() {
         return (
             <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e);
-                }} name="login" title="Enter the login" type="text" placeholder="login"/>
-                <Input onChange={(e: ChangeEvent) => {
-                    this.onControlChange(e);
-                }} name="password" title="Enter the password" type="password" placeholder="*******"/>
-                <label>
-                    <input onChange={(e: ChangeEvent) => {
-                        this.onControlChange(e);
-                    }} type="checkbox" name="remember"/>
-                    Запомнить меня
-                </label>
-                <div>
-                    <Button>Sign In</Button>
-                </div>
-                <div className="error">
+                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
+                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
+                <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me' className={b('remember-btn')}/>
+                <Button block>Sign In</Button>
+                <div className='error'>
                     {this.state.errorMessage}
                 </div>
             </form>
         );
     }
 }
-export default withRouter(AuthForm);
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
+    setUser: (user: userItem) => {
+        dispatch(setUser(user));
+    }
+});
+
+const mapStateToProps = (state: IStoreState): StateProps => ({
+    user: state.user
+});
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));

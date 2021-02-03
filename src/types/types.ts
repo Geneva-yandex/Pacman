@@ -7,8 +7,17 @@ export type SignUpValueObject = {
     phone: string
 };
 
-export type logInValueObject = {
+export type LogInValueObject = {
     login: string;
     password: string;
     remember: boolean;
+};
+
+export type UserDTO = {
+    id: number;
+    first_name: string;
+    second_name: string;
+    display_name: string;
+    login: string;
+    email: string;
 };

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import './TopicForm.scss';
-import {Input} from '../../../components/ui';
+import {Button, Input} from '../../../components/ui';
 
 const b = bem('TopicForm');
 const FORM_ID = 'TopicForm';
@@ -23,7 +22,7 @@ export default class TopicForm extends React.PureComponent {
                     title={'description'}
                     name={'description'}
                 />
-                <button>Create</button>
+                <Button>Create</Button>
             </form>
         );
     }
