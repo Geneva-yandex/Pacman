@@ -1,5 +1,4 @@
 import {ComponentType} from 'react';
-/* Import {ConnectedComponent} from "react-redux"; */
 
 export type RouteType = {
     id: string,

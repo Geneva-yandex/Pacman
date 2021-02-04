@@ -19,7 +19,7 @@ const AccountForm = ({user, onSave}: IAccountFormProps) => {
     });
 
     return <React.Fragment>
-        <form className='profile-form' onSubmit={handleSubmit}>
+        <form className='form' onSubmit={handleSubmit}>
             <Input type='text' name='second_name' title='Last Name'
                 value={values.second_name} onChange={handleChange}/>
 

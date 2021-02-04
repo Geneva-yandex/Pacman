@@ -4,16 +4,24 @@ import {Link} from 'react-router-dom';
 import './Layout.scss';
 import Sidebar from '../Sidebar';
 import OfflineNotification from '../OfflineNotification';
-
+import {IUserState} from 'store/user/reducer';
+import {DispatchAdding, pendingUserType} from 'store/user/actionTypes';
 const b = bem('Layout');
 
-// eslint-disable-next-line no-warning-comments
-// TODO: после организации стора, отображать сайдбар только авторизированным пользователям
-export default class Layout extends React.PureComponent {
+interface ILayoutProps {
+    user: IUserState;
+    setUser: DispatchAdding['setUser'],
+    onGettingUser: pendingUserType['onGettingUser']
+}
+
+class Layout extends React.PureComponent<ILayoutProps> {
     render() {
+        const {item} = this.props.user;
+        const isAuth = item !== null;
+
         return (
-            <div className={b()}>
-                <Sidebar className={b('sidebar')} />
+            <div className={b({auth: !isAuth})}>
+                {isAuth && <Sidebar className={b('sidebar')} />}
 
                 <div className={b('content')}>
                     <header className={b('header')}>
@@ -32,3 +40,5 @@ export default class Layout extends React.PureComponent {
         );
     }
 }
+
+export default Layout;

@@ -1,18 +1,16 @@
-import * as React from 'react';
-import Form from '../../components/AuthForm';
+import React, {PureComponent} from 'react';
+import AuthForm from 'components/AuthForm';
 import {RouteComponentProps, withRouter} from 'react-router';
 import bem from 'easy-bem';
+import './LoginPage.scss';
 
 const b = bem('LoginPage');
 
-class LoginPage extends React.PureComponent<RouteComponentProps> {
+class LoginPage extends PureComponent<RouteComponentProps> {
     render() {
         return (
             <div className={b()}>
-                <div className={'container-fluid'}>
-                    <h1>Login Page</h1>
-                    <Form/>
-                </div>
+                <AuthForm />
             </div>
         );
     }

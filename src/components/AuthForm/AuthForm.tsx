@@ -5,9 +5,10 @@ import authApi from 'api/AuthApi';
 import {ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
 import {connect} from 'react-redux';
-import {UserDTO as userItem} from '../../types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
+import cn from 'classnames';
+import {UserDTO as userItem} from '../../types/types';
 import {DispatchAdding} from '../../store/user/actionTypes';
 import {setUser} from '../../store/user/actions';
 import {IStoreState} from '../../store/types';
@@ -83,11 +84,15 @@ class AuthForm extends React.Component<ComponentProps, State> {
 
     public render() {
         return (
-            <form className={b()} onSubmit={this.onSubmit}>
+            <form className={cn('form', b())} onSubmit={this.onSubmit}>
                 <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
                 <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
+
+                <div className={b('submit')}>
+                    <Button block>Sign In</Button>
+                </div>
+
                 <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me' className={b('remember-btn')}/>
-                <Button block>Sign In</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>
