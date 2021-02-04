@@ -2,7 +2,7 @@ export interface IBaseId<T = number> {
     id: T;
 }
 
-export interface IPsswordsDto {
+export interface IPasswordsDto {
     oldPassword: string;
     newPassword: string;
 }

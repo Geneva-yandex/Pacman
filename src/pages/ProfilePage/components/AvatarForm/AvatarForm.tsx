@@ -5,7 +5,7 @@ import {API_ENDPOINT} from 'misc/constants';
 import './AvatarForm.scss';
 
 interface IAvatarFormProps {
-    avatar: string;
+    avatar: string | undefined;
     onSave: (avatar: File) => void;
 }
 

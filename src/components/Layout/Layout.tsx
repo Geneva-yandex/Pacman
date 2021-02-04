@@ -1,20 +1,13 @@
-import * as React from 'react';
+import React, {PureComponent} from 'react';
 import bem from 'easy-bem';
 import {Link} from 'react-router-dom';
 import './Layout.scss';
 import Sidebar from '../Sidebar';
 import OfflineNotification from '../OfflineNotification';
-import {IUserState} from 'store/user/reducer';
-import {DispatchAdding, pendingUserType} from 'store/user/actionTypes';
+import {ConnectToUserProps} from '../hocs/withUser';
 const b = bem('Layout');
 
-interface ILayoutProps {
-    user: IUserState;
-    setUser: DispatchAdding['setUser'],
-    onGettingUser: pendingUserType['onGettingUser']
-}
-
-class Layout extends React.PureComponent<ILayoutProps> {
+class Layout extends PureComponent<ConnectToUserProps> {
     render() {
         const {item} = this.props.user;
         const isAuth = item !== null;

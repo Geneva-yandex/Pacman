@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import cn from 'classnames';
-import {UserDTO as userItem} from '../../types/types';
+import {IUser} from 'types/interfaces';
 import {DispatchAdding} from '../../store/user/actionTypes';
 import {setUser} from '../../store/user/actions';
 import {IStoreState} from '../../store/types';
@@ -102,7 +102,7 @@ class AuthForm extends React.Component<ComponentProps, State> {
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
-    setUser: (user: userItem) => {
+    setUser: (user: IUser) => {
         dispatch(setUser(user));
     }
 });

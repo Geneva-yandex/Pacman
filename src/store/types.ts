@@ -1,4 +1,4 @@
-import {UserDTO as user} from '../types/types';
+import {IUserState} from './user';
 
 export interface IAction<T = unknown> {
     type: string;
@@ -6,8 +6,5 @@ export interface IAction<T = unknown> {
 }
 
 export interface IStoreState {
-    user: {
-        item: null | user;
-        status: string
-    }
+    user: IUserState;
 }

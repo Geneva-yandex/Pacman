@@ -4,14 +4,14 @@ import {connect} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import cn from 'classnames';
-import {UserDTO as userItem} from '../../types/types';
 import {DispatchAdding} from '../../store/user/actionTypes';
 import {IStoreState} from '../../store/types';
-import {setUser} from '../../store/user/actions';
+import {setUser} from '../../store/user';
+import {IUser} from '../../types/interfaces';
+import authApi from 'api/AuthApi';
+import {Input, Button} from '../ui';
 
 import bem from 'easy-bem';
-import {Input, Button} from '../ui';
-import authApi from 'api/AuthApi';
 
 type StateProps = {
     user: IStoreState['user'];
@@ -31,7 +31,6 @@ type State = {
 
 interface ComponentProps extends RouteComponentProps {
     setUser: DispatchAdding['setUser']
-
 }
 
 const b = bem('AuthForm');
@@ -111,7 +110,7 @@ class AuthForm extends React.Component<ComponentProps, State> {
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
-    setUser: (user: userItem) => {
+    setUser: (user: IUser) => {
         dispatch(setUser(user));
     }
 });
