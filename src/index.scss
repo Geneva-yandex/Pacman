@@ -110,7 +110,7 @@ button {
 
 .form {
   .Input {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 
     &__control {
       width: 100%;
@@ -122,5 +122,32 @@ button {
 .InnerPage {
   &__header {
     margin-bottom: 24px;
+  }
+}
+
+.AuthPage {
+  max-width: 320px;
+  margin: auto;
+
+  &__title {
+    margin: 0 0 32px;
+  }
+
+  &__form {
+    margin-bottom: 25px;
+  }
+
+  &__back-link {
+    text-align: center;
+
+    a {
+      color: $aqua;
+      font-size: 15px;
+      font-weight: 400;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
   }
 }

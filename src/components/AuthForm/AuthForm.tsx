@@ -85,8 +85,8 @@ class AuthForm extends React.Component<ComponentProps, State> {
     public render() {
         return (
             <form className={cn('form', b())} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
-                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
+                <Input onChange={this.onControlChange} name='login' title='Login' type='text' />
+                <Input onChange={this.onControlChange} name='password' title='Password' type='password' placeholder='*******' />
 
                 <div className={b('submit')}>
                     <Button block>Sign In</Button>
