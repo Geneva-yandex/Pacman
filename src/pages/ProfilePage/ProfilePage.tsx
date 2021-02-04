@@ -2,7 +2,6 @@ import React from 'react';
 import bem from 'easy-bem';
 import {Tab, Tabs} from 'components/ui';
 import {IUser, IPasswordsDto} from 'types/interfaces';
-
 import {AccountForm, AvatarForm, PasswordForm} from './components';
 import {IProfilePageProps, IProfilePageState, ProfileTabs} from './types';
 import './ProfilePage.scss';
