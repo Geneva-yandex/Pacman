@@ -1,13 +1,7 @@
 import React from 'react';
 import bem from 'easy-bem';
-import {Action, compose} from 'redux';
-import {connect} from 'react-redux';
-import {ThunkDispatch} from 'redux-thunk';
-import {withRouter} from 'react-router';
 import {Tab, Tabs} from 'components/ui';
 import {IUser, IPasswordsDto} from 'types/interfaces';
-import {IStoreState} from 'store/types';
-import {IUserState, UserStateActions} from 'store/user';
 
 import {AccountForm, AvatarForm, PasswordForm} from './components';
 import {IProfilePageProps, IProfilePageState, ProfileTabs} from './types';
@@ -57,14 +51,4 @@ class ProfilePage extends React.PureComponent<IProfilePageProps, IProfilePageSta
     }
 }
 
-const mapStateToProps = (state: IStoreState) => ({
-    user: state.user
-});
-
-const mapDispatchToProps = (dispatch: ThunkDispatch<IUserState, void, Action>) => ({
-    updateUser: (user: IUser) => dispatch(UserStateActions.updateUser(user)),
-    updateAvatar: (avatar: File) => dispatch(UserStateActions.updateAvatar(avatar)),
-    changePassword: (passwords: IPasswordsDto) => dispatch(UserStateActions.changePassword(passwords))
-});
-
-export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(ProfilePage);
+export default ProfilePage;
