@@ -1,7 +1,7 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import forumData from '../../misc/data/forum-data';
-import {ITopic} from '../../types/ForumTypes';
+import forumData from '../../common/data/forum-data';
+import {ITopic} from '../../common/types/ForumTypes';
 import './ForumPage.scss';
 import TopicCard from '../../components/TopicCard';
 import TopicForm from './views/TopicForm';

@@ -5,7 +5,7 @@ import Start from './views/Start';
 import Finish from './views/Finish';
 import Game from '../../components/Game';
 import {ViewType} from './types';
-import {GamePageViewEnum} from '../../enums/GamePageViewEnum';
+import {GamePageViewEnum} from '../../common/enums/GamePageViewEnum';
 
 const b = bem('GamePage');
 

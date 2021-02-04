@@ -1,4 +1,4 @@
-import {IUser} from 'types/interfaces';
+import {IUser} from 'common/types/interfaces';
 
 export const actions = {
     PENDING: 'PENDING',

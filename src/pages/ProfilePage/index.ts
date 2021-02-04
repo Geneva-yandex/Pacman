@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {Action, compose} from 'redux';
 
 import {IUserState, UserStateActions} from '../../store/user';
-import {IPasswordsDto, IUser} from 'types/interfaces';
+import {IPasswordsDto, IUser} from 'common/types/interfaces';
 import {IStoreState} from 'store/types';
 
 const mapStateToProps = (state: IStoreState) => ({

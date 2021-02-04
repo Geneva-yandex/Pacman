@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import cn from 'classnames';
-import {IUser} from 'types/interfaces';
+import {IUser} from 'common/types/interfaces';
 import {DispatchAdding} from '../../store/user/actionTypes';
 import {setUser} from '../../store/user/actions';
 import {IStoreState} from '../../store/types';

@@ -1,25 +1,17 @@
-import * as React from 'react';
-import bem from 'easy-bem';
-import RegistrationForm from 'components/RegistationForm';
+import React, {PureComponent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
+import RegistrationForm from 'components/RegistationForm';
+import AuthPageLayout from 'components/AuthPageLayout';
 
-const b = bem('AuthPage');
+const backLink = <Link to='/login'>Sign in</Link>;
 
-class SignUpPage extends React.PureComponent<RouteComponentProps> {
+class SignUpPage extends PureComponent<RouteComponentProps> {
     render() {
         return (
-            <div className={b()}>
-                <h1 className={b('title')}>Sign Up</h1>
-
-                <div className={b('form')}>
-                    <RegistrationForm />
-                </div>
-
-                <div className={b('back-link')}>
-                    <Link to='/login'>Sign in</Link>
-                </div>
-            </div>
+            <AuthPageLayout title='Sign Up' backLink={backLink}>
+                <RegistrationForm />
+            </AuthPageLayout>
         );
     }
 }

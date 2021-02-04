@@ -1,6 +1,6 @@
 import React from 'react';
-import {IUser} from 'types/interfaces';
-import {useForm} from 'misc/hooks';
+import {IUser} from 'common/types/interfaces';
+import {useForm} from 'common/hooks';
 import {Input, Button} from 'components/ui';
 
 interface IAccountFormProps {

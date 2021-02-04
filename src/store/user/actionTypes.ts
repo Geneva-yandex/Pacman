@@ -1,4 +1,4 @@
-import {IUser} from 'types/interfaces';
+import {IUser} from 'common/types/interfaces';
 
 export type DispatchAdding = {
     setUser: (user: IUser) => void;

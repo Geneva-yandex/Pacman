@@ -1,6 +1,6 @@
 import {RouteComponentProps} from 'react-router';
 import {IUserState} from 'store/user';
-import {IPasswordsDto, IUser} from 'types/interfaces';
+import {IPasswordsDto, IUser} from 'common/types/interfaces';
 
 export enum ProfileTabs {
    Account = 'account',

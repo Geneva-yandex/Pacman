@@ -1,6 +1,6 @@
 import {BaseApi} from './BaseApi';
-import {SignUpValueObject, LogInValueObject} from '../types/types';
-import {IUser} from '../types/interfaces';
+import {SignUpValueObject, LogInValueObject} from '../common/types/types';
+import {IUser} from '../common/types/interfaces';
 import {AxiosResponse} from 'axios';
 
 class AuthApi extends BaseApi {

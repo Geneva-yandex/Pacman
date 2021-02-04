@@ -1,6 +1,6 @@
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
-import {IPasswordsDto, IUser} from 'types/interfaces';
+import {IPasswordsDto, IUser} from 'common/types/interfaces';
 import AuthApi from 'api/AuthApi';
 import {IUserState} from './types';
 import UserApi from '../../api/UserApi';
