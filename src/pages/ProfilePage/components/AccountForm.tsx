@@ -38,7 +38,7 @@ const AccountForm = ({user, onSave}: IAccountFormProps) => {
             <Input type='tel' name='phone' title='Phone Number'
                 value={values.phone} onChange={handleChange}/>
 
-            <Button size='small' apperance='outlined'>Save</Button>
+            <Button size='small' appearance='outlined'>Save</Button>
         </form>
     </React.Fragment>;
 };

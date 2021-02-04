@@ -13,6 +13,12 @@ type NavItem = {
     primary: boolean
 };
 
+type State = {
+    modals: {
+        [key: string]: boolean
+    }
+};
+
 const b = bem('StartPage');
 
 const startPageNavigation = [
@@ -112,9 +118,9 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
             <li key={navItem.id} className={b('navigationItem')}>
                 {navItem.route ?
                     <Link to={navItem.route}>
-                        <Button apperance={navItem.primary ? 'primary' : 'outlined'}>{navItem.name}</Button>
+                        <Button appearance={navItem.primary ? 'primary' : 'outlined'}>{navItem.name}</Button>
                     </Link> :
-                    <Button apperance='outlined' onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
+                    <Button appearance='outlined' onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
                 }
             </li>
         );
