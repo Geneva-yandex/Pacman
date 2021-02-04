@@ -1,6 +1,5 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import Input from '../ui/Input';
 import {FormEvent} from 'react';
 import authApi from 'api/AuthApi';
 import {ChangeEvent} from 'react';
@@ -12,6 +11,8 @@ import {AnyAction} from 'redux';
 import {DispatchAdding} from '../../store/user/actionTypes';
 import {setUser} from '../../store/user/actions';
 import {IStoreState} from '../../store/types';
+import {Input, Button} from '../ui';
+import './AuthForm.scss';
 
 const b = bem('AuthForm');
 
@@ -61,18 +62,17 @@ class AuthForm extends React.Component<ComponentProps, State> {
         authApi.sendLogInRequest(logInData)
             .then(res => {
                 if (res.status === 200) {
-                    authApi.getUserInfo()
-                        .then(resp => {
-                            const userData = resp.data;
-                            setUser(userData);
-                            this.props.history.push('/');
-                        })
-                        .catch(err => {
-                            this.setState({
-                                errorMessage: err.response.data.reason
-                            });
-                        });
+                    return authApi.getUserInfo();
                 }
+            })
+            .then(resp => {
+                if (!resp) {
+                    return;
+                }
+
+                const userData = resp.data;
+                setUser(userData);
+                this.props.history.push('/');
             })
             .catch(err => {
                 this.setState({
@@ -86,13 +86,8 @@ class AuthForm extends React.Component<ComponentProps, State> {
             <form className={b()} onSubmit={this.onSubmit}>
                 <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
                 <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
-                <label>
-                    <input onChange={this.onControlChange} type='checkbox' name='remember'/>
-                    Запомнить меня
-                </label>
-                <button type='submit'>
-                    Отправить форму
-                </button>
+                <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me' className={b('remember-btn')}/>
+                <Button block>Sign In</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>

@@ -3,7 +3,7 @@ import {CELL_SIZE} from '../views/Canvas';
 import {convertToPixel, getCell, getRow} from '../helpers';
 
 export default class User {
-    ctx: CanvasRenderingContext2D | null;
+    ctx: CanvasRenderingContext2D;
     prevCoords: CoordsType | null;
 
     constructor(props: IComponentProps) {
@@ -12,10 +12,6 @@ export default class User {
     }
 
     public draw(userPosition: CoordsType) {
-        if (!this.ctx) {
-            return;
-        }
-
         this.prevCoords = userPosition;
 
         const radius = 10;
@@ -29,10 +25,6 @@ export default class User {
     }
 
     public move(userPosition: CoordsType) {
-        if (!this.ctx) {
-            return;
-        }
-
         if (this.prevCoords) {
             const prevX = convertToPixel(getCell(this.prevCoords));
             const prevY = convertToPixel(getRow(this.prevCoords));

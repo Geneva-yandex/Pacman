@@ -31,6 +31,10 @@ module.exports = {
         "default-case": "off",
         "no-mixed-operators": "off",
         "prefer-promise-reject-errors": "off",
-        "jsx-quotes": ["error", "prefer-single"]
+        "jsx-quotes": ["error", "prefer-single"],
+        "@typescript-eslint/type-annotation-spacing": ["error"],
+        "no-alert": "off",
+        "no-undef": "off",
+        "no-void": "off",
     }
 }
