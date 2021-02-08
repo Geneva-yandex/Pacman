@@ -112,6 +112,10 @@ module.exports = env => {
                             }
                         }
                     ]
+                },
+                {
+                    test: /\.mp3$/,
+                    loader: 'file-loader'
                 }
             ]
         },
@@ -134,6 +138,7 @@ module.exports = env => {
                     {from: './public/fonts', to: './fonts'},
                     {from: './public/images', to: './images'},
                     {from: './public/offline.html', to: './'},
+                    {from: './public/sounds', to: './sounds'},
                 ]
             }),
             new MiniCssExtractPlugin({
