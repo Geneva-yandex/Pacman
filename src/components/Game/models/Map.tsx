@@ -1,4 +1,4 @@
-import {GameItemsEnum} from '../../../enums/GameItemsEnum';
+import {GameItemsEnum} from '../../../common/enums/GameItemsEnum';
 import {IComponentProps, CoordsType, DrawMapParams} from '../types';
 import {CELL_SIZE} from '../views/Canvas';
 import {convertToPixel, getCell, getRow, makeCellCoords} from '../helpers';

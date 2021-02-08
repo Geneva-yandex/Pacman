@@ -1,8 +1,8 @@
 import React from 'react';
 import bem from 'easy-bem';
+import classnames from 'classnames';
 import {IButtonProps} from './types';
 import './Button.scss';
-import classnames from 'classnames';
 
 const b = bem('Button');
 

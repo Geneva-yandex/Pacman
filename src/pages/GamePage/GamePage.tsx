@@ -1,11 +1,12 @@
 import React, {useRef, useState} from 'react';
 import bem from 'easy-bem';
-import './GamePage.scss';
 import Game from 'components/Game';
 import FullscreenButton from 'components/FullscreenButton';
-import {useFullscreen} from 'misc/hooks';
+import {useFullscreen} from 'common/hooks';
+import {GamePageViewEnum} from 'common/enums/GamePageViewEnum';
+import './GamePage.scss';
+
 import {ViewType} from './types';
-import {GamePageViewEnum} from '../../enums/GamePageViewEnum';
 import Start from './views/Start';
 import Finish from './views/Finish';
 

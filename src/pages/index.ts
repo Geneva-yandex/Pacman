@@ -2,7 +2,7 @@ import LoginPage from './LoginPage';
 import GamePage from './GamePage';
 import ForumPage from './ForumPage';
 import TopicPage from './TopicPage';
-import SignUpPage from './SignPage';
+import SignUpPage from './SignUpPage';
 import StartPage from './StartPage';
 import ProfilePage from './ProfilePage';
 import LeaderboardPage from './LeaderboardPage';

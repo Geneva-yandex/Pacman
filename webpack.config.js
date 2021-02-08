@@ -120,10 +120,10 @@ module.exports = env => {
             alias: {
                 public: PATHS.public,
                 api: `${PATHS.src}/api`,
+                common: `${PATHS.src}/common`,
                 components: `${PATHS.src}/components`,
                 pages: `${PATHS.src}/pages`,
                 types: `${PATHS.src}/types`,
-                misc: `${PATHS.src}/misc`
             }
         },
         plugins: [

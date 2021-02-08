@@ -1,14 +1,14 @@
 import React from 'react';
-import {useForm} from 'misc/hooks';
-import {IPsswordsDto} from 'types/interfaces';
+import {useForm} from 'common/hooks';
+import {IPasswordsDto} from 'common/types/interfaces';
 import {Input, Button} from 'components/ui';
 
 interface IPasswordFormProps {
-    onSave: (passwords: IPsswordsDto) => void;
+    onSave: (passwords: IPasswordsDto) => void;
 }
 
 const PasswordForm = ({onSave}: IPasswordFormProps) => {
-    const {values, handleChange, handleSubmit} = useForm<IPsswordsDto>({
+    const {values, handleChange, handleSubmit} = useForm<IPasswordsDto>({
         initialValues: {
             oldPassword: '',
             newPassword: ''
@@ -17,7 +17,7 @@ const PasswordForm = ({onSave}: IPasswordFormProps) => {
     });
 
     return <React.Fragment>
-        <form className='profile-form' onSubmit={handleSubmit}>
+        <form className='form' onSubmit={handleSubmit}>
             <Input type='password' name='oldPassword' title='Old Password'
                 value={values.oldPassword} onChange={handleChange} />
             <Input type='password' name='newPassword' title='New Password'

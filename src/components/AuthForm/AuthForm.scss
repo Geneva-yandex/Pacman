@@ -1,7 +1,9 @@
 .AuthForm {
-  &__remember-btn {
-    margin-bottom: 30px;
+  &__submit {
+    margin: 25px 0 15px;
+  }
 
+  &.form &__remember-btn {
     .Input__label {
       margin: 0;
     }
@@ -11,8 +13,10 @@
       align-items: center;
     }
 
-    input {
+    .Input__control {
       order: -1;
+      height: initial;
+      width: initial;
     }
   }
 }

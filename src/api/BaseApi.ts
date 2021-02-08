@@ -1,4 +1,4 @@
-import {BASE_API_URL} from 'misc/constants';
+import {BASE_API_URL} from 'common/constants';
 import axios, {AxiosResponse} from 'axios';
 
 axios.defaults.withCredentials = true;

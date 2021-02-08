@@ -14,10 +14,10 @@ import {
     getDirectionType,
     getDirectionByKeyCode
 } from '../helpers';
-import {UserDirectionEnum} from '../../../enums/UserDirectionEnum';
-import {GameItemsEnum} from '../../../enums/GameItemsEnum';
+import {UserDirectionEnum} from '../../../common/enums/UserDirectionEnum';
+import {GameItemsEnum} from '../../../common/enums/GameItemsEnum';
 import {isSuitableValue} from '../helpers';
-import {UserDirectionTypeEnum} from '../../../enums/UserDirectionTypeEnum';
+import {UserDirectionTypeEnum} from '../../../common/enums/UserDirectionTypeEnum';
 
 const b = bem('Canvas');
 

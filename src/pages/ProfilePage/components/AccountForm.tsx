@@ -1,17 +1,13 @@
 import React from 'react';
-import {IUser} from 'types/interfaces';
-import {useForm} from 'misc/hooks';
+import {IUser} from 'common/types/interfaces';
+import {useForm} from 'common/hooks';
 import {Input, Button} from 'components/ui';
 
 interface IAccountFormProps {
-    user: IUser;
+    user: IUser | null;
     onSave: (user: IUser) => void;
 }
 
-// eslint-disable-next-line no-warning-comments
-// TODO: Добавить feedback результата обновления профиля
-// eslint-disable-next-line no-warning-comments
-// TODO: Добавить валидатор в useForm
 const AccountForm = ({user, onSave}: IAccountFormProps) => {
     const {values, handleChange, handleSubmit} = useForm<IUser>({
         initialValues: user,
@@ -19,7 +15,7 @@ const AccountForm = ({user, onSave}: IAccountFormProps) => {
     });
 
     return <React.Fragment>
-        <form className='profile-form' onSubmit={handleSubmit}>
+        <form className='form' onSubmit={handleSubmit}>
             <Input type='text' name='second_name' title='Last Name'
                 value={values.second_name} onChange={handleChange}/>
 

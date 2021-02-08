@@ -1,4 +1,4 @@
-import {IComment, ITopic} from '../../types/ForumTypes';
+import {IComment, ITopic} from '../../common/types/ForumTypes';
 import {RouteComponentProps} from 'react-router';
 
 export interface ITopicPageProps extends RouteComponentProps<{topicId: string}> {

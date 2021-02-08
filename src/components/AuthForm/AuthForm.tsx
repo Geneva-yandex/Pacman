@@ -5,9 +5,10 @@ import authApi from 'api/AuthApi';
 import {ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
 import {connect} from 'react-redux';
-import {UserDTO as userItem} from '../../types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
+import cn from 'classnames';
+import {IUser} from 'common/types/interfaces';
 import {DispatchAdding} from '../../store/user/actionTypes';
 import {setUser} from '../../store/user/actions';
 import {IStoreState} from '../../store/types';
@@ -83,11 +84,15 @@ class AuthForm extends React.Component<ComponentProps, State> {
 
     public render() {
         return (
-            <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
-                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
+            <form className={cn('form', b())} onSubmit={this.onSubmit}>
+                <Input onChange={this.onControlChange} name='login' title='Login' type='text' />
+                <Input onChange={this.onControlChange} name='password' title='Password' type='password' placeholder='*******' />
+
+                <div className={b('submit')}>
+                    <Button block>Sign In</Button>
+                </div>
+
                 <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me' className={b('remember-btn')}/>
-                <Button block>Sign In</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>
@@ -97,7 +102,7 @@ class AuthForm extends React.Component<ComponentProps, State> {
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
-    setUser: (user: userItem) => {
+    setUser: (user: IUser) => {
         dispatch(setUser(user));
     }
 });

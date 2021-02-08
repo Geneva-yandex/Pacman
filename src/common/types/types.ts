@@ -12,12 +12,3 @@ export type LogInValueObject = {
     password: string;
     remember: boolean;
 };
-
-export type UserDTO = {
-    id: number;
-    first_name: string;
-    second_name: string;
-    display_name: string;
-    login: string;
-    email: string;
-};

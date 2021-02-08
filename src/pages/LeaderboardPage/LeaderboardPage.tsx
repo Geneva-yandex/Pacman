@@ -1,6 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import {IUser} from 'types/interfaces';
+import {IUser} from 'common/types/interfaces';
 import LeaderboardItem from './components/LeaderboardItem';
 
 const b = bem('InnerPage');

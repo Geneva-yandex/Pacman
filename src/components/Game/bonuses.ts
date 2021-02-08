@@ -1,4 +1,4 @@
-import {GameItemsEnum} from '../../enums/GameItemsEnum';
+import {GameItemsEnum} from '../../common/enums/GameItemsEnum';
 
 export default {
     [GameItemsEnum.Cookie]: 10,

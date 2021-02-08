@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {PureComponent} from 'react';
 import classnames from 'classnames';
 import {NavLink} from 'react-router-dom';
 import {RouteComponentProps, withRouter} from 'react-router';
@@ -22,7 +22,7 @@ interface ISidebarProps {
     className?: string;
 }
 
-class Sidebar extends React.PureComponent<RouteComponentProps & ISidebarProps> {
+class Sidebar extends PureComponent<RouteComponentProps & ISidebarProps> {
     render() {
         return (
             <aside className={classnames(this.props.className, b())}>
