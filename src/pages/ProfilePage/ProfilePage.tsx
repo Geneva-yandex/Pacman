@@ -8,6 +8,7 @@ import {AuthApi, UserApi} from 'api';
 import {AccountForm, AvatarForm, PasswordForm} from './components';
 import {ProfileTabs} from './types';
 import './ProfilePage.scss';
+import Meta from '../../components/Meta/Meta';
 
 interface IProfilePageState {
     currentTab: ProfileTabs;
@@ -38,6 +39,7 @@ class ProfilePage extends React.PureComponent<RouteComponentProps, IProfilePageS
         const {user, currentTab} = this.state;
 
         return <div className={b()}>
+            <Meta title={'Profile'}/>
             <header className={b('header')}>
                 <h1>Profile</h1>
             </header>

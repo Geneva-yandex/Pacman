@@ -3,15 +3,10 @@ import bem from 'easy-bem';
 import {FormEvent} from 'react';
 import authApi from 'api/AuthApi';
 import {ChangeEvent} from 'react';
-import {withRouter, RouteComponentProps} from 'react-router';
 import {connect} from 'react-redux';
-import {UserDTO as userItem} from '../../types/types';
-import {ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
-import {DispatchAdding} from '../../store/user/actionTypes';
-import {setUser} from '../../store/user/actions';
-import {IStoreState} from '../../store/types';
+import {IStore} from '../../store/types';
 import {Input, Button} from '../ui';
+import {boundActions} from '../../store/initClientStore';
 import './AuthForm.scss';
 
 const b = bem('AuthForm');
@@ -25,13 +20,10 @@ type State = {
 
 };
 type StateProps = {
-    user: IStoreState['user'];
+    user: IStore['user'];
 };
 
-interface ComponentProps extends RouteComponentProps {
-    setUser: DispatchAdding['setUser']
-}
-class AuthForm extends React.Component<ComponentProps, State> {
+class AuthForm extends React.Component<{}, State> {
     state = {
         login: '',
         password: '',
@@ -50,7 +42,6 @@ class AuthForm extends React.Component<ComponentProps, State> {
 
     onSubmit = (event: FormEvent) => {
         event.preventDefault();
-        const {setUser} = this.props;
         const remember = this.state.remember === 'on';
         const {login, password} = this.state;
         const logInData = {
@@ -71,8 +62,8 @@ class AuthForm extends React.Component<ComponentProps, State> {
                 }
 
                 const userData = resp.data;
-                setUser(userData);
-                this.props.history.push('/');
+                boundActions.user.setUser(userData);
+                boundActions.router.push('/');
             })
             .catch(err => {
                 this.setState({
@@ -87,7 +78,7 @@ class AuthForm extends React.Component<ComponentProps, State> {
                 <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
                 <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
                 <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me' className={b('remember-btn')}/>
-                <Button block>Sign In</Button>
+                <Button aperance={'block'}>Sign In</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>
@@ -96,13 +87,7 @@ class AuthForm extends React.Component<ComponentProps, State> {
     }
 }
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
-    setUser: (user: userItem) => {
-        dispatch(setUser(user));
-    }
-});
-
-const mapStateToProps = (state: IStoreState): StateProps => ({
+const mapStateToProps = (state: IStore): StateProps => ({
     user: state.user
 });
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));
+export default connect(mapStateToProps)(AuthForm);

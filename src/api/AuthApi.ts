@@ -1,5 +1,5 @@
 import {BaseApi} from './BaseApi';
-import {SignUpValueObject, LogInValueObject} from '../types/types';
+import {SignUpValueObject, LogInValueObject} from '../types/UserTypes';
 import {IUser} from '../types/interfaces';
 import {AxiosResponse} from 'axios';
 

@@ -14,7 +14,6 @@ export default class Layout extends React.PureComponent {
         return (
             <div className={b()}>
                 <Sidebar className={b('sidebar')} />
-
                 <div className={b('content')}>
                     <header className={b('header')}>
                         <div className='container-fluid'>

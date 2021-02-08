@@ -5,6 +5,7 @@ import {ITopic} from '../../types/ForumTypes';
 import './ForumPage.scss';
 import TopicCard from '../../components/TopicCard';
 import TopicForm from './views/TopicForm';
+import Meta from '../../components/Meta/Meta';
 
 const b = bem('ForumPage');
 
@@ -12,6 +13,7 @@ export default class ForumPage extends React.PureComponent {
     render() {
         return (
             <div className={b()}>
+                <Meta title={'Forum'}/>
                 <div className={'container-fluid'}>
                     <h1>Forum</h1>
                     <div className={b('form-wrap')}>

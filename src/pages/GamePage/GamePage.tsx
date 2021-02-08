@@ -6,6 +6,7 @@ import Finish from './views/Finish';
 import Game from '../../components/Game';
 import {ViewType} from './types';
 import {GamePageViewEnum} from '../../enums/GamePageViewEnum';
+import Meta from '../../components/Meta/Meta';
 
 const b = bem('GamePage');
 
@@ -20,6 +21,7 @@ export default class GamePage extends React.PureComponent<{}, IStateGamePage> {
     render() {
         return (
             <div className={b()}>
+                <Meta title={'Game'}/>
                 <div className={'container-fluid'}>
                     {this.renderView()}
                 </div>

@@ -10,8 +10,8 @@ const Button = (props?: IButtonProps) => {
     const className = classnames(b(), props?.className, {
         [`${b()}--primary`]: props?.aperance === 'primary',
         [`${b()}--outlined`]: props?.aperance === 'outlined',
-        [`${b()}--small`]: props?.size === 'small',
-        [`${b()}--block`]: props?.block
+        [`${b()}--block`]: props?.aperance === 'block',
+        [`${b()}--small`]: props?.size === 'small'
     });
 
     return <button className={className} {...props}>{props?.children}</button>;

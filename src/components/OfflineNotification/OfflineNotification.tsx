@@ -1,11 +1,16 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './OfflineNotification.scss';
+import isServer from '../../misc/utils/isServer';
 
 const b = bem('OfflineNotification');
 
 export default class OfflineNotification extends React.PureComponent {
     render() {
+        if (isServer) {
+            return null;
+        }
+
         return !navigator.onLine && (
             <div className={b()}>
                 <div className='container-fluid'>

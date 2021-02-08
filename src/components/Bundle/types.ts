@@ -10,8 +10,3 @@ export type RouteType = {
     isNavVisible: boolean;
     isProtected?: boolean;
 };
-
-export interface IRouterProps {
-    routes: RouteType[],
-    layout: any,
-}

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import {NavLink} from 'react-router-dom';
-import {RouteComponentProps, withRouter} from 'react-router';
 import SVG from 'react-inlinesvg';
 import bem from 'easy-bem';
 import './Sidebar.scss';
 import AuthApi from '../../api/AuthApi';
 import {Tooltip} from '../ui';
+import {boundActions} from '../../store/initClientStore';
 
 import {
     GameIcon,
@@ -22,7 +22,7 @@ interface ISidebarProps {
     className?: string;
 }
 
-class Sidebar extends React.PureComponent<RouteComponentProps & ISidebarProps> {
+class Sidebar extends React.PureComponent<ISidebarProps> {
     render() {
         return (
             <aside className={classnames(this.props.className, b())}>
@@ -80,7 +80,7 @@ class Sidebar extends React.PureComponent<RouteComponentProps & ISidebarProps> {
 
             if (response.status === 200) {
                 localStorage.removeItem('user');
-                this.props.history.push('/login');
+                boundActions.router.push('/login');
             }
         } catch (error) {
             this.setState({
@@ -90,4 +90,4 @@ class Sidebar extends React.PureComponent<RouteComponentProps & ISidebarProps> {
     };
 }
 
-export default withRouter(Sidebar);
+export default Sidebar;

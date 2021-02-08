@@ -2,6 +2,7 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import {IUser} from 'types/interfaces';
 import LeaderboardItem from './components/LeaderboardItem';
+import Meta from '../../components/Meta/Meta';
 
 const b = bem('InnerPage');
 
@@ -20,6 +21,7 @@ const user: IUser = {
 class LeaderboardPage extends React.PureComponent {
     render() {
         return <div className={b()}>
+            <Meta title={'Leaderboard'}/>
             <header className={b('header')}>
                 <h1>Leaderboard</h1>
             </header>

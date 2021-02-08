@@ -1,35 +1,22 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {UserDTO as userItem} from '../../types/types';
-import {ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
-import {DispatchAdding, pendingUserType} from '../../store/user/actionTypes';
-import {setUser, pendingUser} from '../../store/user/actions';
 import AuthApi from 'api/AuthApi';
-import {IStoreState as state} from '../../store/types';
+import {IStore as state} from '../../store/types';
+import {boundActions} from '../../store/initClientStore';
 
-type StateProps = {
-    user: unknown;
-};
-
-type ComponentState = {
-    user: {}
-};
-
-interface DispatchToProps {
-    setUser: DispatchAdding['setUser'],
-    onGettingUser: pendingUserType['onGettingUser']
+interface IProps {
+    user: any
 }
 
 function withUser(WrappedComponent: typeof React.Component) {
-    class withUser extends React.Component<DispatchToProps, ComponentState> {
+    class withUser extends React.Component<IProps> {
         componentDidMount(): void {
-            const {onGettingUser, setUser} = this.props;
-            onGettingUser();
+            boundActions.user.pendingUser();
+
             AuthApi
                 .getUserInfo()
                 .then(res => {
-                    setUser(res.data);
+                    boundActions.user.setUser(res.data);
                 });
         }
 
@@ -40,20 +27,11 @@ function withUser(WrappedComponent: typeof React.Component) {
         }
     }
 
-    const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchToProps => ({
-        setUser: (user: userItem) => {
-            dispatch(setUser(user));
-        },
-        onGettingUser: () => {
-            dispatch(pendingUser());
-        }
-    });
-
-    const mapStateToProps = (state: state): StateProps => ({
+    const mapStateToProps = (state: state) => ({
         user: state.user
     });
 
-    return connect(mapStateToProps, mapDispatchToProps)(withUser);
+    return connect(mapStateToProps)(withUser);
 }
 
 export default withUser;

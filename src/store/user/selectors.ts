@@ -1,5 +1,5 @@
 import {createSelector} from 'reselect';
-import {IStoreState as stateType} from '../types';
+import {IStore as stateType} from '../types';
 const fullNameSelector = createSelector(
     (state: stateType) => {
         if (state.user.item !== null) {

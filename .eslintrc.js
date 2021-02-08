@@ -36,5 +36,6 @@ module.exports = {
         "no-alert": "off",
         "no-undef": "off",
         "no-void": "off",
+        "no-empty": ["error"]
     }
 }

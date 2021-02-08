@@ -1,30 +1,24 @@
 import React from 'react';
-import {
-    BrowserRouter,
-    Switch,
-    Route
-} from 'react-router-dom';
-import {IRouterProps, RouteType} from './types';
+import {Switch, Route} from 'react-router-dom';
+import {RouteType} from './types';
 import PrivateRoute from '../PrivateRoute';
-import {SignUpValueObject} from '../../types/types';
+import {SignUpValueObject} from '../../types/UserTypes';
+import Layout from '../Layout/Layout';
+import routes from '../../pages/index';
 
-class Router extends React.Component<IRouterProps> {
+class Bundle extends React.Component<{}> {
     user: {
         item: SignUpValueObject | null,
         status: string
     };
 
     public render() {
-        const Layout = this.props.layout;
-
         return (
-            <BrowserRouter>
-                <Layout>
-                    <Switch>
-                        {this.props.routes.map(route => this.renderRoute(route))}
-                    </Switch>
-                </Layout>
-            </BrowserRouter>
+            <Layout>
+                <Switch>
+                    {routes.map(route => this.renderRoute(route))}
+                </Switch>
+            </Layout>
         );
     }
 
@@ -53,4 +47,4 @@ class Router extends React.Component<IRouterProps> {
     }
 }
 
-export default (Router);
+export default Bundle;
