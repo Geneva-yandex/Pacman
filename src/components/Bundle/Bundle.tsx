@@ -2,6 +2,7 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import {RouteType} from './types';
 import PrivateRoute from '../PrivateRoute';
+import {hot} from 'react-hot-loader/root';
 import {SignUpValueObject} from '../../types/UserTypes';
 import Layout from '../Layout/Layout';
 import routes from '../../pages/index';
@@ -47,4 +48,4 @@ class Bundle extends React.Component<{}> {
     }
 }
 
-export default Bundle;
+export default hot(Bundle);

@@ -1,6 +1,6 @@
-const { app } = require('./dist/server.js');
+import app from './app';
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 9001;
 
 app.listen(port, () => {
     console.log(`Application is started on localhost:${port}`);

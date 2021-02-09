@@ -24,7 +24,7 @@ const getClientConfig = (env: any) => {
             bundle: [
                 isDevelopment && 'react-hot-loader/patch',
                 isDevelopment && 'css-hot-loader/hotModuleReplacement',
-                path.join(PATHS.src, 'client')
+                path.join(PATHS.src, 'index')
             ].filter(Boolean)
         },
         output: {

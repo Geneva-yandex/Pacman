@@ -10,13 +10,14 @@ import nodeExternals from 'webpack-node-externals';
 
 const getServerConfig = (env: any) => {
     const isDevelopment = env.NODE_ENV === 'development';
+    console.log(isDevelopment)
 
     return {
         target: 'node',
         node: {
             __dirname: false
         },
-        entry: path.join(PATHS.src, 'server'),
+        entry: path.join(PATHS.server, 'index'),
         output: {
             filename: 'server.js',
             libraryTarget: 'commonjs2',
