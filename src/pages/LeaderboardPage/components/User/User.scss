@@ -1,0 +1,22 @@
+.User {
+  display: flex;
+
+  &__avatar {
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+
+  &__login,
+  &__name {
+    display: block;
+  }
+
+  &__login {
+    margin-bottom: 6px;
+  }
+
+  &__name {
+    font-size: 14px;
+    font-weight: 400;
+  }
+}

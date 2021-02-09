@@ -1,2 +1,5 @@
 import Layout from './Layout';
-export default Layout;
+import withUser from '../hocs/withUser';
+
+const LayoutComponent = withUser(Layout);
+export default LayoutComponent;

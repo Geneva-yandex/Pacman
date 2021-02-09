@@ -3,7 +3,7 @@ import bem from 'easy-bem';
 import {Link} from 'react-router-dom';
 import './TopicCard.scss';
 import {ITopicCardProps} from './types';
-import {ITopic} from '../../types/ForumTypes';
+import {ITopic} from '../../common/types/ForumTypes';
 
 const b = bem('TopicCard');
 

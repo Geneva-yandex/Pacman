@@ -2,8 +2,8 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import './TopicPage.scss';
 import {withRouter} from 'react-router';
-import forumData from '../../data/forum-data';
-import {IComment, ITopic} from '../../types/ForumTypes';
+import forumData from '../../common/data/forum-data';
+import {IComment, ITopic} from '../../common/types/ForumTypes';
 import TopicCard from '../../components/TopicCard';
 import CommentForm from './views/CommentForm';
 import Comment from './views/Comment';
@@ -22,7 +22,7 @@ class TopicPage extends React.PureComponent<ITopicPageProps, ITopicPageState> {
 
     componentDidMount() {
         const topicId = this.props.match?.params?.topicId;
-        const topic = forumData.find((topic:ITopic) => topic.id === Number(topicId));
+        const topic = forumData.find((topic: ITopic) => topic.id === Number(topicId));
         this.setState({
             topic: topic || null,
             isLoading: false

@@ -1,0 +1,22 @@
+.AuthForm {
+  &__submit {
+    margin: 25px 0 15px;
+  }
+
+  &.form &__remember-btn {
+    .Input__label {
+      margin: 0;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+    }
+
+    .Input__control {
+      order: -1;
+      height: initial;
+      width: initial;
+    }
+  }
+}

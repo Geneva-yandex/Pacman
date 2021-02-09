@@ -1,10 +1,9 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import './Canvas.scss';
 import {CoordsType, ICanvasProps, MapType, UserDirectionType, AvailableCellsCountParamsType} from '../types';
 import mapData from '../maps/basic';
-import Map from '../components/Map';
-import User from '../components/User';
+import Map from '../models/Map';
+import User from '../models/User';
 import {
     convertToPixel,
     getCell,
@@ -15,10 +14,10 @@ import {
     getDirectionType,
     getDirectionByKeyCode
 } from '../helpers';
-import {UserDirectionEnum} from '../../../enums/UserDirectionEnum';
-import {GameItemsEnum} from '../../../enums/GameItemsEnum';
+import {UserDirectionEnum} from '../../../common/enums/UserDirectionEnum';
+import {GameItemsEnum} from '../../../common/enums/GameItemsEnum';
 import {isSuitableValue} from '../helpers';
-import {UserDirectionTypeEnum} from '../../../enums/UserDirectionTypeEnum';
+import {UserDirectionTypeEnum} from '../../../common/enums/UserDirectionTypeEnum';
 
 const b = bem('Canvas');
 
@@ -77,7 +76,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
 
     initComponents() {
         const componentProps = {
-            ctx: this.ctx
+            ctx: this.ctx as CanvasRenderingContext2D
         };
 
         this.mapComponent = new Map(componentProps);
@@ -143,7 +142,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         this.animateUser(newDirection, this.userPosition);
     }
 
-    animateUser(userDirection: UserDirectionType, userPosition:CoordsType) {
+    animateUser(userDirection: UserDirectionType, userPosition: CoordsType) {
         const cell = Math.round(getCell(userPosition));
         const row = Math.round(getRow(userPosition));
         const isVerticalDirection = getDirectionType(userDirection) === UserDirectionTypeEnum.Vertical;
@@ -163,7 +162,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         const duration = availableCellsCount * this.props.speed;
         let start = performance.now();
 
-        const animate = (time:number) => {
+        const animate = (time: number) => {
             let timeFraction = Math.abs((time - start) / duration);
 
             if (timeFraction > 1) {
@@ -192,7 +191,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         this.requestAnimationId = requestAnimationFrame(animate);
     }
 
-    getAvailableCellsCount(params: AvailableCellsCountParamsType):number {
+    getAvailableCellsCount(params: AvailableCellsCountParamsType): number {
         const step = params.isPositiveDirection ? 1 : -1;
 
         let cellsCount = 0;

@@ -1,37 +1,30 @@
-import * as React from 'react';
+import React from 'react';
 import {
     BrowserRouter,
     Switch,
     Route
 } from 'react-router-dom';
 import {IRouterProps, RouteType} from './types';
+import PrivateRoute from '../PrivateRoute';
 
-export default class Router extends React.PureComponent<IRouterProps> {
-    render() {
-        const Layout = this.props.layout;
-        return (
-            <BrowserRouter>
-                <Layout>
-                    <Switch>
-                        {this.props.routes.map(route => this.renderRoute(route))}
-                    </Switch>
-                </Layout>
-            </BrowserRouter>
-        );
+const Router = (props: IRouterProps) => {
+    const Layout = props.layout;
+
+    function renderRoute({path, exact, id, component, isProtected}: RouteType) {
+        const routeProps = {path, exact: Boolean(exact), key: id, component};
+        const RouteProvider = isProtected ? PrivateRoute : Route;
+        return <RouteProvider {...routeProps} />;
     }
 
-    renderRoute(route: RouteType) {
-        /* Const Component = route.component; */
+    return (
+        <BrowserRouter>
+            <Layout>
+                <Switch>
+                    {props.routes.map(route => renderRoute(route))}
+                </Switch>
+            </Layout>
+        </BrowserRouter>
+    );
+};
 
-        return (
-            <Route
-                path={route.path}
-                exact={route.exact}
-                key={route.id}
-                component={route.component}
-            >
-                {/* <Component/> */}
-            </Route>
-        );
-    }
-}
+export default Router;

@@ -5,7 +5,7 @@ import {IGameState} from './types';
 import {IViewProps} from '../../pages/GamePage/types';
 import Canvas from './views/Canvas';
 import bonuses from './bonuses';
-import {GameItemsEnum} from '../../enums/GameItemsEnum';
+import {GameItemsEnum} from '../../common/enums/GameItemsEnum';
 
 const b = bem('Game');
 
