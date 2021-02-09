@@ -27,6 +27,7 @@ class LeaderboardPage extends React.PureComponent {
             </header>
 
             <div className={b('main')}>
+                2
                 <LeaderboardItem user={user} position={1} rank={266} />
                 <LeaderboardItem user={user} position={2} rank={156} />
                 <LeaderboardItem user={user} position={3} rank={25} />

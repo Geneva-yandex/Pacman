@@ -9,17 +9,22 @@ import path from 'path';
 import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import TerserPlugin from 'terser-webpack-plugin'
+import TerserPlugin from 'terser-webpack-plugin';
 import {InjectManifest} from 'workbox-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 
 const getClientConfig = (env: any) => {
     const isDevelopment = env.NODE_ENV === 'development';
 
     return {
+        target: 'web',
         mode: isDevelopment ? 'development' : 'production',
         entry: {
             bundle: [
-                path.join(PATHS.src, 'client'),
+                isDevelopment && 'react-hot-loader/patch',
+                isDevelopment && 'css-hot-loader/hotModuleReplacement',
+                path.join(PATHS.src, 'client')
             ].filter(Boolean)
         },
         output: {
@@ -51,15 +56,29 @@ const getClientConfig = (env: any) => {
                 components: `${PATHS.src}/components`,
                 pages: `${PATHS.src}/pages`,
                 types: `${PATHS.src}/types`,
-                misc: `${PATHS.src}/misc`
+                misc: `${PATHS.src}/misc`,
+                'react-dom': '@hot-loader/react-dom'
             }
         },
+        devServer: {
+            port: 9000,
+            historyApiFallback: true,
+            hot: true
+        },
         plugins: [
+            isDevelopment && new webpack.HotModuleReplacementPlugin(),
+            new CleanWebpackPlugin(),
+            new HtmlWebpackPlugin({
+                filename: 'index.html',
+                template: './src/index.html',
+                inject: 'body',
+                chunks: ['bundle', 'vendor']
+            }),
             new CopyPlugin({
                 patterns: [
                     {from: path.join(PATHS.public, 'fonts'), to: './fonts'},
                     {from: path.join(PATHS.public, 'images'), to: './images'},
-                    {from: path.join(PATHS.public, 'offline.html'), to: './'},
+                    {from: path.join(PATHS.public, 'offline.html'), to: './'}
                 ]
             }),
             new MiniCssExtractPlugin({

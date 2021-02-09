@@ -24,4 +24,7 @@ if (isProduction) {
     startServiceWorker();
 }
 
-hydrate(<Application/>, document.getElementById('root'));
+hydrate(
+    <Application/>,
+    document.getElementById('root')
+);

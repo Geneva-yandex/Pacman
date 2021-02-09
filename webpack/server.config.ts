@@ -51,8 +51,8 @@ const getServerConfig = (env: any) => {
         plugins: [
             new webpack.DefinePlugin({
                 NODE_ENV: JSON.stringify(env.NODE_ENV)
-            }),
-        ]
+            })
+        ].filter(Boolean)
     };
 };
 
