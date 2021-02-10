@@ -15,7 +15,6 @@ import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 
 const getClientConfig = (env: any) => {
     const isDevelopment = env.NODE_ENV === 'development';
-    console.log(isDevelopment, 'isDevelopment');
 
     return {
         target: 'web',

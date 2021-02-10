@@ -8,14 +8,14 @@ import render from './render';
 
 function getWebpackMiddlewares(): RequestHandler[] {
     const config = webpackConfig(process.env) as Configuration;
-    console.log(config);
     const compiler = webpack({...config, mode: 'development'});
 
     return [
         devMiddleware(compiler, {
             publicPath: config.output!.publicPath! as string,
             serverSideRender: true,
-            writeToDisk: true
+            writeToDisk: true,
+
         }),
         hotMiddleware(compiler, {path: '/__webpack_hmr'})
     ];
