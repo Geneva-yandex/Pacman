@@ -34,7 +34,7 @@ module.exports = env => {
             host: '0.0.0.0',
             hot: true,
             contentBase: PATHS.dist,
-            port: 4000,
+            port: 5000,
             publicPath: '/',
             historyApiFallback: true
         },

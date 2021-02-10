@@ -2,6 +2,7 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import {FormEvent} from 'react';
 import authApi from 'api/AuthApi';
+import oAuthApi from 'api/OAuthApi';
 import {ChangeEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
 import {connect} from 'react-redux';
@@ -30,7 +31,9 @@ type StateProps = {
 
 interface ComponentProps extends RouteComponentProps {
     setUser: DispatchAdding['setUser']
+    user: IStoreState['user'];
 }
+
 class AuthForm extends React.Component<ComponentProps, State> {
     state = {
         login: '',
@@ -39,6 +42,13 @@ class AuthForm extends React.Component<ComponentProps, State> {
         errorMessage: ''
     };
 
+    UNSAFE_componentWillReceiveProps(nextProps: Readonly<ComponentProps>): void {
+        console.log(nextProps);
+        if (nextProps.user.item !== null) {
+            this.props.history.push('/');
+        }
+    }
+
     onControlChange = (event: ChangeEvent) => {
         const target = event.target;
         const value = (target as HTMLInputElement).value;
@@ -46,6 +56,17 @@ class AuthForm extends React.Component<ComponentProps, State> {
         this.setState({
             [propertyName]: value
         });
+    };
+
+    oAuth = () => {
+        oAuthApi.getOAuthClientID()
+            .then(res => {
+                const CLIENT_ID = res.data.service_id;
+
+                const URL = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${CLIENT_ID}`;
+
+                document.location.href = URL;
+            });
     };
 
     onSubmit = (event: FormEvent) => {
@@ -83,15 +104,24 @@ class AuthForm extends React.Component<ComponentProps, State> {
 
     public render() {
         return (
-            <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
-                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
-                <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me' className={b('remember-btn')}/>
-                <Button block>Sign In</Button>
-                <div className='error'>
-                    {this.state.errorMessage}
-                </div>
-            </form>
+            <div>
+
+                <Button onClick={this.oAuth}>Yandex account</Button>
+
+                <form className={b()} onSubmit={this.onSubmit}>
+
+                    <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text'
+                        placeholder='Логин'/>
+                    <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password'
+                        placeholder='*******'/>
+                    <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me'
+                        className={b('remember-btn')}/>
+                    <Button block>Sign In</Button>
+                    <div className='error'>
+                        {this.state.errorMessage}
+                    </div>
+                </form>
+            </div>
         );
     }
 }
