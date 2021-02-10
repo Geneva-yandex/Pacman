@@ -1,11 +1,11 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './Game.scss';
+import {GameItemsEnum} from 'common/enums';
 import {IGameState} from './types';
-import {IViewProps} from '../../pages/GamePage/types';
+import {IViewProps} from 'pages/GamePage/types';
 import Canvas from './views/Canvas';
 import bonuses from './bonuses';
-import {GameItemsEnum} from '../../common/enums/GameItemsEnum';
 
 const b = bem('Game');
 

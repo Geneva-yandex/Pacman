@@ -1,5 +1,5 @@
 import {BaseApi} from './BaseApi';
-import {IUser, IPasswordsDto, IUserProfileDto} from '../common/types/interfaces';
+import {IUser, IPasswordsDto, IUserProfileDto} from 'common/types/interfaces';
 import {AxiosResponse} from 'axios';
 
 class UserApi extends BaseApi {

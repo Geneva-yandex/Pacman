@@ -1,10 +1,10 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import forumData from '../../common/data/forum-data';
-import {ITopic} from '../../common/types/ForumTypes';
-import './ForumPage.scss';
-import TopicCard from '../../components/TopicCard';
+import forumData from 'common/data/forum-data';
+import {ITopic} from 'common/types/ForumTypes';
+import TopicCard from 'components/TopicCard';
 import TopicForm from './views/TopicForm';
+import './ForumPage.scss';
 
 const b = bem('ForumPage');
 

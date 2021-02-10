@@ -1,7 +1,7 @@
 import * as React from 'react';
 import bem from 'easy-bem';
+import {Button} from 'components/ui';
 import {IViewProps} from '../types';
-import {Button} from '../../../components/ui';
 
 const b = bem('Finish');
 
