@@ -11,25 +11,25 @@ import CopyPlugin from 'copy-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import {InjectManifest} from 'workbox-webpack-plugin';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 
 const getClientConfig = (env: any) => {
     const isDevelopment = env.NODE_ENV === 'development';
+    console.log(isDevelopment, 'isDevelopment');
 
     return {
         target: 'web',
         mode: isDevelopment ? 'development' : 'production',
         entry: {
             bundle: [
-                isDevelopment && 'react-hot-loader/patch',
                 isDevelopment && 'css-hot-loader/hotModuleReplacement',
+                isDevelopment && 'webpack-hot-middleware/client?path=/__webpack_hmr',
                 path.join(PATHS.src, 'index')
             ].filter(Boolean)
         },
         output: {
             filename: '[name].js',
-            path: PATHS.dist,
+            path: path.join(PATHS.dist, 'public'),
             publicPath: '/'
         },
         devtool: isDevelopment ? 'source-map' : false,
@@ -60,25 +60,14 @@ const getClientConfig = (env: any) => {
                 'react-dom': '@hot-loader/react-dom'
             }
         },
-        devServer: {
-            port: 9000,
-            historyApiFallback: true,
-            hot: true
-        },
         plugins: [
             isDevelopment && new webpack.HotModuleReplacementPlugin(),
             new CleanWebpackPlugin(),
-            new HtmlWebpackPlugin({
-                filename: 'index.html',
-                template: './src/index.html',
-                inject: 'body',
-                chunks: ['bundle', 'vendor']
-            }),
             new CopyPlugin({
                 patterns: [
-                    {from: path.join(PATHS.public, 'fonts'), to: './fonts'},
-                    {from: path.join(PATHS.public, 'images'), to: './images'},
-                    {from: path.join(PATHS.public, 'offline.html'), to: './'}
+                    {from: path.join(PATHS.public, 'fonts'), to: './public/fonts'},
+                    {from: path.join(PATHS.public, 'images'), to: './public/images'},
+                    {from: path.join(PATHS.public, 'offline.html'), to: './public'}
                 ]
             }),
             new MiniCssExtractPlugin({

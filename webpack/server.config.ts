@@ -10,13 +10,13 @@ import nodeExternals from 'webpack-node-externals';
 
 const getServerConfig = (env: any) => {
     const isDevelopment = env.NODE_ENV === 'development';
-    console.log(isDevelopment)
 
     return {
         target: 'node',
         node: {
             __dirname: false
         },
+        mode: isDevelopment ? 'development' : 'production',
         entry: path.join(PATHS.server, 'index'),
         output: {
             filename: 'server.js',
