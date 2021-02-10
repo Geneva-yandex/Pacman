@@ -9,9 +9,9 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import cn from 'classnames';
 import {IUser} from 'common/types/interfaces';
-import {DispatchAdding} from '../../store/user/actionTypes';
-import {setUser} from '../../store/user/actions';
-import {IStoreState} from '../../store/types';
+import {DispatchAdding} from 'store/user/actionTypes';
+import {setUser} from 'store/user/actions';
+import {IStoreState} from 'store/types';
 import {Input, Button} from '../ui';
 import './AuthForm.scss';
 
