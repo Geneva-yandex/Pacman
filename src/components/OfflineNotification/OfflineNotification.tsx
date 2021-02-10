@@ -1,5 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
+import {Button} from '../ui';
 import './OfflineNotification.scss';
 
 const b = bem('OfflineNotification');
@@ -16,9 +17,9 @@ export default class OfflineNotification extends React.PureComponent {
                             <br/>
                             Click the button below to try reloading.
                         </p>
-                        <button onClick={() => window.location.reload()}>
+                        <Button onClick={() => window.location.reload()}>
                             &#128260; Reload
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>

@@ -27,5 +27,6 @@
         "common/*": [ "common/*" ],
         "pages/*": [ "pages/*" ],
         "types/*": [ "types/*" ],
+        "store/*": [ "store/*" ]
     }
 }

@@ -2,8 +2,9 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import {Link} from 'react-router-dom';
 import './TopicCard.scss';
+
+import {ITopic} from 'common/types/ForumTypes';
 import {ITopicCardProps} from './types';
-import {ITopic} from '../../common/types/ForumTypes';
 
 const b = bem('TopicCard');
 

@@ -1,14 +1,16 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './IndexPage.scss';
-import AuthApi from '../../api/AuthApi';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
-import {DispatchLoggingOut} from '../../store/user/actionTypes';
-import {logOut} from '../../store/user/actions';
-import {IStoreState} from '../../store/types';
+
+import {DispatchLoggingOut} from 'store/user/actionTypes';
+import AuthApi from 'api/AuthApi';
+import {logOut} from 'store/user';
+import {IStoreState} from 'store/types';
+import {Button} from 'components/ui';
 
 type StateProps = {
     user: IStoreState['user'];
@@ -51,7 +53,7 @@ class IndexPage extends React.PureComponent<ComponentProps, State> {
             <div className={b()}>
                 <div className='container-fluid'>
                     <h1>Index Page</h1>
-                    <button onClick={this.logOutFromSystem}>Выйти из системы</button>
+                    <Button onClick={this.logOutFromSystem}>Выйти из системы</Button>
                     <p className='error'>{this.state.errorMessage}</p>
                 </div>
             </div>

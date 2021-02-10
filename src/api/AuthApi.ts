@@ -1,7 +1,7 @@
-import {BaseApi} from './BaseApi';
-import {SignUpValueObject, LogInValueObject} from '../common/types/types';
-import {IUser} from '../common/types/interfaces';
 import {AxiosResponse} from 'axios';
+import {BaseApi} from './BaseApi';
+import {SignUpValueObject, LogInValueObject} from 'common/types/types';
+import {IUser} from 'common/types/interfaces';
 
 class AuthApi extends BaseApi {
     constructor() {
