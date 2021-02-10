@@ -1,7 +1,17 @@
-import React, {FormEvent, ChangeEvent} from 'react';
-import {withRouter, RouteComponentProps} from 'react-router';
+import * as React from 'react';
 import bem from 'easy-bem';
+import {FormEvent} from 'react';
 import authApi from 'api/AuthApi';
+import {ChangeEvent} from 'react';
+import {withRouter, RouteComponentProps} from 'react-router';
+import {connect} from 'react-redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import cn from 'classnames';
+import {IUser} from 'common/types/interfaces';
+import {DispatchAdding} from 'store/user/actionTypes';
+import {setUser} from 'store/user/actions';
+import {IStoreState} from 'store/types';
 import {Input, Button} from '../ui';
 import './AuthForm.scss';
 
@@ -12,10 +22,17 @@ type State = {
     password: string
     remember: string
     errorMessage: string
-    [key: string]: string
+    [key: string]: string,
+
+};
+type StateProps = {
+    user: IStoreState['user'];
 };
 
-class AuthForm extends React.Component<RouteComponentProps, State> {
+interface ComponentProps extends RouteComponentProps {
+    setUser: DispatchAdding['setUser']
+}
+class AuthForm extends React.Component<ComponentProps, State> {
     state = {
         login: '',
         password: '',
@@ -34,7 +51,7 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
 
     onSubmit = (event: FormEvent) => {
         event.preventDefault();
-
+        const {setUser} = this.props;
         const remember = this.state.remember === 'on';
         const {login, password} = this.state;
         const logInData = {
@@ -54,7 +71,8 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
                     return;
                 }
 
-                localStorage.setItem('user', JSON.stringify(resp.data));
+                const userData = resp.data;
+                setUser(userData);
                 this.props.history.push('/');
             })
             .catch(err => {
@@ -66,11 +84,15 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
 
     public render() {
         return (
-            <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
-                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
+            <form className={cn('form', b())} onSubmit={this.onSubmit}>
+                <Input onChange={this.onControlChange} name='login' title='Login' type='text' />
+                <Input onChange={this.onControlChange} name='password' title='Password' type='password' placeholder='*******' />
+
+                <div className={b('submit')}>
+                    <Button block>Sign In</Button>
+                </div>
+
                 <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me' className={b('remember-btn')}/>
-                <Button block>Sign In</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>
@@ -78,4 +100,14 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
         );
     }
 }
-export default withRouter(AuthForm);
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
+    setUser: (user: IUser) => {
+        dispatch(setUser(user));
+    }
+});
+
+const mapStateToProps = (state: IStoreState): StateProps => ({
+    user: state.user
+});
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));

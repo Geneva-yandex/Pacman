@@ -1,10 +1,12 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './TopicPage.scss';
+
 import {withRouter} from 'react-router';
-import forumData from '../../misc/data/forum-data';
-import {IComment, ITopic} from '../../types/ForumTypes';
-import TopicCard from '../../components/TopicCard';
+import forumData from 'common/data/forum-data';
+import {IComment, ITopic} from 'common/types/ForumTypes';
+import TopicCard from 'components/TopicCard';
+
 import CommentForm from './views/CommentForm';
 import Comment from './views/Comment';
 import {ITopicPageProps, ITopicPageState} from './types';

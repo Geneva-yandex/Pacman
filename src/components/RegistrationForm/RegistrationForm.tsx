@@ -1,8 +1,22 @@
 import React, {ChangeEvent, FormEvent} from 'react';
 import {withRouter, RouteComponentProps} from 'react-router';
-import bem from 'easy-bem';
-import {Input, Button} from '../ui';
+import {connect} from 'react-redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import cn from 'classnames';
+
+import {DispatchAdding} from 'store/user/actionTypes';
+import {IStoreState} from 'store/types';
+import {setUser} from 'store/user';
+import {IUser} from 'common/types/interfaces';
 import authApi from 'api/AuthApi';
+import {Input, Button} from '../ui';
+
+import bem from 'easy-bem';
+
+type StateProps = {
+    user: IStoreState['user'];
+};
 
 type State = {
     first_name: string,
@@ -16,9 +30,13 @@ type State = {
     [key: string]: string
 };
 
+interface ComponentProps extends RouteComponentProps {
+    setUser: DispatchAdding['setUser']
+}
+
 const b = bem('AuthForm');
 
-class AuthForm extends React.Component<RouteComponentProps, State> {
+class AuthForm extends React.Component<ComponentProps, State> {
     state = {
         first_name: '',
         second_name: '',
@@ -41,7 +59,7 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
 
     onSubmit = (event: FormEvent) => {
         event.preventDefault();
-
+        const {setUser} = this.props;
         const signUpData = {
             first_name: this.state.first_name,
             second_name: this.state.second_name,
@@ -62,7 +80,8 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
                     return;
                 }
 
-                localStorage.setItem('user', JSON.stringify(resp.data));
+                const userData = resp.data;
+                setUser(userData);
                 this.props.history.push('/');
             })
             .catch(err => {
@@ -74,14 +93,15 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
 
     public render() {
         return (
-            <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name='first_name' title='Введите имя' type='text' placeholder='Имя' />
-                <Input onChange={this.onControlChange} name='second_name' title='Введите фамилию' type='text' placeholder='Фамилия' />
-                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин' />
-                <Input onChange={this.onControlChange} name='email' title='Введите email' type='email' placeholder='email' />
-                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******' />
-                <Input onChange={this.onControlChange} name='phone' title='Введите номер телефона' type='tel' placeholder='Номер телефона' />
-                <Button type='submit' block>Зарегестрироваться</Button>
+            <form className={cn('form', b())} onSubmit={this.onSubmit}>
+                <Input onChange={this.onControlChange} name='first_name' title='First Name' type='text' />
+                <Input onChange={this.onControlChange} name='second_name' title='Last Name' type='text' />
+                <Input onChange={this.onControlChange} name='login' title='Login' type='text' />
+                <Input onChange={this.onControlChange} name='email' title='Email' type='email' />
+                <Input onChange={this.onControlChange} name='password' title='Password' type='password'
+                    placeholder='*******' />
+                <Input onChange={this.onControlChange} name='phone' title='Phone Number' type='tel'/>
+                <Button type='submit' block>Sign Up</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>
@@ -90,4 +110,14 @@ class AuthForm extends React.Component<RouteComponentProps, State> {
     }
 }
 
-export default withRouter(AuthForm);
+const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
+    setUser: (user: IUser) => {
+        dispatch(setUser(user));
+    }
+});
+
+const mapStateToProps = (state: IStoreState): StateProps => ({
+    user: state.user
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));

@@ -12,5 +12,5 @@ export type RouteType = {
 
 export interface IRouterProps {
     routes: RouteType[],
-    layout: ComponentType
+    layout: any,
 }

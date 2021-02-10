@@ -6,10 +6,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const {InjectManifest} = require('workbox-webpack-plugin');
 
 const PATHS = {
     dist: path.resolve(__dirname, 'dist'),
-    src: path.resolve(__dirname, 'src')
+    src: path.resolve(__dirname, 'src'),
+    public: path.resolve(__dirname, 'public')
 };
 
 module.exports = env => {
@@ -25,7 +27,7 @@ module.exports = env => {
             ].filter(Boolean)
         },
         output: {
-            filename: isDevelopment ? '[name].js' : '[name].[contentHash].js',
+            filename: isDevelopment ? '[name].js' : '[name].[contenthash].js',
             path: PATHS.dist,
             publicPath: '/'
         },
@@ -116,11 +118,13 @@ module.exports = env => {
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             alias: {
+                public: PATHS.public,
                 api: `${PATHS.src}/api`,
+                common: `${PATHS.src}/common`,
                 components: `${PATHS.src}/components`,
                 pages: `${PATHS.src}/pages`,
                 types: `${PATHS.src}/types`,
-                misc: `${PATHS.src}/misc`
+                store: `${PATHS.src}/store`
             }
         },
         plugins: [
@@ -129,17 +133,28 @@ module.exports = env => {
             new CopyPlugin({
                 patterns: [
                     {from: './public/fonts', to: './fonts'},
-                    {from: './public/images', to: './images'}
+                    {from: './public/images', to: './images'},
+                    {from: './public/offline.html', to: './'},
                 ]
             }),
             new MiniCssExtractPlugin({
-                filename: isDevelopment ? 'index.css' : 'index.[contentHash].css'
+                filename: isDevelopment ? 'index.css' : 'index.[contenthash].css'
             }),
             new HtmlWebpackPlugin({
                 filename: 'index.html',
                 template: './src/index.html',
                 inject: 'body',
                 chunks: ['bundle', 'vendor']
+            }),
+            new webpack.DefinePlugin({
+                NODE_ENV: JSON.stringify(env.NODE_ENV)
+            }),
+            !isDevelopment && new InjectManifest({
+                swSrc: './src/sw.ts',
+                swDest: 'sw.js',
+                exclude: [
+                    /\.gitempty$/
+                ]
             })
         ].filter(Boolean)
     };

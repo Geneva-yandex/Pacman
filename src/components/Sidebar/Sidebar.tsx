@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React, {PureComponent} from 'react';
 import classnames from 'classnames';
 import {NavLink} from 'react-router-dom';
 import {RouteComponentProps, withRouter} from 'react-router';
 import SVG from 'react-inlinesvg';
 import bem from 'easy-bem';
 import './Sidebar.scss';
-import AuthApi from '../../api/AuthApi';
+import AuthApi from 'api/AuthApi';
 import {Tooltip} from '../ui';
 
 import {
@@ -22,7 +22,7 @@ interface ISidebarProps {
     className?: string;
 }
 
-class Sidebar extends React.PureComponent<RouteComponentProps & ISidebarProps> {
+class Sidebar extends PureComponent<RouteComponentProps & ISidebarProps> {
     render() {
         return (
             <aside className={classnames(this.props.className, b())}>

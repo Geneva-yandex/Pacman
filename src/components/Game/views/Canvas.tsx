@@ -1,9 +1,11 @@
 import * as React from 'react';
 import bem from 'easy-bem';
+import {UserDirectionEnum, GameItemsEnum, UserDirectionTypeEnum} from 'common/enums';
 import {CoordsType, ICanvasProps, MapType, UserDirectionType, AvailableCellsCountParamsType} from '../types';
 import mapData from '../maps/basic';
 import Map from '../models/Map';
 import User from '../models/User';
+
 import {
     convertToPixel,
     getCell,
@@ -12,12 +14,9 @@ import {
     isOutOfReachItem,
     getDirectionSign,
     getDirectionType,
-    getDirectionByKeyCode
+    getDirectionByKeyCode,
+    isSuitableValue
 } from '../helpers';
-import {UserDirectionEnum} from '../../../enums/UserDirectionEnum';
-import {GameItemsEnum} from '../../../enums/GameItemsEnum';
-import {isSuitableValue} from '../helpers';
-import {UserDirectionTypeEnum} from '../../../enums/UserDirectionTypeEnum';
 
 const b = bem('Canvas');
 

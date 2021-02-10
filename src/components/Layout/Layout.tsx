@@ -1,18 +1,20 @@
-import * as React from 'react';
+import React, {PureComponent} from 'react';
 import bem from 'easy-bem';
 import {Link} from 'react-router-dom';
 import './Layout.scss';
 import Sidebar from '../Sidebar';
-
+import OfflineNotification from '../OfflineNotification';
+import {ConnectToUserProps} from '../hocs/withUser';
 const b = bem('Layout');
 
-// eslint-disable-next-line no-warning-comments
-// TODO: после организации стора, отображать сайдбар только авторизированным пользователям
-export default class Layout extends React.PureComponent {
+class Layout extends PureComponent<ConnectToUserProps> {
     render() {
+        const {item} = this.props.user;
+        const isAuth = item !== null;
+
         return (
-            <div className={b()}>
-                <Sidebar className={b('sidebar')} />
+            <div className={b({auth: !isAuth})}>
+                {isAuth && <Sidebar className={b('sidebar')} />}
 
                 <div className={b('content')}>
                     <header className={b('header')}>
@@ -20,7 +22,7 @@ export default class Layout extends React.PureComponent {
                             <Link to='/' className='logo'>Pacman</Link>
                         </div>
                     </header>
-
+                    <OfflineNotification/>
                     <main className={b('main')}>
                         <div className='container-fluid'>
                             {this.props.children}
@@ -31,3 +33,5 @@ export default class Layout extends React.PureComponent {
         );
     }
 }
+
+export default Layout;
