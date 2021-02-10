@@ -2,8 +2,8 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {IPasswordsDto, IUser} from 'common/types/interfaces';
 import AuthApi from 'api/AuthApi';
+import UserApi from 'api/UserApi';
 import {IUserState} from './types';
-import UserApi from '../../api/UserApi';
 
 type Dispatch = ThunkDispatch<IUserState, void, AnyAction>;
 

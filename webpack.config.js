@@ -128,6 +128,7 @@ module.exports = env => {
                 components: `${PATHS.src}/components`,
                 pages: `${PATHS.src}/pages`,
                 types: `${PATHS.src}/types`,
+                store: `${PATHS.src}/store`
             }
         },
         plugins: [

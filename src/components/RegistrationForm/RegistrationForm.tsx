@@ -4,10 +4,11 @@ import {connect} from 'react-redux';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import cn from 'classnames';
-import {DispatchAdding} from '../../store/user/actionTypes';
-import {IStoreState} from '../../store/types';
-import {setUser} from '../../store/user';
-import {IUser} from '../../common/types/interfaces';
+
+import {DispatchAdding} from 'store/user/actionTypes';
+import {IStoreState} from 'store/types';
+import {setUser} from 'store/user';
+import {IUser} from 'common/types/interfaces';
 import authApi from 'api/AuthApi';
 import {Input, Button} from '../ui';
 

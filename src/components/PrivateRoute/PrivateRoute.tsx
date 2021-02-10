@@ -1,7 +1,7 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {IStoreState} from '../../store/types';
+import {IStoreState} from 'store/types';
 type PrivateRouteArgs = {
     path: string,
     exact: boolean,

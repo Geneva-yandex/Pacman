@@ -5,7 +5,7 @@ import {RouteComponentProps, withRouter} from 'react-router';
 import SVG from 'react-inlinesvg';
 import bem from 'easy-bem';
 import './Sidebar.scss';
-import AuthApi from '../../api/AuthApi';
+import AuthApi from 'api/AuthApi';
 import {Tooltip} from '../ui';
 
 import {

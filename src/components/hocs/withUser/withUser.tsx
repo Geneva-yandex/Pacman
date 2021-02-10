@@ -4,8 +4,8 @@ import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import AuthApi from 'api/AuthApi';
 import {IUser} from 'common/types/interfaces';
-import {setUser, pendingUser, logOut} from '../../../store/user/actions';
-import {IStoreState as state} from '../../../store/types';
+import {setUser, pendingUser, logOut} from 'store/user/actions';
+import {IStoreState as state} from 'store/types';
 import {ComponentState, DispatchToUserProps, StateProps} from './types';
 
 function withUser(WrappedComponent: typeof Component) {
