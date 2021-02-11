@@ -1,4 +1,4 @@
-import {UserDTO as user} from '../types/types';
+import {ILeaderData, UserDTO as user} from '../types/types';
 
 export interface IAction<T = unknown> {
     type: string;
@@ -6,6 +6,10 @@ export interface IAction<T = unknown> {
 }
 
 export interface IStoreState {
+    leaderBoard: {
+      item: ILeaderData[];
+      status: string,
+    }
     user: {
         item: null | user;
         status: string

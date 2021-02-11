@@ -1,23 +1,43 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import {IUser} from 'types/interfaces';
 import LeaderboardItem from './components/LeaderboardItem';
+import LeaderBoardApi from "../../api/LeaderBoardApi";
+import {connect} from "react-redux";
+import {IStoreState as state} from "../../store/types";
+import {ILeaderData} from "../../types/types";
+import {ThunkDispatch} from "redux-thunk";
+import {AnyAction} from "redux";
+import {setLeaders} from "../../store/leaderBoard/actions";
 
 const b = bem('InnerPage');
 
-const user: IUser = {
-    id: 1,
-    login: 'gamer123',
-    first_name: 'Анна',
-    second_name: 'Иванова',
-    phone: '12222',
-    avatar: 'https://i1.wp.com/volosylady.ru/wp-content/uploads/2016/09/kvadratnaya-forma-lica.jpg',
-    role: '',
-    email: '',
-    display_name: ''
-};
+type StateProps = {
+    leaderBoard: ILeaderData[]
+}
 
-class LeaderboardPage extends React.PureComponent {
+interface DispatchToProps {
+    setLeaders: (leaders: {item: ILeaderData[]}) => void;
+}
+
+interface LeaderBoardProps extends DispatchToProps{
+    setLeaders: (leaders: {item: ILeaderData[]}) => void;
+    leaderBoard: StateProps['leaderBoard'];
+}
+
+class LeaderboardPage extends React.PureComponent<LeaderBoardProps> {
+
+    componentDidMount(): void {
+        LeaderBoardApi.getDataForLeaderBoard({
+            ratingFieldName: 'GenevaPacmanScore',
+            cursor: 0,
+            limit: 10,
+        })
+            .then(res => {
+               this.props.setLeaders({item: res.data as ILeaderData[]});
+               console.log(this.props.leaderBoard);
+            });
+    }
+
     render() {
         return <div className={b()}>
             <header className={b('header')}>
@@ -25,12 +45,23 @@ class LeaderboardPage extends React.PureComponent {
             </header>
 
             <div className={b('main')}>
-                <LeaderboardItem user={user} position={1} rank={266} />
-                <LeaderboardItem user={user} position={2} rank={156} />
-                <LeaderboardItem user={user} position={3} rank={25} />
+                {
+                    this.props.leaderBoard.map((leader, index) => <LeaderboardItem key={leader.data.user.id} user={leader.data.user} position={index}
+                                                                                    rank={leader.data.GenevaPacmanScore}/>)
+                }
             </div>
+
         </div>;
     }
 }
+const mapStateToProps = (state: state): StateProps => ({
+    leaderBoard: state.leaderBoard.item
+});
 
-export default LeaderboardPage;
+const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchToProps => ({
+    setLeaders: (leaders: {item: ILeaderData[]}) => {
+        dispatch(setLeaders(leaders));
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeaderboardPage);

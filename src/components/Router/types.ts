@@ -1,11 +1,11 @@
 import {ComponentType} from 'react';
-/* Import {ConnectedComponent} from "react-redux"; */
+import {ConnectedComponent} from "react-redux";
 
 export type RouteType = {
     id: string,
     exact?: boolean,
     path: string,
-    component: ComponentType,
+    component: ComponentType | ConnectedComponent<any, any>,
     title?: string,
     isNavVisible: boolean;
     isProtected?: boolean;

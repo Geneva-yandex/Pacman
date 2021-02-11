@@ -6,10 +6,19 @@ import {IViewProps} from '../../pages/GamePage/types';
 import Canvas from './views/Canvas';
 import bonuses from './bonuses';
 import {GameItemsEnum} from '../../enums/GameItemsEnum';
+import {Button} from "../ui";
+import LeaderBoardApi from "../../api/LeaderBoardApi";
+import {connect} from 'react-redux';
+import {IStoreState as state} from "../../store/types";
 
 const b = bem('Game');
 
-export default class Game extends React.PureComponent<IViewProps, IGameState> {
+type StateProps = {
+    user: unknown;
+};
+
+
+class Game extends React.PureComponent<IViewProps, IGameState> {
     constructor(props: IViewProps) {
         super(props);
 
@@ -57,6 +66,8 @@ export default class Game extends React.PureComponent<IViewProps, IGameState> {
                     />
                     {this.renderInfo()}
                 </div>
+
+                <Button onClick={this.endGameAndSendDataToLeaderBoard}>End game</Button>
             </div>
         );
     }
@@ -78,6 +89,26 @@ export default class Game extends React.PureComponent<IViewProps, IGameState> {
                 </div>
             </div>
         );
+    }
+
+    endGameAndSendDataToLeaderBoard = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) : void  =>{
+        const generatedSendingObject = {
+            data: {
+                GenevaPacmanScore: this.state.score,
+                user: this.props.user,
+            },
+            ratingFieldName: 'GenevaPacmanScore',
+        }
+
+        LeaderBoardApi.sendDataToLeaderBoard(generatedSendingObject)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        this.props.changeView(e);
     }
 
     initCookies(cookies: number) {
@@ -107,3 +138,9 @@ export default class Game extends React.PureComponent<IViewProps, IGameState> {
         }));
     }
 }
+
+const mapStateToProps = (state: state): StateProps => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps)(Game);
