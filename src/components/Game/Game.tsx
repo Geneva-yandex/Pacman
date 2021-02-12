@@ -6,17 +6,16 @@ import {IViewProps} from '../../pages/GamePage/types';
 import Canvas from './views/Canvas';
 import bonuses from './bonuses';
 import {GameItemsEnum} from '../../enums/GameItemsEnum';
-import {Button} from "../ui";
-import LeaderBoardApi from "../../api/LeaderBoardApi";
+import {Button} from '../ui';
+import LeaderBoardApi from '../../api/LeaderBoardApi';
 import {connect} from 'react-redux';
-import {IStoreState as state} from "../../store/types";
+import {IStoreState as state} from '../../store/types';
 
 const b = bem('Game');
 
 type StateProps = {
     user: unknown;
 };
-
 
 class Game extends React.PureComponent<IViewProps, IGameState> {
     constructor(props: IViewProps) {
@@ -91,14 +90,14 @@ class Game extends React.PureComponent<IViewProps, IGameState> {
         );
     }
 
-    endGameAndSendDataToLeaderBoard = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) : void  =>{
+    endGameAndSendDataToLeaderBoard = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
         const generatedSendingObject = {
             data: {
                 GenevaPacmanScore: this.state.score,
-                user: this.props.user,
+                user: this.props.user
             },
-            ratingFieldName: 'GenevaPacmanScore',
-        }
+            ratingFieldName: 'GenevaPacmanScore'
+        };
 
         LeaderBoardApi.sendDataToLeaderBoard(generatedSendingObject)
             .then(res => {
@@ -109,7 +108,7 @@ class Game extends React.PureComponent<IViewProps, IGameState> {
             });
 
         this.props.changeView(e);
-    }
+    };
 
     initCookies(cookies: number) {
         this.setState({cookies});

@@ -1,4 +1,4 @@
-import {IUser} from "./interfaces";
+import {IUser} from './interfaces';
 
 export type SignUpValueObject = {
     first_name: string,
@@ -29,17 +29,17 @@ export type sendDTOToLeaderBoard = {
         [key: string]: unknown
     },
     ratingFieldName: string
-}
+};
 
 export type getDTOFromLeaderBoards = {
     ratingFieldName: string,
     cursor: number,
     limit: number
-}
+};
 
 export type ILeaderData = {
     data: {
         GenevaPacmanScore: number,
         user: IUser
     }
-}
+};

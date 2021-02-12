@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {IUser} from "../../types/interfaces";
+import {IUser} from '../../types/interfaces';
 
 export type ViewType = 'start' | 'game' | 'finish';
 

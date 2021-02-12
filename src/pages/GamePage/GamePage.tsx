@@ -7,7 +7,6 @@ import Game from '../../components/Game';
 import {ViewType} from './types';
 import {GamePageViewEnum} from '../../enums/GamePageViewEnum';
 
-
 const b = bem('GamePage');
 
 export default class GamePage extends React.PureComponent<{}, IStateGamePage> {
