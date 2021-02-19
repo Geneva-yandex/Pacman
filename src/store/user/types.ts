@@ -1,13 +1,13 @@
-import {UserDTO as user} from '../../types/UserTypes';
+import {UserDTO as User} from '../../types/UserTypes';
 
 export enum UserStatusEnum {
-    pending = 'pending',
-    success = 'success',
-    failed = 'failed',
-    quitted = 'quitted'
+    Pending = 'pending',
+    Success = 'success',
+    Failed = 'failed',
+    Quitted = 'quitted'
 }
 
 export interface IUserStore {
-    item: null | user,
+    item: null | User,
     status: null | UserStatusEnum
 }

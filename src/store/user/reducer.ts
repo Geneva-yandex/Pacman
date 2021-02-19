@@ -16,21 +16,21 @@ const defaultState: IUserStore = {
 const userReducer = createReducer(defaultState)
     .handleAction(PENDING_USER_TYPE, (state: IUserStore) => ({
         ...state,
-        status: UserStatusEnum.pending
+        status: UserStatusEnum.Pending
     }))
     .handleAction(SET_USER_TYPE, (state: IUserStore, action: IAction<IUserStore>) => ({
         ...state,
         ...action.payload,
-        status: UserStatusEnum.success
+        status: UserStatusEnum.Success
     }))
     .handleAction(FAILED_USER_TYPE, (state: IUserStore) => ({
         ...state,
-        status: UserStatusEnum.failed
+        status: UserStatusEnum.Failed
     }))
     .handleAction(LOGOUT_TYPE, (state: IUserStore) => ({
         ...state,
         item: null,
-        status: UserStatusEnum.quitted
+        status: UserStatusEnum.Quitted
     }));
 
 export default userReducer;
