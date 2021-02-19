@@ -6,7 +6,7 @@ import {IStoreState as state} from '../../store/types';
 import {ILeaderData} from '../../types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
-import {loadeLeaderBoardsEntityActions} from '../../store/leaderBoard/actions';
+import {LoadLeaderBoardsEntityActions} from '../../store/leaderBoard/actions';
 import {ILeaderBoard} from '../../store/leaderBoard/types';
 
 const b = bem('InnerPage');
@@ -51,7 +51,7 @@ const mapStateToProps = (state: state): StateProps => ({
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<ILeaderBoard, {}, AnyAction>): DispatchToProps => ({
-    setLeaders: () => dispatch(loadeLeaderBoardsEntityActions.fetchLeaderBoardData())
+    setLeaders: () => dispatch(LoadLeaderBoardsEntityActions.fetchLeaderBoardData())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaderboardPage);

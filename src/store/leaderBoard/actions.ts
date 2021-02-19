@@ -15,7 +15,7 @@ export const failedToLoadLeaderBoard = () => {
     };
 };
 
-export class loadeLeaderBoardsEntityActions {
+export class LoadLeaderBoardsEntityActions {
     static fetchLeaderBoardData = () => async (dispatch: Dispatch) => {
         try {
             const leaderBoardResponse = await LeaderBoardApi.getDataForLeaderBoard({
