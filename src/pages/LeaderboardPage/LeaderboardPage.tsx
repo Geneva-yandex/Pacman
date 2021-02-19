@@ -1,13 +1,13 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import LeaderboardItem from './components/LeaderboardItem';
-import LeaderBoardApi from '../../api/LeaderBoardApi';
 import {connect} from 'react-redux';
 import {IStoreState as state} from '../../store/types';
 import {ILeaderData} from '../../types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
-import {setLeaders} from '../../store/leaderBoard/actions';
+import {loadeLeaderBoardsEntityActions} from '../../store/leaderBoard/actions';
+import {ILeaderBoard} from '../../store/leaderBoard/types';
 
 const b = bem('InnerPage');
 
@@ -20,21 +20,13 @@ interface DispatchToProps {
 }
 
 interface LeaderBoardProps extends DispatchToProps{
-    setLeaders: (leaders: {item: ILeaderData[]}) => void;
+    setLeaders: () => void;
     leaderBoard: StateProps['leaderBoard'];
 }
 
 class LeaderboardPage extends React.PureComponent<LeaderBoardProps> {
     componentDidMount(): void {
-        LeaderBoardApi.getDataForLeaderBoard({
-            ratingFieldName: 'GenevaPacmanScore',
-            cursor: 0,
-            limit: 10
-        })
-            .then(res => {
-                this.props.setLeaders({item: res.data as ILeaderData[]});
-                console.log(this.props.leaderBoard);
-            });
+        this.props.setLeaders();
     }
 
     render() {
@@ -53,14 +45,13 @@ class LeaderboardPage extends React.PureComponent<LeaderBoardProps> {
         </div>;
     }
 }
+
 const mapStateToProps = (state: state): StateProps => ({
     leaderBoard: state.leaderBoard.item
 });
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchToProps => ({
-    setLeaders: (leaders: {item: ILeaderData[]}) => {
-        dispatch(setLeaders(leaders));
-    }
+const mapDispatchToProps = (dispatch: ThunkDispatch<ILeaderBoard, {}, AnyAction>): DispatchToProps => ({
+    setLeaders: () => dispatch(loadeLeaderBoardsEntityActions.fetchLeaderBoardData())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeaderboardPage);

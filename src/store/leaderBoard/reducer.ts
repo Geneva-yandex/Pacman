@@ -13,11 +13,15 @@ const defaultState: ILeaderBoardState = {
 export default (state: ILeaderBoardState = defaultState, {type, payload}: IAction) => {
     switch (type) {
     case actions.setLeaders:
-        console.log({...payload as object});
         return {
             ...state,
             ...payload as object,
             status: 'success'
+        };
+    case actions.failed:
+        return {
+            ...state,
+            status: 'failed'
         };
     default:
         return state;
