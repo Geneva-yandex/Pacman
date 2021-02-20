@@ -1,4 +1,11 @@
-import {UserDTO as User} from '../../types/UserTypes';
+import {IUser} from 'common/types/interfaces';
+
+export const actions = {
+    PENDING: 'PENDING',
+    FAILED: 'FAILED',
+    setUser: 'setUser',
+    logOut: 'logOut'
+};
 
 export enum UserStatusEnum {
     Pending = 'pending',
@@ -8,6 +15,6 @@ export enum UserStatusEnum {
 }
 
 export interface IUserStore {
-    item: null | User,
-    status: null | UserStatusEnum
+    item: IUser | null;
+    status: UserStatusEnum | null;
 }

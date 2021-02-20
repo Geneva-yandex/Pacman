@@ -1,13 +1,13 @@
-import * as React from 'react';
-import bem from 'easy-bem';
-import {FormEvent} from 'react';
-import authApi from 'api/AuthApi';
-import {ChangeEvent} from 'react';
+import React, {Component, FormEvent, ChangeEvent} from 'react';
 import {connect} from 'react-redux';
-import {IStore} from '../../store/types';
-import {Input, Button} from '../ui';
-import {boundActions} from '../../store/initClientStore';
+import bem from 'easy-bem';
+import cn from 'classnames';
 import './AuthForm.scss';
+
+import authApi from 'api/AuthApi';
+import {IStore} from 'store/types';
+import {boundActions} from 'store/initClientStore';
+import {Input, Button} from '../ui';
 
 const b = bem('AuthForm');
 
@@ -23,7 +23,7 @@ type StateProps = {
     user: IStore['user'];
 };
 
-class AuthForm extends React.Component<{}, State> {
+class AuthForm extends Component<{}, State> {
     state = {
         login: '',
         password: '',
@@ -74,11 +74,16 @@ class AuthForm extends React.Component<{}, State> {
 
     public render() {
         return (
-            <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text' placeholder='Логин'/>
-                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password' placeholder='*******'/>
+            <form className={cn('form', b())} onSubmit={this.onSubmit}>
+                <Input onChange={this.onControlChange} name='login' title='Login' type='text' />
+                <Input onChange={this.onControlChange} name='password' title='Password' type='password' placeholder='*******' />
+
+                <div className={b('submit')}>
+                    <Button block>Sign In</Button>
+                </div>
+
                 <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me' className={b('remember-btn')}/>
-                <Button aperance={'block'}>Sign In</Button>
+                <Button block>Sign In</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>
@@ -90,4 +95,5 @@ class AuthForm extends React.Component<{}, State> {
 const mapStateToProps = (state: IStore): StateProps => ({
     user: state.user
 });
+
 export default connect(mapStateToProps)(AuthForm);

@@ -1,5 +1,5 @@
 import {BaseApi} from './BaseApi';
-import {IUser, IPsswordsDto, IUserProfileDto} from '../types/interfaces';
+import {IUser, IPasswordsDto, IUserProfileDto} from 'common/types/interfaces';
 import {AxiosResponse} from 'axios';
 
 class UserApi extends BaseApi {
@@ -22,8 +22,8 @@ class UserApi extends BaseApi {
         return this.put<FormData, any>('profile/avatar', formData);
     }
 
-    public changePassword(passwordsDto: IPsswordsDto): Promise<any> {
-        return this.put<IPsswordsDto, any>('password', passwordsDto);
+    public changePassword(passwordsDto: IPasswordsDto): Promise<any> {
+        return this.put<IPasswordsDto, any>('password', passwordsDto);
     }
 }
 

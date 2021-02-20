@@ -2,7 +2,7 @@ import {ChangeEvent, FormEvent, useCallback, useState} from 'react';
 import {IUseForm, IUseFormProps} from './types';
 
 export default <T = unknown>({initialValues, onSubmit}: IUseFormProps<T>): IUseForm<T> => {
-    const [values, setValues] = useState<T>(initialValues);
+    const [values, setValues] = useState<T>(initialValues || {} as T);
 
     const handleChange = useCallback((event: ChangeEvent) => {
         const target = event.target as HTMLInputElement;

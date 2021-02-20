@@ -3,7 +3,7 @@ import {
     setUser,
     pendingUser,
     failedUser
-} from './user/actions';
+} from './user';
 import {routerActions} from 'connected-react-router';
 
 const actions = {

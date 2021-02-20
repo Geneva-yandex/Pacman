@@ -1,50 +1,26 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import {RouteType} from './types';
 import PrivateRoute from '../PrivateRoute';
-import {SignUpValueObject} from '../../types/UserTypes';
-import Layout from '../Layout/Layout';
 import routes from '../../pages/index';
+import Layout from 'components/Layout';
 
-class Bundle extends React.Component<{}> {
-    user: {
-        item: SignUpValueObject | null,
-        status: string
-    };
+const Bundle = () => {
+    function renderRoute({path, exact, id, component, isProtected}: RouteType) {
+        const routeProps = {path, exact: Boolean(exact), key: id, component};
+        const RouteProvider = isProtected ? PrivateRoute : Route;
+        return <RouteProvider {...routeProps} />;
+    }
 
-    public render() {
-        return (
+    return (
+        <BrowserRouter>
             <Layout>
                 <Switch>
-                    {routes.map(route => this.renderRoute(route))}
+                    {routes.map(route => renderRoute(route))}
                 </Switch>
             </Layout>
-        );
-    }
-
-    renderRoute(route: RouteType) {
-        if (route.isProtected) {
-            let isExact = route.exact === true;
-            return (
-                <PrivateRoute
-                    path={route.path}
-                    exact={isExact}
-                    key={route.id}
-                    component={route.component}
-                />
-            );
-        }
-
-        return (
-            <Route
-                path={route.path}
-                exact={route.exact}
-                key={route.id}
-                component={route.component}
-            >
-            </Route>
-        );
-    }
-}
+        </BrowserRouter>
+    );
+};
 
 export default Bundle;

@@ -1,10 +1,12 @@
 import React, {ChangeEvent, FormEvent} from 'react';
 import {connect} from 'react-redux';
-import {IStore} from '../../store/types';
-import {boundActions} from '../../store/initClientStore';
+import cn from 'classnames';
 import bem from 'easy-bem';
-import {Input, Button} from '../ui';
+
 import authApi from 'api/AuthApi';
+import {IStore} from 'store/types';
+import {boundActions} from 'store/initClientStore';
+import {Input, Button} from '../ui';
 
 type StateProps = {
     user: IStore['user'];
@@ -81,20 +83,15 @@ class AuthForm extends React.Component<{}, State> {
 
     public render() {
         return (
-            <form className={b()} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name='first_name' title='Введите имя' type='text'
-                    placeholder='Имя'/>
-                <Input onChange={this.onControlChange} name='second_name' title='Введите фамилию' type='text'
-                    placeholder='Фамилия'/>
-                <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text'
-                    placeholder='Логин'/>
-                <Input onChange={this.onControlChange} name='email' title='Введите email' type='email'
-                    placeholder='email'/>
-                <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password'
-                    placeholder='*******'/>
-                <Input onChange={this.onControlChange} name='phone' title='Введите номер телефона' type='tel'
-                    placeholder='Номер телефона'/>
-                <Button type='submit' aperance={'block'}>Зарегестрироваться</Button>
+            <form className={cn('form', b())} onSubmit={this.onSubmit}>
+                <Input onChange={this.onControlChange} name='first_name' title='First Name' type='text' />
+                <Input onChange={this.onControlChange} name='second_name' title='Last Name' type='text' />
+                <Input onChange={this.onControlChange} name='login' title='Login' type='text' />
+                <Input onChange={this.onControlChange} name='email' title='Email' type='email' />
+                <Input onChange={this.onControlChange} name='password' title='Password' type='password'
+                    placeholder='*******' />
+                <Input onChange={this.onControlChange} name='phone' title='Phone Number' type='tel'/>
+                <Button type='submit' block>Sign Up</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>

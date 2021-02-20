@@ -21,10 +21,12 @@
         ]
     },
     "paths": {
+        "public/*": [ "../public/*" ],
         "api/*": [ "api/*" ],
         "components/*": [ "components/*" ],
+        "common/*": [ "common/*" ],
         "pages/*": [ "pages/*" ],
         "types/*": [ "types/*" ],
-        "misc/*": [ "misc/*" ]
+        "store/*": [ "store/*" ]
     }
 }

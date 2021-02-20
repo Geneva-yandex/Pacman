@@ -36,11 +36,13 @@ const getServerConfig = (env: any) => {
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             alias: {
+                public: PATHS.public,
                 api: `${PATHS.src}/api`,
+                common: `${PATHS.src}/common`,
                 components: `${PATHS.src}/components`,
                 pages: `${PATHS.src}/pages`,
                 types: `${PATHS.src}/types`,
-                misc: `${PATHS.src}/misc`
+                store: `${PATHS.src}/store`
             }
         },
         externals: [
@@ -51,7 +53,7 @@ const getServerConfig = (env: any) => {
         plugins: [
             new webpack.DefinePlugin({
                 NODE_ENV: JSON.stringify(env.NODE_ENV)
-            }),
+            })
         ]
     };
 };

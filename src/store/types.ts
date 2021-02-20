@@ -1,5 +1,5 @@
 import {RouterRootState} from 'connected-react-router';
-import {IUserStore} from './user/types';
+import {IUserStore} from './user';
 
 export interface IAction<T = unknown> {
     type: string;
@@ -7,7 +7,7 @@ export interface IAction<T = unknown> {
 }
 
 export interface IStore extends RouterRootState {
-    user: IUserStore
+    user: IUserStore;
 }
 
 export interface IStoreOptions {
@@ -16,4 +16,3 @@ export interface IStoreOptions {
     },
     initialStore?: IStore
 }
-

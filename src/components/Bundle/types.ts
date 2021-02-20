@@ -1,5 +1,4 @@
 import {ComponentType} from 'react';
-/* Import {ConnectedComponent} from "react-redux"; */
 
 export type RouteType = {
     id: string,
@@ -10,3 +9,8 @@ export type RouteType = {
     isNavVisible: boolean;
     isProtected?: boolean;
 };
+
+export interface IRouterProps {
+    routes: RouteType[],
+    layout: any,
+}

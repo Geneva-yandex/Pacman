@@ -1,7 +1,7 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './CommentForm.scss';
-import {Button} from '../../../components/ui';
+import {Button} from 'components/ui';
 
 const b = bem('CommentForm');
 const FORM_ID = 'CommentForm';

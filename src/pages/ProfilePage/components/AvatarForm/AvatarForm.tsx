@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useRef} from 'react';
 import bem from 'easy-bem';
 import {Input, Button, Avatar} from 'components/ui';
-import {API_ENDPOINT} from 'misc/constants';
+import {API_ENDPOINT} from 'common/constants';
 import './AvatarForm.scss';
 
 interface IAvatarFormProps {
-    avatar: string;
+    avatar: string | undefined;
     onSave: (avatar: File) => void;
 }
 
@@ -30,7 +30,7 @@ const AvatarForm = ({avatar, onSave}: IAvatarFormProps) => {
                 <Avatar size={120} src={avatarSrc} />
             </div>
 
-            <Button size='small' aperance='outlined' type='button' onClick={() => inputEl?.current?.inputRef?.click()}>Change avatar</Button>
+            <Button size='small' appearance='outlined' type='button' onClick={() => inputEl?.current?.inputRef?.click()}>Change avatar</Button>
         </div>
     </React.Fragment>;
 };

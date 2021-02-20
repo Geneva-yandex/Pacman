@@ -119,9 +119,9 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
             <li key={navItem.id} className={b('navigationItem')}>
                 {navItem.route ?
                     <Link to={navItem.route}>
-                        <Button aperance={navItem.primary ? 'primary' : 'outlined'}>{navItem.name}</Button>
+                        <Button appearance={navItem.primary ? 'primary' : 'outlined'}>{navItem.name}</Button>
                     </Link> :
-                    <Button aperance='outlined' onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
+                    <Button appearance='outlined' onClick={e => this.openModal(navItem.modalControl, e)}>{navItem.name}</Button>
                 }
             </li>
         );

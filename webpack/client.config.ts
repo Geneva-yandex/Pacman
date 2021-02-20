@@ -9,7 +9,7 @@ import path from 'path';
 import webpack from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import TerserPlugin from 'terser-webpack-plugin'
+import TerserPlugin from 'terser-webpack-plugin';
 import {InjectManifest} from 'workbox-webpack-plugin';
 
 const getClientConfig = (env: any) => {
@@ -19,7 +19,7 @@ const getClientConfig = (env: any) => {
         mode: isDevelopment ? 'development' : 'production',
         entry: {
             bundle: [
-                path.join(PATHS.src, 'client'),
+                path.join(PATHS.src, 'client')
             ].filter(Boolean)
         },
         output: {
@@ -47,11 +47,13 @@ const getClientConfig = (env: any) => {
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             alias: {
+                public: PATHS.public,
                 api: `${PATHS.src}/api`,
+                common: `${PATHS.src}/common`,
                 components: `${PATHS.src}/components`,
                 pages: `${PATHS.src}/pages`,
                 types: `${PATHS.src}/types`,
-                misc: `${PATHS.src}/misc`
+                store: `${PATHS.src}/store`
             }
         },
         plugins: [
@@ -59,7 +61,7 @@ const getClientConfig = (env: any) => {
                 patterns: [
                     {from: path.join(PATHS.public, 'fonts'), to: './fonts'},
                     {from: path.join(PATHS.public, 'images'), to: './images'},
-                    {from: path.join(PATHS.public, 'offline.html'), to: './'},
+                    {from: path.join(PATHS.public, 'offline.html'), to: './'}
                 ]
             }),
             new MiniCssExtractPlugin({
