@@ -12,6 +12,7 @@ import {getParam} from '../../utils/getParamFromUri';
 
 type StateProps = {
     user: unknown;
+    state: unknown
 };
 
 type ComponentState = {
@@ -28,6 +29,7 @@ function withUser(WrappedComponent: typeof React.Component) {
 
     class withUser extends React.Component<DispatchToProps, ComponentState> {
         private getUserInfo(): void {
+            const {setUser} = this.props;
             AuthApi
                 .getUserInfo()
                 .then(res => {
@@ -68,7 +70,8 @@ function withUser(WrappedComponent: typeof React.Component) {
     });
 
     const mapStateToProps = (state: state): StateProps => ({
-        user: state.user
+        user: state.user,
+        state: state
     });
 
     return connect(mapStateToProps, mapDispatchToProps)(withUser);
