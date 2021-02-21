@@ -27,30 +27,28 @@ function withUser(WrappedComponent: typeof React.Component) {
     const code = getParam('code');
 
     class withUser extends React.Component<DispatchToProps, ComponentState> {
-        componentDidMount(): void {
-            if (code !== null) {
-                OAuthApi.signInToYandex(code)
-                    .then(res => {
-                        if (res.data === 'OK') {
-                            AuthApi
-                                .getUserInfo()
-                                .then(res => {
-                                    setUser(res.data);
-                                })
-                                .catch(err => {
-                                    console.log(err);
-                                });
-                        }
-                    });
-            }
-
-            const {onGettingUser, setUser} = this.props;
-            onGettingUser();
+        private getUserInfo(): void {
             AuthApi
                 .getUserInfo()
                 .then(res => {
                     setUser(res.data);
+                })
+                .catch(err => {
+                    console.log(err);
                 });
+        }
+
+        async componentDidMount(): Promise<void> {
+            if (code !== null) {
+                let singInToYandexResponse = await OAuthApi.signInToYandex(code);
+                if (singInToYandexResponse.data === 'OK') {
+                    this.getUserInfo();
+                }
+            } else {
+                const {onGettingUser} = this.props;
+                onGettingUser();
+                this.getUserInfo();
+            }
         }
 
         render() {

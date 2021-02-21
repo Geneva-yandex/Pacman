@@ -34,6 +34,7 @@ interface ComponentProps extends RouteComponentProps {
     user: IStoreState['user'];
 }
 
+const URL = 'https://oauth.yandex.ru/authorize?response_type=code&client_id=';
 class AuthForm extends React.Component<ComponentProps, State> {
     state = {
         login: '',
@@ -43,7 +44,6 @@ class AuthForm extends React.Component<ComponentProps, State> {
     };
 
     UNSAFE_componentWillReceiveProps(nextProps: Readonly<ComponentProps>): void {
-        console.log(nextProps);
         if (nextProps.user.item !== null) {
             this.props.history.push('/');
         }
@@ -62,10 +62,7 @@ class AuthForm extends React.Component<ComponentProps, State> {
         oAuthApi.getOAuthClientID()
             .then(res => {
                 const CLIENT_ID = res.data.service_id;
-
-                const URL = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${CLIENT_ID}`;
-
-                document.location.href = URL;
+                document.location.href = URL + CLIENT_ID;
             });
     };
 
