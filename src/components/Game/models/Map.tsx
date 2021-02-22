@@ -5,12 +5,16 @@ import {convertToPixel, getCell, getRow, makeCellCoords} from '../helpers';
 
 export default class Map {
     ctx: CanvasRenderingContext2D;
+    private isUserInitialized: boolean;
+    private isGhostInitialized: boolean;
 
     constructor(props: IComponentProps) {
         this.ctx = props.ctx;
+        this.isUserInitialized = false;
+        this.isGhostInitialized = false;
     }
 
-    public drawMap({map, initCookies, initPills, initUser}: DrawMapParams) {
+    public drawMap({map, initCookies, initPills, initUser, initGhost}: DrawMapParams) {
         const countCookies = this.countItem();
         const countPills = this.countItem();
         let cookies = 0;
@@ -18,7 +22,9 @@ export default class Map {
 
         map.forEach((row, rowIndex) => {
             row.forEach((itemCode, cellIndex) => {
-                this.drawItem(itemCode, makeCellCoords(rowIndex, cellIndex));
+                const coords = makeCellCoords(rowIndex, cellIndex);
+
+                this.drawItem(itemCode, coords);
 
                 if (itemCode === GameItemsEnum.Cookie) {
                     cookies = countCookies();
@@ -28,8 +34,14 @@ export default class Map {
                     pills = countPills();
                 }
 
-                if (itemCode === GameItemsEnum.Empty) {
-                    initUser(makeCellCoords(rowIndex, cellIndex));
+                if (itemCode === GameItemsEnum.Empty && !this.isUserInitialized) {
+                    initUser(coords);
+                    this.isUserInitialized = true;
+                }
+
+                if (itemCode === GameItemsEnum.Ghost_home && this.isGhostInitialized) {
+                    initGhost(coords);
+                    this.isGhostInitialized = true;
                 }
             });
         });

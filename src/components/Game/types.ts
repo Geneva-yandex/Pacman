@@ -36,6 +36,7 @@ export interface IComponentProps {
 export type DrawMapParams = {
     map: MapType,
     initUser: (position: CoordsType) => void,
+    initGhost: (position: CoordsType) => void,
 } & GameInitMethodsType;
 
 export type AvailableCellsCountParamsType = {

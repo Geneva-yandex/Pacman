@@ -15,8 +15,9 @@ import {
     getDirectionSign,
     getDirectionType,
     getDirectionByKeyCode,
-    isSuitableValue
+    isSuitableValue, copyMap
 } from '../helpers';
+import Ghost from '../models/Ghost';
 
 const b = bem('Canvas');
 
@@ -32,6 +33,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
     mapData: MapType;
     mapComponent: Map;
     userComponent: User;
+    ghostComponent: Ghost;
     requestAnimationId: number | null;
     userPosition: CoordsType;
     userDirection: UserDirectionType;
@@ -40,7 +42,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         super(props);
 
         this.canvasRef = React.createRef();
-        this.mapData = [...mapData];
+        this.mapData = copyMap(mapData);
         this.requestAnimationId = null;
 
         this.userPosition = makeCellCoords(0, 0);
@@ -59,6 +61,9 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
 
     componentWillUnmount() {
         window.removeEventListener('keydown', this.onKeyDown);
+        if (this.requestAnimationId) {
+            cancelAnimationFrame(this.requestAnimationId);
+        }
     }
 
     render() {
@@ -80,6 +85,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
 
         this.mapComponent = new Map(componentProps);
         this.userComponent = new User(componentProps);
+        this.ghostComponent = new Ghost(componentProps);
 
         this.mapComponent.drawMap({
             map: this.mapData,
@@ -89,6 +95,9 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
                 this.setUserPosition(userPosition);
                 this.userComponent?.draw(userPosition);
                 this.animateUser(this.userDirection, userPosition);
+            },
+            initGhost: ghostPosition => {
+                this.ghostComponent.draw(ghostPosition);
             }
         });
     }

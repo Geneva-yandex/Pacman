@@ -58,3 +58,12 @@ export const getDirectionByKeyCode = (keyCode: string): UserDirectionType | unde
     return map[keyCode] as UserDirectionType | undefined;
 };
 
+export const copyMap = (arr: any[]): any[] => {
+    return arr.map(item => {
+        if (Array.isArray(item)) {
+            return copyMap(item);
+        }
+
+        return item;
+    });
+};
