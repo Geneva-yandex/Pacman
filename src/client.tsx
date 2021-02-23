@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {render} from 'react-dom';
+import {hydrate} from 'react-dom';
 import Application from './Application';
 import './index.scss';
-import {isProduction} from './common/utils/env';
 import axios from 'axios';
+import isProduction from 'common/utils/isProduction';
 axios.defaults.withCredentials = true;
 
-if (isProduction()) {
+if (isProduction) {
     const startServiceWorker = () => {
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -24,4 +24,4 @@ if (isProduction()) {
     startServiceWorker();
 }
 
-render(<Application/>, document.getElementById('root'));
+hydrate(<Application/>, document.getElementById('root'));

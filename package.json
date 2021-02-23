@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --env NODE_ENV=development",
     "build": "webpack --env NODE_ENV=production",
-    "deploy": "npm run build && node server.js",
+    "server": "node index.js",
+    "deploy": "npm run build && npm run server",
     "eslint": "eslint --ext .ts --ext .tsx src/",
     "eslint:fix": "eslint --ext .ts --ext .tsx src/ --fix",
     "stylelint": "stylelint ./src/**/*.scss",
@@ -72,7 +73,6 @@
     "axios": "0.21.1",
     "classnames": "2.2.6",
     "easy-bem": "1.0.2",
-    "pg": "8.5.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-inlinesvg": "2.2.2",
@@ -81,10 +81,7 @@
     "react-tooltip": "4.2.13",
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
-    "reflect-metadata": "0.1.13",
-    "reselect": "4.0.0",
-    "sequelize": "6.5.0",
-    "sequelize-typescript": "2.1.0"
+    "reselect": "4.0.0"
   },
   "husky": {
     "hooks": {
