@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import {RouteType} from './types';
 import PrivateRoute from '../PrivateRoute';
 import routes from '../../pages/index';
@@ -13,13 +13,11 @@ const Bundle = () => {
     }
 
     return (
-        <BrowserRouter>
-            <Layout>
-                <Switch>
-                    {routes.map(route => renderRoute(route))}
-                </Switch>
-            </Layout>
-        </BrowserRouter>
+        <Layout>
+            <Switch>
+                {routes.map(route => renderRoute(route))}
+            </Switch>
+        </Layout>
     );
 };
 
