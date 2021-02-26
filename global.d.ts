@@ -18,3 +18,5 @@ declare module '*.svg' {
 declare var NODE_ENV: 'production' | 'development';
 
 declare var __PRELOADED_STATE__: any;
+
+declare var DATABASE_MONGO_URL: string;

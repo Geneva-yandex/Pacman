@@ -4,10 +4,12 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        depends_on:
+        links:
             - postgres
+            - mongo
         environment:
-            DATABASE_URL: postgres://postgres:newPassword@postgres:5432/packman
+            DATABASE_POSTGRES_URL: postgres://postgres:newPassword@postgres:5432/packman
+            DATABASE_MONGO_URL: mongodb://mongo:27017/packman
             PORT: 8080
         ports:
             - "8080:8080"
@@ -19,7 +21,7 @@ services:
             - "5432:5432"
         volumes:
             - ./postgresdata:/var/lib/postgresql/data
-            - ./src/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+            - ./src/backend/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
         restart: always
         environment:
             POSTGRES_USER: postgres
@@ -39,6 +41,17 @@ services:
             - pgadmin-data:/var/lib/pgadmin
         depends_on:
             - postgres
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: mongo
+            MONGO_INITDB_ROOT_PASSWORD: newPassword
+        volumes:
+            - data-volume:/data/db
 volumes:
     db-data:
     pgadmin-data:
+    data-volume:
