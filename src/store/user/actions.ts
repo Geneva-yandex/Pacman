@@ -1,32 +1,23 @@
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
+import {action} from 'typesafe-actions';
+
 import {IPasswordsDto, IUser} from 'common/types/interfaces';
 import AuthApi from 'api/AuthApi';
 import UserApi from 'api/UserApi';
-import {IUserState} from './types';
+import {IUserStore} from './types';
 
-type Dispatch = ThunkDispatch<IUserState, void, AnyAction>;
+export const SET_USER_TYPE = 'setUser';
+export const LOGOUT_TYPE = 'logOut';
+export const PENDING_USER_TYPE = 'PENDING';
+export const FAILED_USER_TYPE = 'FAILED';
 
-export const logOut = () => ({
-    type: 'logOut'
-});
-export const setUser = (user: IUser) => (
-    {
-        type: 'setUser',
-        payload: {item: user}
-    }
-);
+export const logOut = () => action(LOGOUT_TYPE);
+export const setUser = (user: IUser) => action(SET_USER_TYPE, {item: user});
+export const pendingUser = () => action(PENDING_USER_TYPE);
+export const failedUser = () => action(FAILED_USER_TYPE);
 
-export const pendingUser = () => (
-    {
-        type: 'PENDING'
-    }
-);
-export const failedUser = () => (
-    {
-        type: 'FAILED'
-    }
-);
+type Dispatch = ThunkDispatch<IUserStore, void, AnyAction>;
 
 export class UserStateActions {
     static updateUser = (user: IUser) => async (dispatch: Dispatch) => {

@@ -10,6 +10,7 @@ import TopicCard from 'components/TopicCard';
 import CommentForm from './views/CommentForm';
 import Comment from './views/Comment';
 import {ITopicPageProps, ITopicPageState} from './types';
+import Meta from '../../components/Meta/Meta';
 
 const b = bem('TopicPage');
 
@@ -44,6 +45,7 @@ class TopicPage extends React.PureComponent<ITopicPageProps, ITopicPageState> {
 
         return (
             <div className={b()}>
+                <Meta title={topic.title}/>
                 <div className={'container-fluid'}>
                     <TopicCard
                         topic={topic}

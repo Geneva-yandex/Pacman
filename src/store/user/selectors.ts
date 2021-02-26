@@ -1,14 +1,14 @@
 import {createSelector} from 'reselect';
-import {IStoreState as stateType} from '../types';
+import {IStore as StateType} from '../types';
 const fullNameSelector = createSelector(
-    (state: stateType) => {
+    (state: StateType) => {
         if (state.user.item !== null) {
             return state.user.item.first_name;
         }
 
         return '';
     },
-    (state: stateType) => {
+    (state: StateType) => {
         if (state.user.item !== null) {
             return state.user.item.second_name;
         }

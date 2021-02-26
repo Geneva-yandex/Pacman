@@ -23,11 +23,14 @@ export default (elRef: RefObject<HTMLInputElement>): [boolean, () => void] => {
     };
 
     useLayoutEffect(() => {
-        doc.onfullscreenchange = () =>
-            setIsFullscreen(fullscreenElement() !== null);
+        if (doc) {
+            doc.onfullscreenchange = () => setIsFullscreen(fullscreenElement() !== null);
+        }
 
         return () => {
-            doc.onfullscreenchange = null;
+            if (doc) {
+                doc.onfullscreenchange = null;
+            }
         };
     });
 
