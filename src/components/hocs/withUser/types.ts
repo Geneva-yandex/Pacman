@@ -1,8 +1,8 @@
 import {DispatchAdding, DispatchLoggingOut, pendingUserType} from 'store/user/actionTypes';
-import {IUserState} from 'store/user/types';
+import {IUserStore} from 'store/user/types';
 
 export type StateProps = {
-    user: IUserState;
+    user: IUserStore;
 };
 
 export type ComponentState = {
@@ -15,4 +15,4 @@ export interface DispatchToUserProps {
     onGettingUser: pendingUserType['onGettingUser']
 }
 
-export type ConnectToUserProps = StateProps & DispatchToUserProps;
+export type ConnectToUserProps = StateProps & DispatchToUserProps & {children: Element};

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import bem from 'easy-bem';
 import {Modal, Button} from 'components/ui';
 import './StartPage.scss';
+import Meta from '../../components/Meta/Meta';
 
 type NavItem = {
     id: number,
@@ -129,6 +130,7 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
     render() {
         return (
             <div className={b()}>
+                <Meta title={'Start page'}/>
                 <div className={b('navigation-wrapper')}>
                     <nav className={b('navigation')}>
                         <ul className={b('navigationList')}>
