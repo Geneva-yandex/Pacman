@@ -1,14 +1,15 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import AuthApi from 'api/AuthApi';
-import {IStore as state} from '../../store/types';
-import {boundActions} from '../../store/initClientStore';
+import {IStore as state} from 'store/types';
+import {boundActions} from 'store/initClientStore';
 
 interface IProps {
-    user: any
+    user: any,
+    [key: string]: any
 }
 
-function withUser(WrappedComponent: typeof React.Component) {
+function withUser(WrappedComponent: React.ElementType) {
     class withUser extends React.Component<IProps> {
         componentDidMount(): void {
             boundActions.user.pendingUser();

@@ -4,7 +4,7 @@ type FieldChangeCallback = (event: ChangeEvent) => void;
 type FormSubmitCallback = (event: FormEvent) => void;
 
 export interface IUseFormProps<T> {
-    initialValues: T,
+    initialValues: T | null,
     onSubmit: (values: T) => void
 }
 

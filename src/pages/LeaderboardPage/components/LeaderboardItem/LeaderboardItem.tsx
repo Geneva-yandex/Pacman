@@ -1,6 +1,6 @@
 import React from 'react';
 import bem from 'easy-bem';
-import {IUser} from 'types/interfaces';
+import {IUser} from 'common/types/interfaces';
 import User from '../User';
 import './LeaderboardItem.scss';
 

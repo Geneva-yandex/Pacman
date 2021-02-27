@@ -2,8 +2,8 @@ import * as React from 'react';
 import {hydrate} from 'react-dom';
 import Application from './Application';
 import './index.scss';
-import isProduction from './misc/utils/isProduction';
 import axios from 'axios';
+import isProduction from 'common/utils/isProduction';
 axios.defaults.withCredentials = true;
 
 if (isProduction) {

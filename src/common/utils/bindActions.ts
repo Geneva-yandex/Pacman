@@ -1,6 +1,10 @@
 import {bindActionCreators} from 'redux';
+import {Store} from 'redux';
+import {IAction} from '../../store/types';
 
-const bindActions = (actions: any, store: any): any => {
+type ActionsObjType = Record<string, () => IAction | ActionsObjType>;
+
+const bindActions = (actions: ActionsObjType, store: Store): any => {
     return Object.keys(actions).reduce((result, key) => {
         const subObj = actions[key];
 

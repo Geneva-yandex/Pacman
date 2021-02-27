@@ -4,7 +4,7 @@ import thunkMiddleware from 'redux-thunk';
 import {createBrowserHistory, createMemoryHistory} from 'history';
 import {routerMiddleware} from 'connected-react-router';
 import createRootReducer from './reducer';
-import isServer from '../misc/utils/isServer';
+import isServer from 'common/utils/isServer';
 import {IStoreOptions} from './types';
 
 const configureStore = (options?: IStoreOptions) => {
