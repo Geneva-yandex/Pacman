@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 services:
     my-app:
         build:
@@ -17,13 +17,13 @@ services:
     postgres:
         container_name: postgres
         image: postgres:12
-        ports:
-            - "5432:5432"
-        volumes:
-            - ./postgresdata:/var/lib/postgresql/data
-            - ./src/backend/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
         restart: always
+        ports:
+            - "5433:5432"
+        volumes:
+            - ./pg-data:/var/lib/postgresql
         environment:
+            PGDATA: /var/lib/postgresql/data/pgdata
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: newPassword
             POSTGRES_DB: packman
@@ -50,8 +50,8 @@ services:
             MONGO_INITDB_ROOT_USERNAME: mongo
             MONGO_INITDB_ROOT_PASSWORD: newPassword
         volumes:
-            - data-volume:/data/db
+            - mongo-data:/data/db
 volumes:
-    db-data:
+    pg-data:
     pgadmin-data:
-    data-volume:
+    mongo-data:

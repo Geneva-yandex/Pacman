@@ -1,9 +1,11 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import {RouteType} from './types';
-import PrivateRoute from '../PrivateRoute';
-import routes from '../../pages/index';
+import {hot} from 'react-hot-loader/root';
 import Layout from 'components/Layout';
+
+import PrivateRoute from '../PrivateRoute';
+import {RouteType} from './types';
+import routes from '../../pages/index';
 
 const Bundle = () => {
     function renderRoute({path, exact, id, component, isProtected}: RouteType) {
@@ -21,4 +23,4 @@ const Bundle = () => {
     );
 };
 
-export default Bundle;
+export default hot(Bundle);

@@ -5,5 +5,5 @@ export default (env: any) => {
     return [
         getServerConfig(env),
         getClientConfig(env)
-    ]
-}
+    ];
+};
