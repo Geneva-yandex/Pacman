@@ -1,0 +1,15 @@
+{
+    "development": {
+        "host": "postgres",
+        "port": 5433,
+        "username": "postgres",
+        "password": "newPassword",
+        "database": "packman",
+        "dialect": "postgres",
+        "operatorsAliases": false
+    },
+    "production": {
+        "dialect": "postgres",
+        "operatorsAliases": false
+    }
+}
