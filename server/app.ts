@@ -10,7 +10,7 @@ import routes from '../src/pages/index';
 
 const sequelizeOptions: SequelizeOptions = {
     host: 'postgres',
-    port: 5432,
+    port: 5433,
     username: 'postgres',
     password: 'newPassword',
     database: 'packman',
