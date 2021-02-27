@@ -6,7 +6,7 @@ import AuthPageLayout from 'components/AuthPageLayout';
 import AuthForm from 'components/AuthForm';
 import Meta from 'components/Meta/Meta';
 
-const backLink = <Link to='/sign-up'>Create account</Link>;
+const backLink = <Link to='/sign-up'>Create an account</Link>;
 
 class LoginPage extends PureComponent<RouteComponentProps> {
     render() {
