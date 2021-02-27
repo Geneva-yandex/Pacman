@@ -46,11 +46,17 @@ services:
         ports:
             - "27017:27017"
         restart: always
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: mongo
-            MONGO_INITDB_ROOT_PASSWORD: newPassword
         volumes:
             - data-volume:/data/db
+    mongo-express:
+        image: mongo-express
+        ports:
+            - "8081:8081"
+        restart: always
+        depends_on:
+            - mongo
+        environment:
+            - ME_CONFIG_MONGODB_PORT=27017
 volumes:
     db-data:
     pgadmin-data:
