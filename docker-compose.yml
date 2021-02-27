@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 services:
     my-app:
         build:
@@ -8,7 +8,7 @@ services:
             - postgres
             - mongo
         environment:
-            DATABASE_POSTGRES_URL: postgres://postgres:newPassword@postgres:5433/packman
+            DATABASE_POSTGRES_URL: postgres://postgres:newPassword@postgres:5432/packman
             DATABASE_MONGO_URL: mongodb://mongo:27017/packman
             PORT: 8080
         ports:
@@ -17,13 +17,14 @@ services:
     postgres:
         container_name: postgres
         image: postgres:12
-        ports:
-            - "5433:5433"
-        volumes:
-            - ./postgresdata:/var/lib/postgresql/data
-            - ./server/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
         restart: always
+        ports:
+            - "5433:5432"
+        volumes:
+            - ./pg-data:/var/lib/postgresql
+            - ./server/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
         environment:
+            PGDATA: /var/lib/postgresql/data/pgdata
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: newPassword
             POSTGRES_DB: packman
@@ -50,8 +51,8 @@ services:
             MONGO_INITDB_ROOT_USERNAME: mongo
             MONGO_INITDB_ROOT_PASSWORD: newPassword
         volumes:
-            - data-volume:/data/db
+            - mongo-data:/data/db
 volumes:
-    db-data:
+    pg-data:
     pgadmin-data:
-    data-volume:
+    mongo-data:
