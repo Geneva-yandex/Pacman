@@ -1,19 +1,19 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, PropsWithChildren} from 'react';
 import {Link} from 'react-router-dom';
 import bem from 'easy-bem';
 import './Layout.scss';
 
 import Sidebar from '../Sidebar';
 import OfflineNotification from '../OfflineNotification';
+import {withUser} from '../hocs';
 
 const b = bem('Layout');
 
-class Layout extends PureComponent {
+class Layout extends PureComponent<PropsWithChildren<{}>> {
     render() {
         return (
             <div className={b()}>
                 <Sidebar className={b('sidebar')} />
-
                 <div className={b('content')}>
                     <header className={b('header')}>
                         <div className='container-fluid'>
@@ -32,4 +32,4 @@ class Layout extends PureComponent {
     }
 }
 
-export default Layout;
+export default withUser(Layout);
