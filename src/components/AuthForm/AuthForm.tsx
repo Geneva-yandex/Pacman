@@ -83,7 +83,6 @@ class AuthForm extends Component<{}, State> {
                 </div>
 
                 <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me' className={b('remember-btn')}/>
-                <Button block>Sign In</Button>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>

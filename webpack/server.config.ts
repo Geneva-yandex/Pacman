@@ -16,7 +16,8 @@ const getServerConfig = (env: any) => {
         node: {
             __dirname: false
         },
-        entry: path.join(PATHS.src, 'server'),
+        mode: isDevelopment ? 'development' : 'production',
+        entry: path.join(PATHS.server, 'index'),
         output: {
             filename: 'server.js',
             libraryTarget: 'commonjs2',
@@ -54,7 +55,7 @@ const getServerConfig = (env: any) => {
             new webpack.DefinePlugin({
                 NODE_ENV: JSON.stringify(env.NODE_ENV)
             })
-        ]
+        ].filter(Boolean)
     };
 };
 

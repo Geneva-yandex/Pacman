@@ -4,7 +4,7 @@ import isServer from 'common/utils/isServer';
 import actions from './actions';
 
 export const {store, history} = configureStore({initialStore: !isServer && window.__PRELOADED_STATE__});
-if (!isServer) {
+if (!isServer && window.__PRELOADED_STATE__) {
     delete window.__PRELOADED_STATE__;
 }
 
