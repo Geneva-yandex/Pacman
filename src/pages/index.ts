@@ -6,6 +6,7 @@ import SignUpPage from './SignUpPage';
 import StartPage from './StartPage';
 import ProfilePage from './ProfilePage';
 import LeaderboardPage from './LeaderboardPage';
+import FeedbackPage from './FeedbackPage';
 
 const ROUTE_ROOT = 'root';
 const ROUTE_LOGIN = 'login';
@@ -15,6 +16,7 @@ const ROUTE_FORUM = 'forum';
 const ROUTE_TOPIC = 'topic';
 const ROUTE_GAME = 'game';
 const ROUTE_LEADERBOARD = 'leaderboard';
+const ROUTE_FEEDBACK = 'feedback';
 
 export default [
     {
@@ -93,5 +95,14 @@ export default [
         title: 'Leaderboard',
         isNavVisible: true,
         isProtected: true
+    },
+    {
+        id: ROUTE_FEEDBACK,
+        exact: true,
+        path: '/feedback',
+        component: FeedbackPage,
+        title: 'Feedback',
+        isNavVisible: true,
+        isProtected: false
     }
 ];

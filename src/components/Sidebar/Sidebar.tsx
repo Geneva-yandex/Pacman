@@ -14,7 +14,8 @@ import {
     RatingIcon,
     ChatIcon,
     UserIcon,
-    SignOutIcon
+    SignOutIcon,
+    HelpIcon
 } from './sidebar-icons';
 
 const b = bem('Sidebar');
@@ -47,6 +48,13 @@ class Sidebar extends PureComponent<ISidebarProps> {
                             <Tooltip id='forumTooltip' tooltip='Forum'>
                                 <NavLink activeClassName='active' className='icon-link' to='forum'>
                                     <SVG src={ChatIcon} />
+                                </NavLink>
+                            </Tooltip>
+                        </li>
+                        <li>
+                            <Tooltip id='feedbackTooltip' tooltip='Feedback'>
+                                <NavLink activeClassName='active' className='icon-link icon-link-help' to='feedback'>
+                                    <SVG src={HelpIcon} />
                                 </NavLink>
                             </Tooltip>
                         </li>
