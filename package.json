@@ -90,6 +90,7 @@
   },
   "dependencies": {
     "@types/compression": "1.7.0",
+    "@types/cookie-parser": "1.4.2",
     "@types/copy-webpack-plugin": "6.4.0",
     "@types/css-minimizer-webpack-plugin": "1.1.1",
     "@types/mini-css-extract-plugin": "1.2.2",
@@ -100,6 +101,7 @@
     "classnames": "2.2.6",
     "compression": "1.7.4",
     "connected-react-router": "6.8.0",
+    "cookie-parser": "1.4.5",
     "easy-bem": "1.0.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
