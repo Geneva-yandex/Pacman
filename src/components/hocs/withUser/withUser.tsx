@@ -12,13 +12,17 @@ interface IProps {
 function withUser(WrappedComponent: React.ElementType) {
     class withUser extends React.Component<IProps> {
         componentDidMount(): void {
-            boundActions.user.pendingUser();
+            const {user} = this.props;
 
-            AuthApi
-                .getUserInfo()
-                .then(res => {
-                    boundActions.user.setUser(res.data);
-                });
+            if (user.item === null) {
+                boundActions.user.pendingUser();
+
+                AuthApi
+                    .getUserInfo()
+                    .then(res => {
+                        boundActions.user.setUser(res.data);
+                    });
+            }
         }
 
         render() {
