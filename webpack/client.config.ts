@@ -66,9 +66,10 @@ const getClientConfig = (env: any) => {
             new CleanWebpackPlugin(),
             new CopyPlugin({
                 patterns: [
-                    {from: path.join(PATHS.public, 'fonts'), to: './public/fonts'},
-                    {from: path.join(PATHS.public, 'images'), to: './public/images'},
-                    {from: path.join(PATHS.public, 'offline.html'), to: './public'}
+                    {from: path.join(PATHS.public, 'fonts'), to: './fonts'},
+                    {from: path.join(PATHS.public, 'images'), to: './images'},
+                    {from: path.join(PATHS.public, 'sounds'), to: './sounds'},
+                    {from: path.join(PATHS.public, 'offline.html'), to: '.'}
                 ]
             }),
             new MiniCssExtractPlugin({
