@@ -7,9 +7,14 @@ export const actions = {
     logOut: 'logOut'
 };
 
-export type UserStatus = '' | 'pending' | 'success' | 'failed' | 'quitted';
+export enum UserStatusEnum {
+    Pending = 'pending',
+    Success = 'success',
+    Failed = 'failed',
+    Quitted = 'quitted'
+}
 
-export interface IUserState {
+export interface IUserStore {
     item: IUser | null;
-    status: UserStatus;
+    status: UserStatusEnum | null;
 }

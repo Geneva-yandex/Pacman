@@ -9,17 +9,18 @@ interface IIconButtonProps {
     tooltip?: string;
 }
 
-const IconButton = (() => {
+const IconButtonWrap = (() => {
     let id = 0;
 
-    // eslint-disable-next-line react/display-name
-    return ({icon, onClick, tooltip}: IIconButtonProps) => {
+    function IconButton({icon, onClick, tooltip}: IIconButtonProps) {
         return <button className='IconButton' type='button' onClick={onClick}>
             <Tooltip id={`${id++}-icon-button`} tooltip={tooltip || ''} place='bottom'>
                 <SVG src={icon} />
             </Tooltip>
         </button>;
-    };
+    }
+
+    return IconButton;
 })();
 
-export default IconButton;
+export default IconButtonWrap;

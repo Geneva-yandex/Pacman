@@ -9,7 +9,7 @@ export default (path: string, options: HowlOptions = {}) => {
     const pause = useCallback(() => {
         audio.current.pause(sound);
         setPlayed(false);
-    }, [sound]);
+    }, [audio, sound]);
 
     const play = useCallback(() => {
         const id = audio.current.play();

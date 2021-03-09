@@ -2,6 +2,7 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import {IUser} from 'common/types/interfaces';
 import LeaderboardItem from './components/LeaderboardItem';
+import Meta from '../../components/Meta/Meta';
 
 const b = bem('InnerPage');
 
@@ -20,11 +21,13 @@ const user: IUser = {
 class LeaderboardPage extends React.PureComponent {
     render() {
         return <div className={b()}>
+            <Meta title={'Leaderboard'}/>
             <header className={b('header')}>
                 <h1>Leaderboard</h1>
             </header>
 
             <div className={b('main')}>
+                2
                 <LeaderboardItem user={user} position={1} rank={266} />
                 <LeaderboardItem user={user} position={2} rank={156} />
                 <LeaderboardItem user={user} position={3} rank={25} />

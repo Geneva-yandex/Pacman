@@ -1,18 +1,13 @@
-import React, {Component, FormEvent} from 'react';
-import bem from 'easy-bem';
-import authApi from 'api/AuthApi';
-import {ChangeEvent} from 'react';
-import {withRouter, RouteComponentProps} from 'react-router';
+import React, {Component, FormEvent, ChangeEvent} from 'react';
 import {connect} from 'react-redux';
-import {ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
+import bem from 'easy-bem';
 import cn from 'classnames';
-import {IUser} from 'common/types/interfaces';
-import {DispatchAdding} from 'store/user/actionTypes';
-import {setUser} from 'store/user/actions';
-import {IStoreState} from 'store/types';
-import {Input, Button} from '../ui';
 import './AuthForm.scss';
+
+import authApi from 'api/AuthApi';
+import {IStore} from 'store/types';
+import {boundActions} from 'store/initClientStore';
+import {Input, Button} from '../ui';
 
 const b = bem('AuthForm');
 
@@ -25,14 +20,10 @@ type State = {
 
 };
 type StateProps = {
-    user: IStoreState['user'];
+    user: IStore['user'];
 };
 
-interface ComponentProps extends RouteComponentProps {
-    setUser: DispatchAdding['setUser']
-}
-
-class AuthForm extends Component<ComponentProps, State> {
+class AuthForm extends Component<{}, State> {
     state = {
         login: '',
         password: '',
@@ -51,7 +42,6 @@ class AuthForm extends Component<ComponentProps, State> {
 
     onSubmit = (event: FormEvent) => {
         event.preventDefault();
-        const {setUser} = this.props;
         const remember = this.state.remember === 'on';
         const {login, password} = this.state;
         const logInData = {
@@ -72,8 +62,8 @@ class AuthForm extends Component<ComponentProps, State> {
                 }
 
                 const userData = resp.data;
-                setUser(userData);
-                this.props.history.push('/');
+                boundActions.user.setUser(userData);
+                boundActions.router.push('/');
             })
             .catch(err => {
                 this.setState({
@@ -101,14 +91,8 @@ class AuthForm extends Component<ComponentProps, State> {
     }
 }
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
-    setUser: (user: IUser) => {
-        dispatch(setUser(user));
-    }
-});
-
-const mapStateToProps = (state: IStoreState): StateProps => ({
+const mapStateToProps = (state: IStore): StateProps => ({
     user: state.user
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));
+export default connect(mapStateToProps)(AuthForm);

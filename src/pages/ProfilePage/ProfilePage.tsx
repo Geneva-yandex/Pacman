@@ -5,6 +5,7 @@ import {IUser, IPasswordsDto} from 'common/types/interfaces';
 import {AccountForm, AvatarForm, PasswordForm} from './components';
 import {IProfilePageProps, IProfilePageState, ProfileTabs} from './types';
 import './ProfilePage.scss';
+import Meta from '../../components/Meta/Meta';
 
 const b = bem('ProfilePage');
 
@@ -24,6 +25,7 @@ class ProfilePage extends React.PureComponent<IProfilePageProps, IProfilePageSta
         const {user} = this.props;
 
         return <div className={b()}>
+            <Meta title={'Profile'}/>
             <header className={b('header')}>
                 <h1>Profile</h1>
             </header>

@@ -1,2 +1,2 @@
-import IconButton from './IconButton';
-export default IconButton;
+import IconButtonWrap from './IconButton';
+export default IconButtonWrap;
