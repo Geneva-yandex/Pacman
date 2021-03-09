@@ -10,6 +10,8 @@ import {ResponseWithRender} from '../../types';
 import Bundle from '../../../src/components/Bundle';
 import configureStore from '../../../src/store/configureStore';
 import {IStore} from '../../../src/store/types';
+import {IUser} from '../../../src/common/types/interfaces';
+import {UserStatusEnum} from '../../../src/store/user';
 
 interface IParamsHTML {
     bundleHTML: string,
@@ -45,7 +47,13 @@ export default (req: Request, res: ResponseWithRender, next: NextFunction) => {
         const {store} = configureStore({
             router: {
                 initialEntries: [req.url]
-            }
+            },
+            initialStore: {
+                user: {
+                    item: res.locals.user as IUser,
+                    status: UserStatusEnum.Success
+                }
+            } as any
         });
 
         const context: StaticRouterContext = {};

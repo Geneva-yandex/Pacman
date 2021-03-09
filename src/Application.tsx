@@ -20,11 +20,4 @@ export default class Application extends React.PureComponent {
             </Provider>
         );
     }
-
-    async componentDidMount() {
-        const response = await axios.get('auth');
-        const response2 = await axios.get('https://yandex.ru');
-        console.log(response.data);
-        console.log(response2.data);
-    }
 }

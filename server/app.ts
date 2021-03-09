@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
-import express, {Router, Request, Response} from 'express';
+import express, {Router, Request} from 'express';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
@@ -14,10 +14,6 @@ import auth from './middlewares/auth';
 const app = express();
 const router = Router();
 
-router.get('/auth', [auth], (_req: Request, res: Response) => {
-    res.send('123');
-});
-
 app
     .disable('x-powered-by')
     .enable('trust proxy')
@@ -29,7 +25,7 @@ app
     .use(render);
 
 routes.forEach(r => {
-    app.get(r.path, [auth], (_req: Request, res: ResponseWithRender) => {
+    app.get(r.path, auth, (_req: Request, res: ResponseWithRender) => {
         res.renderBundle();
     });
 });

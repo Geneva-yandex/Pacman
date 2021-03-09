@@ -91,10 +91,18 @@
     "workbox-webpack-plugin": "6.0.2"
   },
   "dependencies": {
+    "@types/copy-webpack-plugin": "6.4.0",
+    "@types/css-minimizer-webpack-plugin": "1.1.1",
+    "@types/howler": "2.2.1",
+    "@types/mini-css-extract-plugin": "1.2.2",
+    "@types/react-helmet": "6.1.0",
+    "@types/terser-webpack-plugin": "5.0.2",
+    "@types/workbox-webpack-plugin": "5.1.5",
     "axios": "0.21.1",
     "classnames": "2.2.6",
     "compression": "1.7.4",
     "connected-react-router": "6.8.0",
+    "cookie-parser": "1.4.5",
     "easy-bem": "1.0.2",
     "howler": "2.2.1",
     "morgan": "1.10.0",
