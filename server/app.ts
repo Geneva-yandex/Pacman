@@ -4,6 +4,7 @@ import https from 'https';
 import express, {Router, Request, Response} from 'express';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
 
 import {render} from './middlewares';
 import {ResponseWithRender} from './types';
@@ -20,9 +21,10 @@ router.get('/auth', [auth], (_req: Request, res: Response) => {
 app
     .disable('x-powered-by')
     .enable('trust proxy')
+    .use(morgan('tiny'))
     .use(cookieParser())
-    .use(router)
     .use(compression())
+    .use(router)
     .use('/', express.static(path.join(__dirname, 'public')))
     .use(render);
 
