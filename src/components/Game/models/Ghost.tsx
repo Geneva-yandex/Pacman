@@ -3,25 +3,34 @@ import {convertToPixel, getCell, getRow} from '../helpers';
 import {CELL_SIZE} from '../views/Canvas';
 
 export default class Ghost {
-    ctx: CanvasRenderingContext2D;
+    ghostCtx: CanvasRenderingContext2D;
+    prevCoords: CoordsType | null;
 
     constructor(props: IComponentProps) {
-        this.ctx = props.ctx;
+        this.ghostCtx = props.ghostCtx;
     }
 
     public draw(ghostPosition: CoordsType) {
-        const radius = 10;
-        const x1 = convertToPixel(getCell(ghostPosition));
-        const x2 = convertToPixel(getCell(ghostPosition)) + CELL_SIZE;
-        const y = convertToPixel(getRow(ghostPosition));
+        this.prevCoords = ghostPosition;
 
-        this.ctx.beginPath();
-        this.ctx.fillStyle = '#e540c5';
-        this.ctx.arcTo(x1, y, x2, y, radius);
-        this.ctx.fill();
+        const radius = 10;
+        const x = convertToPixel(getCell(ghostPosition)) + CELL_SIZE / 2;
+        const y = convertToPixel(getRow(ghostPosition)) + CELL_SIZE / 2;
+
+        this.ghostCtx.beginPath();
+        this.ghostCtx.fillStyle = '#ff0000';
+        this.ghostCtx.arc(x, y, radius, 0, 2 * Math.PI, true);
+        this.ghostCtx.fill();
     }
 
-    public move(ghostPosition: CoordsType) {
-        this.draw(ghostPosition);
+    public move(userPosition: CoordsType) {
+        if (this.prevCoords) {
+            const prevX = convertToPixel(getCell(this.prevCoords));
+            const prevY = convertToPixel(getRow(this.prevCoords));
+
+            this.ghostCtx.clearRect(prevX, prevY, CELL_SIZE, CELL_SIZE);
+        }
+
+        this.draw(userPosition);
     }
 }

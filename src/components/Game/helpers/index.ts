@@ -1,5 +1,5 @@
 import {GameItemsEnum, UserDirectionTypeEnum, UserDirectionEnum, KeyCodeEnum} from 'common/enums';
-import {CoordsType, UserDirectionType, UserDirectionTypeType} from '../types';
+import {CoordsType, GhostCoordsType, UserDirectionType, UserDirectionTypeType} from '../types';
 import {CELL_SIZE} from '../views/Canvas';
 
 export const convertToPixel = (cellsCount: number): number => {
@@ -58,6 +58,17 @@ export const getDirectionByKeyCode = (keyCode: string): UserDirectionType | unde
     return map[keyCode] as UserDirectionType | undefined;
 };
 
+export const getOppositeDirection = (direction: UserDirectionType): UserDirectionType => {
+    const map = {
+        [UserDirectionEnum.Left]: UserDirectionEnum.Right,
+        [UserDirectionEnum.Right]: UserDirectionEnum.Left,
+        [UserDirectionEnum.Top]: UserDirectionEnum.Bottom,
+        [UserDirectionEnum.Bottom]: UserDirectionEnum.Top
+    };
+
+    return map[direction];
+};
+
 export const copyMap = (arr: any[]): any[] => {
     return arr.map(item => {
         if (Array.isArray(item)) {
@@ -66,4 +77,20 @@ export const copyMap = (arr: any[]): any[] => {
 
         return item;
     });
+};
+
+export const makeGhostCoords = (row: number, cell: number, direction: UserDirectionType): GhostCoordsType => ({
+    coords: makeCellCoords(row, cell),
+    direction
+});
+
+export const getNextGhostPosition = (possibleCoords: GhostCoordsType[], userCoords: CoordsType): GhostCoordsType => {
+    const hypotenuses = possibleCoords.map(item => {
+        const cellsDiff = Math.abs(Math.ceil(getCell(userCoords)) - getCell(item.coords));
+        const rowsDiff = Math.abs(Math.ceil(getRow(userCoords)) - getRow(item.coords));
+        return Math.hypot(cellsDiff, rowsDiff);
+    });
+
+    const index = hypotenuses.indexOf(Math.min(...hypotenuses));
+    return possibleCoords[index];
 };

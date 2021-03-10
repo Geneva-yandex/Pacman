@@ -4,12 +4,14 @@ import {CELL_SIZE} from '../views/Canvas';
 import {convertToPixel, getCell, getRow, makeCellCoords} from '../helpers';
 
 export default class Map {
-    ctx: CanvasRenderingContext2D;
+    userCtx: CanvasRenderingContext2D;
+    ghostCtx: CanvasRenderingContext2D;
     private isUserInitialized: boolean;
     private isGhostInitialized: boolean;
 
     constructor(props: IComponentProps) {
-        this.ctx = props.ctx;
+        this.userCtx = props.userCtx;
+        this.ghostCtx = props.ghostCtx;
         this.isUserInitialized = false;
         this.isGhostInitialized = false;
     }
@@ -39,7 +41,7 @@ export default class Map {
                     this.isUserInitialized = true;
                 }
 
-                if (itemCode === GameItemsEnum.Ghost_home && this.isGhostInitialized) {
+                if (itemCode === GameItemsEnum.Ghost_home && !this.isGhostInitialized) {
                     initGhost(coords);
                     this.isGhostInitialized = true;
                 }
@@ -68,36 +70,36 @@ export default class Map {
     }
 
     public drawWalls(coords: CoordsType) {
-        this.ctx.fillStyle = 'rgba(22, 59, 243, 0.5)';
+        this.userCtx.fillStyle = 'rgba(22, 59, 243, 0.5)';
         const rectCoords = this.getRectCoords(coords);
-        this.ctx.fillRect(rectCoords.x, rectCoords.y, rectCoords.width, rectCoords.height);
+        this.userCtx.fillRect(rectCoords.x, rectCoords.y, rectCoords.width, rectCoords.height);
     }
 
     public drawGhostHome(coords: CoordsType) {
         const rectCoords = this.getRectCoords(coords);
 
-        this.ctx.fillStyle = 'rgb(0, 66, 255, 0.2)';
-        this.ctx.fillRect(rectCoords.x, rectCoords.y, rectCoords.width, rectCoords.height);
+        this.userCtx.fillStyle = 'rgb(0, 66, 255, 0.2)';
+        this.userCtx.fillRect(rectCoords.x, rectCoords.y, rectCoords.width, rectCoords.height);
     }
 
     public drawCookie(coords: CoordsType) {
         const radius = 2;
         const arcCoords = this.getArcCoords(coords);
 
-        this.ctx.beginPath();
-        this.ctx.fillStyle = '#ffffff';
-        this.ctx.arc(arcCoords.x, arcCoords.y, radius, 0, 2 * Math.PI, true);
-        this.ctx.fill();
+        this.userCtx.beginPath();
+        this.userCtx.fillStyle = '#ffffff';
+        this.userCtx.arc(arcCoords.x, arcCoords.y, radius, 0, 2 * Math.PI, true);
+        this.userCtx.fill();
     }
 
     public drawPill(coords: CoordsType) {
         const radius = 6;
         const arcCoords = this.getArcCoords(coords);
 
-        this.ctx.beginPath();
-        this.ctx.fillStyle = '#ffffff';
-        this.ctx.arc(arcCoords.x, arcCoords.y, radius, 0, 2 * Math.PI, true);
-        this.ctx.fill();
+        this.userCtx.beginPath();
+        this.userCtx.fillStyle = '#ffffff';
+        this.userCtx.arc(arcCoords.x, arcCoords.y, radius, 0, 2 * Math.PI, true);
+        this.userCtx.fill();
     }
 
     private getRectCoords(coords: CoordsType) {
