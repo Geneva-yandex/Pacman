@@ -22,3 +22,35 @@ export interface IUser extends IBaseId, IBaseUser {
 }
 
 export type IUserProfileDto = IBaseUser;
+
+export interface ITopicCreateData {
+    title: string,
+    description: string,
+    user_id: number,
+}
+
+export interface ITopicData {
+    id: number,
+    title: string,
+    description: string,
+    user_id: number,
+    last_message_txt: string,
+    comments: IComment[]
+}
+
+export interface ICommentCreateData {
+    title: string,
+    description: string,
+    user_id: number,
+    topic_id: number,
+    message_id: number | null
+}
+
+export interface IComment {
+    id: number,
+    title: string,
+    description: string,
+    user_id: number,
+    message_id: number,
+    topic_id: string,
+}

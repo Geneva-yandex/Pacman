@@ -1,17 +1,18 @@
-import path from 'path';
 import express, {Request} from 'express';
 import {Sequelize, SequelizeOptions} from 'sequelize-typescript';
 import mongoose from 'mongoose';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-
+import router from './router';
 import compression from 'compression';
 import {render} from './middlewares';
 import {ResponseWithRender} from './types';
 import routes from '../src/pages/index';
+import Topic from "./db/tables/Topic";
+import Message from "./db/tables/Message";
 
 const sequelizeOptions: SequelizeOptions = {
-    host: 'postgres',
+    host: 'localhost',
     port: 5433,
     username: 'postgres',
     password: 'newPassword',
@@ -20,6 +21,15 @@ const sequelizeOptions: SequelizeOptions = {
 };
 
 const sequelize = new Sequelize(sequelizeOptions);
+
+
+
+sequelize.addModels([Topic, Message]);
+
+Topic.hasMany(Message, {
+    foreignKey: 'topic_id'
+})
+Message.belongsTo(Topic);
 
 sequelize.authenticate()
     .then(() => console.log('Postgres successful connection'))
@@ -42,7 +52,7 @@ app
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: false }))
     .use(compression())
-    .use('/', express.static(path.join(__dirname, 'public')))
+    .use(router)
     .use(render);
 
 routes.forEach(r => {
@@ -51,4 +61,8 @@ routes.forEach(r => {
     });
 });
 
-export default app;
+
+
+
+
+export {app, sequelize};

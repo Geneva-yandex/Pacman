@@ -1,5 +1,6 @@
 import {RouterRootState} from 'connected-react-router';
 import {IUserStore} from './user';
+import {IForumStore} from './forum'
 
 export interface IAction<T = unknown> {
     type: string;
@@ -8,6 +9,7 @@ export interface IAction<T = unknown> {
 
 export interface IStore extends RouterRootState {
     user: IUserStore;
+    forum: IForumStore
 }
 
 export interface IStoreOptions {

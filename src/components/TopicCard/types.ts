@@ -1,7 +1,7 @@
-import {ITopic} from 'common/types/ForumTypes';
+import {ITopicData} from "../../common/types/interfaces";
 
 export interface ITopicCardProps {
-    topic: ITopic,
+    topic: ITopicData,
     hasDescription: boolean,
     isLink: boolean
 }

@@ -1,10 +1,8 @@
-import {ComponentType} from 'react';
-
 export type RouteType = {
     id: string,
     exact?: boolean,
     path: string,
-    component: ComponentType,
+    component: any,
     title?: string,
     isNavVisible: boolean;
     isProtected?: boolean;

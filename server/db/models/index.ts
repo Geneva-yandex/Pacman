@@ -1,10 +1,14 @@
 import {Sequelize} from 'sequelize-typescript';
 // Import productFactory from "./product";
+import Message from '../tables/Message';
+import Topic from '../tables/Topic';
 
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config.json')[env];
 
 const sequelize = new Sequelize(config);
+
+sequelize.addModels([Topic, Message]);
 
 const db = {
     sequelize,

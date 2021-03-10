@@ -1,17 +1,43 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import bem from 'easy-bem';
 import './ForumPage.scss';
 
-import forumData from 'common/data/forum-data';
-import {ITopic} from 'common/types/ForumTypes';
+
 import TopicCard from 'components/TopicCard';
 import Meta from 'components/Meta/Meta';
 import TopicForm from './views/TopicForm';
+import {ThunkDispatch} from "redux-thunk";
+import {AnyAction} from "redux";
+import {connect} from "react-redux";
+import {IStore as state} from '../../store/types'
+import {IForumStore} from "../../store/forum";
+import {ForumEntityActions} from '../../store/forum'
+import {ITopicData} from "../../common/types/interfaces";
 
 const b = bem('ForumPage');
 
-export default class ForumPage extends PureComponent {
+interface StateProps {
+    forumTopics: IForumStore
+}
+
+interface DispatchToProps{
+    getTopics: () => void,
+
+}
+
+type Dispatch = ThunkDispatch<IForumStore, void, AnyAction>;
+
+type ForumPageProps = DispatchToProps & StateProps
+
+class ForumPage extends Component<ForumPageProps> {
+
+    componentDidMount(): void {
+        this.props.getTopics();
+    }
+
     render() {
+        let { topics } = this.props.forumTopics;
+
         return (
             <div className={b()}>
                 <Meta title={'Forum'}/>
@@ -23,16 +49,29 @@ export default class ForumPage extends PureComponent {
                     </div>
                     <div className={b('topics-list')}>
                         <h2>Topics</h2>
-                        {forumData.map((topic: ITopic) => (
+                        {topics ? topics.map((topic: ITopicData) => (
                             <TopicCard
                                 topic={topic}
                                 key={topic.id}
                                 isLink
                             />
-                        ))}
+                        )) : null}
                     </div>
                 </div>
             </div>
         );
     }
 }
+
+
+
+const mapStateToProps = (state: state): StateProps => ({
+    forumTopics: state.forum
+});
+
+
+const mapDispatchToProps = (dispatch: Dispatch): DispatchToProps => ({
+    getTopics: () => dispatch(ForumEntityActions.getTopics())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ForumPage);
