@@ -6,7 +6,7 @@ export default class Postgres {
     options: SequelizeOptions;
     sequelize: Sequelize;
 
-    constructor(options) {
+    constructor(options: SequelizeOptions) {
         if (Postgres.__instance) {
             return Postgres.__instance;
         }

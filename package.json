@@ -49,7 +49,6 @@
     "@types/webpack-dev-middleware": "4.1.0",
     "@types/webpack-hot-middleware": "2.25.3",
     "@types/webpack-node-externals": "2.5.0",
-    "@types/compression": "1.7.0",
     "@types/copy-webpack-plugin": "6.4.0",
     "@types/css-minimizer-webpack-plugin": "1.1.1",
     "@types/mini-css-extract-plugin": "1.2.2",
@@ -112,7 +111,9 @@
     "cookie-parser": "1.4.5",
     "easy-bem": "1.0.2",
     "howler": "2.2.1",
+    "mongoose": "5.11.18",
     "morgan": "1.10.0",
+    "pg": "8.5.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-helmet": "6.1.0",
@@ -122,14 +123,12 @@
     "react-tooltip": "4.2.13",
     "redux": "4.0.5",
     "redux-thunk": "2.3.0",
-    "reselect": "4.0.0",
-    "typesafe-actions": "5.1.0",
-    "webpack-dev-middleware": "4.1.0",
-    "mongoose": "5.11.18",
-    "pg": "8.5.1",
     "reflect-metadata": "0.1.13",
+    "reselect": "4.0.0",
     "sequelize": "6.5.0",
-    "sequelize-typescript": "2.1.0"
+    "sequelize-typescript": "2.1.0",
+    "typesafe-actions": "5.1.0",
+    "webpack-dev-middleware": "4.1.0"
   },
   "husky": {
     "hooks": {

@@ -5,7 +5,7 @@ export default class Mongo {
     url: string;
     options: ConnectOptions;
 
-    constructor(url, options = {
+    constructor(url: string, options: ConnectOptions = {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,

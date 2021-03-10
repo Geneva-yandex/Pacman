@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import https from 'https';
-import express, {Router, Request} from 'express';
+import express, {Request} from 'express';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
@@ -10,10 +10,9 @@ import {render} from './middlewares';
 import {ResponseWithRender} from './types';
 import routes from '../src/pages/index';
 import auth from './middlewares/auth';
-import api from '../src/backend/routes';
+import router from '../src/backend/routes';
 
 const app = express();
-const router = Router();
 
 app
     .disable('x-powered-by')
@@ -21,10 +20,9 @@ app
     .use(morgan('tiny'))
     .use(cookieParser())
     .use(compression())
-    .use(router)
     .use('/', express.static(path.join(__dirname, 'public')))
     .use(render)
-    .use(api);
+    .use(router);
 
 routes.forEach(r => {
     app.get(r.path, auth, (_req: Request, res: ResponseWithRender) => {
