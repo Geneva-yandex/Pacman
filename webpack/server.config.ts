@@ -7,6 +7,7 @@ import fontsLoader from './loaders/fonts';
 import path from 'path';
 import webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
+import CopyPlugin from 'copy-webpack-plugin';
 
 const getServerConfig = (env: any) => {
     const isDevelopment = env.NODE_ENV === 'development';
@@ -54,6 +55,11 @@ const getServerConfig = (env: any) => {
         plugins: [
             new webpack.DefinePlugin({
                 NODE_ENV: JSON.stringify(env.NODE_ENV)
+            }),
+            new CopyPlugin({
+                patterns: [
+                    {from: path.join(PATHS.server, 'cert'), to: './cert'}
+                ]
             })
         ].filter(Boolean)
     };

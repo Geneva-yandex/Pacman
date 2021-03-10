@@ -1,4 +1,4 @@
-import app from './app';
+import {sslServer} from './app';
 import Mongo from './db/Mongo';
 import Postgres from './db/Postgres';
 
@@ -20,7 +20,7 @@ postgres
         return mongo.connect();
     })
     .then(() => {
-        app.listen(port, () => {
+        sslServer.listen(port, () => {
             console.log(`Application is started on localhost:${port}`);
         });
     });
