@@ -2,3 +2,4 @@
 node_modules
 /dist
 /postgresdata
+webpack.config.js

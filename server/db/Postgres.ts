@@ -1,7 +1,12 @@
-const {Sequelize} = require('sequelize-typescript');
+import {Sequelize} from 'sequelize-typescript';
+import {SequelizeOptions} from 'sequelize-typescript/dist/sequelize/sequelize/sequelize-options';
 
-class Postgres {
-    constructor(options) {
+export default class Postgres {
+    static __instance: Postgres;
+    options: SequelizeOptions;
+    sequelize: Sequelize;
+
+    constructor(options: SequelizeOptions) {
         if (Postgres.__instance) {
             return Postgres.__instance;
         }
@@ -23,5 +28,3 @@ class Postgres {
         }
     }
 }
-
-module.exports = Postgres;

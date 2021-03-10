@@ -1,7 +1,11 @@
-const mongoose = require('mongoose')
+import mongoose, {ConnectOptions} from 'mongoose';
 
-class Mongo {
-    constructor(url, options = {
+export default class Mongo {
+    static __instance: Mongo;
+    url: string;
+    options: ConnectOptions;
+
+    constructor(url: string, options: ConnectOptions = {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
@@ -33,5 +37,3 @@ class Mongo {
         })
     }
 }
-
-module.exports = Mongo;
