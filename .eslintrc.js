@@ -36,6 +36,8 @@ module.exports = {
         '@typescript-eslint/type-annotation-spacing': ['error'],
         'no-alert': 'off',
         'no-undef': 'off',
-        'no-void': 'off'
+        'no-void': 'off',
+        'new-cap': 'off',
+        'capitalized-comments': 'off'
     }
 };

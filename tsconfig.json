@@ -2,7 +2,7 @@
     "compilerOptions": {
         "baseUrl": "src",
         "jsx": "react",
-        "noImplicitAny": false,
+        "noImplicitAny": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "alwaysStrict": true,

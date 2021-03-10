@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {Provider} from 'react-redux';
 import Bundle from './components/Bundle';
 import ErrorBoundary from './components/ErrorBoundary';
