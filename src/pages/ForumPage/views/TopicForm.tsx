@@ -1,6 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import {Button, Input} from '../../../components/ui';
+import {Button, Input} from 'components/ui';
 
 const b = bem('TopicForm');
 const FORM_ID = 'TopicForm';

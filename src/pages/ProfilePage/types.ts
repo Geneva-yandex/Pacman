@@ -1,5 +1,5 @@
 import {RouteComponentProps} from 'react-router';
-import {IUserState} from 'store/user';
+import {IUserStore} from 'store/user';
 import {IPasswordsDto, IUser} from 'common/types/interfaces';
 
 export enum ProfileTabs {
@@ -9,7 +9,7 @@ export enum ProfileTabs {
 }
 
 export interface IProfilePageProps extends RouteComponentProps {
-    user: IUserState;
+    user: IUserStore;
     updateUser: (user: IUser) => Promise<void>;
     updateAvatar: (avatar: File) => Promise<void>;
     changePassword: (passwords: IPasswordsDto) => Promise<void>;

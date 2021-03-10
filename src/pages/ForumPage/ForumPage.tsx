@@ -1,17 +1,20 @@
-import * as React from 'react';
+import React, {PureComponent} from 'react';
 import bem from 'easy-bem';
-import forumData from '../../common/data/forum-data';
-import {ITopic} from '../../common/types/ForumTypes';
 import './ForumPage.scss';
-import TopicCard from '../../components/TopicCard';
+
+import forumData from 'common/data/forum-data';
+import {ITopic} from 'common/types/ForumTypes';
+import TopicCard from 'components/TopicCard';
+import Meta from 'components/Meta/Meta';
 import TopicForm from './views/TopicForm';
 
 const b = bem('ForumPage');
 
-export default class ForumPage extends React.PureComponent {
+export default class ForumPage extends PureComponent {
     render() {
         return (
             <div className={b()}>
+                <Meta title={'Forum'}/>
                 <div className={'container-fluid'}>
                     <h1>Forum</h1>
                     <div className={b('form-wrap')}>

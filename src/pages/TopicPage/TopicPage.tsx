@@ -1,13 +1,16 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './TopicPage.scss';
+
 import {withRouter} from 'react-router';
-import forumData from '../../common/data/forum-data';
-import {IComment, ITopic} from '../../common/types/ForumTypes';
-import TopicCard from '../../components/TopicCard';
+import forumData from 'common/data/forum-data';
+import {IComment, ITopic} from 'common/types/ForumTypes';
+import TopicCard from 'components/TopicCard';
+
 import CommentForm from './views/CommentForm';
 import Comment from './views/Comment';
 import {ITopicPageProps, ITopicPageState} from './types';
+import Meta from '../../components/Meta/Meta';
 
 const b = bem('TopicPage');
 
@@ -42,6 +45,7 @@ class TopicPage extends React.PureComponent<ITopicPageProps, ITopicPageState> {
 
         return (
             <div className={b()}>
+                <Meta title={topic.title}/>
                 <div className={'container-fluid'}>
                     <TopicCard
                         topic={topic}

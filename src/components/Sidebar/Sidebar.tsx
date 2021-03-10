@@ -1,19 +1,21 @@
 import React, {PureComponent} from 'react';
 import classnames from 'classnames';
 import {NavLink} from 'react-router-dom';
-import {RouteComponentProps, withRouter} from 'react-router';
 import SVG from 'react-inlinesvg';
 import bem from 'easy-bem';
 import './Sidebar.scss';
-import AuthApi from '../../api/AuthApi';
+
+import AuthApi from 'api/AuthApi';
 import {Tooltip} from '../ui';
+import {boundActions} from '../../store/initClientStore';
 
 import {
     GameIcon,
     RatingIcon,
     ChatIcon,
     UserIcon,
-    SignOutIcon
+    SignOutIcon,
+    HelpIcon
 } from './sidebar-icons';
 
 const b = bem('Sidebar');
@@ -22,7 +24,7 @@ interface ISidebarProps {
     className?: string;
 }
 
-class Sidebar extends PureComponent<RouteComponentProps & ISidebarProps> {
+class Sidebar extends PureComponent<ISidebarProps> {
     render() {
         return (
             <aside className={classnames(this.props.className, b())}>
@@ -46,6 +48,13 @@ class Sidebar extends PureComponent<RouteComponentProps & ISidebarProps> {
                             <Tooltip id='forumTooltip' tooltip='Forum'>
                                 <NavLink activeClassName='active' className='icon-link' to='forum'>
                                     <SVG src={ChatIcon} />
+                                </NavLink>
+                            </Tooltip>
+                        </li>
+                        <li>
+                            <Tooltip id='feedbackTooltip' tooltip='Feedback'>
+                                <NavLink activeClassName='active' className='icon-link icon-link-help' to='feedback'>
+                                    <SVG src={HelpIcon} />
                                 </NavLink>
                             </Tooltip>
                         </li>
@@ -80,7 +89,7 @@ class Sidebar extends PureComponent<RouteComponentProps & ISidebarProps> {
 
             if (response.status === 200) {
                 localStorage.removeItem('user');
-                this.props.history.push('/login');
+                boundActions.router.push('/login');
             }
         } catch (error) {
             this.setState({
@@ -90,4 +99,4 @@ class Sidebar extends PureComponent<RouteComponentProps & ISidebarProps> {
     };
 }
 
-export default withRouter(Sidebar);
+export default Sidebar;

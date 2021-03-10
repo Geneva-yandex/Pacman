@@ -1,9 +1,6 @@
-import {CELL_SIZE} from '../views/Canvas';
+import {GameItemsEnum, UserDirectionTypeEnum, UserDirectionEnum, KeyCodeEnum} from 'common/enums';
 import {CoordsType, UserDirectionType, UserDirectionTypeType} from '../types';
-import {GameItemsEnum} from '../../../common/enums/GameItemsEnum';
-import {UserDirectionTypeEnum} from '../../../common/enums/UserDirectionTypeEnum';
-import {UserDirectionEnum} from '../../../common/enums/UserDirectionEnum';
-import {KeyCodeEnum} from '../../../common/enums/KeyCodeEnum';
+import {CELL_SIZE} from '../views/Canvas';
 
 export const convertToPixel = (cellsCount: number): number => {
     return cellsCount * CELL_SIZE;
