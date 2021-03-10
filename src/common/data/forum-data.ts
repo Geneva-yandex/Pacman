@@ -32,8 +32,8 @@ export default [
     {
         id: 2,
         userId: 3,
-        title: 'Where can a I find Ms. Pac-Man with sound?',
-        description: 'I have searched everywhere. I find knock offs and ones without sound. Where can I go play or download the original Ms.Pac-Man with sound?....I dont even care if I have to pay to do it.',
+        title: 'Where can a I find Ms. Pac-Man with sounds?',
+        description: 'I have searched everywhere. I find knock offs and ones without sounds. Where can I go play or download the original Ms.Pac-Man with sounds?....I dont even care if I have to pay to do it.',
         avatar: user_3,
         firstName: 'Ryan',
         secondName: 'Gosling',

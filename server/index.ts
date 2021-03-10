@@ -1,6 +1,6 @@
-const { app } = require('./dist/server.js');
-const Mongo = require('./db/Mongo');
-const Postgres = require('./db/Postgres');
+import app from './app';
+import Mongo from './db/Mongo';
+import Postgres from './db/Postgres';
 
 const port = process.env.PORT || 9001;
 
