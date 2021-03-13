@@ -20,6 +20,7 @@ app
     .use(morgan('tiny'))
     .use(cookieParser())
     .use(compression())
+    .use(express.json())
     .use('/', express.static(path.join(__dirname, 'public')))
     .use(render)
     .use(router);
