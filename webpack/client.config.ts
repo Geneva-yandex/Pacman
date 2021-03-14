@@ -85,7 +85,11 @@ const getClientConfig = (env: any) => {
                     /\.gitempty$/
                 ]
             })
-        ].filter(Boolean)
+        ].filter(Boolean),
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000
+        }
     };
 };
 

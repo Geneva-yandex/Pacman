@@ -109,7 +109,7 @@ export default class FeedbackForm extends React.PureComponent<{}, IFeedbackFormS
                 />
                 <Button>Send</Button>
                 {this.state.submitSucceeded && (
-                    <div className={b('success')}>Your question has been sent</div>
+                    <div className={b('success')}>Your question has been sent :)</div>
                 )}
                 {this.state.error && (
                     <div className={b('error')}>{this.state.error}</div>

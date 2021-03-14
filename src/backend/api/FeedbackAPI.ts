@@ -4,7 +4,7 @@ import feedbackServiceInstance from '../services/FeedbackService';
 export default class FeedbackAPI {
     public static create = async (request: Request, response: Response) => {
         const {body} = request;
-        console.log('request', request)
+        console.log('request', request);
         try {
             await feedbackServiceInstance.create(body);
             response.send('OK');
