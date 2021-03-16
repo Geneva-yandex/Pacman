@@ -10,8 +10,6 @@ interface CreateRequest {
 class FeedbackService implements BaseRESTService {
     public create(data: CreateRequest) {
         return new Promise((resolve, reject) => {
-            console.log('data', data);
-
             const feedback = new FeedbackModel(data);
             feedback.save(err => {
                 if (err) {

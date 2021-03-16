@@ -25,7 +25,7 @@ services:
             - "5432:5432"
         volumes:
             - ./postgresdata:/var/lib/postgresql/data
-            - ./src/backend/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+            - ./server/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
         restart: always
         environment:
             POSTGRES_USER: postgres

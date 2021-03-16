@@ -10,7 +10,7 @@ import {render} from './middlewares';
 import {ResponseWithRender} from './types';
 import routes from '../src/pages/index';
 import auth from './middlewares/auth';
-import router from '../src/backend/routes';
+import router from './routes';
 
 const app = express();
 

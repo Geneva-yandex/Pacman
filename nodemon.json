@@ -1,0 +1,20 @@
+{
+    "restartable": "rs",
+    "ignore": [
+        "dist/public/",
+        "dist/cert/",
+        "dist/*.map",
+        "public/*",
+        "src/*",
+        "node_modules/**/*",
+        "postgresdata/*",
+        "server/*",
+        "webpack/*",
+        "__mocks__/*",
+        "tests/*",
+        "*.js"
+    ],
+    "watch": "dist/",
+    "verbose": true,
+    "ext": "js"
+}

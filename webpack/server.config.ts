@@ -8,6 +8,7 @@ import path from 'path';
 import webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
 import CopyPlugin from 'copy-webpack-plugin';
+import WebpackShellPluginNext from 'webpack-shell-plugin-next';
 
 const getServerConfig = (env: any) => {
     const isDevelopment = env.NODE_ENV === 'development';
@@ -60,8 +61,20 @@ const getServerConfig = (env: any) => {
                 patterns: [
                     {from: path.join(PATHS.server, 'cert'), to: './cert'}
                 ]
+            }),
+            isDevelopment && new WebpackShellPluginNext({
+                onBuildEnd: {
+                    scripts: ['cross-env NODE_ENV=development nodemon -L --config nodemon.json dist/server.js'],
+                    blocking: false,
+                    parallel: true
+                }
             })
-        ].filter(Boolean)
+        ].filter(Boolean),
+        watch: isDevelopment,
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000
+        }
     };
 };
 
