@@ -1,16 +1,15 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import {Button, Input} from 'components/ui';
-import {ForumEntityActions, IForumStore} from "../../../store/forum";
-import {connect} from "react-redux";
-import {ThunkDispatch} from "redux-thunk";
-import {AnyAction} from "redux";
-import {ChangeEvent} from "react";
-import {FormEvent} from "react";
-import {IStore} from "../../../store/types";
+import {ForumEntityActions, IForumStore} from '../../../store/forum';
+import {connect} from 'react-redux';
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import {ChangeEvent} from 'react';
+import {FormEvent} from 'react';
+import {IStore} from '../../../store/types';
 
 type Dispatch = ThunkDispatch<IForumStore, void, AnyAction>;
-
 
 interface StateToProps {
     user_id: number
@@ -20,7 +19,7 @@ interface DispatchToProps {
     createTopic: (topicData: any) => void;
 }
 
-type TopicFormProps = StateToProps & DispatchToProps
+type TopicFormProps = StateToProps & DispatchToProps;
 
 const b = bem('TopicForm');
 const FORM_ID = 'TopicForm';
@@ -28,8 +27,8 @@ const FORM_ID = 'TopicForm';
 class TopicForm extends React.PureComponent<TopicFormProps> {
     state = {
         title: '',
-        description: '',
-    }
+        description: ''
+    };
 
     onControlChange = (event: ChangeEvent) => {
         const target = event.target;
@@ -45,7 +44,8 @@ class TopicForm extends React.PureComponent<TopicFormProps> {
         const {title, description} = this.state;
         const user_id = this.props.user_id;
         this.props.createTopic({title, description, user_id});
-    }
+    };
+
     render() {
         return (
             <form
@@ -72,10 +72,10 @@ class TopicForm extends React.PureComponent<TopicFormProps> {
 
 const mapStateToProps = (state: IStore): StateToProps => ({
     user_id: state.user.item ? state.user.item.id : 0
-})
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchToProps => ({
     createTopic: (topicData: any) => dispatch(ForumEntityActions.createTopic(topicData))
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopicForm)
+export default connect(mapStateToProps, mapDispatchToProps)(TopicForm);

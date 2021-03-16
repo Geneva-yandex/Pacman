@@ -4,7 +4,7 @@ import {action} from 'typesafe-actions';
 
 import ForumApi from '../../api/ForumApi';
 import {IForumStore} from './types';
-import {IComment, ICommentCreateData, ITopicCreateData, ITopicData} from "../../common/types/interfaces";
+import {IComment, ICommentCreateData, ITopicCreateData, ITopicData} from '../../common/types/interfaces';
 
 export const SET_TOPICS = 'SET_TOPICS';
 export const SET_TOPIC = 'SET_TOPIC';
@@ -12,14 +12,15 @@ export const CREATE_TOPIC = 'CREATE_TOPIC';
 export const COMMENT_TOPIC = 'COMMENT_TOPIC';
 export const FAILED_FORUM = 'FAILED_FORUM';
 export const PENDING_TOPICS = 'PENDING_TOPICS';
+export const CHANGE_RESPONSE = 'CHANGE_RESPONSE';
 
 export const setTopics = (topics: { topics: ITopicData[] }) => action(SET_TOPICS, topics);
 export const setTopic = (topic: { activeTopic: IForumStore['activeTopic']}) => action(SET_TOPIC, topic);
 export const createTopic = (topic: ITopicData) => action(CREATE_TOPIC, topic);
 export const commentTopic = (comment: IComment) => action(COMMENT_TOPIC, comment);
+export const changeResponseId = (responseId: { responseId: number }) => action(CHANGE_RESPONSE, responseId);
 export const failedForum = () => action(FAILED_FORUM);
 export const pendingForum = () => action(PENDING_TOPICS);
-
 
 type Dispatch = ThunkDispatch<IForumStore, void, AnyAction>;
 
@@ -31,11 +32,12 @@ export class ForumEntityActions {
             const topics = topicsPromise.data;
             dispatch(setTopics({
                 topics: topics
-            }))
+            }));
         } catch (e) {
-            dispatch(failedForum())
+            dispatch(failedForum());
         }
-    }
+    };
+
     static createTopic = (topicData: ITopicCreateData) => async (dispatch: Dispatch) => {
         try {
             const newTopic = await ForumApi.createTopic(topicData);
@@ -44,38 +46,67 @@ export class ForumEntityActions {
             } else {
                 dispatch(failedForum());
             }
-
         } catch (e) {
             dispatch(failedForum());
         }
-    }
+    };
 
     static getTopic = (id: number) => async (dispatch: Dispatch) => {
-        console.log('get topic');
         try {
             const topic = await ForumApi.getTopic(id);
-            console.log(topic);
-            if (topic.status == 200) {
+            if (topic.status === 200) {
+                let activeTopic = topic.data.topic;
+
+                const rawComments: IComment[] = activeTopic.Messages;
+
+                const rootComments = rawComments.filter((comment: IComment) => {
+                    return comment.message_id === 0;
+                });
+
+                let comments = rootComments.map((comment: IComment) => {
+                    let childComments = rawComments.filter((innerComment: IComment) => {
+                        return comment.id === innerComment.message_id;
+                    });
+                    Object.defineProperty(comment, 'comments', {
+                        writable: true,
+                        configurable: true,
+                        enumerable: true,
+                        value: childComments
+                    });
+                    return comment;
+                });
+
+                Object.defineProperty(activeTopic, 'comments', {
+                    writable: true,
+                    configurable: true,
+                    enumerable: true,
+                    value: comments
+                });
+
                 dispatch(setTopic({
-                    activeTopic: topic.data,
-                }))
+                    activeTopic: activeTopic
+                }));
             } else {
                 dispatch(failedForum());
             }
         } catch (e) {
+            console.log(e);
             dispatch(failedForum());
         }
-    }
+    };
 
     static leaveComment = (commentData: ICommentCreateData) => async (dispatch: Dispatch) => {
         try {
             const newComment = await ForumApi.createComment(commentData);
-            if (newComment.status == 200) {
-                dispatch(commentTopic(newComment.data))
+            if (newComment.status === 200) {
+                dispatch(commentTopic(newComment.data));
             }
         } catch (e) {
-          dispatch(failedForum());
+            dispatch(failedForum());
         }
-    }
+    };
 
+    static changeResponseId = (responseId: number) => (dispatch: Dispatch) => {
+        dispatch(changeResponseId({responseId}));
+    };
 }

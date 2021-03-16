@@ -1,6 +1,6 @@
 import {RouterRootState} from 'connected-react-router';
 import {IUserStore} from './user';
-import {IForumStore} from './forum'
+import {IForumStore} from './forum';
 
 export interface IAction<T = unknown> {
     type: string;

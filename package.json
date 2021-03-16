@@ -106,6 +106,7 @@
     "easy-bem": "1.0.2",
     "mongoose": "5.11.18",
     "morgan": "1.10.0",
+    "node-fetch": "2.6.1",
     "pg": "8.5.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",

@@ -35,7 +35,8 @@ export interface ITopicData {
     description: string,
     user_id: number,
     last_message_txt: string,
-    comments: IComment[]
+    comments: IComment[],
+    Messages: IComment[],
 }
 
 export interface ICommentCreateData {
@@ -53,4 +54,5 @@ export interface IComment {
     user_id: number,
     message_id: number,
     topic_id: string,
+    comments: IComment[],
 }

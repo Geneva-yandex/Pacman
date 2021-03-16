@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import './TopicCard.scss';
 
 import {ITopicCardProps} from './types';
-import {ITopicData} from "../../common/types/interfaces";
+import {ITopicData} from '../../common/types/interfaces';
 
 const b = bem('TopicCard');
 
@@ -37,34 +37,26 @@ export default class TopicCard extends React.PureComponent<ITopicCardProps> {
     }
 
     renderInner(topic: ITopicData) {
-        const {hasDescription} = this.props;
-
         return (
             <div className={b('inner')}>
                 <div
                     className={b('avatar')}
                     style={{
-                        backgroundImage: `url(${topic.title})`
+                        backgroundImage: `url(${topic.user_id})`
                     }}
                 />
                 <div className={b('content')}>
                     <div className={b('user-name')}>
-                        {`${topic.title} ${topic.title}`}
+                        {`${topic.user_id}`}
                     </div>
                     <div className={b('topic-title')}>
                         {topic.title}
                     </div>
-                    {hasDescription && (
+                    {topic.description && (
                         <p className={b('topic-description')}>
                             {topic.description}
                         </p>
                     )}
-                    <div className={b('comments')}>
-                        {/*{topic.comments.length ?
-                            `Comments: ${topic.comments.length}` :
-                            'No comments'
-                        }*/}
-                    </div>
                 </div>
             </div>
         );

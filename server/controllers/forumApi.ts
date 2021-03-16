@@ -6,6 +6,12 @@ import getId from '../services/getIdParam';
 
 class ForumApi{
 
+    public static getUsers = async (req: Request, res: Response) => {
+        console.log(req);
+        const users = await ForumService.getUsers([1, 2, 3, 4, 5]);
+        res.status(200).json(users);
+    }
+
     public static create = async (req : Request, res: Response) =>
     {
         const {body} = req;
@@ -49,10 +55,7 @@ class ForumApi{
                 res.status(404,).json( {"error": "topic has not been found"});
                 return;
             }
-
-            const comments = await ForumService.getComment(topic.id);
-
-            res.status(200).json({topic, comments});
+            res.status(200).json({topic});
 
         } catch (e) {
             res.status(400).json( {"error" : e} )

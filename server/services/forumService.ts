@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 import Topic from '../db/tables/Topic';
 import Message from '../db/tables/Message';
 
@@ -24,16 +26,17 @@ class ForumService {
 
     }
 
-    public static getTopic = async (id: number) =>
-    {
-        const topic = await Topic.findByPk(id);
+    public static getTopic = async (id: number) => {
+        const topic = await Topic.findOne({
+            where: {id},
+            include: [Message as any]
+        });
 
         return topic;
 
     }
 
-    public static getComment = async (id: number) =>
-    {
+    public static getComment = async (id: number) => {
         const comments = await Message.findAll({
             where: {
                 topic_id: id
@@ -53,6 +56,34 @@ class ForumService {
         // @ts-ignore
         const createdMessage = await Message.create(request);
         return createdMessage;
+    }
+
+    public static getUsers = async (userIds: number[]) => {
+        let promises: Promise<unknown>[] = [];
+        userIds.forEach(id => {
+
+            let promise = new Promise((resolve, reject) => {
+                fetch(`https://ya-praktikum.tech/api/v2/user/${id}`, {
+                    'headers': {
+                        'accept': 'application/json',
+                        'cookie': '',
+                    },
+                    'method': 'GET',
+                })
+                    .then((res: any) => res.json())
+                    .then((user: unknown) => {
+                        resolve(user);
+                    })
+                    .catch((err: unknown) => {
+                        reject(err);
+                    });
+            });
+            promises.push(promise);
+        });
+        let users = await Promise.all(promises);
+        return users;
+
+
     }
 
 }
