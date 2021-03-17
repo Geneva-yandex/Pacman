@@ -6,9 +6,10 @@ import {IStore as state} from '../../../store/types';
 import {Dispatch} from '../types';
 import {ForumEntityActions} from '../../../store/forum';
 import {connect} from 'react-redux';
-import {ICommentCreateData} from '../../../common/types/interfaces';
+import {IComment, ICommentCreateData} from '../../../common/types/interfaces';
 import {FormEvent} from 'react';
 import {ChangeEvent} from 'react';
+import Comment from './Comment';
 
 const b = bem('CommentForm');
 const FORM_ID = 'CommentForm';
@@ -16,7 +17,8 @@ const FORM_ID = 'CommentForm';
 interface StateProps {
     activeTopicId: number,
     userId: number,
-    responseId: number
+    responseId: number,
+    activeTopicComments: IComment[] | undefined
 }
 
 interface DispatchToProps {
@@ -31,6 +33,10 @@ class CommentForm extends React.PureComponent<CommentFormProps> {
         title: '',
         description: ''
     };
+
+    componentDidMount() {
+        console.log(this.props.activeTopicComments);
+    }
 
     onControlChange = (event: ChangeEvent) => {
         const target = event.target;
@@ -53,6 +59,7 @@ class CommentForm extends React.PureComponent<CommentFormProps> {
             topic_id: activeTopicId,
             message_id: this.props.responseId
         });
+        (e.target as HTMLFormElement).reset();
     };
 
     noResponse = () => {
@@ -68,12 +75,23 @@ class CommentForm extends React.PureComponent<CommentFormProps> {
             >
                 {Boolean(this.props.responseId) && (
                     <div>
-                        You are responsing to comment with id {this.props.responseId}
+                        <p>
+                            You are responding to comment with id {this.props.responseId}
+                        </p>
+                        <br/>
+                        <div>
+                            <Comment comment={((this.props.activeTopicComments as IComment[]).find((comment: IComment) => comment.id === this.props.responseId) as IComment)}
+                                responsable={false}
+                            />
+                        </div>
                         <br/>
 
-                        <div className={'dont_want'} onClick={this.noResponse}>
-                            I do not want to response
+                        <div className={'dont_want_to_respond'} onClick={this.noResponse}>
+                            <p>
+                                I do not want to response
+                            </p>
                         </div>
+                        <br/>
 
                     </div>
                 )}
@@ -98,7 +116,8 @@ class CommentForm extends React.PureComponent<CommentFormProps> {
 const mapStateToProps = (state: state): StateProps => ({
     activeTopicId: state.forum.activeTopic ? state.forum.activeTopic.id : 0,
     userId: state.user.item ? state.user.item.id : 0,
-    responseId: state.forum.responseId
+    responseId: state.forum.responseId,
+    activeTopicComments: state.forum.activeTopic?.comments
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchToProps => ({

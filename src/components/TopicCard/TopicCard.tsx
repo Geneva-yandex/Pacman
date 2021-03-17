@@ -42,21 +42,19 @@ export default class TopicCard extends React.PureComponent<ITopicCardProps> {
                 <div
                     className={b('avatar')}
                     style={{
-                        backgroundImage: `url(${topic.user_id})`
+                        backgroundImage: `url(${topic.user.avatar})`
                     }}
                 />
                 <div className={b('content')}>
                     <div className={b('user-name')}>
-                        {`${topic.user_id}`}
+                        {`${topic.user.display_name}`}
                     </div>
                     <div className={b('topic-title')}>
                         {topic.title}
                     </div>
-                    {topic.description && (
-                        <p className={b('topic-description')}>
-                            {topic.description}
-                        </p>
-                    )}
+                    <div className={b('topic-description')}>
+                        {topic.description}
+                    </div>
                 </div>
             </div>
         );

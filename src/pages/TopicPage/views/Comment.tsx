@@ -22,12 +22,12 @@ class Comment extends React.PureComponent<ITopicCommentProps> {
                     <div
                         className={b('avatar')}
                         style={{
-                            backgroundImage: `url(${comment.user_id})`
+                            backgroundImage: `url(${comment.user.avatar})`
                         }}
                     />
                     <div className={b('content')}>
                         <div className={b('user-name')}>
-                            {`${comment.user_id}`}
+                            {`${comment.user.display_name}`}
                         </div>
                         <div className={b('message')}>
                             {comment.title}

@@ -1,5 +1,7 @@
 import axios, {AxiosResponse} from 'axios';
-import {ITopicData} from '../common/types/interfaces';
+import {ITopicData, IUser} from '../common/types/interfaces';
+
+axios.defaults.withCredentials = true;
 
 interface topicData {
     title: string,
@@ -15,8 +17,16 @@ interface commentData {
 }
 
 class ForumApi {
-    private url = 'http://localhost:9001';
+    private url = 'http://local.ya-praktikum.tech:9001';
     private forumApiUrl = '/api/forum/';
+
+    public getAllUsers(usersId: number[]): Promise<AxiosResponse<IUser>[]> {
+        let promises = usersId.map(id => {
+            return axios
+                .get(`https://ya-praktikum.tech/api/v2/user/${id}`);
+        });
+        return Promise.all(promises);
+    }
 
     public get(): Promise<AxiosResponse<ITopicData[]>> {
         return axios
