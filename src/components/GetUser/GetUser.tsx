@@ -8,7 +8,7 @@ import AuthApi from 'api/AuthApi';
 import OAuthApi from 'api/OAuthApi';
 import {IStore} from '../../store/types';
 import {getParam} from '../../utils/getParamFromUri';
-import {IUser} from "../../common/types/interfaces";
+import {IUser} from '../../common/types/interfaces';
 
 type StateProps = {
     user: unknown;
