@@ -9,7 +9,6 @@ const defaultState: IUserState = {
     item: null
 };
 export default (state: IUserState = defaultState, {type, payload}: IAction) => {
-    console.log(type);
     switch (type) {
     case actions.PENDING:
         return {
@@ -17,7 +16,6 @@ export default (state: IUserState = defaultState, {type, payload}: IAction) => {
             status: 'pending'
         };
     case actions.setUser:
-        console.log(payload);
         return {
             ...state,
             ...payload as object,

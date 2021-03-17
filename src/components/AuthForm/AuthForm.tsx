@@ -43,10 +43,13 @@ class AuthForm extends React.Component<ComponentProps, State> {
         errorMessage: ''
     };
 
-    UNSAFE_componentWillReceiveProps(nextProps: Readonly<ComponentProps>): void {
+    shouldComponentUpdate(nextProps: Readonly<ComponentProps>): boolean {
         if (nextProps.user.item !== null) {
             this.props.history.push('/');
+            return true;
         }
+        return false;
+
     }
 
     onControlChange = (event: ChangeEvent) => {
