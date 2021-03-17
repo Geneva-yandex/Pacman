@@ -1,9 +1,9 @@
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
-import {IStoreState} from '../types';
+import {IStore} from '../types';
 import LeaderBoardApi from '../../api/LeaderBoardApi';
 
-type Dispatch = ThunkDispatch<IStoreState, void, AnyAction>;
+type Dispatch = ThunkDispatch<IStore, void, AnyAction>;
 
 export const setLeaders = (leaders: unknown) => ({
     type: 'setLeaders',

@@ -9,7 +9,7 @@ import {GameItemsEnum} from '../../common/enums';
 import {Button} from '../ui';
 import LeaderBoardApi from '../../api/LeaderBoardApi';
 import {connect} from 'react-redux';
-import {IStoreState as state} from '../../store/types';
+import {IStore} from '../../store/types';
 import {UserDTO} from '../../common/types/types';
 
 const b = bem('Game');
@@ -139,7 +139,7 @@ class Game extends React.PureComponent<IViewProps, IGameState> {
     }
 }
 
-const mapStateToProps = (state: state): StateProps => ({
+const mapStateToProps = (state: IStore): StateProps => ({
     user: state.user.item
 });
 

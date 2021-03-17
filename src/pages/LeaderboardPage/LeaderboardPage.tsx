@@ -2,7 +2,7 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import LeaderboardItem from './components/LeaderboardItem';
 import {connect} from 'react-redux';
-import {IStoreState as state} from '../../store/types';
+import {IStore} from '../../store/types';
 import {ILeaderData} from '../../common/types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
@@ -49,8 +49,8 @@ class LeaderboardPage extends React.PureComponent<LeaderBoardProps> {
     }
 }
 
-const mapStateToProps = (state: state): StateProps => ({
-    leaderBoard: state.leaderBoard.item
+const mapStateToProps = (state: IStore): StateProps => ({
+    leaderBoard: state.leaderBoard.item,
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<ILeaderBoard, {}, AnyAction>): DispatchToProps => ({

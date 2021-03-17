@@ -1,5 +1,5 @@
 import {BaseApi} from './BaseApi';
-import {SendDTOToLeaderBoard, GetDTOFromLeaderBoards} from '../types/types';
+import {SendDTOToLeaderBoard, GetDTOFromLeaderBoards} from '../common/types/types';
 
 class LeaderBoardApi extends BaseApi {
     constructor() {

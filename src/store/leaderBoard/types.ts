@@ -1,4 +1,4 @@
-import {ILeaderData} from '../../types/types';
+import {ILeaderData} from '../../common/types/types';
 
 export const actions = {
     setLeaders: 'setLeaders',

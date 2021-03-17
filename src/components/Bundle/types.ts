@@ -1,8 +1,5 @@
 import {ComponentType} from 'react';
-<<<<<<< HEAD:src/components/Router/types.ts
 import {ConnectedComponent} from 'react-redux';
-=======
->>>>>>> origin/dev:src/components/Bundle/types.ts
 
 export type RouteType = {
     id: string,
