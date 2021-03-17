@@ -18,4 +18,5 @@ function isEquivalent(a: object, b: object): boolean {
 
     return true;
 }
+
 export default isEquivalent;

@@ -48,8 +48,8 @@ class AuthForm extends React.Component<ComponentProps, State> {
             this.props.history.push('/');
             return true;
         }
-        return false;
 
+        return false;
     }
 
     onControlChange = (event: ChangeEvent) => {

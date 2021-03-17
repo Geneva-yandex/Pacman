@@ -23,7 +23,6 @@ export default function PrivateRoute({path, exact, key, component}: PrivateRoute
         );
     }
 
-
     return (
 
         <Redirect
