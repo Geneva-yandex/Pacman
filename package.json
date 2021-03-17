@@ -1,11 +1,14 @@
 {
-    "name": "Packman",
+    "name": "pacman",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "test": "jest",
-        "start": "webpack --env NODE_ENV=development --config webpack/server.config.ts",
+        "build:dev": "webpack --env NODE_ENV=development --config webpack/index.ts",
+        "start:api:nodemon": "nodemon --watch dist dist/server.js",
+        "start:api:webpack": "webpack --env NODE_ENV=development --config webpack/server.config.ts --watch",
+        "start:api": "npm run build:dev && run-p start:api:*",
         "server": "node dist/server.js",
         "build": "webpack --env NODE_ENV=production",
         "deploy": "npm run build && npm run server",

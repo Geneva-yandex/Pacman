@@ -1,4 +1,4 @@
-import {Router} from 'express';
+import {Router, Request, Response} from 'express';
 import FeedbackAPI from '../api/FeedbackAPI';
 
 const feedbackRoutes = (router: Router) => {
@@ -6,6 +6,8 @@ const feedbackRoutes = (router: Router) => {
     const feedbackRouter: Router = Router();
 
     feedbackRouter.post('/', FeedbackAPI.create);
+
+    feedbackRouter.get('/', (_: Request, res: Response) => res.json({ ping: 'pong' })); 
 
     router.use('/feedback', feedbackRouter);
 };
