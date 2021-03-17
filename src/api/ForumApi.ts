@@ -1,6 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
 import {ITopicData, IUser} from '../common/types/interfaces';
-import {INNER_API} from 'common/constants';
 axios.defaults.withCredentials = true;
 
 interface topicData {
