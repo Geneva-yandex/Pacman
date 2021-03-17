@@ -2,15 +2,15 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import './Game.scss';
 import {IGameState} from './types';
-import {IViewProps} from '../../pages/GamePage/types';
+import {IViewProps} from 'pages/GamePage/types';
 import Canvas from './views/Canvas';
 import bonuses from './bonuses';
-import {GameItemsEnum} from '../../enums/GameItemsEnum';
+import {GameItemsEnum} from '../../common/enums';
 import {Button} from '../ui';
 import LeaderBoardApi from '../../api/LeaderBoardApi';
 import {connect} from 'react-redux';
 import {IStoreState as state} from '../../store/types';
-import {UserDTO} from '../../types/types';
+import {UserDTO} from '../../common/types/types';
 
 const b = bem('Game');
 

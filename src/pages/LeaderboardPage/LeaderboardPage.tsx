@@ -3,11 +3,12 @@ import bem from 'easy-bem';
 import LeaderboardItem from './components/LeaderboardItem';
 import {connect} from 'react-redux';
 import {IStoreState as state} from '../../store/types';
-import {ILeaderData} from '../../types/types';
+import {ILeaderData} from '../../common/types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {fetchLeaderBoardData} from '../../store/leaderBoard/actions';
 import {ILeaderBoard} from '../../store/leaderBoard/types';
+import Meta from '../../components/Meta/Meta';
 
 const b = bem('InnerPage');
 
@@ -31,6 +32,7 @@ class LeaderboardPage extends React.PureComponent<LeaderBoardProps> {
 
     render() {
         return <div className={b()}>
+            <Meta title={'Leaderboard'}/>
             <header className={b('header')}>
                 <h1>Leaderboard</h1>
             </header>
@@ -40,6 +42,7 @@ class LeaderboardPage extends React.PureComponent<LeaderBoardProps> {
                     this.props.leaderBoard.map((leader, index) => <LeaderboardItem key={leader.data.user.id} user={leader.data.user} position={index}
                         rank={leader.data.GenevaPacmanScore}/>)
                 }
+
             </div>
 
         </div>;

@@ -1,0 +1,28 @@
+@import '../../styles/variables';
+
+.AuthPageLayout {
+  max-width: 320px;
+  margin: auto;
+
+  &__title {
+    margin: 0 0 32px;
+  }
+
+  &__form {
+    margin-bottom: 25px;
+  }
+
+  &__back-link {
+    text-align: center;
+
+    a {
+      color: $aqua;
+      font-size: 15px;
+      font-weight: 400;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

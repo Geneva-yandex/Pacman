@@ -1,4 +1,4 @@
-import {ITopic} from '../../types/ForumTypes';
+import {ITopic} from 'common/types/ForumTypes';
 
 export interface ITopicCardProps {
     topic: ITopic,

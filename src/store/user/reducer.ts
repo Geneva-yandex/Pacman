@@ -1,40 +1,37 @@
+import {createReducer} from 'typesafe-actions';
+import {
+    SET_USER_TYPE,
+    LOGOUT_TYPE,
+    PENDING_USER_TYPE,
+    FAILED_USER_TYPE
+} from './actions';
 import {IAction} from '../types';
-import {UserDTO as user} from '../../types/types';
-import {actions} from './types';
-export interface IUserState {
-    item: user | null;
-}
+import {IUserStore, UserStatusEnum} from './types';
 
-const defaultState: IUserState = {
-    item: null
+const defaultState: IUserStore = {
+    item: null,
+    status: null
 };
-export default (state: IUserState = defaultState, {type, payload}: IAction) => {
-    switch (type) {
-    case actions.PENDING:
-        return {
-            ...state,
-            status: 'pending'
-        };
-    case actions.setUser:
 
-        return {
-            ...state,
-            ...payload as object,
-            status: 'success'
-        };
-    case actions.FAILED:
-        return {
-            ...state,
-            status: 'failed'
-        };
-    case actions.logOut:
-        return {
-            ...state,
-            item: null,
-            status: 'quitted'
-        };
-    default:
-        return state;
-    }
-};
+const userReducer = createReducer(defaultState)
+    .handleAction(PENDING_USER_TYPE, (state: IUserStore) => ({
+        ...state,
+        status: UserStatusEnum.Pending
+    }))
+    .handleAction(SET_USER_TYPE, (state: IUserStore, action: IAction<IUserStore>) => ({
+        ...state,
+        ...action.payload,
+        status: UserStatusEnum.Success
+    }))
+    .handleAction(FAILED_USER_TYPE, (state: IUserStore) => ({
+        ...state,
+        status: UserStatusEnum.Failed
+    }))
+    .handleAction(LOGOUT_TYPE, (state: IUserStore) => ({
+        ...state,
+        item: null,
+        status: UserStatusEnum.Quitted
+    }));
+
+export default userReducer;
 

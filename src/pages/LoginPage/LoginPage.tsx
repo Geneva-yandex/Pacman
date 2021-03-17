@@ -1,20 +1,24 @@
-import * as React from 'react';
-import Form from '../../components/AuthForm';
+import React, {PureComponent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
-import bem from 'easy-bem';
+import {Link} from 'react-router-dom';
 
-const b = bem('LoginPage');
+import AuthPageLayout from 'components/AuthPageLayout';
+import AuthForm from 'components/AuthForm';
+import Meta from 'components/Meta/Meta';
 
-class LoginPage extends React.PureComponent<RouteComponentProps> {
+const backLink = <Link to='/sign-up'>Create an account</Link>;
+
+class LoginPage extends PureComponent<RouteComponentProps> {
     render() {
         return (
-            <div className={b()}>
-                <div className={'container-fluid'}>
-                    <h1>Login Page</h1>
-                    <Form/>
-                </div>
-            </div>
+            <>
+                <Meta title={'Login'}/>
+                <AuthPageLayout title='Sign In' backLink={backLink}>
+                    <AuthForm />
+                </AuthPageLayout>
+            </>
         );
     }
 }
+
 export default withRouter(LoginPage);
