@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
 import {ITopicData, IUser} from '../common/types/interfaces';
-
+import {INNER_API} from 'common/constants';
 axios.defaults.withCredentials = true;
 
 interface topicData {
@@ -17,7 +17,7 @@ interface commentData {
 }
 
 class ForumApi {
-    private url = 'http://local.ya-praktikum.tech:9001';
+    private url = 'localhost:9001';
     private forumApiUrl = '/api/forum/';
 
     public getAllUsers(usersId: number[]): Promise<AxiosResponse<IUser>[]> {
