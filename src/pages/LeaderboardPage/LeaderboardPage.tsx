@@ -50,7 +50,7 @@ class LeaderboardPage extends React.PureComponent<LeaderBoardProps> {
 }
 
 const mapStateToProps = (state: IStore): StateProps => ({
-    leaderBoard: state.leaderBoard.item,
+    leaderBoard: state.leaderBoard.item
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<ILeaderBoard, {}, AnyAction>): DispatchToProps => ({
