@@ -10,11 +10,12 @@ import {Button} from '../ui';
 import LeaderBoardApi from '../../api/LeaderBoardApi';
 import {connect} from 'react-redux';
 import {IStoreState as state} from '../../store/types';
+import {UserDTO} from '../../types/types';
 
 const b = bem('Game');
 
 type StateProps = {
-    user: unknown;
+    user: UserDTO | null;
 };
 
 class Game extends React.PureComponent<IViewProps, IGameState> {
@@ -94,7 +95,7 @@ class Game extends React.PureComponent<IViewProps, IGameState> {
         const generatedSendingObject = {
             data: {
                 GenevaPacmanScore: this.state.score,
-                user: this.props.user
+                user: (this.props.user as UserDTO)
             },
             ratingFieldName: 'GenevaPacmanScore'
         };
@@ -139,7 +140,7 @@ class Game extends React.PureComponent<IViewProps, IGameState> {
 }
 
 const mapStateToProps = (state: state): StateProps => ({
-    user: state.user
+    user: state.user.item
 });
 
 export default connect(mapStateToProps)(Game);

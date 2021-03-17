@@ -15,18 +15,16 @@ export const failedToLoadLeaderBoard = () => {
     };
 };
 
-export class LoadLeaderBoardsEntityActions {
-    static fetchLeaderBoardData = () => async (dispatch: Dispatch) => {
-        try {
-            const leaderBoardResponse = await LeaderBoardApi.getDataForLeaderBoard({
-                ratingFieldName: 'GenevaPacmanScore',
-                cursor: 0,
-                limit: 10
-            });
-            const leaderBoardItems = leaderBoardResponse.data;
-            dispatch(setLeaders({item: leaderBoardItems}));
-        } catch (e) {
-            dispatch(failedToLoadLeaderBoard());
-        }
-    };
-}
+export const fetchLeaderBoardData = () => async (dispatch: Dispatch) => {
+    try {
+        const leaderBoardResponse = await LeaderBoardApi.getDataForLeaderBoard({
+            ratingFieldName: 'GenevaPacmanScore',
+            cursor: 0,
+            limit: 10
+        });
+        const leaderBoardItems = leaderBoardResponse.data;
+        dispatch(setLeaders({item: leaderBoardItems}));
+    } catch (e) {
+        dispatch(failedToLoadLeaderBoard());
+    }
+};

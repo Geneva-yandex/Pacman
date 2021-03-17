@@ -1,9 +1,9 @@
-import {getDTOFromLeaderBoards} from '../../types/types';
+import {GetDTOFromLeaderBoards} from '../../types/types';
 import {IAction} from '../types';
 import {actions} from './types';
 
 type ILeaderBoardState = {
-    item: getDTOFromLeaderBoards | []
+    item: GetDTOFromLeaderBoards | []
 };
 
 const defaultState: ILeaderBoardState = {

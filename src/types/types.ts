@@ -24,22 +24,23 @@ export type UserDTO = {
     email: string;
 };
 
-export type sendDTOToLeaderBoard = {
+export type SendDTOToLeaderBoard = {
     data: {
-        [key: string]: unknown
+        GenevaPacmanScore: number,
+        user: UserDTO
     },
     ratingFieldName: string
 };
 
-export type getDTOFromLeaderBoards = {
+export type GetDTOFromLeaderBoards = {
     ratingFieldName: string,
     cursor: number,
     limit: number
 };
 
-export type ILeaderData = {
+export interface ILeaderData {
     data: {
         GenevaPacmanScore: number,
         user: IUser
     }
-};
+}

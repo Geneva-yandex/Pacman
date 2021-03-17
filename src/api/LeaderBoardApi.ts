@@ -1,16 +1,16 @@
 import {BaseApi} from './BaseApi';
-import {sendDTOToLeaderBoard, getDTOFromLeaderBoards} from '../types/types';
+import {SendDTOToLeaderBoard, GetDTOFromLeaderBoards} from '../types/types';
 
 class LeaderBoardApi extends BaseApi {
     constructor() {
         super('leaderboard');
     }
 
-    public sendDataToLeaderBoard(data: sendDTOToLeaderBoard) {
+    public sendDataToLeaderBoard(data: SendDTOToLeaderBoard) {
         return this.post('', data);
     }
 
-    public getDataForLeaderBoard(data: getDTOFromLeaderBoards) {
+    public getDataForLeaderBoard(data: GetDTOFromLeaderBoards) {
         return this.post('/all', data);
     }
 }
