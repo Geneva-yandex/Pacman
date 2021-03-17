@@ -2,14 +2,23 @@ import * as React from 'react';
 import bem from 'easy-bem';
 import './Game.scss';
 import {IGameState} from './types';
-import {IViewProps} from '../../pages/GamePage/types';
+import {IViewProps} from 'pages/GamePage/types';
 import Canvas from './views/Canvas';
 import bonuses from './bonuses';
-import {GameItemsEnum} from '../../enums/GameItemsEnum';
+import {GameItemsEnum} from '../../common/enums';
+import {Button} from '../ui';
+import LeaderBoardApi from '../../api/LeaderBoardApi';
+import {connect} from 'react-redux';
+import {IStore} from '../../store/types';
+import {UserDTO} from '../../common/types/types';
 
 const b = bem('Game');
 
-export default class Game extends React.PureComponent<IViewProps, IGameState> {
+type StateProps = {
+    user: UserDTO | null;
+};
+
+class Game extends React.PureComponent<IViewProps, IGameState> {
     constructor(props: IViewProps) {
         super(props);
 
@@ -57,6 +66,8 @@ export default class Game extends React.PureComponent<IViewProps, IGameState> {
                     />
                     {this.renderInfo()}
                 </div>
+
+                <Button onClick={this.endGameAndSendDataToLeaderBoard}>End game</Button>
             </div>
         );
     }
@@ -79,6 +90,26 @@ export default class Game extends React.PureComponent<IViewProps, IGameState> {
             </div>
         );
     }
+
+    endGameAndSendDataToLeaderBoard = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+        const generatedSendingObject = {
+            data: {
+                GenevaPacmanScore: this.state.score,
+                user: (this.props.user as UserDTO)
+            },
+            ratingFieldName: 'GenevaPacmanScore'
+        };
+
+        LeaderBoardApi.sendDataToLeaderBoard(generatedSendingObject)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        this.props.changeView(e);
+    };
 
     initCookies(cookies: number) {
         this.setState({cookies});
@@ -107,3 +138,9 @@ export default class Game extends React.PureComponent<IViewProps, IGameState> {
         }));
     }
 }
+
+const mapStateToProps = (state: IStore): StateProps => ({
+    user: state.user.item
+});
+
+export default connect(mapStateToProps)(Game);

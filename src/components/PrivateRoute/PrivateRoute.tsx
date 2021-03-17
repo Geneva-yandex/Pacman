@@ -1,7 +1,7 @@
 import React from 'react';
 import {Redirect, Route} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {IStoreState} from '../../store/types';
+import {IStore} from '../../store/types';
 type PrivateRouteArgs = {
     path: string,
     exact: boolean,
@@ -9,7 +9,7 @@ type PrivateRouteArgs = {
     component: React.ComponentType,
 };
 export default function PrivateRoute({path, exact, key, component}: PrivateRouteArgs) {
-    const userData = useSelector((state: IStoreState) => state.user);
+    const userData = useSelector((state: IStore) => state.user);
     const isAuth = userData.item !== null;
 
     if (isAuth) {

@@ -1,5 +1,5 @@
 import {BaseApi} from './BaseApi';
-import {IServiceId} from '../types/interfaces';
+import {IServiceId} from '../common/types/interfaces';
 import {AxiosResponse} from 'axios';
 
 class AuthApi extends BaseApi {

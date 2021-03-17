@@ -1,44 +1,55 @@
-import * as React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import bem from 'easy-bem';
-import {IStateGamePage} from './types';
-import Start from './views/Start';
-import Finish from './views/Finish';
-import Game from '../../components/Game';
+import Game from 'components/Game';
+import FullscreenButton from 'components/FullscreenButton';
+import PlayStopButton from 'components/PlayStopButton';
+import {useFullscreen, useSound} from 'common/hooks';
+import {GamePageViewEnum} from 'common/enums/GamePageViewEnum';
+import './GamePage.scss';
+
 import {ViewType} from './types';
-import {GamePageViewEnum} from '../../enums/GamePageViewEnum';
+import Finish from './views/Finish';
 
 const b = bem('GamePage');
 
-export default class GamePage extends React.PureComponent<{}, IStateGamePage> {
-    constructor(props: {}) {
-        super(props);
-        this.state = {
-            view: GamePageViewEnum.Start
-        };
-    }
+const GamePage = () => {
+    const gameRef = useRef(null);
+    const [view, setView] = useState<ViewType>(GamePageViewEnum.Game);
+    const [isFullscreen, setIsFullscreen] = useFullscreen(gameRef);
 
-    render() {
-        return (
-            <div className={b()}>
-                <div className={'container-fluid'}>
-                    {this.renderView()}
-                </div>
-            </div>
-        );
-    }
+    const {play, pause, played} = useSound('sounds/game.mp3', {
+        volume: 0.4,
+        loop: true
+    });
 
-    renderView() {
-        switch (this.state.view) {
-        case GamePageViewEnum.Start:
-            return <Start changeView={() => this.changeView(GamePageViewEnum.Game)}/>;
+    useEffect(() => {
+        play();
+        return () => pause();
+    }, []);
+
+    const getView = () => {
+        switch (view) {
         case GamePageViewEnum.Finish:
-            return <Finish changeView={() => this.changeView(GamePageViewEnum.Game)}/>;
+            return <Finish changeView={() => setView(GamePageViewEnum.Game)}/>;
         case GamePageViewEnum.Game:
-            return <Game changeView={() => this.changeView(GamePageViewEnum.Finish)}/>;
+            return <Game changeView={() => setView(GamePageViewEnum.Finish)}/>;
         }
-    }
+    };
 
-    changeView(view: ViewType) {
-        this.setState({view});
-    }
-}
+    const toggleSound = () => played ? pause() : play();
+
+    return (
+        <div ref={gameRef} className={b()}>
+            <div className={'container-fluid'}>
+                <div className={b('tools')}>
+                    <PlayStopButton played={played} onClick={toggleSound} />
+                    <FullscreenButton onClick={setIsFullscreen} isFullscreen={isFullscreen} />
+                </div>
+
+                {getView()}
+            </div>
+        </div>
+    );
+};
+
+export default GamePage;

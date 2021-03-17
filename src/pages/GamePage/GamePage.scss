@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+
+.GamePage {
+  background: #171717;
+
+  &__tools {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+  }
+}

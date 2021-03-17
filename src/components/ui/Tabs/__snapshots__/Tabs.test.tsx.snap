@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs Tabs component renders correctly 1`] = `
+<div
+  className="Tabs"
+>
+  <ul
+    className="Tabs__nav"
+  >
+    <li
+      className="Tabs__header-item Tabs__header-item--active"
+    >
+      <button
+        className="Tabs__tab-button"
+        onClick={[Function]}
+      >
+        First tab
+      </button>
+    </li>
+    <li
+      className="Tabs__header-item"
+    >
+      <button
+        className="Tabs__tab-button"
+        onClick={[Function]}
+      >
+        Second tab
+      </button>
+    </li>
+  </ul>
+  <div
+    className="Tabs__content"
+  >
+    First tab content
+  </div>
+</div>
+`;

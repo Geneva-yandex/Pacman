@@ -1,20 +1,26 @@
-import * as React from 'react';
-import bem from 'easy-bem';
+import React, {PureComponent, PropsWithChildren} from 'react';
 import {Link} from 'react-router-dom';
+import bem from 'easy-bem';
 import './Layout.scss';
+
 import Sidebar from '../Sidebar';
 import OfflineNotification from '../OfflineNotification';
+import {withUser} from '../hocs';
+import {IUserStore} from '../../store/user';
 
 const b = bem('Layout');
 
-// eslint-disable-next-line no-warning-comments
-// TODO: после организации стора, отображать сайдбар только авторизированным пользователям
-export default class Layout extends React.PureComponent {
+type LayoutProps = PropsWithChildren<{
+    user: IUserStore;
+}>;
+
+class Layout extends PureComponent<LayoutProps> {
     render() {
+        const {user} = this.props;
+
         return (
             <div className={b()}>
-                <Sidebar className={b('sidebar')} />
-
+                {user.item && <Sidebar className={b('sidebar')} />}
                 <div className={b('content')}>
                     <header className={b('header')}>
                         <div className='container-fluid'>
@@ -32,3 +38,5 @@ export default class Layout extends React.PureComponent {
         );
     }
 }
+
+export default withUser(Layout);

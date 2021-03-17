@@ -1,7 +1,7 @@
-import {UserDTO as userItem} from '../../types/types';
+import {IUser} from 'common/types/interfaces';
 
 export type DispatchAdding = {
-    setUser: (user: userItem) => void;
+    setUser: (user: IUser) => void;
 };
 export type pendingUserType = {
     onGettingUser: () => void;

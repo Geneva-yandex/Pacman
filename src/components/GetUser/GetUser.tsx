@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
-import {UserDTO as userItem} from '../../types/types';
 import {ThunkDispatch} from 'redux-thunk';
 import {AnyAction} from 'redux';
 import {DispatchAdding, pendingUserType} from '../../store/user/actionTypes';
-import {setUser, pendingUser} from '../../store/user/actions';
+import {setUser, pendingUser} from '../../store/user';
 import AuthApi from 'api/AuthApi';
 import OAuthApi from 'api/OAuthApi';
-import {IStoreState as state} from '../../store/types';
+import {IStore} from '../../store/types';
 import {getParam} from '../../utils/getParamFromUri';
+import {IUser} from "../../common/types/interfaces";
 
 type StateProps = {
     user: unknown;
@@ -61,7 +61,7 @@ function withUser(WrappedComponent: typeof React.Component) {
     }
 
     const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchToProps => ({
-        setUser: (user: userItem) => {
+        setUser: (user: IUser) => {
             dispatch(setUser(user));
         },
         onGettingUser: () => {
@@ -69,7 +69,7 @@ function withUser(WrappedComponent: typeof React.Component) {
         }
     });
 
-    const mapStateToProps = (state: state): StateProps => ({
+    const mapStateToProps = (state: IStore): StateProps => ({
         user: state.user,
         state: state
     });

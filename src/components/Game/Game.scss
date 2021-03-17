@@ -1,6 +1,8 @@
 .Game {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100%;
 
   &__info {
     margin-top: 20px;

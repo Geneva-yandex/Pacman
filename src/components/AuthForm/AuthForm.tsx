@@ -1,19 +1,15 @@
-import * as React from 'react';
+import React, {FormEvent, ChangeEvent} from 'react';
+import {connect} from 'react-redux';
 import bem from 'easy-bem';
-import {FormEvent} from 'react';
+import cn from 'classnames';
+import './AuthForm.scss';
 import authApi from 'api/AuthApi';
 import oAuthApi from 'api/OAuthApi';
-import {ChangeEvent} from 'react';
-import {withRouter, RouteComponentProps} from 'react-router';
-import {connect} from 'react-redux';
-import {UserDTO as userItem} from '../../types/types';
-import {ThunkDispatch} from 'redux-thunk';
-import {AnyAction} from 'redux';
+import {RouteComponentProps} from 'react-router';
 import {DispatchAdding} from '../../store/user/actionTypes';
-import {setUser} from '../../store/user/actions';
-import {IStoreState} from '../../store/types';
+import {IStore} from '../../store/types';
+import {boundActions} from 'store/initClientStore';
 import {Input, Button} from '../ui';
-import './AuthForm.scss';
 
 const b = bem('AuthForm');
 
@@ -26,16 +22,17 @@ type State = {
 
 };
 type StateProps = {
-    user: IStoreState['user'];
+    user: IStore['user'];
 };
 
 interface ComponentProps extends RouteComponentProps {
     setUser: DispatchAdding['setUser']
-    user: IStoreState['user'];
+    user: IStore['user'];
 }
 
 const URL = 'https://oauth.yandex.ru/authorize?response_type=code&client_id=';
-class AuthForm extends React.Component<ComponentProps, State> {
+
+class AuthForm extends React.PureComponent<ComponentProps, State> {
     state = {
         login: '',
         password: '',
@@ -45,7 +42,7 @@ class AuthForm extends React.Component<ComponentProps, State> {
 
     shouldComponentUpdate(nextProps: Readonly<ComponentProps>): boolean {
         if (nextProps.user.item !== null) {
-            this.props.history.push('/');
+            boundActions.router.push('/');
             return true;
         }
 
@@ -71,7 +68,6 @@ class AuthForm extends React.Component<ComponentProps, State> {
 
     onSubmit = (event: FormEvent) => {
         event.preventDefault();
-        const {setUser} = this.props;
         const remember = this.state.remember === 'on';
         const {login, password} = this.state;
         const logInData = {
@@ -92,8 +88,8 @@ class AuthForm extends React.Component<ComponentProps, State> {
                 }
 
                 const userData = resp.data;
-                setUser(userData);
-                this.props.history.push('/');
+                boundActions.user.setUser(userData);
+                boundActions.router.push('/');
             })
             .catch(err => {
                 this.setState({
@@ -104,35 +100,30 @@ class AuthForm extends React.Component<ComponentProps, State> {
 
     public render() {
         return (
-            <div>
 
-                <Button onClick={this.oAuth}>Yandex account</Button>
+            <form className={cn('form', b())} onSubmit={this.onSubmit}>
+                <Input onChange={this.onControlChange} name='login' title='Login' type='text'/>
+                <Input onChange={this.onControlChange} name='password' title='Password' type='password'
+                    placeholder='*******'/>
 
-                <form className={b()} onSubmit={this.onSubmit}>
-
-                    <Input onChange={this.onControlChange} name='login' title='Введите логин' type='text'
-                        placeholder='Логин'/>
-                    <Input onChange={this.onControlChange} name='password' title='Введите пароль' type='password'
-                        placeholder='*******'/>
-                    <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me'
-                        className={b('remember-btn')}/>
+                <div className={b('submit')}>
                     <Button block>Sign In</Button>
-                    <div className='error'>
-                        {this.state.errorMessage}
-                    </div>
-                </form>
-            </div>
+
+                    <Button onClick={this.oAuth}>Yandex account</Button>
+                </div>
+
+                <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me'
+                    className={b('remember-btn')}/>
+                <div className='error'>
+                    {this.state.errorMessage}
+                </div>
+            </form>
         );
     }
 }
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<unknown, {}, AnyAction>): DispatchAdding => ({
-    setUser: (user: userItem) => {
-        dispatch(setUser(user));
-    }
-});
-
-const mapStateToProps = (state: IStoreState): StateProps => ({
+const mapStateToProps = (state: IStore): StateProps => ({
     user: state.user
 });
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForm));
+
+export default connect(mapStateToProps, null)(AuthForm);
