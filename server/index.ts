@@ -8,9 +8,9 @@ const mongo = new Mongo(process.env.DATABASE_MONGO_URL as string);
 const postgres = new Postgres({
     host: 'postgres',
     port: 5432,
-    username: 'postgres',
-    password: 'newPassword',
-    database: 'packman',
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DB,
     dialect: 'postgres'
 })
 

@@ -8,10 +8,11 @@ services:
         links:
             - postgres
             - mongo
+        env_file: .env
         environment:
-            DATABASE_POSTGRES_URL: postgres://postgres:newPassword@postgres:5432/packman
-            DATABASE_MONGO_URL: mongodb://mongo:27017/packman
-            PORT: 9001
+            - DATABASE_POSTGRES_URL=$DATABASE_POSTGRES_URL
+            - DATABASE_MONGO_URL=$DATABASE_MONGO_URL
+            - PORT=9001
         ports:
             - "9001:9001"
         restart: always
@@ -27,18 +28,20 @@ services:
             - ./postgresdata:/var/lib/postgresql/data
             - ./server/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
         restart: always
+        env_file: .env
         environment:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: newPassword
-            POSTGRES_DB: packman
+            - POSTGRES_USER=$POSTGRES_USER
+            - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+            - POSTGRES_DB=$POSTGRES_DB
     pgadmin:
         container_name: pgadmin
         image: dpage/pgadmin4:4.18
         restart: always
+        env_file: .env
         environment:
-            PGADMIN_DEFAULT_EMAIL: admin@admin.com
-            PGADMIN_DEFAULT_PASSWORD: secret
-            PGADMIN_LISTEN_PORT: "5001"
+            - PGADMIN_DEFAULT_EMAIL=$PGADMIN_DEFAULT_EMAIL
+            - PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD
+            - PGADMIN_LISTEN_PORT=5001
         ports:
             - "5001:5001"
         volumes:
