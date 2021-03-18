@@ -3,7 +3,7 @@ import {hydrate} from 'react-dom';
 import Application from './Application';
 import './index.scss';
 import axios from 'axios';
-import isProduction from 'common/utils/isProduction';
+import isProduction from './common/utils/isProduction';
 axios.defaults.withCredentials = true;
 
 if (isProduction) {

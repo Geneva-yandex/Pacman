@@ -1,6 +1,6 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import {UserDirectionEnum, GameItemsEnum, UserDirectionTypeEnum} from 'common/enums';
+import {UserDirectionEnum, GameItemsEnum, UserDirectionTypeEnum} from '../../../common/enums';
 import {CoordsType, ICanvasProps, MapType, UserDirectionType, AvailableCellsCountParamsType} from '../types';
 import mapData from '../maps/basic';
 import Map from '../models/Map';

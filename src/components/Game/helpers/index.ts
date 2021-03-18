@@ -1,4 +1,4 @@
-import {GameItemsEnum, UserDirectionTypeEnum, UserDirectionEnum, KeyCodeEnum} from 'common/enums';
+import {GameItemsEnum, UserDirectionTypeEnum, UserDirectionEnum, KeyCodeEnum} from '../../../common/enums';
 import {CoordsType, UserDirectionType, UserDirectionTypeType} from '../types';
 import {CELL_SIZE} from '../views/Canvas';
 
