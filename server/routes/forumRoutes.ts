@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import ForumAPI from '../controllers/forumApi';
+import ForumAPI from '../controllers/ForumApi';
 
 const forumRoutes = (router: Router) => {
     const forumRoutes: Router = Router();

@@ -6,7 +6,7 @@ const feedbackRoutes = (router: Router) => {
 
     feedbackRouter.post('/', FeedbackAPI.create);
 
-    router.use('/feedback', feedbackRouter);
+    router.use('/api/feedback', feedbackRouter);
 };
 
 export default feedbackRoutes;

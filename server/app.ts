@@ -29,9 +29,9 @@ app
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: false}))
     .use(express.json())
+    .use(router)
     .use('/', express.static(path.join(__dirname, 'public')))
-    .use([...webpackMiddlewares, render])
-    .use(router);
+    .use([...webpackMiddlewares, render]);
 
 routes.forEach(r => {
     app.get(r.path, auth, (_req: Request, res: ResponseWithRender) => {
