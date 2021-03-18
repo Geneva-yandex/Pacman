@@ -1,13 +1,19 @@
-import React, {Component, FormEvent, ChangeEvent} from 'react';
+import React, {FormEvent, ChangeEvent} from 'react';
 import {connect} from 'react-redux';
 import bem from 'easy-bem';
 import cn from 'classnames';
 import './AuthForm.scss';
-
 import authApi from 'api/AuthApi';
-import {IStore} from 'store/types';
-import {boundActions} from 'store/initClientStore';
+import oAuthApi from 'api/OAuthApi';
+import {RouteComponentProps, withRouter} from 'react-router';
+import {DispatchAdding} from '../../store/user/actionTypes';
+import {IStore} from '../../store/types';
+import {boundActions} from '../../store/initClientStore';
 import {Input, Button} from '../ui';
+import {setUser} from '../../store/user';
+import {ThunkDispatch} from 'redux-thunk';
+import {AnyAction} from 'redux';
+import {IUser} from '../../common/types/interfaces';
 
 const b = bem('AuthForm');
 
@@ -19,17 +25,38 @@ type State = {
     [key: string]: string,
 
 };
+
+type DisptachProps = {
+    setUser: (user: IUser) => void
+};
+
 type StateProps = {
     user: IStore['user'];
 };
 
-class AuthForm extends Component<{}, State> {
+interface ComponentProps extends RouteComponentProps {
+    setUser: DispatchAdding['setUser']
+    user: IStore['user'];
+}
+
+const URL = 'https://oauth.yandex.ru/authorize?response_type=code&client_id=';
+
+class AuthForm extends React.PureComponent<ComponentProps, State> {
     state = {
         login: '',
         password: '',
         remember: '',
         errorMessage: ''
     };
+
+    shouldComponentUpdate(nextProps: Readonly<ComponentProps>): boolean {
+        if (nextProps.user.item !== null) {
+            boundActions.router.push('/');
+            return true;
+        }
+
+        return false;
+    }
 
     onControlChange = (event: ChangeEvent) => {
         const target = event.target;
@@ -38,6 +65,14 @@ class AuthForm extends Component<{}, State> {
         this.setState({
             [propertyName]: value
         });
+    };
+
+    oAuth = () => {
+        oAuthApi.getOAuthClientID()
+            .then(res => {
+                const CLIENT_ID = res.data.service_id;
+                document.location.href = URL + CLIENT_ID;
+            });
     };
 
     onSubmit = (event: FormEvent) => {
@@ -74,15 +109,20 @@ class AuthForm extends Component<{}, State> {
 
     public render() {
         return (
+
             <form className={cn('form', b())} onSubmit={this.onSubmit}>
-                <Input onChange={this.onControlChange} name='login' title='Login' type='text' />
-                <Input onChange={this.onControlChange} name='password' title='Password' type='password' placeholder='*******' />
+                <Input onChange={this.onControlChange} name='login' title='Login' type='text'/>
+                <Input onChange={this.onControlChange} name='password' title='Password' type='password'
+                    placeholder='*******'/>
 
                 <div className={b('submit')}>
                     <Button block>Sign In</Button>
+
+                    <Button onClick={this.oAuth}>Yandex account</Button>
                 </div>
 
-                <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me' className={b('remember-btn')}/>
+                <Input onChange={this.onControlChange} type='checkbox' name='remember' title='Remember me'
+                    className={b('remember-btn')}/>
                 <div className='error'>
                     {this.state.errorMessage}
                 </div>
@@ -95,4 +135,8 @@ const mapStateToProps = (state: IStore): StateProps => ({
     user: state.user
 });
 
-export default connect(mapStateToProps)(AuthForm);
+const mapDispatchToProps = (dispatch: ThunkDispatch<IStore, {}, AnyAction>): DisptachProps => ({
+    setUser: (user: IUser) => dispatch(setUser(user))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AuthForm));

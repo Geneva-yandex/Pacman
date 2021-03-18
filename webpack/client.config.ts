@@ -15,14 +15,15 @@ import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 
 const getClientConfig = (env: any) => {
     const isDevelopment = env.NODE_ENV === 'development';
+    const isApiDev = env.DEV === 'api';
 
     return {
         target: 'web',
         mode: isDevelopment ? 'development' : 'production',
         entry: {
             bundle: [
-                isDevelopment && 'css-hot-loader/hotModuleReplacement',
-                isDevelopment && 'webpack-hot-middleware/client?path=/__webpack_hmr',
+                isDevelopment && !isApiDev && 'css-hot-loader/hotModuleReplacement',
+                isDevelopment && !isApiDev && 'webpack-hot-middleware/client?path=/__webpack_hmr',
                 path.join(PATHS.src, 'index')
             ].filter(Boolean)
         },
@@ -62,20 +63,21 @@ const getClientConfig = (env: any) => {
             }
         },
         plugins: [
-            isDevelopment && new webpack.HotModuleReplacementPlugin(),
+            isDevelopment && !isApiDev && new webpack.HotModuleReplacementPlugin(),
             new CleanWebpackPlugin(),
             new CopyPlugin({
                 patterns: [
-                    {from: path.join(PATHS.public, 'fonts'), to: './public/fonts'},
-                    {from: path.join(PATHS.public, 'images'), to: './public/images'},
-                    {from: path.join(PATHS.public, 'offline.html'), to: './public'}
+                    {from: path.join(PATHS.public, 'fonts'), to: './fonts'},
+                    {from: path.join(PATHS.public, 'images'), to: './images'},
+                    {from: path.join(PATHS.public, 'sounds'), to: './sounds'},
+                    {from: path.join(PATHS.public, 'offline.html'), to: '.'}
                 ]
             }),
             new MiniCssExtractPlugin({
                 filename: 'index.css'
             }),
             new webpack.DefinePlugin({
-                NODE_ENV: JSON.stringify(env.NODE_ENV)
+                NODE_ENV: JSON.stringify(env.NODE_ENV),
             }),
             !isDevelopment && new InjectManifest({
                 swSrc: path.join(PATHS.src, 'sw.ts'),
@@ -84,7 +86,12 @@ const getClientConfig = (env: any) => {
                     /\.gitempty$/
                 ]
             })
-        ].filter(Boolean)
+        ].filter(Boolean),
+        watch: isDevelopment && !isApiDev,
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000
+        }
     };
 };
 

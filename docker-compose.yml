@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3"
 services:
     my-app:
         build:
@@ -7,36 +7,39 @@ services:
         links:
             - postgres
             - mongo
+        env_file: .env
         environment:
-            DATABASE_POSTGRES_URL: postgres://postgres:newPassword@postgres:5432/packman
-            DATABASE_MONGO_URL: mongodb://mongo:27017/packman
-            PORT: 8080
-            FORUM_API: http://localhost:9001
+            - DATABASE_POSTGRES_URL: postgres://postgres:newPassword@postgres:5432/packman
+            - DATABASE_MONGO_URL=$DATABASE_MONGO_URL
+            - PORT=8080
+            - FORUM_API: http://localhost:9001
         ports:
             - "8080:8080"
         restart: always
     postgres:
         container_name: postgres
         image: postgres:12
-        restart: always
         ports:
-            - "5433:5432"
+            - "5432:5432"
         volumes:
-            - ./pg-data:/var/lib/postgresql
-            - ./src/migrations/dbinit.sql
+            - ./pg-data:/var/lib/postgresql/data
+            - ./server/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+        restart: always
+        env_file: .env
         environment:
-            PGDATA: /var/lib/postgresql/data/mydata
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: newPassword
-            POSTGRES_DB: packman
+            - PGDATA: /var/lib/postgresql/data/mydata
+            - POSTGRES_USER=$POSTGRES_USER
+            - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+            - POSTGRES_DB=$POSTGRES_DB
     pgadmin:
         container_name: pgadmin
         image: dpage/pgadmin4:4.18
         restart: always
+        env_file: .env
         environment:
-            PGADMIN_DEFAULT_EMAIL: admin@admin.com
-            PGADMIN_DEFAULT_PASSWORD: secret
-            PGADMIN_LISTEN_PORT: "5001"
+            - PGADMIN_DEFAULT_EMAIL=$PGADMIN_DEFAULT_EMAIL
+            - PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD
+            - PGADMIN_LISTEN_PORT=5001
         ports:
             - "5001:5001"
         volumes:
@@ -48,11 +51,17 @@ services:
         ports:
             - "27017:27017"
         restart: always
-        environment:
-            MONGO_INITDB_ROOT_USERNAME: mongo
-            MONGO_INITDB_ROOT_PASSWORD: newPassword
         volumes:
             - mongo-data:/data/db
+    mongo-express:
+        image: mongo-express
+        ports:
+            - "8081:8081"
+        restart: always
+        depends_on:
+            - mongo
+        environment:
+            - ME_CONFIG_MONGODB_PORT=27017
 volumes:
     pg-data:
     pgadmin-data:

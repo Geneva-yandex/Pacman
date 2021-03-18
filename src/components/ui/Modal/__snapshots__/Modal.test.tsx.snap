@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Modal component renders correctly 1`] = `
+<div
+  className="modal"
+>
+  <div>
+    <section
+      className="Modal__wrapper"
+    >
+      <div
+        className="close-button"
+        data-modal="test"
+        onClick={[Function]}
+      >
+        X
+      </div>
+    </section>
+  </div>
+</div>
+`;

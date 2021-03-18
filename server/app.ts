@@ -1,46 +1,52 @@
+import fs from 'fs';
+import path from 'path';
+import https from 'https';
 import express, {Request} from 'express';
-import mongoose from 'mongoose';
-import logger from 'morgan';
-import bodyParser from 'body-parser';
-import router from './router';
 import compression from 'compression';
-import {render} from './middlewares';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+
+import {getWebpackMiddlewares} from './middlewares/hot';
+import auth from './middlewares/auth';
+import render from './middlewares/render';
 import {ResponseWithRender} from './types';
 import routes from '../src/pages/index';
-import sequelize from './db/models';
-
-sequelize.authenticate()
-    .then(() => console.log('Postgres successful connection'))
-    .catch(err => console.error('Postgres connection error:', err));
-
-mongoose.connect(process.env.DATABASE_MONGO_URL as string, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
-});
-
-mongoose.connection.on('error', err => console.error('Mongo connection error:', err));
-mongoose.connection.once('open', () => console.log('Mongo successful connection'));
+import router from './router';
+import router2 from './routes';
 
 const app = express();
 
+const isApiDev = process.env.DEV === 'api';
+const isDevelopment = process.env.NODE_ENV === 'development';
+const webpackMiddlewares = (!isApiDev && isDevelopment && getWebpackMiddlewares()) || [];
+
 app
-    .use(logger('dev'))
+    .disable('x-powered-by')
+    .enable('trust proxy')
+    .use(morgan('tiny'))
+    .use(cookieParser())
+    .use(compression())
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: false }))
-    .use(compression())
+    .use(express.json())
+    .use('/', express.static(path.join(__dirname, 'public')))
+    .use([...webpackMiddlewares,  render])
     .use(router)
-    .use(render);
+    .use(router2);
 
 routes.forEach(r => {
-    app.get(r.path, (_req: Request, res: ResponseWithRender) => {
+    app.get(r.path, auth, (_req: Request, res: ResponseWithRender) => {
         res.renderBundle();
     });
 });
 
+export const sslServer = https.createServer(
+    {
+        key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),
+        cert: fs.readFileSync(path.join(__dirname, 'cert', 'cert.pem'))
+    },
+    app
+);
 
-
-
-
-export {app, sequelize};
+export default app;

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import AuthApi from 'api/AuthApi';
-import {IStore as state} from 'store/types';
-import {boundActions} from 'store/initClientStore';
+import {IStore as state} from '../../../store/types';
+import {boundActions} from '../../../store/initClientStore';
 
 interface IProps {
     user: any,
@@ -12,13 +12,17 @@ interface IProps {
 function withUser(WrappedComponent: React.ElementType) {
     class withUser extends React.Component<IProps> {
         componentDidMount(): void {
-            boundActions.user.pendingUser();
+            const {user} = this.props;
 
-            AuthApi
-                .getUserInfo()
-                .then(res => {
-                    boundActions.user.setUser(res.data);
-                });
+            if (user.item === null) {
+                boundActions.user.pendingUser();
+
+                AuthApi
+                    .getUserInfo()
+                    .then(res => {
+                        boundActions.user.setUser(res.data);
+                    });
+            }
         }
 
         render() {

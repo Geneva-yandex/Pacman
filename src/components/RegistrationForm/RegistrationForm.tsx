@@ -4,8 +4,8 @@ import cn from 'classnames';
 import bem from 'easy-bem';
 
 import authApi from 'api/AuthApi';
-import {IStore} from 'store/types';
-import {boundActions} from 'store/initClientStore';
+import {IStore} from '../../store/types';
+import {boundActions} from '../../store/initClientStore';
 import {Input, Button} from '../ui';
 
 type StateProps = {

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Input component renders correctly 1`] = `
+<div
+  className="Input"
+>
+  <label>
+    <input
+      className="Input__control"
+      name="name"
+      type="text"
+    />
+  </label>
+</div>
+`;

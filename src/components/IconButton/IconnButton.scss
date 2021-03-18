@@ -1,0 +1,14 @@
+.IconButton {
+  width: 30px;
+  height: 30px;
+  opacity: 0.5;
+  transition: 0.25s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  svg path {
+    stroke: #ffffff;
+  }
+}

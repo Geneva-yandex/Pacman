@@ -12,7 +12,6 @@ const defaultState: IUserStore = {
     item: null,
     status: null
 };
-
 const userReducer = createReducer(defaultState)
     .handleAction(PENDING_USER_TYPE, (state: IUserStore) => ({
         ...state,
