@@ -11,7 +11,7 @@ import sequelize from './db/models';
 
 sequelize.authenticate()
     .then(() => console.log('Postgres successful connection'))
-    .catch(err => console.error('Postgres connection error:', err));
+    .catch(err => console.error('Postgres connection errorr:', err));
 
 mongoose.connect(process.env.DATABASE_MONGO_URL as string, {
     useNewUrlParser: true,

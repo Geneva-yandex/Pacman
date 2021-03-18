@@ -4,7 +4,7 @@ import Message from '../tables/Message';
 import Topic from '../tables/Topic';
 
 const sequelizeOptions: SequelizeOptions = {
-    host: 'localhost',
+    host: 'postgres',
     port: 5433,
     username: 'postgres',
     password: 'newPassword',
