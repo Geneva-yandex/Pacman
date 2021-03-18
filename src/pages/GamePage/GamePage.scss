@@ -1,11 +1,15 @@
-@import '../../styles/variables';
-
 .GamePage {
-  background: #171717;
+  background: var(--color-background);
 
   &__tools {
     position: absolute;
     right: 24px;
     top: 24px;
+
+    svg {
+      * {
+        stroke: var(--color-text) !important;
+      }
+    }
   }
 }

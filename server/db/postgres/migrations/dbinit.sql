@@ -23,11 +23,11 @@ CREATE TABLE IF NOT EXISTS user {
 
 CREATE TABLE IF NOT EXISTS site_theme {
     "id" serial PRIMARY KEY AUTO_INCREMENT,
+    "name" text not null unsigned,
     "theme" text not null unsigned,
-    "description" text not null unsigned,
 }
 
-CREATE INDEX IF NOT EXISTS index_theme ON site_theme ("theme");
+CREATE INDEX IF NOT EXISTS index_theme ON site_theme ("name");
 
 CREATE TABLE IF NOT EXISTS user_theme {
     "id" serial PRIMARY KEY AUTO_INCREMENT,

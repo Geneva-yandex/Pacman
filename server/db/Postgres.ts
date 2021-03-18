@@ -27,7 +27,7 @@ export default class Postgres {
 
         try {
             await this.sequelize.authenticate();
-            await this.sequelize.sync();
+            await this.sequelize.sync({force: true});
 
             console.log('Postgres successful connection');
         } catch (err) {

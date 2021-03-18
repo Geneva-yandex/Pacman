@@ -3,3 +3,4 @@ export * from './GamePageViewEnum';
 export * from './KeyCodeEnum';
 export * from './UserDirectionEnum';
 export * from './UserDirectionTypeEnum';
+export * from './Themes';

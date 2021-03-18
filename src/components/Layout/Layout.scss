@@ -39,7 +39,7 @@
 .logo {
   display: inline-block;
   font-size: 30px;
-  color: $yellow;
+  color: var(--color-primary);
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;

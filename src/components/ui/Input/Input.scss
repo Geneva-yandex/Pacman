@@ -10,11 +10,11 @@
   }
 
   &__control {
-    background: rgba(#ffffff, 5%);
-    border: 1px solid rgba(#ffffff, 20%);
+    background: rgba(#ffffff, 0.05);
+    border: 1px solid var(--color-input-border);
     height: 46px;
     border-radius: 4px;
-    color: #ffffff;
+    color: var(--color-text);
     font-size: 16px;
     padding: 5px 10px;
     font-weight: 400;
@@ -22,11 +22,11 @@
     transition: 0.25s border-color ease;
 
     &:focus {
-      border-color: rgba(#ffffff, 40%);
+      border-color: var(--color-input-border-focus);
     }
 
     &::placeholder {
-      color: #b8bcca;
+      color: rgba(var(--color-text), 0.5);
     }
   }
 }

@@ -4,8 +4,8 @@
   text-transform: uppercase;
   font-weight: 500;
   font-size: 16px;
-  background: $white;
-  color: $grey-dark;
+  background: var(--color-default-button-bg);
+  color: var(--color-default-button-color);
   border-radius: 15px;
   cursor: pointer;
   transition: transform $short-effect;
@@ -16,14 +16,14 @@
   line-height: 1;
 
   &--primary {
-    background: $yellow;
-    color: #171717;
+    background: var(--color-primary);
+    color: var(--color-background);
   }
 
   &--outlined {
     background: transparent;
-    border: 2px solid $yellow;
-    color: $yellow;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
   }
 
   &--small {

@@ -8,14 +8,14 @@
   }
 
   &__header-item {
-    color: rgba(#ffffff, 0.5);
+    color: rgba(var(--color-text), 0.5);
     border-bottom: 3px solid transparent;
     margin-bottom: -1px;
     transition: 0.25s ease;
 
     &--active {
-      color: $yellow;
-      border-color: $yellow;
+      color: var(--color-primary);
+      border-color: var(--color-primary);
     }
   }
 
@@ -27,7 +27,7 @@
     transition: 0.25s ease;
 
     &:hover {
-      color: $yellow;
+      color: var(--color-primary);
     }
   }
 }

@@ -25,11 +25,11 @@ class SiteTheme extends Model<SiteTheme> {
     @AllowNull(false)
     @Unique
     @Column(DataType.STRING)
-    theme: string;
+    name: string;
 
     @AllowNull(false)
     @Column(DataType.STRING)
-    description: string;
+    theme: string;
 }
 
 export default SiteTheme;

@@ -4,6 +4,27 @@ import axios from 'axios';
 const PRAKTIKUM_AUTH_ENDPOINT = 'https://ya-praktikum.tech/api/v2/auth/user';
 
 async function auth(req: Request, res: Response, next: NextFunction) {
+    try {
+        const {data} = await getUser(req);
+        res.locals.user = data;
+    } catch (err) {
+        res.locals.user = null;
+    }
+
+    next();
+}
+
+export async function authReq(req: Request, res: Response, next: NextFunction) {
+    try {
+        const {data} = await getUser(req);
+        res.locals.user = data;
+        next();
+    } catch (err) {
+        res.send(401);
+    }
+}
+
+async function getUser(req: Request) {
     const authData = {
         authCookie: req.cookies.authCookie,
         uuid: req.cookies.uuid
@@ -14,17 +35,9 @@ async function auth(req: Request, res: Response, next: NextFunction) {
         .map(([key, value]) => `${key}=${value}`)
         .join(';');
 
-    try {
-        const {data} = await axios.get(PRAKTIKUM_AUTH_ENDPOINT, {
-            headers: {Cookie: cookies}
-        });
-
-        res.locals.user = data;
-    } catch (err) {
-        res.locals.user = null;
-    }
-
-    next();
+    return axios.get(PRAKTIKUM_AUTH_ENDPOINT, {
+        headers: {Cookie: cookies}
+    });
 }
 
 export default auth;
