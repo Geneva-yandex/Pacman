@@ -30,7 +30,7 @@ export default [
     },
     {
         id: ROUTE_LOGIN,
-        exact: true,
+        exact: false,
         path: '/login',
         component: LoginPage,
         title: 'Log-in',

@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import bem from 'easy-bem';
 import {Button} from '../ui';
 import './OfflineNotification.scss';
-import isServer from 'common/utils/isServer';
+import isServer from '../../common/utils/isServer';
 
 const b = bem('OfflineNotification');
 

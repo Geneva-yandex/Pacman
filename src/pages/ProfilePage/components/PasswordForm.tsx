@@ -1,6 +1,6 @@
 import React from 'react';
-import {useForm} from 'common/hooks';
-import {IPasswordsDto} from 'common/types/interfaces';
+import {useForm} from '../../../common/hooks';
+import {IPasswordsDto} from '../../../common/types/interfaces';
 import {Input, Button} from 'components/ui';
 
 interface IPasswordFormProps {

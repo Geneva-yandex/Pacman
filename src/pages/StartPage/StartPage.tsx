@@ -2,7 +2,7 @@ import React, {MouseEvent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import bem from 'easy-bem';
-import {Modal, Button} from 'components/ui';
+import {Modal, Button} from '../../components/ui';
 import './StartPage.scss';
 import Meta from '../../components/Meta/Meta';
 

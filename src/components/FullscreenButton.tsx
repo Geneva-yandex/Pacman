@@ -1,6 +1,6 @@
 import React from 'react';
-import FullscreenInIcon from 'public/images/icons/expand-outline.svg';
-import FullscreenOutIcon from 'public/images/icons/contract-outline.svg';
+import FullscreenInIcon from '../../public/images/icons/expand-outline.svg';
+import FullscreenOutIcon from '../../public/images/icons/contract-outline.svg';
 import IconButtonWrap from './IconButton';
 
 interface IFullscreenButtonProps {

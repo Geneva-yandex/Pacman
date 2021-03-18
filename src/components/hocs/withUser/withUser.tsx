@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import AuthApi from 'api/AuthApi';
-import {IStore as state} from 'store/types';
-import {boundActions} from 'store/initClientStore';
+import {IStore as state} from '../../../store/types';
+import {boundActions} from '../../../store/initClientStore';
 
 interface IProps {
     user: any,

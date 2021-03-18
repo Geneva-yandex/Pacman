@@ -3,8 +3,8 @@ import bem from 'easy-bem';
 import './TopicPage.scss';
 
 import {withRouter} from 'react-router';
-import forumData from 'common/data/forum-data';
-import {IComment, ITopic} from 'common/types/ForumTypes';
+import forumData from '../../common/data/forum-data';
+import {IComment, ITopic} from '../../common/types/ForumTypes';
 import TopicCard from 'components/TopicCard';
 
 import CommentForm from './views/CommentForm';
