@@ -16,7 +16,7 @@ interface commentData {
 }
 
 class ForumApi {
-    private url = 'http://localhost:9001';
+    private url = 'https://localhost:9001';
     private forumApiUrl = '/api/forum/';
 
     public getAllUsers(usersId: number[]): Promise<AxiosResponse<IUser>[]> {
