@@ -62,6 +62,10 @@ const getServerConfig = (env: any) => {
                 ]
             }),
         ].filter(Boolean),
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000
+        }
     };
 };
 

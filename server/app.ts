@@ -5,14 +5,18 @@ import express, {Request} from 'express';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-
-import {render} from './middlewares';
+import {getWebpackMiddlewares} from './middlewares/hot';
+import render from './middlewares/render';
 import {ResponseWithRender} from './types';
 import routes from '../src/pages/index';
 import auth from './middlewares/auth';
 import router from './routes';
 
 const app = express();
+
+const isApiDev = process.env.DEV === 'api';
+const isDevelopment = process.env.NODE_ENV === 'development';
+const webpackMiddlewares = (!isApiDev && isDevelopment && getWebpackMiddlewares()) || [];
 
 app
     .disable('x-powered-by')
@@ -22,7 +26,7 @@ app
     .use(compression())
     .use(express.json())
     .use('/', express.static(path.join(__dirname, 'public')))
-    .use(render)
+    .use([...webpackMiddlewares,  render])
     .use(router);
 
 routes.forEach(r => {

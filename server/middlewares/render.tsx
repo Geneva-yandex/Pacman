@@ -5,12 +5,12 @@ import {Helmet, HelmetData} from 'react-helmet';
 import {StaticRouter} from 'react-router-dom';
 import {StaticRouterContext} from 'react-router';
 import {Provider} from 'react-redux';
-import {ResponseWithRender} from '../../types';
-import Bundle from '../../../src/components/Bundle';
-import configureStore from '../../../src/store/configureStore';
-import {IStore} from '../../../src/store/types';
-import {IUser} from '../../../src/common/types/interfaces';
-import {UserStatusEnum} from '../../../src/store/user';
+import {ResponseWithRender} from '../types';
+import Bundle from '../../src/components/Bundle';
+import configureStore from '../../src/store/configureStore';
+import {IStore} from '../../src/store/types';
+import {IUser} from '../../src/common/types/interfaces';
+import {UserStatusEnum} from '../../src/store/user';
 
 interface IParamsHTML {
     bundleHTML: string,

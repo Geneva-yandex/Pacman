@@ -15,14 +15,15 @@ import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 
 const getClientConfig = (env: any) => {
     const isDevelopment = env.NODE_ENV === 'development';
-
+    const isApiDev = env.DEV === 'api';
+    console.log('getClientConfig', isApiDev)
     return {
         target: 'web',
         mode: isDevelopment ? 'development' : 'production',
         entry: {
             bundle: [
-                isDevelopment && 'css-hot-loader/hotModuleReplacement',
-                isDevelopment && 'webpack-hot-middleware/client?path=/__webpack_hmr',
+                isDevelopment && !isApiDev && 'css-hot-loader/hotModuleReplacement',
+                isDevelopment && !isApiDev && 'webpack-hot-middleware/client?path=/__webpack_hmr',
                 path.join(PATHS.src, 'index')
             ].filter(Boolean)
         },
@@ -62,7 +63,7 @@ const getClientConfig = (env: any) => {
             }
         },
         plugins: [
-            isDevelopment && new webpack.HotModuleReplacementPlugin(),
+            isDevelopment && !isApiDev && new webpack.HotModuleReplacementPlugin(),
             new CleanWebpackPlugin(),
             new CopyPlugin({
                 patterns: [
@@ -76,7 +77,7 @@ const getClientConfig = (env: any) => {
                 filename: 'index.css'
             }),
             new webpack.DefinePlugin({
-                NODE_ENV: JSON.stringify(env.NODE_ENV)
+                NODE_ENV: JSON.stringify(env.NODE_ENV),
             }),
             !isDevelopment && new InjectManifest({
                 swSrc: path.join(PATHS.src, 'sw.ts'),
@@ -86,6 +87,7 @@ const getClientConfig = (env: any) => {
                 ]
             })
         ].filter(Boolean),
+        watch: isDevelopment && !isApiDev,
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000
