@@ -12,7 +12,7 @@ import auth from './middlewares/auth';
 import render from './middlewares/render';
 import {ResponseWithRender} from './types';
 import routes from '../src/pages/index';
-import router from './router';
+import router from './routes';
 
 const app = express();
 
