@@ -1,5 +1,7 @@
 import {Sequelize, SequelizeOptions} from 'sequelize-typescript';
-import {Topic, Message} from './postgres/models';
+import {Topic, Message, User, UserTheme, SiteTheme} from './postgres/models';
+
+const models = [Topic, Message, User, UserTheme, SiteTheme];
 
 export default class Postgres {
     static __instance: Postgres;
@@ -18,7 +20,7 @@ export default class Postgres {
 
     async connect() {
         this.sequelize = new Sequelize(this.options);
-        this.sequelize.addModels([Topic, Message]);
+        this.sequelize.addModels(models);
 
         Topic.hasMany(Message, {foreignKey: 'topic_id'});
         Message.belongsTo(Topic);
