@@ -16,7 +16,7 @@ import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 const getClientConfig = (env: any) => {
     const isDevelopment = env.NODE_ENV === 'development';
     const isApiDev = env.DEV === 'api';
-    console.log('getClientConfig', isApiDev)
+
     return {
         target: 'web',
         mode: isDevelopment ? 'development' : 'production',
