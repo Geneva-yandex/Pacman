@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import https from 'https';
 import express, {Request} from 'express';
+import router from './router';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
@@ -10,7 +11,6 @@ import render from './middlewares/render';
 import {ResponseWithRender} from './types';
 import routes from '../src/pages/index';
 import auth from './middlewares/auth';
-import router from './routes';
 
 const app = express();
 
@@ -26,7 +26,7 @@ app
     .use(compression())
     .use(express.json())
     .use('/', express.static(path.join(__dirname, 'public')))
-    .use([...webpackMiddlewares,  render])
+    .use([...webpackMiddlewares, render])
     .use(router);
 
 routes.forEach(r => {
@@ -34,7 +34,6 @@ routes.forEach(r => {
         res.renderBundle();
     });
 });
-
 export const sslServer = https.createServer(
     {
         key: fs.readFileSync(path.join(__dirname, 'cert', 'key.pem')),

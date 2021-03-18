@@ -1,6 +1,6 @@
+
 import {ComponentType} from 'react';
 import {ConnectedComponent} from 'react-redux';
-
 export type RouteType = {
     id: string,
     exact?: boolean,
