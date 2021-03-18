@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import UserThemeApi from '../controllers/UserThemeApi';
+import UserThemeApi from '../controllers/userThemeApi';
 
 const themesRoutes = (router: Router) => {
     const userThemeRouter: Router = Router();

@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import feedbackServiceInstance from '../services/FeedbackService';
+import feedbackServiceInstance from '../services/feedbackService';
 
 export default class FeedbackAPI {
     public static create = async (request: Request, response: Response) => {

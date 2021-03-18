@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import FeedbackAPI from '../controllers/FeedbackAPI';
+import FeedbackAPI from '../controllers/feedbackAPI';
 
 const feedbackRoutes = (router: Router) => {
     const feedbackRouter: Router = Router();
