@@ -1,16 +1,14 @@
-const fetch = require('node-fetch');
-
 import Topic from '../db/tables/Topic';
 import Message from '../db/tables/Message';
 
-interface createRequest {
+interface CreateRequest {
     title: string;
     description: string;
     user_id: number,
     last_message_txt?: string
 }
 
-interface createMessage {
+interface CreateMessage {
     title: string,
     description: string,
     user_id: number,
@@ -46,45 +44,18 @@ class ForumService {
         return comments;
     }
 
-    public static createTopic = async (request: createRequest) => {
+    public static createTopic = async (request: CreateRequest) => {
         // @ts-ignore
         const createdTopic = await Topic.create(request);
         return createdTopic;
     }
 
-    public static leaveComment = async (request: createMessage) => {
+    public static leaveComment = async (request: CreateMessage) => {
         // @ts-ignore
         const createdMessage = await Message.create(request);
         return createdMessage;
     }
 
-    public static getUsers = async (userIds: number[]) => {
-        let promises: Promise<unknown>[] = [];
-        userIds.forEach(id => {
-
-            let promise = new Promise((resolve, reject) => {
-                fetch(`https://ya-praktikum.tech/api/v2/user/${id}`, {
-                    'headers': {
-                        'accept': 'application/json',
-                        'cookie': '',
-                    },
-                    'method': 'GET',
-                })
-                    .then((res: any) => res.json())
-                    .then((user: unknown) => {
-                        resolve(user);
-                    })
-                    .catch((err: unknown) => {
-                        reject(err);
-                    });
-            });
-            promises.push(promise);
-        });
-        let users = await Promise.all(promises);
-        return users;
-
-
-    }
 
 }
 

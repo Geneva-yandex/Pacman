@@ -1,16 +1,27 @@
-import {Sequelize} from 'sequelize-typescript';
+import {Sequelize, SequelizeOptions} from 'sequelize-typescript';
 // Import productFactory from "./product";
 import Message from '../tables/Message';
 import Topic from '../tables/Topic';
 
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config.json')[env];
+const sequelizeOptions: SequelizeOptions = {
+    host: 'localhost',
+    port: 5433,
+    username: 'postgres',
+    password: 'newPassword',
+    database: 'packman',
+    dialect: 'postgres'
+};
 
-const sequelize = new Sequelize(config);
+const sequelize = new Sequelize(sequelizeOptions);
 
 sequelize.addModels([Topic, Message]);
 
-const db = {
+Topic.hasMany(Message, {
+    foreignKey: 'topic_id'
+});
+Message.belongsTo(Topic);
+
+/*const db = {
     sequelize,
     Sequelize
     // Product: productFactory(sequelize),
@@ -20,6 +31,6 @@ Object.values(db).forEach((model: any) => {
     if (model.associate) {
         model.associate(db);
     }
-});
+});*/
 
-export default db;
+export default sequelize;

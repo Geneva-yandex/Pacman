@@ -14,6 +14,12 @@ import Comment from './Comment';
 const b = bem('CommentForm');
 const FORM_ID = 'CommentForm';
 
+interface IState {
+    title: string
+    description: string,
+    [key: string]: unknown
+}
+
 interface StateProps {
     activeTopicId: number,
     userId: number,
@@ -28,15 +34,11 @@ interface DispatchToProps {
 
 type CommentFormProps = StateProps & DispatchToProps;
 
-class CommentForm extends React.PureComponent<CommentFormProps> {
+class CommentForm extends React.PureComponent<CommentFormProps, IState> {
     state = {
         title: '',
         description: ''
     };
-
-    componentDidMount() {
-        console.log(this.props.activeTopicComments);
-    }
 
     onControlChange = (event: ChangeEvent) => {
         const target = event.target;
@@ -50,8 +52,7 @@ class CommentForm extends React.PureComponent<CommentFormProps> {
     onSubmit = (e: FormEvent) => {
         e.preventDefault();
         const {title, description} = this.state;
-        const userId = this.props.userId;
-        const activeTopicId = this.props.activeTopicId;
+        const {userId, activeTopicId} = this.props;
         this.props.createComment({
             title,
             description,

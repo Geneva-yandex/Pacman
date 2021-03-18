@@ -1,5 +1,4 @@
 import express, {Request} from 'express';
-import {Sequelize, SequelizeOptions} from 'sequelize-typescript';
 import mongoose from 'mongoose';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
@@ -8,28 +7,7 @@ import compression from 'compression';
 import {render} from './middlewares';
 import {ResponseWithRender} from './types';
 import routes from '../src/pages/index';
-import Topic from "./db/tables/Topic";
-import Message from "./db/tables/Message";
-
-const sequelizeOptions: SequelizeOptions = {
-    host: 'localhost',
-    port: 5433,
-    username: 'postgres',
-    password: 'newPassword',
-    database: 'packman',
-    dialect: 'postgres'
-};
-
-const sequelize = new Sequelize(sequelizeOptions);
-
-
-
-sequelize.addModels([Topic, Message]);
-
-Topic.hasMany(Message, {
-    foreignKey: 'topic_id'
-})
-Message.belongsTo(Topic);
+import sequelize from './db/models';
 
 sequelize.authenticate()
     .then(() => console.log('Postgres successful connection'))
