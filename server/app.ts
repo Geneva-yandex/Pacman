@@ -13,7 +13,6 @@ import render from './middlewares/render';
 import {ResponseWithRender} from './types';
 import routes from '../src/pages/index';
 import router from './router';
-import router2 from './routes';
 
 const app = express();
 
@@ -24,16 +23,15 @@ const webpackMiddlewares = (!isApiDev && isDevelopment && getWebpackMiddlewares(
 app
     .disable('x-powered-by')
     .enable('trust proxy')
-    .use(morgan('tiny'))
+    .use(morgan('short'))
     .use(cookieParser())
     .use(compression())
     .use(bodyParser.json())
-    .use(bodyParser.urlencoded({ extended: false }))
+    .use(bodyParser.urlencoded({extended: false}))
     .use(express.json())
     .use('/', express.static(path.join(__dirname, 'public')))
-    .use([...webpackMiddlewares,  render])
-    .use(router)
-    .use(router2);
+    .use([...webpackMiddlewares, render])
+    .use(router);
 
 routes.forEach(r => {
     app.get(r.path, auth, (_req: Request, res: ResponseWithRender) => {

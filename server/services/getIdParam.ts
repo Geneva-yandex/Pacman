@@ -5,6 +5,7 @@ function getIdParam(req: Request) {
     if (/^\d+$/.test(id)) {
         return Number.parseInt(id, 10);
     }
+
     throw new TypeError(`Invalid ':id' param: "${id}"`);
 }
 

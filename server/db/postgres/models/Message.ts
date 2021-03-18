@@ -8,8 +8,8 @@ import {
     Model,
     PrimaryKey,
     Table
-} from "sequelize-typescript";
-import Topic from "./Topic";
+} from 'sequelize-typescript';
+import Topic from './Topic';
 
 @Table({
     tableName: 'messages'
@@ -42,8 +42,7 @@ class Message extends Model<Message> {
     topic_id: number;
 
     @BelongsTo(() => Topic)
-    topic: Topic
+    topic: Topic;
 }
 
-
-export default Message
+export default Message;

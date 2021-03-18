@@ -1,5 +1,5 @@
 import BaseRESTService from './BaseRESTService';
-import FeedbackModel from '../models/FeedbackModel';
+import FeedbackModel from '../db/mongo/models/FeedbackModel';
 
 interface CreateRequest {
     name: string,

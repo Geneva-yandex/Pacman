@@ -1,5 +1,5 @@
-import {Sequelize} from 'sequelize-typescript';
-import {SequelizeOptions} from 'sequelize-typescript/dist/sequelize/sequelize/sequelize-options';
+import {Sequelize, SequelizeOptions} from 'sequelize-typescript';
+import {Topic, Message} from './postgres/models';
 
 export default class Postgres {
     static __instance: Postgres;
@@ -18,9 +18,15 @@ export default class Postgres {
 
     async connect() {
         this.sequelize = new Sequelize(this.options);
+        this.sequelize.addModels([Topic, Message]);
+
+        Topic.hasMany(Message, {foreignKey: 'topic_id'});
+        Message.belongsTo(Topic);
 
         try {
             await this.sequelize.authenticate();
+            await this.sequelize.sync();
+
             console.log('Postgres successful connection');
         } catch (err) {
             console.error('Postgres connection error:', err);

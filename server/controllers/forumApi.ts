@@ -3,7 +3,7 @@ import ForumService from '../services/forumService';
 import getId from '../services/getIdParam';
 import practicumApi from '../services/practicumApi';
 
-class ForumApi{
+class ForumApi {
     public static getUsers = async (_req: Request, res: Response) => {
         const {body} = _req;
         const users = await practicumApi.getUsers(body);
@@ -18,7 +18,6 @@ class ForumApi{
         } catch (e) {
             res.status(400).json({error: e});
         }
-
     };
 
     public static comment = async (req: Request, res: Response) => {
@@ -28,7 +27,7 @@ class ForumApi{
             let topicComment = await ForumService.leaveComment(body);
             res.status(200).json(topicComment);
         } catch (e) {
-            res.status(400).json({error: e})
+            res.status(400).json({error: e});
         }
     };
 
@@ -49,7 +48,6 @@ class ForumApi{
             }
 
             res.status(200).json({topic});
-
         } catch (e) {
             res.status(400).json({error: e});
         }
