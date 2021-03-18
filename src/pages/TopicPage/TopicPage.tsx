@@ -3,12 +3,9 @@ import bem from 'easy-bem';
 import './TopicPage.scss';
 import {ForumEntityActions} from '../../store/forum';
 import {withRouter} from 'react-router';
-
 import Comment from './views/Comment';
 import {IComment} from 'common/types/interfaces';
-
 import TopicCard from 'components/TopicCard';
-
 import CommentForm from './views/CommentForm';
 import {ITopicPageProps, ITopicPageState, StateProps, Dispatch, DispatchToProps} from './types';
 import Meta from '../../components/Meta/Meta';

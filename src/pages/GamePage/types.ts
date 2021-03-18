@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {IUser} from '../../common/types/interfaces';
 
 export type ViewType = 'start' | 'game' | 'finish';
 
@@ -7,5 +8,6 @@ export interface IStateGamePage {
 }
 
 export interface IViewProps {
-    changeView: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+    changeView: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+    user?: IUser;
 }

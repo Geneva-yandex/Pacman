@@ -21,6 +21,10 @@ export interface IUser extends IBaseId, IBaseUser {
     role: string;
 }
 
+export type IServiceId = {
+    service_id: string;
+};
+
 export type IUserProfileDto = IBaseUser;
 
 export interface ITopicCreateData {
