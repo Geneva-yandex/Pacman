@@ -4,9 +4,9 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import {Action, compose} from 'redux';
 
-import {IPasswordsDto, IUser} from 'common/types/interfaces';
-import {IUserStore, UserStateActions} from 'store/user';
-import {IStore} from 'store/types';
+import {IPasswordsDto, IUser} from '../../common/types/interfaces';
+import {IUserStore, UserStateActions} from '../../store/user';
+import {IStore} from '../../store/types';
 
 const mapStateToProps = (state: IStore) => ({
     user: state.user

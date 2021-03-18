@@ -1,6 +1,6 @@
 import configureStore from './configureStore';
-import bindActions from 'common/utils/bindActions';
-import isServer from 'common/utils/isServer';
+import bindActions from '../common/utils/bindActions';
+import isServer from '../common/utils/isServer';
 import actions from './actions';
 
 export const {store, history} = configureStore({initialStore: !isServer && window.__PRELOADED_STATE__});

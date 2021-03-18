@@ -3,7 +3,7 @@ import bem from 'easy-bem';
 import {Button, Input} from 'components/ui';
 import {ChangeEvent, FormEvent} from 'react';
 import {IFeedbackFormState} from '../types';
-import {FeedbackFieldsEnum} from 'common/types/FeedbackTypes';
+import {FeedbackFieldsEnum} from '../../../common/types/FeedbackTypes';
 import feedbackApi from 'api/FeedbackApi';
 import './FeedbackForm.scss';
 

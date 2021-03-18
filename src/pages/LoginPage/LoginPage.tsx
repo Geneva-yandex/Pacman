@@ -1,14 +1,12 @@
 import React, {PureComponent} from 'react';
-import {RouteComponentProps, withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
-
 import AuthPageLayout from 'components/AuthPageLayout';
 import AuthForm from 'components/AuthForm';
 import Meta from 'components/Meta/Meta';
 
 const backLink = <Link to='/sign-up'>Create an account</Link>;
 
-class LoginPage extends PureComponent<RouteComponentProps> {
+class LoginPage extends PureComponent {
     render() {
         return (
             <>
@@ -21,4 +19,4 @@ class LoginPage extends PureComponent<RouteComponentProps> {
     }
 }
 
-export default withRouter(LoginPage);
+export default LoginPage;

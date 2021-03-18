@@ -11,6 +11,7 @@ type PrivateRouteArgs = {
 export default function PrivateRoute({path, exact, key, component}: PrivateRouteArgs) {
     const userData = useSelector((state: IStore) => state.user);
     const isAuth = userData.item !== null;
+
     if (isAuth) {
         return (
             <Route
@@ -23,6 +24,7 @@ export default function PrivateRoute({path, exact, key, component}: PrivateRoute
     }
 
     return (
+
         <Redirect
             to={'/login'}
         >
