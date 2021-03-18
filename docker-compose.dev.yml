@@ -3,14 +3,14 @@ services:
     my-app:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: Dockerfile.dev
         links:
             - postgres
             - mongo
         env_file: .env
         environment:
             - DATABASE_MONGO_URL=$DATABASE_MONGO_URL
-            - BACKEND_URI=https://localhost:9001
+            - FORUM_API=https://localhost:9001
             - PORT=9001
         ports:
             - "9001:9001"

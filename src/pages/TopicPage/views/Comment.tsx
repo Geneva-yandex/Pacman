@@ -15,6 +15,20 @@ class Comment extends React.PureComponent<ITopicCommentProps> {
 
     render() {
         const {comment} = this.props;
+        console.log(comment.user);
+        if (comment.user === undefined) {
+            comment.user = {
+                avatar: '',
+                display_name: '',
+                email: '',
+                first_name: '',
+                id: 0,
+                login: '',
+                phone: '',
+                role: '',
+                second_name: ''
+            };
+        }
 
         return (
             <div>

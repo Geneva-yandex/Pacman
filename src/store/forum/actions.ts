@@ -79,7 +79,7 @@ export class ForumEntityActions {
             if (topic.status === 200) {
                 let activeTopic = topic.data.topic;
 
-                const rawComments: IComment[] = activeTopic.Messages;
+                let rawComments: IComment[] = activeTopic.Messages;
 
                 let userIds = [activeTopic.user_id];
 
@@ -92,6 +92,16 @@ export class ForumEntityActions {
                 const users = await ForumApi.getAllUsers(userIds);
 
                 activeTopic.user = users[0].data;
+
+                rawComments = rawComments.map((comment: IComment) => {
+                    let user = users.find(user => user.data.id === comment.user_id);
+                    if (user) {
+                        comment.user = user.data;
+                    }
+                    return comment;
+                });
+
+                console.log(rawComments);
 
                 const rootComments = rawComments.filter((comment: IComment) => {
                     return comment.message_id === 0;
@@ -108,10 +118,7 @@ export class ForumEntityActions {
                         value: childComments
                     });
 
-                    let user = users.find(user => user.data.id === comment.user_id);
-                    if (user) {
-                        comment.user = user.data;
-                    }
+
 
                     return comment;
                 });
