@@ -5,24 +5,22 @@ import Bundle from './components/Bundle';
 import ErrorBoundary from './components/ErrorBoundary';
 import {ConnectedRouter} from 'connected-react-router';
 import {history, store} from './store/initClientStore';
-import {Themes} from './common/enums';
 
-const ThemeContext = React.createContext(Themes.Dark);
-
-/* const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   :root {
     --color-text: white;
     --color-background: #171717;
     --color-primary: #fed940;
     --color-sidebar-bg: rgba(47, 47, 47, 0.5);
-      --color-sidebar-icon: white;
---color-input-border: rgba(#ffffff, 0.2);
---color-input-border-focus: rgba(#ffffff, 0.4);
---color-tabs-border: rgba(#eaeef4, 0.3);
+    --color-sidebar-icon: white;
+    --color-input-border: rgba(#ffffff, 0.2);
+    --color-input-border-focus: rgba(#ffffff, 0.4);
+    --color-tabs-border: rgba(#eaeef4, 0.3);
   }
-`; */
+`;
 
-const a = `
+/*
+const lightTheme = `
   :root {
     --color-text: black; --color-background: white;
       --color-default-button-bg: #dedede;
@@ -36,22 +34,21 @@ const a = `
   }
 `;
 
-const GlobalStyles = createGlobalStyle`${a}}`;
+const GlobalStyles = createGlobalStyle`${lightTheme}}`;
+ */
 
 export default class Application extends React.PureComponent {
     render() {
         return (
             <>
                 <GlobalStyles />
-                <ThemeContext.Provider value={Themes.Dark}>
-                    <Provider store={store}>
-                        <ErrorBoundary>
-                            <ConnectedRouter history={history}>
-                                <Bundle/>
-                            </ConnectedRouter>
-                        </ErrorBoundary>
-                    </Provider>
-                </ThemeContext.Provider>
+                <Provider store={store}>
+                    <ErrorBoundary>
+                        <ConnectedRouter history={history}>
+                            <Bundle/>
+                        </ConnectedRouter>
+                    </ErrorBoundary>
+                </Provider>
             </>
         );
     }
