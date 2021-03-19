@@ -29,8 +29,8 @@ jobs:
             - name: deploy
               uses: garygrossgarten/github-action-ssh@release
               with:
-                  command: cd dist && ./build.sh
-                  host: geneva-pacman-02.ya-praktikum.tech/
+                  command: touch index.html
+                  host: 84.201.162.161
                   username: Dierkalalala
                   privateKey: ${{ secrets.SSH_CLOUD_KEY}}
 
