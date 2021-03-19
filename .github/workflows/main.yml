@@ -25,12 +25,15 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - uses: actions/checkout@v2
 
-            # Runs a single command using the runners shell
-            - name: deploy
-              uses: garygrossgarten/github-action-ssh@release
-              with:
-                  command: touch index.html
-                  host: 84.201.162.161
-                  username: admin
-                  privateKey: ${{ secrets.SSH_CLOUD_KEY}}
-
+            - name: docker login
+              env:
+                  DOCKER_USER: ${{ secrets.DOCKER_USER }}
+                  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+              run: |
+                  docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+            - name: docker build app
+              run: |
+                  docker build ./ -t dierkholm/pacman:1.0.0
+            - name: docker push
+              run: |
+                  docker push dierkholm/pacman:1.0.0
