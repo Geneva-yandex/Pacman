@@ -3,8 +3,8 @@ import bem from 'easy-bem';
 import {Link} from 'react-router-dom';
 import './TopicCard.scss';
 
-import {ITopic} from 'common/types/ForumTypes';
 import {ITopicCardProps} from './types';
+import {ITopicData} from '../../common/types/interfaces';
 
 const b = bem('TopicCard');
 
@@ -36,34 +36,24 @@ export default class TopicCard extends React.PureComponent<ITopicCardProps> {
             );
     }
 
-    renderInner(topic: ITopic) {
-        const {hasDescription} = this.props;
-
+    renderInner(topic: ITopicData) {
         return (
             <div className={b('inner')}>
                 <div
                     className={b('avatar')}
                     style={{
-                        backgroundImage: `url(${topic.avatar})`
+                        backgroundImage: `url(${topic.user.avatar})`
                     }}
                 />
                 <div className={b('content')}>
                     <div className={b('user-name')}>
-                        {`${topic.firstName} ${topic.secondName}`}
+                        {`${topic.user.display_name}`}
                     </div>
                     <div className={b('topic-title')}>
                         {topic.title}
                     </div>
-                    {hasDescription && (
-                        <p className={b('topic-description')}>
-                            {topic.description}
-                        </p>
-                    )}
-                    <div className={b('comments')}>
-                        {topic.comments.length ?
-                            `Comments: ${topic.comments.length}` :
-                            'No comments'
-                        }
+                    <div className={b('topic-description')}>
+                        {topic.description}
                     </div>
                 </div>
             </div>

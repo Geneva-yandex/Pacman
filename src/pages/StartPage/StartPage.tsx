@@ -2,8 +2,9 @@ import React, {MouseEvent} from 'react';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import bem from 'easy-bem';
-import {Modal, Button} from 'components/ui';
+import {Modal, Button} from '../../components/ui';
 import './StartPage.scss';
+import Meta from '../../components/Meta/Meta';
 
 type NavItem = {
     id: number,
@@ -24,21 +25,21 @@ const b = bem('StartPage');
 const startPageNavigation = [
     {
         id: 0,
-        name: 'Старт',
+        name: 'Play',
         route: '/game',
         modalControl: '',
         primary: true
     },
     {
         id: 1,
-        name: 'Тренировка',
+        name: 'Training',
         route: '/',
         modalControl: '',
         primary: false
     },
     {
         id: 2,
-        name: 'Инструкция',
+        name: 'Help',
         route: '',
         modalControl: 'instructionModal',
         primary: false
@@ -52,7 +53,6 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
         modals: {
             instructionModal: true
         }
-
     };
 
     constructor(props: RouteComponentProps) {
@@ -129,6 +129,7 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
     render() {
         return (
             <div className={b()}>
+                <Meta title={'Start page'}/>
                 <div className={b('navigation-wrapper')}>
                     <nav className={b('navigation')}>
                         <ul className={b('navigationList')}>

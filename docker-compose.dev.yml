@@ -1,0 +1,66 @@
+version: "3"
+services:
+    my-app:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        links:
+            - postgres
+            - mongo
+        env_file: .env
+        environment:
+            - DATABASE_MONGO_URL=$DATABASE_MONGO_URL
+            - FORUM_API=https://localhost:9001
+            - PORT=9001
+        ports:
+            - "9001:9001"
+        restart: always
+    postgres:
+        container_name: postgres
+        image: postgres:12
+        restart: always
+        ports:
+            - "5433:5432"
+        volumes:
+            - ./pg-data:/var/lib/postgresql
+            - ./src/migrations/dbinit.sql
+        environment:
+            PGDATA: /var/lib/postgresql/data/mydata
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: newPassword
+            POSTGRES_DB: packman
+    pgadmin:
+        container_name: pgadmin
+        image: dpage/pgadmin4:4.18
+        restart: always
+        env_file: .env
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=$PGADMIN_DEFAULT_EMAIL
+            - PGADMIN_DEFAULT_PASSWORD=$PGADMIN_DEFAULT_PASSWORD
+            - PGADMIN_LISTEN_PORT=5001
+        ports:
+            - "5001:5001"
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        depends_on:
+            - postgres
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
+        restart: always
+        volumes:
+            - data-volume:/data/db
+    mongo-express:
+        image: mongo-express
+        ports:
+            - "8081:8081"
+        restart: always
+        depends_on:
+            - mongo
+        environment:
+            - ME_CONFIG_MONGODB_PORT=27017
+volumes:
+    db-data:
+    pgadmin-data:
+    data-volume:

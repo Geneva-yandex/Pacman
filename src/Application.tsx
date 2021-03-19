@@ -1,20 +1,18 @@
-import * as React from 'react';
+import React from 'react';
 import {Provider} from 'react-redux';
-import Router from './components/Router';
-import Layout from './components/Layout';
-import routes from './pages';
+import Bundle from './components/Bundle';
 import ErrorBoundary from './components/ErrorBoundary';
-import store from './store';
+import {ConnectedRouter} from 'connected-react-router';
+import {store, history} from './store/initClientStore';
 
 export default class Application extends React.PureComponent {
     render() {
         return (
             <Provider store={store}>
                 <ErrorBoundary>
-                    <Router
-                        layout={Layout}
-                        routes={routes}
-                    />
+                    <ConnectedRouter history={history}>
+                        <Bundle/>
+                    </ConnectedRouter>
                 </ErrorBoundary>
             </Provider>
         );

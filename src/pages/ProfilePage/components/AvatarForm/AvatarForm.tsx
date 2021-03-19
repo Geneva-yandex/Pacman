@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useRef} from 'react';
 import bem from 'easy-bem';
 import {Input, Button, Avatar} from 'components/ui';
-import {API_ENDPOINT} from 'common/constants';
+import {API_ENDPOINT} from '../../../../common/constants';
 import './AvatarForm.scss';
 
 interface IAvatarFormProps {

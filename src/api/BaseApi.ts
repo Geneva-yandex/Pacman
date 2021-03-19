@@ -1,11 +1,11 @@
-import {BASE_API_URL} from 'common/constants';
+import {BASE_API_URL} from '../common/constants';
 import axios, {AxiosResponse} from 'axios';
 
 axios.defaults.withCredentials = true;
 
 export class BaseApi {
     // eslint-disable-next-line no-useless-constructor
-    constructor(public apiControllerName: string) {}
+    constructor(public apiControllerName: string, public baseApiUrl = BASE_API_URL) {}
 
     public get<T>(url: string): Promise<AxiosResponse<T>> {
         return axios.get<T>(this._url(url));
@@ -24,6 +24,6 @@ export class BaseApi {
     }
 
     private _url(url: string = ''): string {
-        return `${BASE_API_URL}/${this.apiControllerName}/${url}`;
+        return `${this.baseApiUrl}/${this.apiControllerName}/${url}`;
     }
 }
