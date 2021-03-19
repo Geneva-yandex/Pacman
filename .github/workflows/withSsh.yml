@@ -31,6 +31,6 @@ jobs:
               with:
                   command: touch index.html
                   host: 84.201.162.161
-                  username: Dierkalalala
+                  username: admin
                   privateKey: ${{ secrets.SSH_CLOUD_KEY}}
 
