@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: SSH_Deploy
+name: Docker hub pushing
 
 # Controls when the action will run.
 on:
@@ -37,3 +37,10 @@ jobs:
             - name: docker push
               run: |
                   docker push dierkholm/pacman:1.0.0
+            - name: deploy
+              uses: garygrossgarten/github-action-ssh@release
+              with:
+                command: touch index.html
+                host: 84.201.162.161
+                username: admin
+                privateKey: ${{ secrets.SSH_CLOUD_KEY}}

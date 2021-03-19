@@ -98,6 +98,7 @@ export class ForumEntityActions {
                     if (user) {
                         comment.user = user.data;
                     }
+
                     return comment;
                 });
 
@@ -117,8 +118,6 @@ export class ForumEntityActions {
                         enumerable: true,
                         value: childComments
                     });
-
-
 
                     return comment;
                 });
