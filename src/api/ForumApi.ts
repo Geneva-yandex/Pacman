@@ -16,9 +16,8 @@ interface commentData {
 }
 
 class ForumApi {
-    private url = 'https://localhost:9001';
+    private url = NODE_ENV === 'development' ? 'https://localhost:9001' : 'https://geneva-pacman-02.ya-praktikum.tech';
     private forumApiUrl = '/api/forum/';
-
     public getAllUsers(usersId: number[]): Promise<AxiosResponse<IUser>[]> {
         let promises = usersId.map(id => {
             return axios
