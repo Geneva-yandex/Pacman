@@ -97,6 +97,7 @@
         "sass": "1.30.0",
         "sass-loader": "10.1.0",
         "start-server-webpack-plugin": "2.2.5",
+        "styled-components": "5.2.1",
         "stylelint": "13.8.0",
         "stylelint-config-standard": "20.0.0",
         "stylelint-scss": "3.18.0",
@@ -146,7 +147,6 @@
         "sequelize": "6.5.0",
         "sequelize-cli": "6.2.0",
         "sequelize-typescript": "2.1.0",
-        "styled-components": "5.2.1",
         "typesafe-actions": "5.1.0",
         "webpack-dev-middleware": "4.1.0",
         "webpack-shell-plugin-next": "2.2.2"

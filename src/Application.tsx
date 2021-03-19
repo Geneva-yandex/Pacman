@@ -9,7 +9,7 @@ import {Themes} from './common/enums';
 
 const ThemeContext = React.createContext(Themes.Dark);
 
-/*const GlobalStyles = createGlobalStyle`
+/* const GlobalStyles = createGlobalStyle`
   :root {
     --color-text: white;
     --color-background: #171717;
@@ -20,7 +20,7 @@ const ThemeContext = React.createContext(Themes.Dark);
 --color-input-border-focus: rgba(#ffffff, 0.4);
 --color-tabs-border: rgba(#eaeef4, 0.3);
   }
-`;*/
+`; */
 
 const a = `
   :root {

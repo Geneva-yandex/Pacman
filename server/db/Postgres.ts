@@ -25,6 +25,11 @@ export default class Postgres {
         Topic.hasMany(Message, {foreignKey: 'topic_id'});
         Message.belongsTo(Topic);
 
+        SiteTheme.hasMany(UserTheme, {foreignKey: 'theme_id'});
+        UserTheme.belongsTo(SiteTheme);
+
+        User.hasOne(UserTheme, {foreignKey: 'owner_id'});
+
         try {
             await this.sequelize.authenticate();
             await this.sequelize.sync({force: true});
