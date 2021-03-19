@@ -6,6 +6,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+const expressJSDocSwagger = require('express-jsdoc-swagger');
 
 import {getWebpackMiddlewares} from './middlewares/hot';
 import auth from './middlewares/auth';
@@ -32,6 +33,19 @@ app
     .use('/', express.static(path.join(__dirname, 'public')))
     .use([...webpackMiddlewares, render])
     .use(router);
+
+const options = {
+    info: {
+        version: '1.0.0',
+        title: 'Pacman',
+        description: 'Packman Game by Yandex Geneva Inc.',
+    },
+    filesPattern: './*.js',
+    baseDir: __dirname,
+    apiDocsPath: '/api-docs'
+};
+
+expressJSDocSwagger(app)(options);
 
 routes.forEach(r => {
     app.get(r.path, auth, (_req: Request, res: ResponseWithRender) => {
