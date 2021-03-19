@@ -1,13 +1,13 @@
 import * as React from 'react';
 import bem from 'easy-bem';
-import {UserDirectionEnum, GameItemsEnum, UserDirectionTypeEnum} from 'common/enums';
+import {GameItemsEnum, UserDirectionEnum, UserDirectionTypeEnum} from 'common/enums';
 import {
+    AvailableCellsCountParamsType,
     CoordsType,
+    GhostCoordsType,
     ICanvasProps,
     MapType,
-    UserDirectionType,
-    AvailableCellsCountParamsType,
-    GhostCoordsType
+    UserDirectionType
 } from '../types';
 import mapData from '../maps/basic';
 import Map from '../models/Map';
@@ -15,17 +15,25 @@ import User from '../models/User';
 import './Canvas.scss';
 
 import {
+    checkBump,
     convertToPixel,
+    copyMap, decreaseSpeed,
     getCell,
-    getRow,
-    makeCellCoords,
-    isOutOfReachItem,
+    getDirectionByKeyCode,
     getDirectionSign,
     getDirectionType,
-    getDirectionByKeyCode,
-    isSuitableValue, copyMap, getNextGhostPosition, makeGhostCoords, getOppositeDirection
+    getNextGhostPosition,
+    getOppositeDirection,
+    getRow,
+    increaseSpeed,
+    isOutOfReachItem,
+    isSuitableValue,
+    makeCellCoords,
+    makeGhostCoords
 } from '../helpers';
 import Ghost from '../models/Ghost';
+import {GhostModeEnum} from '../../../common/enums/GhostModeEnum';
+import {INITIAL_SPEED} from '../Game';
 
 const b = bem('Canvas');
 
@@ -40,6 +48,7 @@ const DIRECTIONS = [
     UserDirectionEnum.Top,
     UserDirectionEnum.Bottom
 ];
+const GHOST_TARGET_COORDS = makeCellCoords(0, 0);
 
 export default class Canvas extends React.PureComponent<ICanvasProps> {
     userCanvasRef: React.RefObject<HTMLCanvasElement>;
@@ -55,6 +64,12 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
     ghostCanvasRef: React.RefObject<HTMLCanvasElement>;
     ghostDirection: UserDirectionType | null;
     ghostRequestAnimationId: number | null;
+    initialGhostPosition: CoordsType;
+    initialUserPosition: CoordsType;
+    resetTimerId: ReturnType<typeof setTimeout>;
+    ghostPosition: CoordsType;
+    bump: boolean;
+    needChangeDirection: boolean;
 
     constructor(props: ICanvasProps) {
         super(props);
@@ -67,10 +82,12 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         this.userDirection = UserDirectionEnum.Right;
 
         this.ghostCanvasRef = React.createRef();
-        this.ghostDirection = null;
         this.ghostRequestAnimationId = null;
+        this.ghostDirection = null;
 
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.initUser = this.initUser.bind(this);
+        this.initGhost = this.initGhost.bind(this);
     }
 
     componentDidMount() {
@@ -83,6 +100,12 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         }
     }
 
+    componentDidUpdate(prevProps: Readonly<ICanvasProps>) {
+        if (prevProps.ghostMode === GhostModeEnum.Chase && this.props.ghostMode !== GhostModeEnum.Chase && this.ghostDirection) {
+            this.needChangeDirection = true;
+        }
+    }
+
     componentWillUnmount() {
         window.removeEventListener('keydown', this.onKeyDown);
 
@@ -92,6 +115,10 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
 
         if (this.ghostRequestAnimationId) {
             cancelAnimationFrame(this.ghostRequestAnimationId);
+        }
+
+        if (this.resetTimerId) {
+            clearTimeout(this.resetTimerId);
         }
     }
 
@@ -128,16 +155,33 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
             map: this.mapData,
             initCookies: this.props.initCookies,
             initPills: this.props.initPills,
-            initUser: userPosition => {
-                this.setUserPosition(userPosition);
-                this.userComponent?.draw(userPosition);
-                this.animateUser(this.userDirection, userPosition);
-            },
-            initGhost: ghostPosition => {
-                this.ghostComponent.draw(ghostPosition);
-                this.chaseUser(ghostPosition);
-            }
+            initUser: this.initUser,
+            initGhost: this.initGhost
         });
+    }
+
+    initUser(userPosition: CoordsType, needResetOnly: boolean = false) {
+        this.initialUserPosition = userPosition;
+        this.setUserPosition(userPosition);
+        this.userDirection = UserDirectionEnum.Right;
+
+        if (!needResetOnly) {
+            this.userComponent.draw(userPosition);
+        }
+
+        this.animateUser(this.userDirection, userPosition);
+    }
+
+    initGhost(ghostPosition: CoordsType, needResetOnly: boolean = false) {
+        this.initialGhostPosition = ghostPosition;
+        this.setGhostPosition(ghostPosition);
+        this.ghostDirection = null;
+
+        if (!needResetOnly) {
+            this.ghostComponent.draw(ghostPosition);
+        }
+
+        this.animateGhost(ghostPosition);
     }
 
     onKeyDown(e: KeyboardEvent) {
@@ -229,7 +273,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
 
             this.takeMapItems(userDirection, newRow, newCell);
 
-            if (timeFraction < 1) {
+            if (timeFraction < 1 && !this.bump) {
                 this.userRequestAnimationId = requestAnimationFrame(animate);
             }
         };
@@ -237,7 +281,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         this.userRequestAnimationId = requestAnimationFrame(animate);
     }
 
-    chaseUser(ghostPosition: CoordsType) {
+    animateGhost(ghostPosition: CoordsType) {
         const possibleCoords: GhostCoordsType[] = [];
 
         const cell = getCell(ghostPosition);
@@ -256,18 +300,25 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
                     row + step :
                     row;
 
-                if (!isOutOfReachItem(this.mapData[newRow][newCell])) {
+                const mapItem = this.mapData[newRow][newCell];
+
+                if (!isOutOfReachItem(mapItem)) {
                     possibleCoords.push(makeGhostCoords(newRow, newCell, direction));
                 }
             }
         });
 
-        const nextGhostPosition = getNextGhostPosition(possibleCoords, this.userPosition);
+        const targetCoords = this.props.ghostMode === GhostModeEnum.Chase ?
+            this.userPosition :
+            GHOST_TARGET_COORDS;
+
+        const nextGhostPosition = getNextGhostPosition(possibleCoords, targetCoords);
 
         const start = performance.now();
+        const speed = this.getGhostSpeedByMode();
 
         const animate = (time: number) => {
-            let timeFraction = Math.abs((time - start) / this.props.speed);
+            let timeFraction = Math.abs((time - start) / speed);
 
             if (timeFraction > 1) {
                 timeFraction = 1;
@@ -277,17 +328,71 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
             const newRow = (getRow(nextGhostPosition.coords) - row) * timeFraction + row;
 
             const coords = makeCellCoords(newRow, newCell);
-            this.ghostComponent.move(coords);
+            this.setGhostPosition(coords);
+            this.ghostComponent.move(coords, this.props.ghostMode);
+
+            if (checkBump(this.userPosition, coords)) {
+                if (this.props.ghostMode !== GhostModeEnum.Frightened) {
+                    this.bump = true;
+                    this.resetGhostAndUserPosition();
+                    this.props.decreaseLives();
+                } else {
+                    this.resetGhostAndUserPosition(true);
+                }
+
+                return;
+            }
 
             if (timeFraction < 1) {
                 this.ghostRequestAnimationId = requestAnimationFrame(animate);
             } else {
-                this.ghostDirection = getOppositeDirection(nextGhostPosition.direction);
-                this.chaseUser(nextGhostPosition.coords);
+                this.ghostDirection = this.needChangeDirection ?
+                    nextGhostPosition.direction :
+                    getOppositeDirection(nextGhostPosition.direction);
+                this.needChangeDirection = false;
+                this.animateGhost(nextGhostPosition.coords);
             }
         };
 
         this.ghostRequestAnimationId = requestAnimationFrame(animate);
+    }
+
+    getGhostSpeedByMode() {
+        switch (this.props.ghostMode) {
+        case GhostModeEnum.Chase:
+            return increaseSpeed(this.props.speed, INITIAL_SPEED);
+        case GhostModeEnum.Frightened:
+            return decreaseSpeed(this.props.speed, INITIAL_SPEED);
+        default:
+            return this.props.speed;
+        }
+    }
+
+    resetGhostAndUserPosition(resetGhostOnly?: boolean) {
+        if (this.userRequestAnimationId && !resetGhostOnly) {
+            cancelAnimationFrame(this.userRequestAnimationId);
+        }
+
+        if (this.ghostRequestAnimationId) {
+            cancelAnimationFrame(this.ghostRequestAnimationId);
+        }
+
+        if (this.props.lives !== 1 || resetGhostOnly) {
+            this.resetTimerId = setTimeout(() => {
+                this.bump = false;
+                if (!resetGhostOnly) {
+                    this.initUser(this.initialUserPosition, true);
+                } else {
+                    if (this.props.ghostModeTimer) {
+                        clearTimeout(this.props.ghostModeTimer);
+                    }
+
+                    this.props.returnGhostToPreviousMode();
+                }
+
+                this.initGhost(this.initialGhostPosition, true);
+            }, resetGhostOnly ? 2500 : 1500);
+        }
     }
 
     getAvailableCellsCount(params: AvailableCellsCountParamsType): number {
@@ -317,6 +422,10 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
 
     setUserPosition(userPosition: CoordsType) {
         this.userPosition = userPosition;
+    }
+
+    setGhostPosition(ghostPosition: CoordsType) {
+        this.ghostPosition = ghostPosition;
     }
 
     takeMapItems(direction: UserDirectionType, row: number, cell: number) {

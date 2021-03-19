@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export type ViewType = 'start' | 'game' | 'finish';
 
 export interface IStateGamePage {
@@ -7,5 +5,5 @@ export interface IStateGamePage {
 }
 
 export interface IViewProps {
-    changeView: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+    changeView: () => void
 }

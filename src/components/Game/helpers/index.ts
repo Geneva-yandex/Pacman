@@ -1,5 +1,10 @@
 import {GameItemsEnum, UserDirectionTypeEnum, UserDirectionEnum, KeyCodeEnum} from 'common/enums';
-import {CoordsType, GhostCoordsType, UserDirectionType, UserDirectionTypeType} from '../types';
+import {
+    CoordsType,
+    GhostCoordsType,
+    UserDirectionType,
+    UserDirectionTypeType
+} from '../types';
 import {CELL_SIZE} from '../views/Canvas';
 
 export const convertToPixel = (cellsCount: number): number => {
@@ -14,6 +19,14 @@ export const makeCellCoords = (row: number, cell: number): CoordsType => ({
 export const getRow = (coords: CoordsType) => coords.row;
 
 export const getCell = (coords: CoordsType) => coords.cell;
+
+export const increaseSpeed = (currentSpeed: number, initialSpeed: number) => {
+    return currentSpeed - initialSpeed * 0.05;
+};
+
+export const decreaseSpeed = (currentSpeed: number, initialSpeed: number) => {
+    return currentSpeed + initialSpeed * 0.5;
+};
 
 export const isSuitableValue = (value: number): boolean => {
     const ERROR = 0.2;
@@ -93,4 +106,9 @@ export const getNextGhostPosition = (possibleCoords: GhostCoordsType[], userCoor
 
     const index = hypotenuses.indexOf(Math.min(...hypotenuses));
     return possibleCoords[index];
+};
+
+export const checkBump = (userPosition: CoordsType, ghostPosition: CoordsType): boolean => {
+    return (Math.abs(getCell(userPosition) - getCell(ghostPosition)) +
+        Math.abs(getRow(userPosition) - getRow(ghostPosition))) < 0.9;
 };

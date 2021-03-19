@@ -1,3 +1,5 @@
+import {GhostModeEnum} from '../../common/enums/GhostModeEnum';
+
 export type MapType = number[][];
 
 export type CoordsType = {
@@ -16,7 +18,11 @@ export interface IGameState {
     lives: number,
     level: number,
     score: number,
-    speed: number
+    speed: number,
+    ghostMode: GhostModeEnum,
+    showGameOverView: boolean,
+    showNextLevelView: boolean,
+    showDecreasedLivesView: boolean
 }
 
 export type GameInitMethodsType = {
@@ -24,9 +30,12 @@ export type GameInitMethodsType = {
     initPills: (pills: number) => void,
 };
 
-export interface ICanvasProps extends Omit<IGameState, 'lives' | 'level' | 'score'>, GameInitMethodsType {
+export interface ICanvasProps extends Omit<IGameState, 'level' | 'score' | 'showGameOverView' | 'showNextLevelView' | 'showDecreasedLivesView'>, GameInitMethodsType {
     eatPills: () => void
-    eatCookies: () => void
+    eatCookies: () => void,
+    decreaseLives: () => void,
+    returnGhostToPreviousMode: () => void,
+    ghostModeTimer: ReturnType<typeof setTimeout> | undefined
 }
 
 export interface IComponentProps {

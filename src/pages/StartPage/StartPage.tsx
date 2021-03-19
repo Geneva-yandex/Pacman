@@ -24,21 +24,21 @@ const b = bem('StartPage');
 const startPageNavigation = [
     {
         id: 0,
-        name: 'Старт',
+        name: 'Game',
         route: '/game',
         modalControl: '',
         primary: true
     },
     {
         id: 1,
-        name: 'Тренировка',
+        name: 'Training',
         route: '/',
         modalControl: '',
         primary: false
     },
     {
         id: 2,
-        name: 'Инструкция',
+        name: 'Rules',
         route: '',
         modalControl: 'instructionModal',
         primary: false
