@@ -10,11 +10,11 @@ export interface IAction<T = unknown> {
 
 export interface IStore extends RouterRootState {
     user: IUserStore;
+    forum: IForumStore,
     leaderBoard: {
         item: ILeaderData[];
         status: string,
-    },
-    forum: IForumStore
+    }
 }
 
 export interface IStoreOptions {

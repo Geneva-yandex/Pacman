@@ -6,8 +6,9 @@ import forumReducer from './forum/reducer';
 
 const createRootReducer = (history: any) => combineReducers({
     router: connectRouter(history),
-    leaderBoard: leaderBoardReducer,
     user: userReducer,
-    forum: forumReducer
+    forum: forumReducer,
+    leaderBoard: leaderBoardReducer
 });
+
 export default createRootReducer;

@@ -23,15 +23,15 @@ const webpackMiddlewares = (!isApiDev && isDevelopment && getWebpackMiddlewares(
 app
     .disable('x-powered-by')
     .enable('trust proxy')
-    .use(morgan('short'))
+    .use(morgan('tiny'))
     .use(cookieParser())
     .use(compression())
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: false}))
     .use(express.json())
-    .use(router)
     .use('/', express.static(path.join(__dirname, 'public')))
-    .use([...webpackMiddlewares, render]);
+    .use([...webpackMiddlewares, render])
+    .use(router);
 
 routes.forEach(r => {
     app.get(r.path, auth, (_req: Request, res: ResponseWithRender) => {

@@ -60,6 +60,7 @@ class TopicForm extends React.PureComponent<TopicFormProps> {
                     name={'title'}
                 />
                 <Input
+                    onChange={this.onControlChange}
                     type={'text'}
                     title={'description'}
                     name={'description'}

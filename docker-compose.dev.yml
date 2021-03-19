@@ -12,6 +12,7 @@ services:
         environment:
             - DATABASE_POSTGRES_URL=$DATABASE_POSTGRES_URL
             - DATABASE_MONGO_URL=$DATABASE_MONGO_URL
+            - FORUM_API=https://localhost:9001
             - PORT=9001
         ports:
             - "9001:9001"
