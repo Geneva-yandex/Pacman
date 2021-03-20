@@ -8,12 +8,21 @@ import Canvas from './views/Canvas';
 import bonuses from './bonuses';
 import {GhostModeEnum} from '../../common/enums/GhostModeEnum';
 import {increaseSpeed} from './helpers';
+import {Button} from '../ui';
+import LeaderBoardApi from '../../api/LeaderBoardApi';
+import {connect} from 'react-redux';
+import {IStore} from '../../store/types';
+import {UserDTO} from '../../common/types/types';
+
+type StateProps = {
+    user: UserDTO | null;
+};
 
 const b = bem('Game');
 
 export const INITIAL_SPEED = 400;
 
-export default class Game extends React.PureComponent<IViewProps, IGameState> {
+class Game extends React.PureComponent<IViewProps, IGameState> {
     scatterGhostModeCounter: number;
     timers: {
         ghostMode?: ReturnType<typeof setTimeout>;
@@ -117,6 +126,12 @@ export default class Game extends React.PureComponent<IViewProps, IGameState> {
                     {this.state.showGameOverView && this.renderGameOverView()}
                     {this.state.showNextLevelView && this.renderNextLevelView()}
                 </div>
+                <Button
+                    onClick={this.endGameAndSendDataToLeaderBoard}
+                    className={b('end-game-btn')}
+                >
+                    End game
+                </Button>
             </div>
         );
     }
@@ -160,6 +175,26 @@ export default class Game extends React.PureComponent<IViewProps, IGameState> {
             </div>
         );
     }
+
+    endGameAndSendDataToLeaderBoard = (): void => {
+        const generatedSendingObject = {
+            data: {
+                GenevaPacmanScore: this.state.score,
+                user: (this.props.user as UserDTO)
+            },
+            ratingFieldName: 'GenevaPacmanScore'
+        };
+
+        LeaderBoardApi.sendDataToLeaderBoard(generatedSendingObject)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+        this.props.changeView();
+    };
 
     initCookies(cookies: number) {
         this.setState({cookies});
@@ -273,3 +308,9 @@ export default class Game extends React.PureComponent<IViewProps, IGameState> {
         }
     }
 }
+
+const mapStateToProps = (state: IStore): StateProps => ({
+    user: state.user.item
+});
+
+export default connect(mapStateToProps)(Game);

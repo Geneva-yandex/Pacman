@@ -1,3 +1,5 @@
+import isServer from '../../utils/isServer';
+
 interface ILocalDocument extends HTMLDocument {
     webkitFullscreenElement?: Element;
     mozFullScreenElement?: Element;
@@ -7,14 +9,22 @@ interface ILocalDocument extends HTMLDocument {
     webkitExitFullscreen?: () => void;
 }
 
-export const doc = document as ILocalDocument;
+export const doc = !isServer ? document as ILocalDocument : null;
 
-export function fullscreenElement(): Element | null {
+export function fullscreenElement(): Element | null | undefined {
+    if (!doc) {
+        return;
+    }
+
     // @ts-ignore
     return doc[getBrowserFullscreenElementProp()];
 }
 
 export function exitFullscreen(): void {
+    if (!doc) {
+        return;
+    }
+
     if (doc.exitFullscreen) {
         doc.exitFullscreen();
     } else if (doc.webkitExitFullscreen) {
@@ -26,7 +36,11 @@ export function exitFullscreen(): void {
     }
 }
 
-export function getBrowserFullscreenElementProp(): string | never {
+export function getBrowserFullscreenElementProp(): string | never | undefined {
+    if (!doc) {
+        return;
+    }
+
     if (typeof doc.fullscreenElement !== 'undefined') {
         return 'fullscreenElement';
     }

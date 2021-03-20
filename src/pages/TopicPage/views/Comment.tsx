@@ -1,31 +1,67 @@
 import * as React from 'react';
 import bem from 'easy-bem';
 import './Comment.scss';
-import {ITopicCommentProps} from '../types';
+import {Dispatch, ITopicCommentDispatchToProps, ITopicCommentProps} from '../types';
+import {ForumEntityActions} from '../../../store/forum';
+import {connect} from 'react-redux';
 
 const b = bem('Comment');
 
-export default class Comment extends React.PureComponent<ITopicCommentProps> {
+class Comment extends React.PureComponent<ITopicCommentProps> {
+    changeComment = () => {
+        let commentId = this.props.comment.id;
+        this.props.changeCommentId(commentId);
+    };
+
     render() {
         const {comment} = this.props;
+        console.log(comment.user);
+        if (comment.user === undefined) {
+            comment.user = {
+                avatar: '',
+                display_name: '',
+                email: '',
+                first_name: '',
+                id: 0,
+                login: '',
+                phone: '',
+                role: '',
+                second_name: ''
+            };
+        }
 
         return (
-            <div className={b()}>
-                <div
-                    className={b('avatar')}
-                    style={{
-                        backgroundImage: `url(${comment.avatar})`
-                    }}
-                />
-                <div className={b('content')}>
-                    <div className={b('user-name')}>
-                        {`${comment.firstName} ${comment.secondName}`}
+            <div>
+                <div className={b()}>
+                    <div
+                        className={b('avatar')}
+                        style={{
+                            backgroundImage: `url(${comment.user.avatar})`
+                        }}
+                    />
+                    <div className={b('content')}>
+                        <div className={b('user-name')}>
+                            {`${comment.user.display_name}`}
+                        </div>
+                        <div className={b('message')}>
+                            {comment.title}
+                        </div>
+                        <div className={b('message-description')}>
+                            {comment.description}
+                        </div>
                     </div>
-                    <div className={b('message')}>
-                        {comment.content}
-                    </div>
+                    {Boolean(this.props.responsable) && (
+                        <div onClick={this.changeComment} className={b('respond')}>
+                            Respond to this comments
+                        </div>
+                    )}
                 </div>
             </div>
         );
     }
 }
+const mapDispatchToProps = (dispatch: Dispatch): ITopicCommentDispatchToProps => ({
+    changeCommentId: (id: number) => dispatch(ForumEntityActions.changeResponseId(id))
+});
+
+export default connect(null, mapDispatchToProps)(Comment);

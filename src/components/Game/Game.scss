@@ -3,6 +3,7 @@
 .Game {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100%;
 
@@ -35,6 +36,10 @@
       content: '\1F622';
       margin-left: 5px;
     }
+  }
+
+  &__end-game-btn {
+    margin-top: 60px;
   }
 
   &__next-level-wrap {
