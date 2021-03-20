@@ -11,6 +11,8 @@ import configureStore from '../../src/store/configureStore';
 import {IStore} from '../../src/store/types';
 import {IUser} from '../../src/common/types/interfaces';
 import {UserStatusEnum} from '../../src/store/user';
+import UserThemeServiceService from '../services/userThemeService';
+import {darkTheme, lightTheme} from '../../src/utils/themes';
 
 interface IParamsHTML {
     bundleHTML: string,
@@ -42,7 +44,22 @@ const getHTML = ({bundleHTML, helmet, store}: IParamsHTML) => {
 };
 
 export default (req: Request, res: ResponseWithRender, next: NextFunction) => {
-    res.renderBundle = () => {
+    res.renderBundle = async () => {
+        let theme = 'dark';
+
+        if (res.locals.user) {
+            try {
+                const userTheme = await UserThemeServiceService.getUserTheme(res.locals.user.id);
+                console.log('userTheme', userTheme);
+
+                if (userTheme) {
+                    theme = userTheme.theme;
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
         const {store} = configureStore({
             router: {
                 initialEntries: [req.url]
@@ -51,6 +68,10 @@ export default (req: Request, res: ResponseWithRender, next: NextFunction) => {
                 user: {
                     item: res.locals.user as IUser,
                     status: UserStatusEnum.Success
+                },
+                theme: {
+                    name: theme,
+                    theme: theme === 'dark' ? darkTheme : lightTheme
                 }
             } as any
         });

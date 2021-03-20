@@ -5,8 +5,8 @@ class ThemeApi extends BaseApi {
         super('userThemes', 'api');
     }
 
-    public changeUserTheme() {
-        return this.post('', 1);
+    public changeUserTheme(theme: string) {
+        return this.post('', {theme});
     }
 }
 

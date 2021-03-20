@@ -19,6 +19,7 @@ export default class UserThemeApi {
      */
     public static setUserTheme = async (request: Request, response: Response) => {
         const {body} = request;
+        console.log(body);
         const user = response.locals.user;
 
         if (!user) {
@@ -29,7 +30,7 @@ export default class UserThemeApi {
             const userTheme = await UserThemeServiceService.getUserTheme(user.id);
 
             const actionDto: UserThemeCreateDto = {
-                themeId: body.themeId,
+                theme: body.theme,
                 ownerId: user.id
             };
 
@@ -38,7 +39,7 @@ export default class UserThemeApi {
                 await UserThemeServiceService.updateUserTheme(actionDto) :
                 await UserThemeServiceService.setUserTheme(actionDto);
 
-            response.send('ok');
+            response.json(userTheme);
         } catch (error) {
             response.status(500).send({error});
         }

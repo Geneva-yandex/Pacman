@@ -23,5 +23,6 @@ export interface IStoreOptions {
     router?: {
         initialEntries: string[];
     },
-    initialStore?: IStore
+    initialStore?: IStore,
+    theme?: IThemeState
 }

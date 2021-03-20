@@ -18,12 +18,21 @@ import {
     HelpIcon,
     ThemeIcon
 } from './sidebar-icons';
-// import ThemeApi from '../../api/ThemeApi';
+
+import {IStore} from '../../store/types';
+import {ThunkDispatch} from 'redux-thunk';
+import {IUserStore} from '../../store/user';
+import {Action} from 'redux';
+import {connect} from 'react-redux';
+import {ThemeStateActions} from '../../store/theme/actions';
+import {IThemeState} from '../../store/theme/reducer';
 
 const b = bem('Sidebar');
 
 interface ISidebarProps {
     className?: string;
+    theme: IThemeState;
+    toggleTheme: (theme: string) => {};
 }
 
 class Sidebar extends PureComponent<ISidebarProps> {
@@ -93,8 +102,8 @@ class Sidebar extends PureComponent<ISidebarProps> {
     }
 
     private _changeUserTheme = async () => {
-        boundActions.theme.toggleDarkLightTheme();
-        // await ThemeApi.changeUserTheme();
+        const theme = this.props.theme.name === 'dark' ? 'light' : 'dark';
+        this.props.toggleTheme(theme);
     };
 
     private _signOut = async () => {
@@ -113,4 +122,12 @@ class Sidebar extends PureComponent<ISidebarProps> {
     };
 }
 
-export default Sidebar;
+const mapStateToProps = (state: IStore) => ({
+    theme: state.theme
+});
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<IUserStore, void, Action>) => ({
+    toggleTheme: (theme: string) => dispatch(ThemeStateActions.toggleTheme(theme))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

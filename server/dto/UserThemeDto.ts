@@ -1,4 +1,4 @@
 export interface UserThemeCreateDto {
-    themeId: number;
+    theme: string;
     ownerId: number;
 }

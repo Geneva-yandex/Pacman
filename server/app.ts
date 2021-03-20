@@ -38,7 +38,7 @@ const options = {
     info: {
         version: '1.0.0',
         title: 'Pacman',
-        description: 'Packman Game by Yandex Geneva Inc.',
+        description: 'Packman Game by Yandex Geneva Inc.'
     },
     filesPattern: './*.js',
     baseDir: __dirname,

@@ -1,7 +1,7 @@
 import {Sequelize, SequelizeOptions} from 'sequelize-typescript';
-import {Topic, Message, User, UserTheme, SiteTheme} from './postgres/models';
+import {Topic, Message, User, UserTheme, SiteTheme, UserTheme2} from './postgres/models';
 
-const models = [Topic, Message, User, UserTheme, SiteTheme];
+const models = [Topic, Message, User, UserTheme, SiteTheme, UserTheme2];
 
 export default class Postgres {
     static __instance: Postgres;
