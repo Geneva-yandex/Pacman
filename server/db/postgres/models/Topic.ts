@@ -1,6 +1,5 @@
 import {AllowNull, AutoIncrement, Column, DataType, Model, PrimaryKey, Table} from 'sequelize-typescript';
 
-
 @Table({
     timestamps: true, // don't add 'created_at', 'updated_at'
     paranoid: true, // add 'deleted_at'
@@ -27,7 +26,6 @@ class Topic extends Model<Topic> {
     @AllowNull(true)
     @Column(DataType.TEXT)
     last_message_txt: string;
-
 }
 
-export default Topic
+export default Topic;

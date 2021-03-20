@@ -3,7 +3,7 @@
 .Sidebar {
   height: 100%;
   width: $sidebar-width;
-  background-color: rgba(#2f2f2f, 50%);
+  background-color: var(--color-sidebar-bg);
   display: flex;
   padding: 24px 10px;
   flex-direction: column;
@@ -22,21 +22,21 @@
 
     a.active {
       opacity: 1;
-      color: $yellow;
+      color: var(--color-primary);
     }
   }
 
   .icon-button,
   .icon-link {
     display: block;
-    color: #ffffff;
+    color: var(--color-sidebar-icon);
     width: 40px;
     height: 40px;
   }
 
   .icon-link-help {
     path {
-      fill: #ffffff;
+      fill: var(--color-sidebar-icon);
     }
   }
 }

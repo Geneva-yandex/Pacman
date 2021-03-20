@@ -1,6 +1,7 @@
 version: "3"
 services:
     my-app:
+        image: webpack
         build:
             context: .
             dockerfile: Dockerfile.dev
@@ -9,28 +10,31 @@ services:
             - mongo
         env_file: .env
         environment:
+            - DATABASE_POSTGRES_URL=$DATABASE_POSTGRES_URL
             - DATABASE_MONGO_URL=$DATABASE_MONGO_URL
             - FORUM_API=https://localhost:9001
             - PORT=9001
         ports:
             - "9001:9001"
         restart: always
+        volumes:
+            - ./:/dist:rw
+            - node_modules:/dist/node_modules
     postgres:
         container_name: postgres
         image: postgres:12
-        restart: always
         ports:
-            - "5433:5432"
+            - "5432:5432"
         volumes:
             - ./pg-data:/var/lib/postgresql
-            - ./src/migrations/dbinit.sql
+            - ./server/db/postgres/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+        restart: always
+        env_file: .env
         environment:
-            PGDATA: /var/lib/postgresql/data/mydata
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: newPassword
-            POSTGRES_DB: packman
+            - POSTGRES_USER=$POSTGRES_USER
+            - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+            - POSTGRES_DB=$POSTGRES_DB
     pgadmin:
-        container_name: pgadmin
         image: dpage/pgadmin4:4.18
         restart: always
         env_file: .env
@@ -50,7 +54,7 @@ services:
             - "27017:27017"
         restart: always
         volumes:
-            - data-volume:/data/db
+            - mongo-data:/data/db
     mongo-express:
         image: mongo-express
         ports:
@@ -61,6 +65,7 @@ services:
         environment:
             - ME_CONFIG_MONGODB_PORT=27017
 volumes:
-    db-data:
+    pg-data:
     pgadmin-data:
-    data-volume:
+    mongo-data:
+    node_modules:

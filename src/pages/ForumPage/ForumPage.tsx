@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import bem from 'easy-bem';
 import './ForumPage.scss';
+
 import TopicCard from 'components/TopicCard';
 import Meta from 'components/Meta/Meta';
 import TopicForm from './views/TopicForm';

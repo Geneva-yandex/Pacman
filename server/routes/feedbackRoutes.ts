@@ -1,13 +1,12 @@
 import {Router} from 'express';
-import FeedbackAPI from '../api/FeedbackAPI';
+import FeedbackAPI from '../controllers/feedbackAPI';
 
 const feedbackRoutes = (router: Router) => {
-    // eslint-disable-next-line new-cap
     const feedbackRouter: Router = Router();
 
     feedbackRouter.post('/', FeedbackAPI.create);
 
-    router.use('/feedback', feedbackRouter);
+    router.use('/api/feedback', feedbackRouter);
 };
 
 export default feedbackRoutes;

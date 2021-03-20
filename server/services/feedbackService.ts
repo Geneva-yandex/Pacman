@@ -1,14 +1,9 @@
 import BaseRESTService from './BaseRESTService';
-import FeedbackModel from '../models/FeedbackModel';
-
-interface CreateRequest {
-    name: string,
-    phone: string,
-    question: string
-}
+import FeedbackModel from '../db/mongo/models/FeedbackModel';
+import {CreateFeedbackDto} from '../dto';
 
 class FeedbackService implements BaseRESTService {
-    public create(data: CreateRequest) {
+    public create(data: CreateFeedbackDto) {
         return new Promise((resolve, reject) => {
             const feedback = new FeedbackModel(data);
             feedback.save(err => {

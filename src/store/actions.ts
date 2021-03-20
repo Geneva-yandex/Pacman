@@ -1,10 +1,13 @@
+import {routerActions} from 'connected-react-router';
+
 import {
     logOut,
     setUser,
     pendingUser,
     failedUser
 } from './user';
-import {routerActions} from 'connected-react-router';
+
+import {setTheme, toggleDarkLightTheme} from './theme/actions';
 
 const actions = {
     user: {
@@ -13,7 +16,11 @@ const actions = {
         pendingUser,
         failedUser
     },
-    router: {...routerActions}
+    router: {...routerActions},
+    theme: {
+        setTheme,
+        toggleDarkLightTheme
+    }
 };
 
 export default actions;
