@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.3"
 services:
     my-app:
         build:
@@ -12,7 +12,6 @@ services:
             - DATABASE_POSTGRES_URL=$DATABASE_POSTGRES_URL
             - DATABASE_MONGO_URL=$DATABASE_MONGO_URL
             - PORT=8080
-            - FORUM_API=https://localhost:9001
         ports:
             - "8080:8080"
         restart: always
