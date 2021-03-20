@@ -18,7 +18,7 @@ import {
     HelpIcon,
     ThemeIcon
 } from './sidebar-icons';
-import ThemeApi from '../../api/ThemeApi';
+// import ThemeApi from '../../api/ThemeApi';
 
 const b = bem('Sidebar');
 
@@ -66,7 +66,7 @@ class Sidebar extends PureComponent<ISidebarProps> {
                 <div className={b('actions')}>
                     <ul className={b('nav-list')}>
                         <li>
-                            <Tooltip id='themeTooltip' tooltip='Change theme'>
+                            <Tooltip id='themeTooltip' tooltip='Toggle dark/light theme'>
                                 <button className='icon-button' onClick={this._changeUserTheme}>
                                     <SVG src={ThemeIcon} />
                                 </button>
@@ -93,7 +93,8 @@ class Sidebar extends PureComponent<ISidebarProps> {
     }
 
     private _changeUserTheme = async () => {
-        await ThemeApi.changeUserTheme();
+        boundActions.theme.toggleDarkLightTheme();
+        // await ThemeApi.changeUserTheme();
     };
 
     private _signOut = async () => {

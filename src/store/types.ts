@@ -2,6 +2,7 @@ import {RouterRootState} from 'connected-react-router';
 import {IUserStore} from './user';
 import {IForumStore} from './forum';
 import {ILeaderData} from '../common/types/types';
+import {IThemeState} from './theme/reducer';
 
 export interface IAction<T = unknown> {
     type: string;
@@ -14,7 +15,8 @@ export interface IStore extends RouterRootState {
     leaderBoard: {
         item: ILeaderData[];
         status: string,
-    }
+    },
+    theme: IThemeState
 }
 
 export interface IStoreOptions {

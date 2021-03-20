@@ -24,6 +24,7 @@ body {
   font-size: 18px;
   color: var(--color-text);
   background: var(--color-background);
+  transition: 0.15s background-color;
 }
 
 * {
