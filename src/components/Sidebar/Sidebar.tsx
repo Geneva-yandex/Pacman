@@ -67,7 +67,7 @@ class Sidebar extends PureComponent<ISidebarProps> {
                     <ul className={b('nav-list')}>
                         <li>
                             <Tooltip id='themeTooltip' tooltip='Toggle dark/light theme'>
-                                <button className='icon-button' onClick={this._changeUserTheme}>
+                                <button className='icon-button theme-icon' onClick={this._changeUserTheme}>
                                     <SVG src={ThemeIcon} />
                                 </button>
                             </Tooltip>
