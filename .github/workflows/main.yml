@@ -40,7 +40,7 @@ jobs:
             - name: deploy
               uses: garygrossgarten/github-action-ssh@release
               with:
-                command: touch index.html
+                command: ls -ln
                 host: 84.201.162.161
                 username: admin
                 privateKey: ${{ secrets.SSH_CLOUD_KEY}}
