@@ -166,7 +166,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
         this.userDirection = UserDirectionEnum.Right;
 
         if (!needResetOnly) {
-            this.userComponent.draw(userPosition);
+            this.userComponent.draw(userPosition, this.userDirection);
         }
 
         this.animateUser(this.userDirection, userPosition);
@@ -269,7 +269,7 @@ export default class Canvas extends React.PureComponent<ICanvasProps> {
 
             const coords = makeCellCoords(newRow, newCell);
             this.setUserPosition(coords);
-            this.userComponent.move(coords);
+            this.userComponent.move(coords, userDirection);
 
             this.takeMapItems(userDirection, newRow, newCell);
 
