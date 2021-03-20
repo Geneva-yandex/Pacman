@@ -14,13 +14,28 @@ export default class Ghost {
     public draw(ghostPosition: CoordsType, mode?: GhostModeEnum) {
         this.prevCoords = ghostPosition;
 
-        const radius = 10;
-        const x = convertToPixel(getCell(ghostPosition)) + CELL_SIZE / 2;
-        const y = convertToPixel(getRow(ghostPosition)) + CELL_SIZE / 2;
+        const headRadius = 10;
+        const legRadius = 2.5;
+
+        const cell = getCell(ghostPosition);
+        const row = getRow(ghostPosition);
+
+        const xArc = convertToPixel(cell) + CELL_SIZE / 2;
+        const y = convertToPixel(row) + CELL_SIZE / 2;
+        const xRect = convertToPixel(cell) + (CELL_SIZE - headRadius * 2) / 2;
+        const xArcLeg_1 = convertToPixel(cell) + CELL_SIZE / 2 - headRadius / 2;
+        const xArcLeg_2 = convertToPixel(cell) + CELL_SIZE / 2 + headRadius / 2;
+        const yArcLeg = convertToPixel(row) + CELL_SIZE / 2 + headRadius;
 
         this.ghostCtx.beginPath();
         this.ghostCtx.fillStyle = (mode === GhostModeEnum.Frightened) ? '#0073ff' : '#ff0000';
-        this.ghostCtx.arc(x, y, radius, 0, 2 * Math.PI, true);
+        this.ghostCtx.arc(xArc, y, headRadius, 0, 2 * Math.PI, true);
+        this.ghostCtx.fillRect(xRect, y, headRadius * 2, headRadius);
+        this.ghostCtx.fill();
+        this.ghostCtx.beginPath();
+        this.ghostCtx.fillStyle = '#171717';
+        this.ghostCtx.arc(xArcLeg_1, yArcLeg, legRadius, 0, 2 * Math.PI, true);
+        this.ghostCtx.arc(xArcLeg_2, yArcLeg, legRadius, 0, 2 * Math.PI, true);
         this.ghostCtx.fill();
     }
 
