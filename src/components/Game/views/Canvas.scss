@@ -1,0 +1,9 @@
+.Canvas {
+  position: relative;
+
+  &__ghost-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

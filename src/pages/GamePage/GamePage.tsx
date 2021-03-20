@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import bem from 'easy-bem';
 import Game from 'components/Game';
 import FullscreenButton from 'components/FullscreenButton';
-import PlayStopButton from 'components/PlayStopButton';
+import PlayStopButton from '../../components/PlayStopButton';
 import {useFullscreen, useSound} from '../../common/hooks';
 import {GamePageViewEnum} from '../../common/enums';
 import './GamePage.scss';

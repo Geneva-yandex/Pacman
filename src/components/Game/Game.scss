@@ -1,8 +1,15 @@
+@import '../../styles/variables';
+
 .Game {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100%;
+
+  &__inner {
+    position: relative;
+  }
 
   &__info {
     margin-top: 20px;
@@ -10,5 +17,120 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  &__game-over {
+    width: 250px;
+    height: 74px;
+    background: red;
+    color: $yellow;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: enter-exit 2s ease forwards;
+    border: 2px solid white;
+
+    &::after {
+      content: '\1F622';
+      margin-left: 5px;
+    }
+  }
+
+  &__end-game-btn {
+    margin-top: 60px;
+  }
+
+  &__next-level-wrap {
+    width: 250px;
+    height: 94px;
+    background: green;
+    color: $yellow;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: enter-exit 2s ease forwards;
+    border: 2px solid white;
+  }
+
+  &__next-level {
+    &::after {
+      content: '\1F525';
+      margin-left: 5px;
+    }
+  }
+
+  &__next-level-congratulations {
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 7px;
+    text-transform: uppercase;
+  }
+
+  &__decreased-lives {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: red;
+    font-size: 50px;
+    font-weight: 500;
+    transform: translate(-50%, -50%);
+    animation: lives-animation 1s linear forwards;
+
+    &::after {
+      content: '\1F915';
+      margin-left: 5px;
+    }
+  }
+
+  @keyframes enter-exit {
+    0% {
+      transform: translateY(-200px);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translateY(0) rotate(2deg);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: translateY(0) rotate(-2deg);
+    }
+
+    100% {
+      transform: translateY(-200px);
+    }
+  }
+
+  @keyframes lives-animation {
+    from {
+      opacity: 0;
+    }
+
+    20% {
+      opacity: 1;
+    }
+
+    40% {
+      opacity: 0.5;
+    }
+
+    60% {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
   }
 }

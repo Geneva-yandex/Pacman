@@ -25,7 +25,7 @@ const b = bem('StartPage');
 const startPageNavigation = [
     {
         id: 0,
-        name: 'Play',
+        name: 'Game',
         route: '/game',
         modalControl: '',
         primary: true
@@ -39,7 +39,7 @@ const startPageNavigation = [
     },
     {
         id: 2,
-        name: 'Help',
+        name: 'Rules',
         route: '',
         modalControl: 'instructionModal',
         primary: false
@@ -53,6 +53,7 @@ class StartPage extends React.PureComponent<RouteComponentProps, State> {
         modals: {
             instructionModal: true
         }
+
     };
 
     constructor(props: RouteComponentProps) {
